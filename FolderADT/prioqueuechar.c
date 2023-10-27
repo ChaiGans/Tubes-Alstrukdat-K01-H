@@ -57,7 +57,7 @@ void masuk(PrioQueueChar * Q, infotype X){
 int compare(const void * a, const void * b){
 	infotype *x = (infotype *)a;
 	infotype *y = (infotype *)b;
-	return (x->prio > y->prio);
+	return (x->popularity > y->popularity);
 }
 
 void Enqueue(PrioQueueChar * Q, infotype X){
@@ -93,7 +93,7 @@ void Dequeue(PrioQueueChar * Q, infotype * X){
 void PrintPrioQueueChar (PrioQueueChar Q){
 	int len = NBElmt(Q);
 	for(int i=0;i<len;i++){
-		printf("%d %c\n",Q.T[Head(Q)].prio,Q.T[Head(Q)].info);
+		printf("%d %c\n",Q.T[Head(Q)].popularity,Q.T[Head(Q)].popularity);
 		if(Head(Q)==MaxEl(Q)){
 			Head(Q)=1;
 		}

@@ -7,6 +7,8 @@
 #include "queue.h"
 #include "time.h"
 #include "listlinier.h"
+#include "prioqueuechar.h"
+
 typedef struct {
     char username[20];
     char password[20]; 
@@ -15,7 +17,7 @@ typedef struct {
     char weton[6]; // Pahing, Kliwon, Wage, Pon, dan Legi (case insensitive)
     char status[6]; // PUBLIC, PRIVAT
     Matrix fotoProfil[5][5]; // use pcolor.c
-    Queue permintaanTeman; // harusnya priorqueuepermintaan (check by jumlah teman atau length of listTeman)
+    PrioQueueChar permintaanTeman; // harusnya priorqueuepermintaan (check by jumlah teman atau length of listTeman)
 } Profile;
 
 // List Dinamis dari Kicauan

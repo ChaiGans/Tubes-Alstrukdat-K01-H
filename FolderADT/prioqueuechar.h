@@ -13,8 +13,8 @@
 
 /* Definisi elemen dan address */
 typedef struct {
-    int prio;  /* [1..100], prioritas dengan nilai 1..100 (1 adalah prioritas adalah tertinggi) */
-    char info;  /* elemen karakter */
+    int popularity;  /* banyak teman sesuai dengan inputan dari konfigurasi pengguna */
+    int id;  /* id sender yang mengirimkan pengiriman pertermanan dari konfigurasi pengguna */
 } infotype;
 typedef int address;   /* indeks tabel */
 /* Contoh deklarasi variabel bertype PrioQueueChar : */
@@ -30,8 +30,8 @@ typedef struct {
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika e adalah infotype dan Q adalah PrioQueueChar, maka akses elemen : */
-#define Prio(e)     (e).prio
-#define Info(e)     (e).info
+#define Popularity(e)     (e).popularity
+#define ID(e)             (e).id
 #define Head(Q)     (Q).HEAD
 #define Tail(Q)     (Q).TAIL
 #define InfoHead(Q) (Q).T[(Q).HEAD]
