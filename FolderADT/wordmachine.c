@@ -74,3 +74,20 @@ void CopyWord()
             break;
     }
 }
+
+Word ReadWord () {
+    START();
+    currentWord.Length = 0;
+    while (currentChar != MARK)
+    {
+        if (currentWord.Length < NMax)
+        { // jika lebih akan terpotong
+            currentWord.TabWord[currentWord.Length++] = currentChar;
+            ADV();
+        }
+        else
+            break;
+    }
+    currentWord.TabWord[currentWord.Length] = '\0';
+    return currentWord;
+}
