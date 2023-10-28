@@ -31,13 +31,13 @@ void print_blue(char c)
 void createFotoProfil(FotoProfil *F)
 {
     /* Membentuk dua Matrix warnaProfil dan simbolProfil "kosong" berukuran 5 x 5 */
-    createMatrix(5, 5, &F->WarnaProfil);
-    createMatrix(5, 5, &F->SimbolProfil);
+    createMatrix(SIZE, SIZE, &F->WarnaProfil);
+    createMatrix(SIZE, SIZE, &F->SimbolProfil);
     // Mengisi Matrix WarnaProfil dengan default FotoProfil (R)
     int i, j;
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < SIZE; i++)
     {
-        for (j = 0; j < 5; j++)
+        for (j = 0; j < SIZE; j++)
         {
             ELMT(WARNAPROFIL(*F), i, j) = 'R';
         }
