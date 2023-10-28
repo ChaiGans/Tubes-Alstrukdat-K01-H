@@ -97,4 +97,7 @@ long Durasi (TIME TAw, TIME TAkh);
 /* Mengirim TAkh-TAw dlm Detik, dengan kalkulasi */
 /* Jika TAw > TAkh, maka TAkh adalah 1 hari setelah TAw */
 
+void GetLocalTime();
+/*Mendapatkan local time lalu mengkonversi ke bentuk Day/Month/Year Hour:Minute:Second*/
+
 #endif

@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include "time.h"
 #include <math.h>
+#include <time.h>
 
 /* ***************************************************************** */
 /* DEFINISI PRIMITIF                                                 */
@@ -145,4 +146,22 @@ long Durasi (TIME TAw, TIME TAkh) {
     /* Mengirim TAkh-TAw dlm Detik, dengan kalkulasi */
     /* Jika TAw > TAkh, maka TAkh adalah 1 hari setelah TAw */
     return (TIMEToDetik(TAkh) - TIMEToDetik(TAw) + 86400)%86400;
+}
+
+void GetLocalTime (){
+    time_t rawtime;
+    struct tm *local_timeinfo;
+
+    time(&rawtime);
+
+    local_timeinfo = localtime(&rawtime);
+
+    int year = local_timeinfo->tm_year + 1900;
+    int month = local_timeinfo->tm_mon + 1;
+    int day = local_timeinfo->tm_mday;
+    int hour = local_timeinfo->tm_hour;
+    int minute = local_timeinfo->tm_min;
+    int second = local_timeinfo->tm_sec;
+
+    printf("%d/%d/%d %d:%d:%d\n", day,month,year,hour,minute,second);    
 }
