@@ -92,7 +92,7 @@ void readUtasConfig(char *filename)
     // lanjut
 }
 
-void initReadConfig()
+void initReadConfig(Word fileName)
 {
     readPenggunaConfig("config/pengguna.txt");
     // readKicauanConfig("config/kicauan.txt");

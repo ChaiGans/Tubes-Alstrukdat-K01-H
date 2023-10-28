@@ -34,7 +34,7 @@ void readUtasConfig(char *filename);
 // I.S. : Sembarang
 // F.S. : Membaca file utas.txt dan mendefinisikan utas.
 
-void initReadConfig();
+void initReadConfig(Word fileName);
 // I.S. : Sembarang
 // F.S. : Membaca semua file config dan inisiasi semua data.
 
