@@ -40,16 +40,16 @@ typedef struct {
 #define Elmt(Q,i)   (Q).T[(i)]
 
 /* ********* Prototype ********* */
-boolean IsEmpty (PrioQueueChar Q);
+boolean IsEmptyQueue (PrioQueueChar Q);
 /* Mengirim true jika Q kosong: lihat definisi di atas */
-boolean IsFull (PrioQueueChar Q);
+boolean IsFullQueue (PrioQueueChar Q);
 /* Mengirim true jika tabel penampung elemen Q sudah penuh */
 /* yaitu mengandung elemen sebanyak MaxEl */
-int NBElmt (PrioQueueChar Q);
+int NBElmtQueue (PrioQueueChar Q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
 
 /* *** Kreator *** */
-void MakeEmpty (PrioQueueChar * Q, int Max);
+void MakeEmptyQueue (PrioQueueChar * Q, int Max);
 /* I.S. sembarang */
 /* F.S. Sebuah Q kosong terbentuk dan salah satu kondisi sbb: */
 /* Jika alokasi berhasil, Tabel memori dialokasi berukuran Max+1 */
@@ -57,7 +57,7 @@ void MakeEmpty (PrioQueueChar * Q, int Max);
 /* Proses : Melakukan alokasi, membuat sebuah Q kosong */
 
 /* *** Destruktor *** */
-void DeAlokasi(PrioQueueChar * Q);
+void DeAlokasiQueue(PrioQueueChar * Q);
 /* Proses: Mengembalikan memori Q */
 /* I.S. Q pernah dialokasi */
 /* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
@@ -84,5 +84,8 @@ void PrintPrioQueueChar (PrioQueueChar Q);
 <prio-n> <elemen-n>
 #
 */
+void masuk(PrioQueueChar * Q, infotype X);
+
+int compare(const void * a, const void * b);
 
 #endif

@@ -2,15 +2,15 @@
 #include <stdlib.h>
 #include "prioqueuechar.h"
 
-boolean IsEmpty(PrioQueueChar Q){
+boolean IsEmptyQueue(PrioQueueChar Q){
 	return (Head(Q) == Nil && Tail(Q) == Nil);
 }
 
-boolean IsFull(PrioQueueChar Q){
+boolean IsFullQueue(PrioQueueChar Q){
 	return (NBElmt(Q) == MaxEl(Q));
 }
 
-int NBElmt(PrioQueueChar Q){
+int NBElmtQueue(PrioQueueChar Q){
 	if(IsEmpty(Q)){
 		return 0;
 	}
@@ -23,7 +23,7 @@ int NBElmt(PrioQueueChar Q){
 	return Tail(Q) - Head(Q) + 1;
 }
 
-void MakeEmpty(PrioQueueChar * Q, int Max){
+void MakeEmptyQueue(PrioQueueChar * Q, int Max){
 	(*Q).T = (infotype *) malloc((Max+1) * sizeof(infotype));
 	if((*Q).T != NULL){
 		MaxEl(*Q) = Max;
@@ -34,7 +34,7 @@ void MakeEmpty(PrioQueueChar * Q, int Max){
 	}
 }
 
-void DeAlokasi(PrioQueueChar * Q){
+void DeAlokasiQueue(PrioQueueChar * Q){
 	MaxEl(*Q) = 0;
 	free((*Q).T);
 }
