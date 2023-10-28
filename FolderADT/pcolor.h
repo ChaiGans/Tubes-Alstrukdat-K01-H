@@ -21,3 +21,31 @@ We only provide 8 colors. Feel free to modify/add colors if you want to.
 void print_red(char c);
 void print_green(char c);
 void print_blue(char c);
+
+/* ******************* Foto Profil ********************* */
+#include "matrix.h"
+#include "charmachine.h"
+#include "wordmachine.h"
+
+typedef struct
+{
+    Matrix WarnaProfil;  // Matrix warna profil
+    Matrix SimbolProfil; // Matrix simbol profil
+} FotoProfil;
+
+/* *** Selektor *** */
+#define WARNAPROFIL(F) (F).WarnaProfil
+#define SIMBOLPROFIL(F) (F).SimbolProfil
+
+/* *** KREATOR *** */
+void createFotoProfil(FotoProfil *F);
+/* Membentuk dua Matrix warnaProfil dan simbolProfil "kosong" berukuran 5 x 5 */
+
+/* *** KELOMPOK BACA/TULIS *** */
+void printFotoProfil(FotoProfil F);
+/* I.S. F terdefinisi */
+/* F.S. F ditampilkan di layar sesuai dengan warna dan simbolnya */
+
+void ubahFotoProfil(FotoProfil *F);
+/* I.S. F terdefinisi */
+/* F.S. Warna dan simbol pada F terubah sesuai dengan input pengguna */

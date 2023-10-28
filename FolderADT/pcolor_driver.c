@@ -11,9 +11,12 @@ Modified at: 23/10/2023
 
 int main()
 {
-    print_red('R');
-    print_green('G');
-    print_blue('B');
-    printf("\n");
+    // test foto profil
+    FotoProfil F;
+    createFotoProfil(&F);
+    printFotoProfil(F);
+
+    ubahFotoProfil(&F);
+    printFotoProfil(F);
     return 0;
 }
