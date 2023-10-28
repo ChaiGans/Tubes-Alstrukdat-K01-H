@@ -35,6 +35,11 @@ void STARTWORD(FILE *input, boolean file)
     {
         EndWord = true;
     }
+    else if (file)
+    {
+        EndWord = false;
+        CopyLine();
+    }
     else
     {
         EndWord = false;
@@ -42,7 +47,7 @@ void STARTWORD(FILE *input, boolean file)
     }
 }
 
-void ADVWORD()
+void ADVWORD(boolean file)
 {
     /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
        F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
@@ -53,6 +58,11 @@ void ADVWORD()
     if (EOP)
     {
         EndWord = true;
+    }
+    else if (file)
+    {
+        EndWord = false;
+        CopyLine();
     }
     else
     {
@@ -70,7 +80,7 @@ void CopyWord()
               currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
               Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
     currentWord.Length = 0;
-    while (currentChar != NEWLINE && currentChar != MARK && currentChar != EOF && currentChar != BLANK)
+    while (currentChar != MARK && currentChar != EOF && currentChar != BLANK)
     {
         if (currentWord.Length < NMax)
         { // jika lebih akan terpotong
@@ -79,6 +89,16 @@ void CopyWord()
         }
         else
             break;
+    }
+}
+
+void CopyLine()
+{
+    currentWord.Length = 0;
+    while (currentChar != NEWLINE && currentChar != EOF)
+    {
+        currentWord.TabWord[currentWord.Length++] = currentChar;
+        ADV();
     }
 }
 

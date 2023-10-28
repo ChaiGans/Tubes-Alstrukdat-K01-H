@@ -33,7 +33,7 @@ void STARTWORD(FILE *input, boolean file);
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 
-void ADVWORD();
+void ADVWORD(boolean file);
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
    F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
           currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
@@ -47,6 +47,14 @@ void CopyWord();
           currentChar = BLANK atau currentChar = MARK;
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+
+void CopyLine();
+/* Mengakuisisi line, menyimpan dalam currentWord
+   I.S. : currentChar adalah karakter pertama dari line
+   F.S. : currentWord berisi line yang sudah diakuisisi;
+          currentChar = NEWLINE atau currentChar = MARK;
+          currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
+          Jika panjang line melebihi NMax, maka sisa line "dipotong" */
 
 Word ReadWord();
 #endif
