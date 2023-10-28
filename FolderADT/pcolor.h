@@ -27,6 +27,8 @@ void print_blue(char c);
 #include "charmachine.h"
 #include "wordmachine.h"
 
+#define SIZE 5 // Ukuran foto profil
+
 typedef struct
 {
     Matrix WarnaProfil;  // Matrix warna profil
