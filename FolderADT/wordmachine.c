@@ -1,29 +1,37 @@
 #include <stdio.h>
 #include "wordmachine.h"
+#include "boolean.h"
+#include "charmachine.h"
 
 boolean EndWord;
 Word currentWord;
+boolean isNewLine;
 
 void IgnoreBlanks()
 {
     /* Mengabaikan satu atau beberapa BLANK
        I.S. : currentChar sembarang
-       F.S. : currentChar ≠ BLANK atau currentChar = MARK */
-    while (currentChar == BLANK)
+       F.S. : (currentChar ≠ BLANK dan currentChar != NEWLINE) atau currentChar = MARK */
+    isNewLine = false;
+    while (currentChar == BLANK || currentChar == NEWLINE)
     {
+        if (currentChar == NEWLINE && !EOP)
+        {
+            isNewLine = true;
+        }
         ADV();
     }
 }
 
-void STARTWORD()
+void STARTWORD(FILE *input, boolean file)
 {
     /* I.S. : currentChar sembarang
        F.S. : EndWord = true, dan currentChar = MARK;
               atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
               currentChar karakter pertama sesudah karakter terakhir kata */
-    START();
+    START(input, file);
     IgnoreBlanks();
-    if (currentChar == MARK)
+    if (isNewLine || EOP)
     {
         EndWord = true;
     }
@@ -42,7 +50,7 @@ void ADVWORD()
               Jika currentChar = MARK, EndWord = true.
        Proses : Akuisisi kata menggunakan procedure CopyWord */
     IgnoreBlanks();
-    if (currentChar == MARK)
+    if (EOP)
     {
         EndWord = true;
     }
@@ -50,7 +58,6 @@ void ADVWORD()
     {
         EndWord = false;
         CopyWord();
-        IgnoreBlanks();
     }
 }
 
@@ -63,7 +70,7 @@ void CopyWord()
               currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
               Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
     currentWord.Length = 0;
-    while (currentChar != BLANK && currentChar != MARK)
+    while (currentChar != NEWLINE && currentChar != MARK && currentChar != EOF && currentChar != BLANK)
     {
         if (currentWord.Length < NMax)
         { // jika lebih akan terpotong
@@ -75,8 +82,9 @@ void CopyWord()
     }
 }
 
-Word ReadWord () {
-    START();
+Word ReadWord()
+{
+    START(stdin, false);
     currentWord.Length = 0;
     while (currentChar != MARK)
     {

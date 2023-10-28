@@ -9,6 +9,7 @@
 
 #define NMax 100
 #define BLANK ' '
+#define NEWLINE '\n'
 
 typedef struct
 {
@@ -19,13 +20,14 @@ typedef struct
 /* State Mesin Word */
 extern boolean EndWord;
 extern Word currentWord;
+extern boolean isNewLine;
 
 void IgnoreBlanks();
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : currentChar sembarang
    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
 
-void STARTWORD();
+void STARTWORD(FILE *input, boolean file);
 /* I.S. : currentChar sembarang
    F.S. : EndWord = true, dan currentChar = MARK;
           atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
