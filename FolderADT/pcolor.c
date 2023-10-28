@@ -43,9 +43,9 @@ void createFotoProfil(FotoProfil *F)
         }
     }
     // Mengisi Matrix SimbolProfil dengan default FotoProfil (*)
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < SIZE; i++)
     {
-        for (j = 0; j < 5; j++)
+        for (j = 0; j < SIZE; j++)
         {
             ELMT(SIMBOLPROFIL(*F), i, j) = '*';
         }
@@ -58,9 +58,9 @@ void printFotoProfil(FotoProfil F)
     /* F.S. F ditampilkan di layar sesuai dengan warna dan simbolnya */
     int i, j;
     char warna, simbol;
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < SIZE; i++)
     {
-        for (j = 0; j < 5; j++)
+        for (j = 0; j < SIZE; j++)
         {
             warna = ELMT(WARNAPROFIL(F), i, j);
             simbol = ELMT(SIMBOLPROFIL(F), i, j);
