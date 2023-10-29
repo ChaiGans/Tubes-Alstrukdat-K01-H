@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "listpengguna.h"
-#include <math.h>
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create List kosong  */
@@ -87,9 +86,9 @@ void printListPengguna(ListPengguna l) {
         printf("[");
         for (i=0; i<ListPenggunaLength(l); i++) {
             if (i==ListPenggunaLength(l)-1) {
-                printf("%s", l.contents[i].username);
+                printf("%d", l.contents[i].index);
             } else {
-                printf("%s,", l.contents[i].username);
+                printf("%d,", l.contents[i].index);
             }
         }
         printf("]");
