@@ -28,7 +28,7 @@ typedef struct {
     int nomorHP; 
     char weton[6]; // Pahing, Kliwon, Wage, Pon, dan Legi (case insensitive)
     char status[6]; // PUBLIC, PRIVAT
-    Matrix fotoProfil[5][5]; // use pcolor.c
+    Matrix fotoProfil; // use pcolor.c
     PrioQueueChar permintaanTeman; // harusnya priorqueuepermintaan (check by jumlah teman atau length of listTeman)
 } Profile;
 
@@ -106,21 +106,6 @@ void printListPengguna(ListPengguna l);
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
 /* Jika List kosong : menulis [] */
 
-/* ********** OPERATOR ARITMATIKA ********** */
-/* *** Aritmatika List : Penjumlahan, pengurangan, perkalian, ... *** */
-ListPengguna plusMinusListPengguna(ListPengguna l1, ListPengguna l2, boolean plus);
-/* Prekondisi : l1 dan l2 berukuran sama dan tidak kosong */
-/* Jika plus = true, mengirimkan  l1+l2, yaitu setiap elemen l1 dan l2 pada 
-       indeks yang sama dijumlahkan */
-/* Jika plus = false, mengirimkan l1-l2, yaitu setiap elemen l1 dikurangi 
-       elemen l2 pada indeks yang sama */
-
-/* ********** OPERATOR RELASIONAL ********** */
-/* *** Operasi pembandingan List: *** */
-boolean isListPenggunaEqual(ListPengguna l1, ListPengguna l2);
-/* Mengirimkan true jika l1 sama dengan l2 yaitu jika ukuran l1 = l2 dan semua 
-   elemennya sama */
-
 /* ********** SEARCHING ********** */
 /* ***  Perhatian : List boleh kosong!! *** */
 int indexOfListPengguna(ListPengguna l, Profile val);
@@ -128,12 +113,6 @@ int indexOfListPengguna(ListPengguna l, Profile val);
 /* Jika ada, menghasilkan indeks i terkecil, dengan ELMT(l,i) = val */
 /* Jika tidak ada atau jika l kosong, mengirimkan IDX_UNDEF */
 /* Skema Searching yang digunakan bebas */
-
-/* ********** NILAI EKSTREM ********** */
-void extremeValuesListPengguna(ListPengguna l, Profile *max, Profile *min);
-/* I.S. List l tidak kosong */
-/* F.S. Max berisi nilai terbesar dalam l;
-        Min berisi nilai terkecil dalam l */
 
 /* ********** MENAMBAH ELEMEN ********** */
 /* *** Menambahkan elemen terakhir *** */
@@ -174,13 +153,5 @@ void deleteLastListPengguna(ListPengguna *l, Profile *val);
 /* F.S. val adalah nilai elemen terakhir l sebelum penghapusan, */
 /*      Banyaknya elemen List berkurang satu */
 /*      List l mungkin menjadi kosong */
-
-/* ********** SORTING ********** */
-void sortListPengguna(ListPengguna *l, boolean asc);
-/* I.S. l boleh kosong */
-/* F.S. Jika asc = true, l terurut membesar */
-/*      Jika asc = false, l terurut mengecil */
-/* Proses : Mengurutkan l dengan salah satu algoritma sorting,
-   algoritma bebas */
 
 #endif
