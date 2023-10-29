@@ -7,11 +7,11 @@ boolean IsEmptyQueue(PrioQueueChar Q){
 }
 
 boolean IsFullQueue(PrioQueueChar Q){
-	return (NBElmt(Q) == MaxEl(Q));
+	return (NBElmtQueue(Q) == MaxEl(Q));
 }
 
 int NBElmtQueue(PrioQueueChar Q){
-	if(IsEmpty(Q)){
+	if(IsEmptyQueue(Q)){
 		return 0;
 	}
 	if(Head(Q) == Tail(Q)){
@@ -40,7 +40,7 @@ void DeAlokasiQueue(PrioQueueChar * Q){
 }
 
 void masuk(PrioQueueChar * Q, infotype X){
-	if(IsEmpty(*Q)){
+	if(IsEmptyQueue(*Q)){
 		Head(*Q) = 0;
 		Tail(*Q) = 0;
 	}else{
@@ -63,7 +63,7 @@ int compare(const void * a, const void * b){
 void Enqueue(PrioQueueChar * Q, infotype X){
 	int i, count;
 	masuk(Q, X);
-	count = NBElmt(*Q);
+	count = NBElmtQueue(*Q);
 	infotype * temp = (infotype *) malloc(count * sizeof(infotype));
 	for(i = 0; i < count; i++){
 		Dequeue(Q, &temp[i]);
@@ -76,7 +76,7 @@ void Enqueue(PrioQueueChar * Q, infotype X){
 
 void Dequeue(PrioQueueChar * Q, infotype * X){
 	*X = Elmt(*Q, Head(*Q));
-	if(NBElmt(*Q) == 1){
+	if(NBElmtQueue(*Q) == 1){
 		Head(*Q) = Nil;
 		Tail(*Q) = Nil;
 	}
@@ -91,7 +91,7 @@ void Dequeue(PrioQueueChar * Q, infotype * X){
 }
 
 void PrintPrioQueueChar (PrioQueueChar Q){
-	int len = NBElmt(Q);
+	int len = NBElmtQueue(Q);
 	for(int i=0;i<len;i++){
 		printf("%d %c\n",Q.T[Head(Q)].popularity,Q.T[Head(Q)].popularity);
 		if(Head(Q)==MaxEl(Q)){
