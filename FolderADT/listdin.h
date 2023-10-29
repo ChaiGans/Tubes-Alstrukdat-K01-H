@@ -10,9 +10,9 @@
 #include "boolean.h"
 
 /*  Kamus Umum */
-#define IDX_MIN 0
+#define IDX_MIN_LISTDIN 0
 /* Indeks minimum list */
-#define IDX_UNDEF -1
+#define IDX_UNDEF_LISTDIN -1
 /* Indeks tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
@@ -38,7 +38,7 @@ typedef struct{
 /* ********** SELEKTOR ********** */
 #define NEFF(l) (l).nEff
 #define BUFFER(l) (l).buffer
-#define ELMT(l, i) (l).buffer[i]
+#define ELMT_DIN(l, i) (l).buffer[i]
 #define CAPACITY(l) (l).capacity
 
 /* ********** KONSTRUKTOR ********** */

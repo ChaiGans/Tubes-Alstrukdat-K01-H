@@ -9,20 +9,20 @@
 #include "boolean.h"
 
 /*  Kamus Umum */
-#define CAPACITY 100
+#define CAPACITY_STATIK 20
 /* Kapasitas penyimpanan */
-#define IDX_MIN 0
+#define IDX_MIN_STATIK 0
 /* Indeks minimum list */
-#define IDX_UNDEF -1
+#define IDX_UNDEF_STATIK -1
 /* Indeks tak terdefinisi*/
-#define MARK -9999
+#define MARK_STATIK -9999
 /* Nilai elemen tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
 typedef int ElType;  /* type elemen List */
 typedef int IdxType;
 typedef struct {
-   ElType contents[CAPACITY]; /* memori tempat penyimpan elemen (container) */
+   ElType contents[CAPACITY_STATIK]; /* memori tempat penyimpan elemen (container) */
 } ListStatik;
 /* Indeks yang digunakan [0..CAPACITY-1] */
 /* Jika l adalah ListStatik, cara deklarasi dan akses: */
