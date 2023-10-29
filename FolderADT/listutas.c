@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "listlinier.h"
+#include "listutas.h"
 
-Address newNodeListLinier(ElType val) {
+Address newNodeListUtas(Utas val) {
     Address p = (Address) malloc (sizeof (Node));
     if (p != NULL) {
-        INFO(p) = val;
+        UTAS(p) = val;
         NEXT(p) = NULL;
     }
     return p;
@@ -13,25 +13,25 @@ Address newNodeListLinier(ElType val) {
 
 /* Definisi List : */
 /* List kosong : FIRST(l) = NULL */
-/* Setiap elemen dengan Address p dapat diacu INFO(p), NEXT(p) */
+/* Setiap elemen dengan Address p dapat diacu UTAS(p), NEXT(p) */
 /* Elemen terakhir list: jika addressnya Last, maka NEXT(Last)=NULL */
 
 /* PROTOTYPE */
 /****************** PEMBUATAN LIST KOSONG ******************/
-void CreateListLinier(List *l) {
+void CreateListUtasUtas(List *l) {
     /* I.S. sembarang             */
     /* F.S. Terbentuk list kosong */
     FIRST(*l) = NULL;
 }
 
 /****************** TEST LIST KOSONG ******************/
-boolean isEmptyListLinier(List l) {
+boolean isEmptyListUtas(List l) {
     /* Mengirim true jika list kosong */
     return (FIRST(l) == NULL);
 }
 
 /****************** GETTER SETTER ******************/
-ElType getElmtListLinier(List l, int idx) {
+Utas getElmtListUtas(List l, int idx) {
     /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
     /* F.S. Mengembalikan nilai elemen l pada indeks idx */
     int currentIdx = 0;
@@ -40,10 +40,10 @@ ElType getElmtListLinier(List l, int idx) {
         currentIdx += 1;
         p = NEXT(p);
     }
-    return INFO(p);
+    return UTAS(p);
 }
 
-void setElmtListLinier(List *l, int idx, ElType val) {
+void setElmtListUtas(List *l, int idx, Utas val) {
     /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
     /* F.S. Mengubah elemen l pada indeks ke-idx menjadi val */
     int currentIdx = 0;
@@ -52,17 +52,17 @@ void setElmtListLinier(List *l, int idx, ElType val) {
         currentIdx += 1;
         p = NEXT(p); 
     }
-    INFO(p) = val;
+    UTAS(p) = val;
 }
 
-int indexOfListLinier(List l, ElType val) {
+int indexOfListUtas(List l, Utas val) {
     /* I.S. l, val terdefinisi */
     /* F.S. Mencari apakah ada elemen list l yang bernilai val */
     /* Jika ada, mengembalikan indeks elemen pertama l yang bernilai val */
     /* Mengembalikan IDX_UNDEF jika tidak ditemukan */
     int currentIdx = 0;
     Address p = FIRST(l);
-    while (p != NULL && INFO(p) != val) {
+    while (p != NULL && UTAS(p).IDUtas != val.IDUtas) {
         currentIdx += 1;
         p = NEXT(p);
     }
@@ -75,27 +75,27 @@ int indexOfListLinier(List l, ElType val) {
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
-void insertFirstListLinier(List *l, ElType val) {
+void insertFirstListUtas(List *l, Utas val) {
     /* I.S. l mungkin kosong */
     /* F.S. Melakukan alokasi sebuah elemen dan */
     /* menambahkan elemen pertama dengan nilai val jika alokasi berhasil. */
     /* Jika alokasi gagal: I.S.= F.S. */
-    Address p = newNode(val);
+    Address p = newNodeListUtas(val);
     if (p != NULL){
         NEXT(p) = FIRST(*l);
         FIRST(*l) = p;
     }
  
 }
-void insertLastListLinier(List *l, ElType val) {
+void insertLastListUtas(List *l, Utas val) {
     /* I.S. l mungkin kosong */
     /* F.S. Melakukan alokasi sebuah elemen dan */
     /* menambahkan elemen list di akhir: elemen terakhir yang baru */
     /* bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
-    if (isEmpty(*l)) {
-        insertFirst(l, val);
+    if (isEmptyListUtas(*l)) {
+        insertFirstListUtas(l, val);
     } else {
-        Address p = newNode(val);
+        Address p = newNodeListUtas(val);
         if (p != NULL) {
             Address last = FIRST(*l);
             while (NEXT(last) != NULL) {
@@ -106,15 +106,15 @@ void insertLastListLinier(List *l, ElType val) {
     }
 }
 
-void insertAtListLinier(List *l, ElType val, int idx) {
+void insertAtListUtas(List *l, Utas val, int idx) {
     /* I.S. l tidak mungkin kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
     /* F.S. Melakukan alokasi sebuah elemen dan */
     /* menyisipkan elemen dalam list pada indeks ke-idx (bukan menimpa elemen di i) */
     /* yang bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
-    Address insertElement = newNode(val);
+    Address insertElement = newNodeListUtas(val);
     if (insertElement != NULL) {
         if (idx == 0) {
-            insertFirst(l ,val);
+            insertFirstListUtas(l ,val);
         } else {
             Address p = FIRST(*l);
             int currentIdx = 0;
@@ -129,19 +129,19 @@ void insertAtListLinier(List *l, ElType val, int idx) {
 }
 
 /*** PENGHAPUSAN ELEMEN ***/
-void deleteFirstListLinier(List *l, ElType *val) {
+void deleteFirstListUtas(List *l, Utas *val) {
     /* I.S. List l tidak kosong  */
-    /* F.S. Elemen pertama list dihapus: nilai info disimpan pada x */
+    /* F.S. Elemen pertama list dihapus: nilai UTAS disimpan pada x */
     /*      dan alamat elemen pertama di-dealokasi */
     Address p = FIRST(*l);
-    *val = INFO(p);
+    *val = UTAS(p);
     FIRST(*l) = NEXT(p);
     free(p);
 
 }
-void deleteLastListLinier(List *l, ElType *val) {
+void deleteLastListUtas(List *l, Utas *val) {
     /* I.S. list tidak kosong */
-    /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada x */
+    /* F.S. Elemen terakhir list dihapus: nilai UTAS disimpan pada x */
     /*      dan alamat elemen terakhir di-dealokasi */
     Address p = FIRST(*l);
     Address prev = NULL;
@@ -154,16 +154,16 @@ void deleteLastListLinier(List *l, ElType *val) {
     } else {
         NEXT(prev) = NULL;
     }
-    *val = INFO(p);
+    *val = UTAS(p);
     free(p);
 }
 
-void deleteAtListLinier(List *l, int idx, ElType *val) {
+void deleteAtListUtas(List *l, int idx, Utas *val) {
     /* I.S. list tidak kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
     /* F.S. val diset dengan elemen l pada indeks ke-idx. */
     /*      Elemen l pada indeks ke-idx dihapus dari l */
     if (idx == 0){
-        deleteFirst(l,val);
+        deleteFirstListUtas(l,val);
     } else{
         int currentIdx = 0;
         Address p = FIRST(*l);
@@ -173,7 +173,7 @@ void deleteAtListLinier(List *l, int idx, ElType *val) {
             prev = p;
             p = NEXT(p);
         }
-        *val = INFO(p);
+        *val = UTAS(p);
         NEXT(prev) = NEXT(p);
         free(p);
     }
@@ -181,8 +181,8 @@ void deleteAtListLinier(List *l, int idx, ElType *val) {
 
 
 /****************** PROSES SEMUA ELEMEN LIST ******************/
-void displayListLinier(List l) {
-    // void printInfo(List l);
+void displayListUtas(List l) {
+    // void printUTAS(List l);
     /* I.S. List mungkin kosong */
     /* F.S. Jika list tidak kosong, iai list dicetak ke kanan: [e1,e2,...,en] */
     /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
@@ -194,16 +194,16 @@ void displayListLinier(List l) {
         Address p = FIRST(l);
         printf("[");
         while (NEXT(p) != NULL) {
-            printf("%d,", INFO(p));
+            printf("%d,", UTAS(p).IDUtas);
             p = NEXT(p);
         }
         if (NEXT(p) == NULL) {
-            printf("%d]", INFO(p));
+            printf("%d]", UTAS(p).IDUtas);
         }
     }
 }
 
-int listLinierlength(List l) {
+int ListUtaslength(List l) {
     /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
     if (isEmpty(l)) {
         return 0;
@@ -219,24 +219,24 @@ int listLinierlength(List l) {
 }
 
 /****************** PROSES TERHADAP LIST ******************/
-List concatListLinier(List l1, List l2)  {
+List concatListUtas(List l1, List l2)  {
     /* I.S. l1 dan l2 sembarang */
     /* F.S. l1 dan l2 kosong, l3 adalah hasil konkatenasi l1 & l2 */
     /* Konkatenasi dua buah list : l1 dan l2    */
     /* menghasilkan l3 yang baru (dengan elemen list l1 dan l2 secara beurutan). */
     /* Tidak ada alokasi/dealokasi pada prosedur ini */
     List l3;
-    CreateList(&l3);
+    CreateListUtas(&l3);
     Address p;
     int val;
     p = FIRST(l1);
     while (p != NULL) {
-        insertLast(&l3,INFO(p));
+        insertLastListUtas(&l3,UTAS(p));
         p = NEXT(p);
     }
     p = FIRST(l2);
     while (p != NULL) {
-        insertLast(&l3,INFO(p));
+        insertLastListUtas(&l3,UTAS(p));
         p = NEXT(p);
     }
     return l3;
