@@ -24,7 +24,7 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna);
 // I.S. : Sembarang
 // F.S. : Membaca file pengguna.txt dan mendefinisikan profil pengguna.
 
-void readKicauanConfig(char *filename, ListKicau *listKicau);
+void readKicauanConfig(char *filename, ListKicau *listKicau, ListPengguna listPengguna);
 // I.S. : Sembarang
 // F.S. : Membaca file kicauan.txt dan mendefinisikan kicauan.
 

@@ -135,7 +135,7 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna)
         printf("Pengguna berhasil dibaca.\n");
 }
 
-void readKicauanConfig(char *filename, ListKicau *listKicau)
+void readKicauanConfig(char *filename, ListKicau *listKicau, ListPengguna listPengguna)
 {
     FILE *file = fopen(filename, "r");
     if (file == NULL)
@@ -145,8 +145,48 @@ void readKicauanConfig(char *filename, ListKicau *listKicau)
     }
     printf("file kicau terbuka");
     STARTWORD(file, true);
-    int banyakKicauan = wordToInt(currentWord);
-    // lanjut
+
+    int banyakKicau = wordToInt(currentWord);
+
+    int i; for (i = 0; i < banyakKicau; i++){
+        Kicauan tweet;
+
+        ADVWORD(true); // current word = ID
+        tweet.id = wordToInt(currentWord);
+        
+        ADVWORD(true); // current word = text
+        int j; for (j = 0; j < currentWord.Length; j++){
+            tweet.text[j] = currentWord.TabWord[j];
+        }
+
+        ADVWORD(true); // current word = like
+        tweet.like = wordToInt(currentWord);
+
+        ADVWORD(true); // current word = author
+        boolean found = false; j = 0;
+        while((listPengguna.contents[j].index != MARK_STATIK)&&(found == false)){
+
+            int k = 0; boolean tidaksama = false;
+
+            while ((k < currentWord.Length) && (tidaksama == false)){
+                if (currentWord.TabWord[k] != listPengguna.contents[j].username[k]) tidaksama = true;
+                else k++;
+            }
+            
+            if (tidaksama) j++;
+            else found = true;
+
+            if (found) tweet.authorID = listPengguna.contents[j].index;
+            else j++;
+        }
+
+        ADVWORD(true);
+        // tweet.datetime = 
+
+        insertLastListKicau(&*listKicau, tweet);
+    }
+
+    printf("Kicauan berhasil dibaca");
 }
 
 void readBalasanConfig(char *filename)
@@ -187,8 +227,8 @@ void readUtasConfig(char *filename)
 
 void initReadConfig(Word fileName, ListPengguna *listPengguna, ListKicau *listKicau)
 {
-    readPenggunaConfig("config/pengguna.txt", listPengguna);
-    readKicauanConfig("config/kicauan.txt", listKicau);
+    readPenggunaConfig("../config/pengguna.txt", &*listPengguna);
+    readKicauanConfig("../config/kicauan.txt", &*listKicau, *listPengguna);
     //  readBalasanConfig("config/balasan.txt");
     //  readDrafConfig("config/draf.txt");
     //  readUtasConfig("config/utas.txt");
