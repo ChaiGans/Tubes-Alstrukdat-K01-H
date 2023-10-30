@@ -6,7 +6,7 @@
 #include "listdin.h"
 #include "queue.h"
 #include "time.h"
-#include "listlinier.h"
+#include "listutas.h"
 #include "prioqueuechar.h"
 
 typedef struct {

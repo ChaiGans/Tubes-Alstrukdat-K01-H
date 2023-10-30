@@ -213,7 +213,7 @@ void readDrafConfig(char *filename)
     // lanjut
 }
 
-void readUtasConfig(char *filename)
+void readUtasConfig(char *filename, ListPengguna listPengguna, ListUtas *listUtas)
 {
     FILE *file = fopen(filename, "r");
     if (file == NULL)
@@ -222,7 +222,51 @@ void readUtasConfig(char *filename)
         return;
     }
     STARTWORD(file, true);
-    // lanjut
+    int banyakKicau = wordToInt(currentWord); // banyak kicau
+    for (int i = 0 ; i < banyakKicau ; i++)
+    {
+        Utas temp; int index;
+
+        temp.IDUtas = i+1;
+
+        ADVWORD(true);
+        temp.idKicau = wordToInt(currentWord); // ID kicau
+
+        ADVWORD(true);
+        int banyakUtas = wordToInt(currentWord); // jumlah utas (kicauam sambungan)
+        
+        for (int j = 0 ; j < banyakUtas ; j++)
+        {
+            ADVWORD(true); // text utas
+            for (j = 0; j < currentWord.Length; j++)
+            {
+                temp.text[j] = currentWord.TabWord[j];
+            }
+
+            ADVWORD(true); // authorname
+            // ubah authorname jadi authorid
+            boolean found = false; j = 0;
+            while((listPengguna.contents[j].index != MARK_STATIK)&&(found == false))
+            {
+                int k = 0; boolean tidaksama = false;
+
+                while ((k < currentWord.Length) && (tidaksama == false)){
+                    if (currentWord.TabWord[k] != listPengguna.contents[j].username[k]) tidaksama = true;
+                    else k++;
+                }
+                
+                if (tidaksama) j++;
+                else found = true;
+
+                if (found) temp.idAuthor = listPengguna.contents[j].index;
+                else j++;
+            }
+
+            ADVWORD(true);
+            //datetime
+        }
+        insertLastListUtas(&listUtas,temp);
+    }
 }
 
 void initReadConfig(Word fileName, ListPengguna *listPengguna, ListKicau *listKicau)
