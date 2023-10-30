@@ -10,6 +10,7 @@
 #include "wordmachine.h"
 #include "fotoprofil.h"
 #include "prioqueuechar.h"
+
 /*  Kamus Umum */
 #define CAPACITY_STATIK 20
 /* Kapasitas penyimpanan */
@@ -24,12 +25,12 @@
 typedef struct
 {
    int index;
-   Word username;
-   Word password;
-   Word bio; // Bio max 135 karakter
+   char username[20];
+   char password[20];
+   char bio[135]; // Bio max 135 karakter
    int nomorHP;
-   Word weton;                    // Pahing, Kliwon, Wage, Pon, dan Legi (case insensitive)
-   Word status;                   // PUBLIC, PRIVAT
+   char weton[6];                 // Pahing, Kliwon, Wage, Pon, dan Legi (case insensitive)
+   char status[6];                // PUBLIC, PRIVAT
    FotoProfil fotoProfil;         // use pcolor.c
    PrioQueueChar permintaanTeman; // harusnya priorqueuepermintaan (check by jumlah teman atau length of listTeman)
 } Profile;

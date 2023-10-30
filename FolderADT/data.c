@@ -29,23 +29,19 @@ int wordToInt(Word w)
     return res;
 }
 
-Word cutWord(Word w)
+void cutWord(Word w, char *res)
 {
-    Word res;
     if (w.Length == 0)
     {
-        res.Length = 0;
-        res.TabWord[0] = '\0';
-        return w;
+        res[0] = '\0';
+        return;
     }
 
     int i;
     for (i = 0; i < w.Length; i++)
     {
-        res.TabWord[i] = w.TabWord[i];
+        res[i] = w.TabWord[i];
     }
-    res.Length = w.Length;
-    return res;
 }
 
 void readPenggunaConfig(char *filename, ListPengguna *listPengguna)
@@ -62,27 +58,25 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna)
 
     for (int i = 0; i < banyakProfile; i++)
     {
-        Profile p;
-
-        p.index = i;
+        listPengguna->contents[i].index = i;
         ADVWORD(true); // currentWord = username
-        p.username = cutWord(currentWord);
+        cutWord(currentWord, listPengguna->contents[i].username);
 
         ADVWORD(true); // currentWord = password
-        p.password = cutWord(currentWord);
+        cutWord(currentWord, listPengguna->contents[i].password);
 
         ADVWORD(true); // currentWord = bio
-        p.bio = blankLineCheck(cutWord(currentWord));
+        cutWord(blankLineCheck(currentWord), listPengguna->contents[i].bio);
 
         ADVWORD(true); // currentWord = nomor HP
-        p.nomorHP = wordToInt(blankLineCheck(cutWord(currentWord)));
+        listPengguna->contents[i].nomorHP = wordToInt(currentWord);
         // 0 kalo di int jadi ilang
 
         ADVWORD(true); // currentWord = weton
-        p.weton = blankLineCheck(cutWord(currentWord));
+        cutWord(blankLineCheck(currentWord), listPengguna->contents[i].weton);
 
         ADVWORD(true); // currentWord = status
-        p.status = blankLineCheck(cutWord(currentWord));
+        cutWord(currentWord, listPengguna->contents[i].status);
 
         // baca profil
         FotoProfil foto;
@@ -112,8 +106,7 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna)
             }
         }
 
-        p.fotoProfil = foto;
-        listPengguna->contents[i] = p;
+        listPengguna->contents[i].fotoProfil = foto;
     }
 
     Matrix pertemanan;
