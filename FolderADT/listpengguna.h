@@ -8,6 +8,7 @@
 
 #include "boolean.h"
 #include "matrix.h"
+#include "wordmachine.h"
 #include "prioqueuechar.h"
 /*  Kamus Umum */
 #define CAPACITY_STATIK 20
@@ -20,28 +21,30 @@
 /* Nilai elemen tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
-typedef struct {
-    int index;
-    char username[20];
-    char password[20]; 
-    char bio[135]; // Bio max 135 karakter
-    int nomorHP; 
-    char weton[6]; // Pahing, Kliwon, Wage, Pon, dan Legi (case insensitive)
-    char status[6]; // PUBLIC, PRIVAT
-    Matrix fotoProfil; // use pcolor.c
-    PrioQueueChar permintaanTeman; // harusnya priorqueuepermintaan (check by jumlah teman atau length of listTeman)
+typedef struct
+{
+   int index;
+   Word username;
+   Word password;
+   Word bio; // Bio max 135 karakter
+   int nomorHP;
+   Word weton;                    // Pahing, Kliwon, Wage, Pon, dan Legi (case insensitive)
+   Word status;                   // PUBLIC, PRIVAT
+   Matrix fotoProfil;             // use pcolor.c
+   PrioQueueChar permintaanTeman; // harusnya priorqueuepermintaan (check by jumlah teman atau length of listTeman)
 } Profile;
 
 typedef int IdxType;
-typedef struct {
+typedef struct
+{
    Profile contents[CAPACITY_STATIK]; /* memori tempat penyimpan elemen (container) */
 } ListPengguna;
 /* Indeks yang digunakan [0..CAPACITY-1] */
 /* Jika l adalah ListPengguna, cara deklarasi dan akses: */
 /* Deklarasi : l : ListPengguna */
-/* Maka cara akses: 
+/* Maka cara akses:
    ELMT(l,i) untuk mengakses elemen ke-i */
-/* Definisi : 
+/* Definisi :
    List kosong: semua elemen bernilai MARK
    Definisi elemen pertama: ELMT(l,i) dengan i=0 */
 
@@ -59,7 +62,7 @@ void CreateListPengguna(ListPengguna *l);
 /* *** Banyaknya elemen *** */
 int ListPenggunaLength(ListPengguna l);
 /* Mengirimkan banyaknya elemen efektif List */
-/* Mengirimkan nol jika List kosong */  
+/* Mengirimkan nol jika List kosong */
 
 /* *** Selektor INDEKS *** */
 IdxType getFirstIdxListPengguna(ListPengguna l);
@@ -94,12 +97,12 @@ void readListPengguna(ListPengguna *l);
 /* 1. Baca banyaknya elemen diakhiri enter, misalnya n */
 /*    Pembacaan diulangi sampai didapat n yang benar yaitu 0 <= n <= CAPACITY */
 /*    Jika n tidak valid, tidak diberikan pesan kesalahan */
-/* 2. Jika 0 < n <= CAPACITY; Lakukan n kali: 
+/* 2. Jika 0 < n <= CAPACITY; Lakukan n kali:
           Baca elemen mulai dari indeks 0 satu per satu diakhiri enter */
 /*    Jika n = 0; hanya terbentuk List kosong */
 void printListPengguna(ListPengguna l);
-/* Proses : Menuliskan isi List dengan traversal, List ditulis di antara kurung 
-   siku; antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan 
+/* Proses : Menuliskan isi List dengan traversal, List ditulis di antara kurung
+   siku; antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan
    karakter di depan, di tengah, atau di belakang, termasuk spasi dan enter */
 /* I.S. l boleh kosong */
 /* F.S. Jika l tidak kosong: [e1,e2,...,en] */
