@@ -130,10 +130,12 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna)
         // proses permintaan pertemanan, tapi belum dikerjain karena gatau ADT graf hihi
     }
 
-    printf("Pengguna berhasil dibaca.\n");
+    ADVWORD(true); // read sampe pita ditutup
+    if (EOF)
+        printf("Pengguna berhasil dibaca.\n");
 }
 
-void readKicauanConfig(char *filename)
+void readKicauanConfig(char *filename, ListKicau *listKicau)
 {
     FILE *file = fopen(filename, "r");
     if (file == NULL)
@@ -141,7 +143,9 @@ void readKicauanConfig(char *filename)
         printf("File %s tidak ditemukan.\n", filename);
         return;
     }
+    printf("file kicau terbuka");
     STARTWORD(file, true);
+    int banyakKicauan = wordToInt(currentWord);
     // lanjut
 }
 
@@ -181,10 +185,10 @@ void readUtasConfig(char *filename)
     // lanjut
 }
 
-void initReadConfig(Word fileName, ListPengguna *listPengguna)
+void initReadConfig(Word fileName, ListPengguna *listPengguna, ListKicau *listKicau)
 {
     readPenggunaConfig("config/pengguna.txt", listPengguna);
-    // readKicauanConfig("config/kicauan.txt");
+    readKicauanConfig("config/kicauan.txt", listKicau);
     //  readBalasanConfig("config/balasan.txt");
     //  readDrafConfig("config/draf.txt");
     //  readUtasConfig("config/utas.txt");

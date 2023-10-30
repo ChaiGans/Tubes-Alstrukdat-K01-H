@@ -6,6 +6,7 @@
 #include "wordmachine.h"
 #include "boolean.h"
 #include "listpengguna.h"
+#include "listkicau.h"
 
 // Fungsi pada data.h digunakan untuk mendapatkan data dari file pengguna.txt, kicauan.txt, balasan.txt, draf.txt, dan utas.txt
 // Fungsi pada data.h juga digunakan untuk mengubah data pada file pengguna.txt, kicauan.txt, balasan.txt, draf.txt, dan utas.txt
@@ -23,7 +24,7 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna);
 // I.S. : Sembarang
 // F.S. : Membaca file pengguna.txt dan mendefinisikan profil pengguna.
 
-void readKicauanConfig(char *filename);
+void readKicauanConfig(char *filename, ListKicau *listKicau);
 // I.S. : Sembarang
 // F.S. : Membaca file kicauan.txt dan mendefinisikan kicauan.
 
@@ -39,7 +40,7 @@ void readUtasConfig(char *filename);
 // I.S. : Sembarang
 // F.S. : Membaca file utas.txt dan mendefinisikan utas.
 
-void initReadConfig(Word fileName, ListPengguna *listPengguna);
+void initReadConfig(Word fileName, ListPengguna *listPengguna, ListKicau *listKicau);
 // I.S. : Sembarang
 // F.S. : Membaca semua file config dan inisiasi semua data.
 
