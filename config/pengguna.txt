@@ -2,7 +2,7 @@
 Tuan Hak
 passTuanHak
 Ini bio lho
-081
+082
 Pahing
 Privat
 R * R * R * R * R *
@@ -17,7 +17,7 @@ passTuanVin
 
 Publik
 R * R * R * R * R *
-R * R * R * R * R *
+R * R * G * R * R *
 R * R * R * R * R *
 R * R * R * R * R *
 R * R * R * R * R *
@@ -28,7 +28,7 @@ passTuanBri
 
 Publik
 R * R * R * R * R *
-R * R * R * R * R *
+R * R * B * R * R *
 R * R * R * R * R *
 R * R * R * R * R *
 R * R * R * R * R *
