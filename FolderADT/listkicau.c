@@ -8,7 +8,7 @@ void CreateListKicau(ListKicau *l, int capacity)
 {
     (*l).capacity = capacity;
     (*l).nEff = 0;
-    (*l).buffer = (ElTypeKicauan *)malloc(capacity * sizeof(ElTypeKicauan));
+    (*l).buffer = (ElTypeKicau *)malloc(capacity * sizeof(ElTypeKicau));
 }
 /* I.S. l sembarang, capacity > 0 */
 /* F.S. Terbentuk list dinamis l kosong dengan kapasitas capacity */
@@ -97,7 +97,7 @@ void printListKicau(ListKicau l);
 
 /* ********** SEARCHING ********** */
 /* ***  Perhatian : list boleh kosong!! *** */
-IdxType indexOfListKicau(ListKicau l, ElTypeKicauan val)
+IdxType indexOfListKicau(ListKicau l, ElTypeKicau val)
 {
     // int i; for (i = 0; i < l.nEff; i++){
     //     if (ELMT_DIN(l, i) == val) return i;
@@ -128,16 +128,18 @@ void copyListKicau(ListKicau lIn, ListKicau *lOut)
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
-void insertLastListKicau(ListKicau *l, ElTypeKicauan val)
+void insertLastListKicau(ListKicau *l, ElTypeKicau val)
 {
     (*l).buffer[(*l).nEff] = val;
     (*l).nEff++;
+    if (isFullListKicau(*l))
+        expandListKicau(&*l, (*l).capacity);
 }
 /* Proses: Menambahkan val sebagai elemen terakhir list */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */
 /* ********** MENGHAPUS ELEMEN ********** */
-void deleteLastListKicau(ListKicau *l, ElTypeKicauan *val)
+void deleteLastListKicau(ListKicau *l, ElTypeKicau *val)
 {
     *val = (*l).buffer[(*l).nEff - 1];
     (*l).nEff--;
@@ -152,7 +154,7 @@ void deleteLastListKicau(ListKicau *l, ElTypeKicauan *val)
 void expandListKicau(ListKicau *l, int num)
 {
     (*l).capacity += num;
-    (*l).buffer = realloc((*l).buffer, ((*l).capacity * sizeof(ElTypeKicauan)));
+    (*l).buffer = realloc((*l).buffer, ((*l).capacity * sizeof(ElTypeKicau)));
 }
 /* Proses : Menambahkan capacity l sebanyak num */
 /* I.S. List sudah terdefinisi */
@@ -161,7 +163,7 @@ void expandListKicau(ListKicau *l, int num)
 void shrinkListKicau(ListKicau *l, int num)
 {
     (*l).capacity -= num;
-    (*l).buffer = realloc((*l).buffer, ((*l).capacity * sizeof(ElTypeKicauan)));
+    (*l).buffer = realloc((*l).buffer, ((*l).capacity * sizeof(ElTypeKicau)));
 }
 /* Proses : Mengurangi capacity sebanyak num */
 /* I.S. List sudah terdefinisi, ukuran capacity > num, dan nEff < capacity - num. */
@@ -170,7 +172,7 @@ void shrinkListKicau(ListKicau *l, int num)
 void compressListKicau(ListKicau *l)
 {
     (*l).capacity = (*l).nEff;
-    (*l).buffer = realloc((*l).buffer, ((*l).capacity * sizeof(ElTypeKicauan)));
+    (*l).buffer = realloc((*l).buffer, ((*l).capacity * sizeof(ElTypeKicau)));
 }
 /* Proses : Mengubah capacity sehingga capacity = nEff */
 /* I.S. List tidak kosong */

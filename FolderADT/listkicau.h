@@ -27,13 +27,13 @@ typedef struct
 } Kicauan;
 
 /* Definisi elemen dan koleksi objek */
-typedef Kicauan ElTypeKicauan; /* type elemen list */
+typedef Kicauan ElTypeKicau; /* type elemen list */
 typedef int IdxType;
 typedef struct
 {
-    ElTypeKicauan *buffer; /* memori tempat penyimpan elemen (container) */
-    int nEff;              /* >=0, banyaknya elemen efektif */
-    int capacity;          /* ukuran elemen */
+    ElTypeKicau *buffer; /* memori tempat penyimpan elemen (container) */
+    int nEff;            /* >=0, banyaknya elemen efektif */
+    int capacity;        /* ukuran elemen */
 } ListKicau;
 
 /* ********** SELEKTOR ********** */
@@ -106,7 +106,7 @@ void printListKicau(ListKicau l);
 
 /* ********** SEARCHING ********** */
 /* ***  Perhatian : list boleh kosong!! *** */
-IdxType indexOfListKicau(ListKicau l, ElTypeKicauan val);
+IdxType indexOfListKicau(ListKicau l, ElTypeKicau val);
 /* Search apakah ada elemen List l yang bernilai val */
 /* Jika ada, menghasilkan indeks i terkecil, dengan elemen ke-i = val */
 /* Jika tidak ada, mengirimkan IDX_UNDEF */
@@ -121,12 +121,12 @@ void copyListKicau(ListKicau lIn, ListKicau *lOut);
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
-void insertLastListKicau(ListKicau *l, ElTypeKicauan val);
+void insertLastListKicau(ListKicau *l, ElTypeKicau val);
 /* Proses: Menambahkan val sebagai elemen terakhir list */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */
 /* ********** MENGHAPUS ELEMEN ********** */
-void deleteLastListKicau(ListKicau *l, ElTypeKicauan *val);
+void deleteLastListKicau(ListKicau *l, ElTypeKicau *val);
 /* Proses : Menghapus elemen terakhir list */
 /* I.S. List tidak kosong */
 /* F.S. val adalah nilai elemen terakhir l sebelum penghapusan, */
