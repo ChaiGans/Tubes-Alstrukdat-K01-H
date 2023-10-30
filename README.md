@@ -2,11 +2,9 @@
 tes change read me
 
 ## CARA PAKE WORDMACHINE KALO MAU BACA DARI TERMINAL 
-### inisiasi: `STARTWORD(stdin, false)`
-`stdin` -> ngasih tau kita mau nerima pita masukan dari pengguna lewat standard input (atau bisa dibilang terminal)  
-`false` -> ngasih tau kita mau nerima masukan **BUKAN** dari file  
-### kontinu: `ADVWORD`(false)`
-`false` -> ngasih tau kita mau nerima masukan **BUKAN** dari file
+### pake `ReadWord()` yang udah dibikin chai
+cara pakenya 
+`kataYangLuMau = ReadWord()`
 
 ## CARA PAKE WORDMACHINE KALO MAU BACA DARI FILE 
 ### inisiasi: `STARTWORD(<filePath>, true)`
@@ -15,5 +13,5 @@ tes change read me
 ### kontinu: `ADVWORD`(true)`
 `true` -> ngasih tau kita mau nerima masukan dari file  
 
-p.s. : jangan lupa `#include "boolean.h"`
+p.s. : jangan lupa `#include "boolean.h"`  
 kasih tau aja kalo masih ada yang salah dari wordmachinenya mungkin aku coba selesain 👋
