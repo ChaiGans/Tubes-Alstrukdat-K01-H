@@ -1,6 +1,5 @@
 #include "data.h"
 #include <stdio.h>
-#include "wordmachine.h"
 
 Word blankLineCheck(Word w)
 {
@@ -89,9 +88,9 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna)
         FotoProfil foto;
         createFotoProfil(&foto);
 
+        // looping untuk baca foto profil
         int i, baris, kolom;
         char warna, simbol;
-
         for (baris = 0; baris < 5; baris++)
         {
             kolom = 0;
@@ -113,6 +112,7 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna)
             }
         }
 
+        p.fotoProfil = foto;
         listPengguna->contents[i] = p;
     }
 

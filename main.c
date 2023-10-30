@@ -1,7 +1,6 @@
 #include "FolderADT/charmachine.h"
 #include "FolderADT/wordmachine.h"
 #include "FolderADT/data.h"
-#include "FolderADT/listpengguna.h"
 #include <stdio.h>
 
 // static FILE *pita; // Declare pita as a global variable

@@ -5,9 +5,7 @@
 
 #include "wordmachine.h"
 #include "boolean.h"
-#include "fotoprofil.h"
 #include "listpengguna.h"
-#include "matrix.h"
 
 // Fungsi pada data.h digunakan untuk mendapatkan data dari file pengguna.txt, kicauan.txt, balasan.txt, draf.txt, dan utas.txt
 // Fungsi pada data.h juga digunakan untuk mengubah data pada file pengguna.txt, kicauan.txt, balasan.txt, draf.txt, dan utas.txt

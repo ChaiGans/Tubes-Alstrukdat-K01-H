@@ -7,8 +7,8 @@
 #define ListPengguna_H
 
 #include "boolean.h"
-#include "matrix.h"
 #include "wordmachine.h"
+#include "fotoprofil.h"
 #include "prioqueuechar.h"
 /*  Kamus Umum */
 #define CAPACITY_STATIK 20
@@ -30,7 +30,7 @@ typedef struct
    int nomorHP;
    Word weton;                    // Pahing, Kliwon, Wage, Pon, dan Legi (case insensitive)
    Word status;                   // PUBLIC, PRIVAT
-   Matrix fotoProfil;             // use pcolor.c
+   FotoProfil fotoProfil;         // use pcolor.c
    PrioQueueChar permintaanTeman; // harusnya priorqueuepermintaan (check by jumlah teman atau length of listTeman)
 } Profile;
 
