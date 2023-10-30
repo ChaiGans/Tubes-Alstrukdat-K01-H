@@ -1,6 +1,7 @@
 #include "FolderADT/charmachine.h"
 #include "FolderADT/wordmachine.h"
 #include "FolderADT/data.h"
+#include "FolderADT/listpengguna.h"
 #include <stdio.h>
 
 // static FILE *pita; // Declare pita as a global variable
@@ -26,5 +27,7 @@ int main()
     printf("Masukkan nama file config: ");
     STARTWORD(stdin, false);
     Word fileName = currentWord;
-    initReadConfig(fileName);
+    ListPengguna listPengguna;
+    CreateListPengguna(&listPengguna);
+    initReadConfig(fileName, &listPengguna);
 }
