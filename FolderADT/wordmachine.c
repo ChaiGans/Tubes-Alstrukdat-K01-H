@@ -7,19 +7,33 @@ boolean EndWord;
 Word currentWord;
 boolean isNewLine;
 
-void IgnoreBlanks()
+void IgnoreBlanks(boolean file)
 {
     /* Mengabaikan satu atau beberapa BLANK
        I.S. : currentChar sembarang
        F.S. : (currentChar ≠ BLANK dan currentChar != NEWLINE) atau currentChar = MARK */
     isNewLine = false;
-    while (currentChar == BLANK || currentChar == NEWLINE)
+    if (!file)
     {
-        if (currentChar == NEWLINE && !EOP)
+        while (currentChar == BLANK || currentChar == NEWLINE)
         {
-            isNewLine = true;
+            if (currentChar == NEWLINE && !EOP)
+            {
+                isNewLine = true;
+            }
+            ADV();
         }
-        ADV();
+    }
+    else
+    {
+        if (currentChar == BLANK || currentChar == NEWLINE)
+        {
+            if (!EOP)
+            {
+                isNewLine = true;
+            }
+            ADV();
+        }
     }
 }
 
@@ -30,7 +44,7 @@ void STARTWORD(FILE *input, boolean file)
               atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
               currentChar karakter pertama sesudah karakter terakhir kata */
     START(input, file);
-    IgnoreBlanks();
+    IgnoreBlanks(file);
     if (isNewLine || EOP)
     {
         EndWord = true;
@@ -54,7 +68,7 @@ void ADVWORD(boolean file)
               currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
               Jika currentChar = MARK, EndWord = true.
        Proses : Akuisisi kata menggunakan procedure CopyWord */
-    IgnoreBlanks();
+    IgnoreBlanks(file);
     if (EOP)
     {
         EndWord = true;
@@ -94,12 +108,21 @@ void CopyWord()
 
 void CopyLine()
 {
+    int i = 0;
     currentWord.Length = 0;
+
     while (currentChar != NEWLINE && currentChar != EOF)
     {
-        currentWord.TabWord[currentWord.Length++] = currentChar;
-        ADV();
+        if (currentWord.Length < NMax)
+        {
+            currentWord.TabWord[i] = currentChar;
+            ADV();
+            i++;
+        }
+        else
+            break;
     }
+    currentWord.Length = i;
 }
 
 Word ReadWord()

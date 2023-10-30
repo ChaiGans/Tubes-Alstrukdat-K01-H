@@ -22,7 +22,7 @@ extern boolean EndWord;
 extern Word currentWord;
 extern boolean isNewLine;
 
-void IgnoreBlanks();
+void IgnoreBlanks(boolean file);
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : currentChar sembarang
    F.S. : currentChar ≠ BLANK atau currentChar = MARK */
