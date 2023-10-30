@@ -16,7 +16,8 @@
 /* Indeks tak terdefinisi*/
 
 // List Dinamis dari Kicauan
-typedef struct {
+typedef struct
+{
     int id;
     char text[280];
     int authorID;
@@ -26,12 +27,13 @@ typedef struct {
 } Kicauan;
 
 /* Definisi elemen dan koleksi objek */
-typedef Kicauan ElType; /* type elemen list */
+typedef Kicauan ElTypeKicauan; /* type elemen list */
 typedef int IdxType;
-typedef struct{
-    ElType *buffer; /* memori tempat penyimpan elemen (container) */
-    int nEff;       /* >=0, banyaknya elemen efektif */
-    int capacity;   /* ukuran elemen */
+typedef struct
+{
+    ElTypeKicauan *buffer; /* memori tempat penyimpan elemen (container) */
+    int nEff;              /* >=0, banyaknya elemen efektif */
+    int capacity;          /* ukuran elemen */
 } ListKicau;
 
 /* ********** SELEKTOR ********** */
@@ -102,31 +104,29 @@ void printListKicau(ListKicau l);
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
 /* Jika list kosong : menulis [] */
 
-
 /* ********** SEARCHING ********** */
 /* ***  Perhatian : list boleh kosong!! *** */
-IdxType indexOfListKicau(ListKicau l, ElType val);
+IdxType indexOfListKicau(ListKicau l, ElTypeKicauan val);
 /* Search apakah ada elemen List l yang bernilai val */
 /* Jika ada, menghasilkan indeks i terkecil, dengan elemen ke-i = val */
 /* Jika tidak ada, mengirimkan IDX_UNDEF */
 /* Menghasilkan indeks tak terdefinisi (IDX_UNDEF) jika List l kosong */
 /* Skema Searching yang digunakan bebas */
 
-
 /* ********** OPERASI LAIN ********** */
 void copyListKicau(ListKicau lIn, ListKicau *lOut);
 /* I.S. lIn terdefinisi tidak kosong, lOut sembarang */
 /* F.S. lOut berisi salinan dari lIn (identik, nEff dan capacity sama) */
-/* Proses : Menyalin isi lIn ke lOut */ 
+/* Proses : Menyalin isi lIn ke lOut */
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
-void insertLastListKicau(ListKicau *l, ElType val);
+void insertLastListKicau(ListKicau *l, ElTypeKicauan val);
 /* Proses: Menambahkan val sebagai elemen terakhir list */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
 /* F.S. val adalah elemen terakhir l yang baru */
 /* ********** MENGHAPUS ELEMEN ********** */
-void deleteLastListKicau(ListKicau *l, ElType *val);
+void deleteLastListKicau(ListKicau *l, ElTypeKicauan *val);
 /* Proses : Menghapus elemen terakhir list */
 /* I.S. List tidak kosong */
 /* F.S. val adalah nilai elemen terakhir l sebelum penghapusan, */
@@ -148,6 +148,5 @@ void compressListKicau(ListKicau *l);
 /* Proses : Mengubah capacity sehingga capacity = nEff */
 /* I.S. List tidak kosong */
 /* F.S. Ukuran capacity = nEff */
-
 
 #endif
