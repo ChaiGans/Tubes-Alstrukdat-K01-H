@@ -24,9 +24,27 @@ int main()
 
     // meminta input nama file config
     printf("Masukkan nama file config: ");
-    STARTWORD(stdin, false);
+    ReadWord();
     Word fileName = currentWord;
+
+    // inisiasi list yang akan digunakan
     ListPengguna listPengguna;
     CreateListPengguna(&listPengguna);
-    initReadConfig(fileName, &listPengguna);
+    ListKicau listKicau;
+    CreateListKicau(&listKicau, 10); // eh gatau ini capacity tuh gimane
+
+    // membaca file config
+    initReadConfig(fileName, &listPengguna, &listKicau);
+
+    // skema command line interface
+    while (true)
+    {
+        printf("\n>> ");
+        Word command = ReadWord();
+        printf("command : ");
+        for (int i = 1; i < command.Length; i++)
+        {
+            printf("%c", command.TabWord[i]);
+        }
+    }
 }
