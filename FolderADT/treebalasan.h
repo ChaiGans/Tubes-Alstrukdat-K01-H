@@ -7,6 +7,7 @@
 #define POHONBINER_H
 
 #include "boolean.h"
+#include "datetime.h"
 
 /* Selektor */
 #define ROOT(p) (p)->info
@@ -17,7 +18,7 @@ typedef struct {
     int id;
     char text[10];
     int authorID;
-    // TIme (local time)
+    DATETIME time;
 } Balasan;
 typedef struct treeNode* Address;
 typedef struct treeNode { 
