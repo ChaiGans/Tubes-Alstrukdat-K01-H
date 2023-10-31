@@ -40,6 +40,6 @@ typedef struct {
 // List Dinamis dari UTAS
 typedef struct {
     Kicauan kicau;
-    List kicauansambungan; // Kicauan sambungan harus ada type : text, localtime
+    ListUtas kicauansambungan; // Kicauan sambungan harus ada type : text, localtime
 } Utas;
 #endif

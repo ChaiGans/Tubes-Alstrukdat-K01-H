@@ -37,7 +37,7 @@ void readDrafConfig(char *filename);
 // I.S. : Sembarang
 // F.S. : Membaca file draf.txt dan mendefinisikan draf.
 
-void readUtasConfig(char *filename);
+void readUtasConfig(char *filename, ListPengguna listPengguna, ListUtas *listUtas);
 // I.S. : Sembarang
 // F.S. : Membaca file utas.txt dan mendefinisikan utas.
 

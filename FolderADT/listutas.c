@@ -11,27 +11,27 @@ Address newNodeListUtas(Utas val) {
     return p;
 }
 
-/* Definisi List : */
-/* List kosong : FIRST(l) = NULL */
+/* Definisi ListUtas : */
+/* ListUtas kosong : FIRST(l) = NULL */
 /* Setiap elemen dengan Address p dapat diacu UTAS(p), NEXT(p) */
 /* Elemen terakhir list: jika addressnya Last, maka NEXT(Last)=NULL */
 
 /* PROTOTYPE */
 /****************** PEMBUATAN LIST KOSONG ******************/
-void CreateListUtasUtas(List *l) {
+void CreateListUtasUtas(ListUtas *l) {
     /* I.S. sembarang             */
     /* F.S. Terbentuk list kosong */
     FIRST(*l) = NULL;
 }
 
 /****************** TEST LIST KOSONG ******************/
-boolean isEmptyListUtas(List l) {
+boolean isEmptyListUtas(ListUtas l) {
     /* Mengirim true jika list kosong */
     return (FIRST(l) == NULL);
 }
 
 /****************** GETTER SETTER ******************/
-Utas getElmtListUtas(List l, int idx) {
+Utas getElmtListUtas(ListUtas l, int idx) {
     /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
     /* F.S. Mengembalikan nilai elemen l pada indeks idx */
     int currentIdx = 0;
@@ -43,7 +43,7 @@ Utas getElmtListUtas(List l, int idx) {
     return UTAS(p);
 }
 
-void setElmtListUtas(List *l, int idx, Utas val) {
+void setElmtListUtas(ListUtas *l, int idx, Utas val) {
     /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
     /* F.S. Mengubah elemen l pada indeks ke-idx menjadi val */
     int currentIdx = 0;
@@ -55,7 +55,7 @@ void setElmtListUtas(List *l, int idx, Utas val) {
     UTAS(p) = val;
 }
 
-int indexOfListUtas(List l, Utas val) {
+int indexOfListUtas(ListUtas l, Utas val) {
     /* I.S. l, val terdefinisi */
     /* F.S. Mencari apakah ada elemen list l yang bernilai val */
     /* Jika ada, mengembalikan indeks elemen pertama l yang bernilai val */
@@ -75,7 +75,7 @@ int indexOfListUtas(List l, Utas val) {
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
-void insertFirstListUtas(List *l, Utas val) {
+void insertFirstListUtas(ListUtas *l, Utas val) {
     /* I.S. l mungkin kosong */
     /* F.S. Melakukan alokasi sebuah elemen dan */
     /* menambahkan elemen pertama dengan nilai val jika alokasi berhasil. */
@@ -87,7 +87,7 @@ void insertFirstListUtas(List *l, Utas val) {
     }
  
 }
-void insertLastListUtas(List *l, Utas val) {
+void insertLastListUtas(ListUtas *l, Utas val) {
     /* I.S. l mungkin kosong */
     /* F.S. Melakukan alokasi sebuah elemen dan */
     /* menambahkan elemen list di akhir: elemen terakhir yang baru */
@@ -106,7 +106,7 @@ void insertLastListUtas(List *l, Utas val) {
     }
 }
 
-void insertAtListUtas(List *l, Utas val, int idx) {
+void insertAtListUtas(ListUtas *l, Utas val, int idx) {
     /* I.S. l tidak mungkin kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
     /* F.S. Melakukan alokasi sebuah elemen dan */
     /* menyisipkan elemen dalam list pada indeks ke-idx (bukan menimpa elemen di i) */
@@ -129,7 +129,7 @@ void insertAtListUtas(List *l, Utas val, int idx) {
 }
 
 /*** PENGHAPUSAN ELEMEN ***/
-void deleteFirstListUtas(List *l, Utas *val) {
+void deleteFirstListUtas(ListUtas *l, Utas *val) {
     /* I.S. List l tidak kosong  */
     /* F.S. Elemen pertama list dihapus: nilai UTAS disimpan pada x */
     /*      dan alamat elemen pertama di-dealokasi */
@@ -139,7 +139,7 @@ void deleteFirstListUtas(List *l, Utas *val) {
     free(p);
 
 }
-void deleteLastListUtas(List *l, Utas *val) {
+void deleteLastListUtas(ListUtas *l, Utas *val) {
     /* I.S. list tidak kosong */
     /* F.S. Elemen terakhir list dihapus: nilai UTAS disimpan pada x */
     /*      dan alamat elemen terakhir di-dealokasi */
@@ -158,7 +158,7 @@ void deleteLastListUtas(List *l, Utas *val) {
     free(p);
 }
 
-void deleteAtListUtas(List *l, int idx, Utas *val) {
+void deleteAtListUtas(ListUtas *l, int idx, Utas *val) {
     /* I.S. list tidak kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
     /* F.S. val diset dengan elemen l pada indeks ke-idx. */
     /*      Elemen l pada indeks ke-idx dihapus dari l */
@@ -181,9 +181,9 @@ void deleteAtListUtas(List *l, int idx, Utas *val) {
 
 
 /****************** PROSES SEMUA ELEMEN LIST ******************/
-void displayListUtas(List l) {
-    // void printUTAS(List l);
-    /* I.S. List mungkin kosong */
+void displayListUtas(ListUtas l) {
+    // void printUTAS(ListUtas l);
+    /* I.S. ListUtas mungkin kosong */
     /* F.S. Jika list tidak kosong, iai list dicetak ke kanan: [e1,e2,...,en] */
     /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
     /* Jika list kosong : menulis [] */
@@ -203,7 +203,7 @@ void displayListUtas(List l) {
     }
 }
 
-int ListUtaslength(List l) {
+int ListUtaslength(ListUtas l) {
     /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
     if (isEmpty(l)) {
         return 0;
@@ -219,13 +219,13 @@ int ListUtaslength(List l) {
 }
 
 /****************** PROSES TERHADAP LIST ******************/
-List concatListUtas(List l1, List l2)  {
+ListUtas concatListUtas(ListUtas l1, ListUtas l2)  {
     /* I.S. l1 dan l2 sembarang */
     /* F.S. l1 dan l2 kosong, l3 adalah hasil konkatenasi l1 & l2 */
     /* Konkatenasi dua buah list : l1 dan l2    */
     /* menghasilkan l3 yang baru (dengan elemen list l1 dan l2 secara beurutan). */
     /* Tidak ada alokasi/dealokasi pada prosedur ini */
-    List l3;
+    ListUtas l3;
     CreateListUtas(&l3);
     Address p;
     int val;
