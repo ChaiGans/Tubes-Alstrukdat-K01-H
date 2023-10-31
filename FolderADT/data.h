@@ -29,7 +29,7 @@ void readKicauanConfig(char *filename, ListKicau *listKicau, ListPengguna listPe
 // I.S. : Sembarang
 // F.S. : Membaca file kicauan.txt dan mendefinisikan kicauan.
 
-void readBalasanConfig(char *filename);
+void readBalasanConfig(char *filename, ListKicau *l);
 // I.S. : Sembarang
 // F.S. : Membaca file balasan.txt dan mendefinisikan balasan.
 
