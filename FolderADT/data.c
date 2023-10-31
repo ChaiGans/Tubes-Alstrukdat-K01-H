@@ -29,6 +29,36 @@ int wordToInt(Word w)
     return res;
 }
 
+int charToInt (char w) {
+    return w - '0';
+}
+
+void wordToIDParentParser (Word w, int* parentRoot, int* idBalasan) {
+    int i = 0;
+    int save = 1;
+    int currentNumber = 0;
+    while (w.TabWord[i] != ' ') {
+        if (w.TabWord[i] == '-') {
+            save = -1;
+        } else {
+            currentNumber *= 10;
+            currentNumber += charToInt(w.TabWord[i]);
+        }
+        i+=1;
+    }
+    *parentRoot = save*currentNumber;
+    i+=1;
+    save = 1;
+    currentNumber = 0;
+    while (i < w.Length) {
+        currentNumber *= 10;
+        currentNumber += charToInt(w.TabWord[i]);
+        i += 1;
+    }
+    *idBalasan = currentNumber;
+}   
+
+
 void cutWord(Word w, char *res)
 {
     if (w.Length == 0)
@@ -189,7 +219,7 @@ void readKicauanConfig(char *filename, ListKicau *listKicau, ListPengguna listPe
     printf("Kicauan berhasil dibaca");
 }
 
-void readBalasanConfig(char *filename)
+void readBalasanConfig(char *filename, ListKicau *l)
 {
     FILE *file = fopen(filename, "r");
     if (file == NULL)
@@ -198,6 +228,36 @@ void readBalasanConfig(char *filename)
         return;
     }
     STARTWORD(file, true);
+    int banyakKicauan = wordToInt(currentWord);
+    ADVWORD(true);
+    int parentRoot, idBalasan;
+    int i;
+    for (i = 0; i < banyakKicauan; i++) {
+        int currentIDKicauan = wordToInt(currentWord);
+        ADVWORD(true);
+        int banyakBalasan = wordToInt(currentWord);
+        ADVWORD(true);
+        int j; 
+        for (j = 0; j < banyakBalasan; j++) {
+            wordToIDParentParser(currentWord, &parentRoot, &idBalasan);
+            ADVWORD(true);
+            int k;
+            if (parentRoot == -1) {
+                for (k = 0; k < currentWord.Length; k++) {
+                    (*l).buffer[currentIDKicauan].balasan->info.text[k] = currentWord.TabWord[k];
+                }
+                (*l).buffer[currentIDKicauan].balasan->info.id = idBalasan;
+            } else {
+
+            }
+            ADVWORD(true);
+            int authorID;
+            // Parse authorID
+            (*l).buffer[currentIDKicauan].balasan->info.authorID = authorID;
+            ADVWORD(true);
+            // Parse local time
+        }
+    }
     // lanjut
 }
 
