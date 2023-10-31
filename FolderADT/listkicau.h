@@ -8,7 +8,8 @@
 #define LISTKICAU_H
 
 #include "boolean.h"
-
+#include "datetime.h"
+#include "treebalasan.h"
 /*  Kamus Umum */
 #define IDX_MIN_LISTDIN 0
 /* Indeks minimum list */
@@ -22,8 +23,8 @@ typedef struct
     char text[280];
     int authorID;
     int like;
-    // Time (local time)
-    // Tree of balasan
+    DATETIME localtime;
+    BinTree balasan;
 } Kicauan;
 
 /* Definisi elemen dan koleksi objek */
