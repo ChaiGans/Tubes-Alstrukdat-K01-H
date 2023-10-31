@@ -179,8 +179,6 @@ Profile cariPengguna(Word uname, ListPengguna listPengguna){
 
         if (tidaksama) i++;
         else found = true;
-
-        if (found == false) i++;
     } 
     
     return listPengguna.contents[i];
