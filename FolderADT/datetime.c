@@ -217,3 +217,60 @@ void getLocalTIme (DATETIME* receiveTime){
 void displayDATETIME (DATETIME receiveTime) {
     printf("%d/%d/%d %d:%d:%d\n", Day(receiveTime), Month(receiveTime), Year(receiveTime), Hour(Time(receiveTime)), Minute(Time(receiveTime)), Second(Time(receiveTime))); 
 }
+
+void DATETIMEparser(char datestring[19], DATETIME* returnedDateTime) {
+    int i = 0;
+    int res = 0;
+
+    while (datestring[i] != '/') {
+        res *= 10;
+        res += datestring[i] - '0';
+        i += 1;
+    }
+    returnedDateTime->DD = res;
+
+    res = 0;
+    i += 1;
+    while (datestring[i] != '/') {
+        res *= 10;
+        res += datestring[i] - '0';
+        i += 1;
+    }
+    returnedDateTime->MM = res;
+
+    res = 0;
+    i += 1;
+    while (datestring[i] != ' ') {
+        res *= 10;
+        res += datestring[i] - '0';
+        i += 1;
+    }
+    returnedDateTime->YYYY = res;
+
+    res = 0;
+    i += 1;
+    while (datestring[i] != ':') {
+        res *= 10;
+        res += datestring[i] - '0';
+        i += 1;
+    }
+    returnedDateTime->T.HH = res;
+
+    res = 0;
+    i += 1;
+    while (datestring[i] != ':') {
+        res *= 10;
+        res += datestring[i] - '0';
+        i += 1;
+    }
+    returnedDateTime->T.MM = res;
+
+    res = 0;
+    i += 1;
+    while (datestring[i] != '\0') {
+        res *= 10;
+        res += datestring[i] - '0';
+        i += 1;
+    }
+    returnedDateTime->T.SS = res;
+}
