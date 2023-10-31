@@ -94,5 +94,6 @@ long int DATETIMEDurasi(DATETIME DAw, DATETIME DAkh);
 
 void getLocalTIme (DATETIME* receiveTime);
 void displayDATETIME (DATETIME receiveTime);
+void DATETIMEparser (char datestring[19], DATETIME* returnedDateTime);
 
 #endif
