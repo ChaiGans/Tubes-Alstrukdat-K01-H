@@ -165,6 +165,28 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna)
         printf("Pengguna berhasil dibaca.\n");
 }
 
+Profile cariPengguna(Word uname, ListPengguna listPengguna){
+    boolean found = false; int i = 0;
+
+    while((listPengguna.contents[i].index != MARK_STATIK)&&(found == false)){
+
+        int j = 0; boolean tidaksama = false;
+        
+        while((j < uname.Length)&&(tidaksama == false)){
+            if (uname.TabWord[j] != listPengguna.contents[i].username[j]) tidaksama = true;
+            else j++;
+        } 
+
+        if (tidaksama) i++;
+        else found = true;
+
+        if (found == false) i++;
+    } 
+    
+    return listPengguna.contents[i];
+}
+
+
 void readKicauanConfig(char *filename, ListKicau *listKicau, ListPengguna listPengguna)
 {
     FILE *file = fopen(filename, "r");
@@ -193,22 +215,7 @@ void readKicauanConfig(char *filename, ListKicau *listKicau, ListPengguna listPe
         tweet.like = wordToInt(currentWord);
 
         ADVWORD(true); // current word = author
-        boolean found = false; j = 0;
-        while((listPengguna.contents[j].index != MARK_STATIK)&&(found == false)){
-
-            int k = 0; boolean tidaksama = false;
-
-            while ((k < currentWord.Length) && (tidaksama == false)){
-                if (currentWord.TabWord[k] != listPengguna.contents[j].username[k]) tidaksama = true;
-                else k++;
-            }
-            
-            if (tidaksama) j++;
-            else found = true;
-
-            if (found) tweet.authorID = listPengguna.contents[j].index;
-            else j++;
-        }
+        tweet.authorID = cariPengguna(currentWord, listPengguna).index;
 
         ADVWORD(true);
         // tweet.datetime = 
