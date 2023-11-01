@@ -332,7 +332,7 @@ void readUtasConfig(char *filename, ListPengguna listPengguna, ListUtas *listUta
             ADVWORD(true);
             //datetime
 
-            insertLastListUtas(&listUtas,temp);
+            insertLastListUtas(listUtas,temp);
         }
     }
 }

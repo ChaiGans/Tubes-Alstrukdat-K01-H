@@ -9,7 +9,7 @@ void CreateListDin(ListDin *l, int capacity) {
     /* F.S. Terbentuk list dinamis l kosong dengan kapasitas capacity */
     CAPACITY(*l) = capacity;
     NEFF(*l) = 0;
-    BUFFER(*l) = (ElType *) malloc (capacity * sizeof (ElType));
+    BUFFER(*l) = (int *) malloc (capacity * sizeof (int));
 }
 
 void dealocateListDin(ListDin *l) {
@@ -156,7 +156,7 @@ boolean isListDinEqual(ListDin l1, ListDin l2) {
 
 /* ********** SEARCHING ********** */
 /* ***  Perhatian : list boleh kosong!! *** */
-IdxType indexOfListDin(ListDin l, ElType val) {
+IdxType indexOfListDin(ListDin l, int val) {
     /* Search apakah ada elemen List l yang bernilai val */
     /* Jika ada, menghasilkan indeks i terkecil, dengan elemen ke-i = val */
     /* Jika tidak ada, mengirimkan IDX_UNDEF */
@@ -177,7 +177,7 @@ IdxType indexOfListDin(ListDin l, ElType val) {
 }
 
 /* ********** NILAI EKSTREM ********** */
-void extremeValuesListDin(ListDin l, ElType *max, ElType *min) {
+void extremeValuesListDin(ListDin l, int *max, int *min) {
     /* I.S. List l tidak kosong */
     /* F.S. max berisi nilai maksimum l;
             min berisi nilai minimum l */
@@ -211,7 +211,7 @@ void copyListDin(ListDin lIn, ListDin *lOut) {
     NEFF(*lOut) = NEFF(lIn);
 }
 
-ElType sumListDin(ListDin l) {
+int sumListDin(ListDin l) {
     /* Menghasilkan hasil penjumlahan semua elemen l */
     /* Jika l kosong menghasilkan 0 */  
     int sum, i;
@@ -221,7 +221,7 @@ ElType sumListDin(ListDin l) {
     }
     return sum;
 }
-int countValListDin(ListDin l, ElType val) {
+int countValListDin(ListDin l, int val) {
     /* Menghasilkan berapa banyak kemunculan val di l */
     /* Jika l kosong menghasilkan 0 */
     int cnt, i;
@@ -268,7 +268,7 @@ void sortListDin(ListDin *l, boolean asc) {
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
-void insertLastListDin(ListDin *l, ElType val) {
+void insertLastListDin(ListDin *l, int val) {
     /* Proses: Menambahkan val sebagai elemen terakhir list */
     /* I.S. List l boleh kosong, tetapi tidak penuh */
     /* F.S. val adalah elemen terakhir l yang baru */
@@ -280,7 +280,7 @@ void insertLastListDin(ListDin *l, ElType val) {
     NEFF(*l) += 1;
 }
 /* ********** MENGHAPUS ELEMEN ********** */
-void deleteLastListDin(ListDin *l, ElType *val) {
+void deleteLastListDin(ListDin *l, int *val) {
     /* Proses : Menghapus elemen terakhir list */
     /* I.S. List tidak kosong */
     /* F.S. val adalah nilai elemen terakhir l sebelum penghapusan, */
@@ -296,7 +296,7 @@ void expandListDin(ListDin *l, int num) {
     /* I.S. List sudah terdefinisi */
     /* F.S. Ukuran list bertambah sebanyak num */
     CAPACITY(*l) += num;
-    BUFFER(*l) = realloc(BUFFER(*l), (CAPACITY(*l)) * sizeof(ElType));
+    BUFFER(*l) = realloc(BUFFER(*l), (CAPACITY(*l)) * sizeof(int));
 }
 
 void shrinkListDin(ListDin *l, int num) {
@@ -304,7 +304,7 @@ void shrinkListDin(ListDin *l, int num) {
     /* I.S. List sudah terdefinisi, ukuran capacity > num, dan nEff < capacity - num. */
     /* F.S. Ukuran list berkurang sebanyak num. */
     CAPACITY(*l) -= num;
-    BUFFER(*l) = realloc(BUFFER(*l), (CAPACITY(*l)) * sizeof(ElType));
+    BUFFER(*l) = realloc(BUFFER(*l), (CAPACITY(*l)) * sizeof(int));
 }
 
 void compressListDin(ListDin *l) {
@@ -312,5 +312,5 @@ void compressListDin(ListDin *l) {
     /* I.S. List tidak kosong */
     /* F.S. Ukuran capacity = nEff */
     CAPACITY(*l) = NEFF(*l);
-    BUFFER(*l) = realloc(BUFFER(*l), (CAPACITY(*l)) * sizeof(ElType));
+    BUFFER(*l) = realloc(BUFFER(*l), (CAPACITY(*l)) * sizeof(int));
 }

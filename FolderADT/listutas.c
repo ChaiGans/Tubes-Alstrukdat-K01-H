@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include "listutas.h"
 
-Address newNodeListUtas(Utas val) {
-    Address p = (Address) malloc (sizeof (Node));
+Alamat newNodeListUtas(Utas val) {
+    Alamat p = (Alamat) malloc (sizeof (Node));
     if (p != NULL) {
         UTAS(p) = val;
         NEXT(p) = NULL;
@@ -13,12 +13,12 @@ Address newNodeListUtas(Utas val) {
 
 /* Definisi ListUtas : */
 /* ListUtas kosong : FIRST(l) = NULL */
-/* Setiap elemen dengan Address p dapat diacu UTAS(p), NEXT(p) */
-/* Elemen terakhir list: jika addressnya Last, maka NEXT(Last)=NULL */
+/* Setiap elemen dengan Alamat p dapat diacu UTAS(p), NEXT(p) */
+/* Elemen terakhir list: jika Alamatnya Last, maka NEXT(Last)=NULL */
 
 /* PROTOTYPE */
 /****************** PEMBUATAN LIST KOSONG ******************/
-void CreateListUtasUtas(ListUtas *l) {
+void CreateListUtas(ListUtas *l) {
     /* I.S. sembarang             */
     /* F.S. Terbentuk list kosong */
     FIRST(*l) = NULL;
@@ -35,7 +35,7 @@ Utas getElmtListUtas(ListUtas l, int idx) {
     /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
     /* F.S. Mengembalikan nilai elemen l pada indeks idx */
     int currentIdx = 0;
-    Address p = FIRST(l);
+    Alamat p = FIRST(l);
     while (currentIdx < idx) {
         currentIdx += 1;
         p = NEXT(p);
@@ -47,7 +47,7 @@ void setElmtListUtas(ListUtas *l, int idx, Utas val) {
     /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
     /* F.S. Mengubah elemen l pada indeks ke-idx menjadi val */
     int currentIdx = 0;
-    Address p = FIRST(*l);
+    Alamat p = FIRST(*l);
     while (currentIdx < idx) {
         currentIdx += 1;
         p = NEXT(p); 
@@ -59,15 +59,15 @@ int indexOfListUtas(ListUtas l, Utas val) {
     /* I.S. l, val terdefinisi */
     /* F.S. Mencari apakah ada elemen list l yang bernilai val */
     /* Jika ada, mengembalikan indeks elemen pertama l yang bernilai val */
-    /* Mengembalikan IDX_UNDEF jika tidak ditemukan */
+    /* Mengembalikan IDX_UNDEF_UTAS jika tidak ditemukan */
     int currentIdx = 0;
-    Address p = FIRST(l);
+    Alamat p = FIRST(l);
     while (p != NULL && UTAS(p).IDUtas != val.IDUtas) {
         currentIdx += 1;
         p = NEXT(p);
     }
     if (p == NULL) {
-        return IDX_UNDEF;
+        return IDX_UNDEF_UTAS;
     } else {
         return currentIdx;
     }
@@ -80,7 +80,7 @@ void insertFirstListUtas(ListUtas *l, Utas val) {
     /* F.S. Melakukan alokasi sebuah elemen dan */
     /* menambahkan elemen pertama dengan nilai val jika alokasi berhasil. */
     /* Jika alokasi gagal: I.S.= F.S. */
-    Address p = newNodeListUtas(val);
+    Alamat p = newNodeListUtas(val);
     if (p != NULL){
         NEXT(p) = FIRST(*l);
         FIRST(*l) = p;
@@ -95,9 +95,9 @@ void insertLastListUtas(ListUtas *l, Utas val) {
     if (isEmptyListUtas(*l)) {
         insertFirstListUtas(l, val);
     } else {
-        Address p = newNodeListUtas(val);
+        Alamat p = newNodeListUtas(val);
         if (p != NULL) {
-            Address last = FIRST(*l);
+            Alamat last = FIRST(*l);
             while (NEXT(last) != NULL) {
                 last = NEXT(last);
             }
@@ -111,12 +111,12 @@ void insertAtListUtas(ListUtas *l, Utas val, int idx) {
     /* F.S. Melakukan alokasi sebuah elemen dan */
     /* menyisipkan elemen dalam list pada indeks ke-idx (bukan menimpa elemen di i) */
     /* yang bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
-    Address insertElement = newNodeListUtas(val);
+    Alamat insertElement = newNodeListUtas(val);
     if (insertElement != NULL) {
         if (idx == 0) {
             insertFirstListUtas(l ,val);
         } else {
-            Address p = FIRST(*l);
+            Alamat p = FIRST(*l);
             int currentIdx = 0;
             while (currentIdx < idx-1) { // currentIdx < 3
                 currentIdx += 1;
@@ -133,7 +133,7 @@ void deleteFirstListUtas(ListUtas *l, Utas *val) {
     /* I.S. List l tidak kosong  */
     /* F.S. Elemen pertama list dihapus: nilai UTAS disimpan pada x */
     /*      dan alamat elemen pertama di-dealokasi */
-    Address p = FIRST(*l);
+    Alamat p = FIRST(*l);
     *val = UTAS(p);
     FIRST(*l) = NEXT(p);
     free(p);
@@ -143,8 +143,8 @@ void deleteLastListUtas(ListUtas *l, Utas *val) {
     /* I.S. list tidak kosong */
     /* F.S. Elemen terakhir list dihapus: nilai UTAS disimpan pada x */
     /*      dan alamat elemen terakhir di-dealokasi */
-    Address p = FIRST(*l);
-    Address prev = NULL;
+    Alamat p = FIRST(*l);
+    Alamat prev = NULL;
     while (NEXT(p) != NULL) {
         prev = p;
         p = NEXT(p);
@@ -166,8 +166,8 @@ void deleteAtListUtas(ListUtas *l, int idx, Utas *val) {
         deleteFirstListUtas(l,val);
     } else{
         int currentIdx = 0;
-        Address p = FIRST(*l);
-        Address prev;
+        Alamat p = FIRST(*l);
+        Alamat prev;
         while (currentIdx < idx) { 
             currentIdx += 1;
             prev = p;
@@ -188,10 +188,10 @@ void displayListUtas(ListUtas l) {
     /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
     /* Jika list kosong : menulis [] */
     /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
-    if (isEmpty(l)) { 
+    if (isEmptyListUtas(l)) { 
         printf("[]");
     } else {
-        Address p = FIRST(l);
+        Alamat p = FIRST(l);
         printf("[");
         while (NEXT(p) != NULL) {
             printf("%d,", UTAS(p).IDUtas);
@@ -205,11 +205,11 @@ void displayListUtas(ListUtas l) {
 
 int ListUtaslength(ListUtas l) {
     /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
-    if (isEmpty(l)) {
+    if (isEmptyListUtas(l)) {
         return 0;
     } else {
         int currentIdx = 0;
-        Address p = FIRST(l);
+        Alamat p = FIRST(l);
         while (p != NULL) {
             currentIdx += 1;
             p = NEXT(p);
@@ -227,7 +227,7 @@ ListUtas concatListUtas(ListUtas l1, ListUtas l2)  {
     /* Tidak ada alokasi/dealokasi pada prosedur ini */
     ListUtas l3;
     CreateListUtas(&l3);
-    Address p;
+    Alamat p;
     int val;
     p = FIRST(l1);
     while (p != NULL) {

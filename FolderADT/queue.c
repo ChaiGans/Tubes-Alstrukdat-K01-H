@@ -20,7 +20,7 @@ boolean isEmpty(Queue q) {
 boolean isFull(Queue q) {
     /* Mengirim true jika tabel penampung elemen q sudah penuh */
     /* yaitu IDX_TAIL akan selalu di belakang IDX_HEAD dalam buffer melingkar*/
-    return (IDX_HEAD(q) == ((IDX_TAIL(q)+1)%CAPACITY));
+    return (IDX_HEAD(q) == ((IDX_TAIL(q)+1)%QUEUECAPACITY));
 }
 
 int length(Queue q) {
@@ -28,18 +28,18 @@ int length(Queue q) {
     if (isEmpty(q)) {
         return 0;
     } else if (isFull(q)) {
-        return CAPACITY;
+        return QUEUECAPACITY;
     } else {
         if (IDX_HEAD(q)<=IDX_TAIL(q)) {
             return (IDX_TAIL(q)-IDX_HEAD(q)+1);
         } else {
-            return (CAPACITY+(IDX_TAIL(q)-IDX_HEAD(q))+1);
+            return (QUEUECAPACITY+(IDX_TAIL(q)-IDX_HEAD(q))+1);
         }
     }
 }
 
 /* *** Primitif Add/Delete *** */
-void enqueue(Queue *q, ElType val) {
+void enqueue(Queue *q, int val) {
     /* Proses: Menambahkan val pada q dengan aturan FIFO */
     /* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
     /* F.S. val menjadi TAIL yang baru, IDX_TAIL "mundur" dalam buffer melingkar. */
@@ -48,12 +48,12 @@ void enqueue(Queue *q, ElType val) {
         IDX_TAIL(*q) = 0;
         TAIL(*q) = val;
     } else {
-        IDX_TAIL(*q) = (IDX_TAIL(*q) + 1)%CAPACITY;
+        IDX_TAIL(*q) = (IDX_TAIL(*q) + 1)%QUEUECAPACITY;
         TAIL(*q) = val;
     }
 
 }
-void dequeue(Queue *q, ElType *val) {
+void dequeue(Queue *q, int *val) {
     /* Proses: Menghapus val pada q dengan aturan FIFO */
     /* I.S. q tidak mungkin kosong */
     /* F.S. val = nilai elemen HEAD pd I.S., IDX_HEAD "mundur";
@@ -63,7 +63,7 @@ void dequeue(Queue *q, ElType *val) {
         IDX_HEAD(*q) = IDX_UNDEF;
         IDX_TAIL(*q) = IDX_UNDEF;
     } else {
-        IDX_HEAD(*q) = (IDX_HEAD(*q) + 1)%CAPACITY;
+        IDX_HEAD(*q) = (IDX_HEAD(*q) + 1)%QUEUECAPACITY;
     }
 }
 

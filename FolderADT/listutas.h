@@ -1,12 +1,13 @@
 /* File : ListUtas.h */
 /* contoh ADT list berkait dengan representasi fisik pointer  */
-/* Representasi address dengan pointer */
+/* Representasi Alamat dengan pointer */
 /* Utas adalah integer */
 
 #ifndef ListUtas_H
 #define ListUtas_H
 
 #include "boolean.h"
+#include "datetime.h"
 
 /* Definisi Node : */
 typedef struct {
@@ -14,27 +15,27 @@ typedef struct {
     int idAuthor; // Si pembuat utas
     int IDUtas;
     char text[280];
-    // Datetime Localtime;
+    DATETIME localtime;
 } Utas;
-typedef struct node* Address;
+typedef struct node* Alamat;
 typedef struct node {
     Utas utas;
-    Address next;
+    Alamat next;
 } Node;
 
 #define UTAS(p) (p)->utas
 #define NEXT(p) (p)->next
 
-Address newNodeListUtas(Utas val);
+Alamat newNodeListUtas(Utas val);
 
 /* Definisi ListUtas : */
 /* ListUtas kosong : FIRST(l) = NULL */
-/* Setiap elemen dengan Address p dapat diacu INFO(p), NEXT(p) */
-/* Elemen terakhir list: jika addressnya Last, maka NEXT(Last)=NULL */
+/* Setiap elemen dengan Alamat p dapat diacu INFO(p), NEXT(p) */
+/* Elemen terakhir list: jika Alamatnya Last, maka NEXT(Last)=NULL */
 
-typedef Address ListUtas;
+typedef Alamat ListUtas;
 
-#define IDX_UNDEF (-1)
+#define IDX_UNDEF_UTAS (-1)
 #define FIRST(l) (l)
 
 /* PROTOTYPE */
