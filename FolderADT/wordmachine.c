@@ -182,6 +182,14 @@ void transferWordToString (char inputString[], Word w) {
     inputString[w.Length] = '\0';
 }
 
+void transferStringToString (char inputString[], char targetString[]) {
+    int i;
+    for (i = 0; i<stringLength(inputString); i++) {
+        targetString[i] = inputString[i];
+    }
+    targetString[stringLength(inputString)] = '\0';
+}
+
 boolean stringStringCompare (char string1[], char string2[]) {
     if (stringLength(string1) != stringLength(string2)) {
         return false;
@@ -205,7 +213,7 @@ void displayArrayOfChar (char string[]) {
 
 boolean isInteger (Word w, int* totalNumber) {
     int i;
-    int number = NULL;
+    int number = 0;
     for (i = 0; i < w.Length; i++) {
         if ((int)w.TabWord[i] < 48 || (int)w.TabWord[i] > 57) {
             return false;
@@ -214,6 +222,6 @@ boolean isInteger (Word w, int* totalNumber) {
             number += w.TabWord[i] - '0';
         }
     }
-    *totalNumber = number;
+    *totalNumber = number;  
     return true;
 }

@@ -70,6 +70,7 @@ void gantiProfil (Profile* userProfile) {
     displayProfileInformation(*userProfile);
     printf("Masukkan bio akun:\n");
     bio = ReadWord();
+    transferWordToString(*userProfile->bio, bio);
     putchar('\n');
     do {
         printf("Masukkan No HP:\n");
@@ -79,6 +80,7 @@ void gantiProfil (Profile* userProfile) {
             printf("No HP tidak valid. Masukkan lagi yuk!\n");
         }
     } while (!isInteger(nomorHP, &nomorHPinteger));
+    (*userProfile).nomorHP = nomorHPinteger;
     do {
         printf("Masukkan Weton:\n");
         weton = ReadWord();
@@ -87,23 +89,58 @@ void gantiProfil (Profile* userProfile) {
             printf("Weton anda tidak valid.\n");
         }
     } while (!isWetonValid(weton));
+    transferWordToString(*userProfile->weton, weton);
     printf("Profil anda sudah berhasil diperbarui!");
 }
 
 void aturJenisAkun (Profile* userProfile) {
     printf("Saat ini, akun Anda adalah akun ");
     displayStatusAKun(*userProfile);
-    if (stringStringCompare(*userProfile->status, "PUBLIK")) {
+    if (stringStringCompare((*userProfile).status, "PUBLIK")) {
         printf(". Ingin mengubah ke akun PRIVAT? (YA/TIDAK)");
         Word konfirmasi = ReadWord();
         if (wordStringCompare(konfirmasi, "YA")) {
-            *userProfile->status = "PRIVAT";
+            transferStringToString("PRIVAT", userProfile->status);
         }
     } else {
         printf(". Ingin mengubah ke akun PUBLIK? (YA/TIDAK)");
         Word konfirmasi = ReadWord();
         if (wordStringCompare(konfirmasi, "YA")) {
-            *userProfile->status = "PUBLIK";
+            transferStringToString("PUBLIK", userProfile->status);
         }
     }   
 }
+
+void ubahFotoProfil(Profile *userProfile) {
+    printf("Foto profil Anda saat ini adalah\n");
+    displayFotoProfil(userProfile->fotoProfil);
+    putchar('\n');
+    printf("Masukkan Foto Profil yang baru: \n");
+    Word userInput = ReadWord();
+
+    int i;
+    int baris = 0;
+    int kolom = 0;
+
+    for (i = 0; i < 100; i++) {
+        char karakter = userInput.TabWord[i];
+
+        if (i % 4 == 0) {
+            ELMT(WARNAPROFIL((*userProfile).fotoProfil), baris, kolom) = karakter;
+        } else if (i % 4 == 2) {
+            ELMT(SIMBOLPROFIL((*userProfile).fotoProfil), baris, kolom) = karakter;
+        }
+
+        if (i % 4 == 3) {
+            kolom++;
+            if (kolom == 5) {
+                kolom = 0;
+            }
+        }
+        if (i % 20 == 19) {
+            baris++;
+        }
+    }
+    printf("Foto profil anda sudah berhasil diganti!");
+}
+

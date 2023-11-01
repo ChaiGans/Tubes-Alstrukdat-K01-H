@@ -5,6 +5,7 @@
 
 #include "wordmachine.h"
 #include "boolean.h"
+#include "profile.h"
 #include "listpengguna.h"
 #include "listkicau.h"
 #include "listutas.h"

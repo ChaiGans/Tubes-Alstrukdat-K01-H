@@ -4,11 +4,9 @@
 #include "features/user.h"
 #include <stdio.h>
 
-// static FILE *pita; // Declare pita as a global variable
 Word userInput;
 
-void printASCIIART()
-{
+void printASCIIART() {
     printf("      _                     _            \n");
     printf("     | |___      _____  ___| |_ ___ _ __ \n");
     printf("     | __\\ \\ /\\ / / _ \\/ _ \\ __/ _ \\ '__|\n");
@@ -17,37 +15,49 @@ void printASCIIART()
     printf("                                         \n");
 }
 
-int main()
-{
-    // pesan selamat datang
+int main() {
     printASCIIART();
     printf("Selamat datang di tweeter.\n");
 
-    // meminta input nama file config
-    printf("Masukkan nama file config: ");
-    ReadWord();
-    Word fileName = currentWord;
+    Word fileName;
     int currentLoginID = -1;
-    // inisiasi list yang akan digunakan
     ListPengguna listPengguna;
     CreateListPengguna(&listPengguna);
     ListKicau listKicau;
-    CreateListKicau(&listKicau, 10); // eh gatau ini capacity tuh gimane
+    CreateListKicau(&listKicau, 10);
 
-    // membaca file config
+    printf("Masukkan nama file config: ");
+    ReadWord();
+    fileName = currentWord;
+
     initReadConfig(fileName, &listPengguna, &listKicau);
-    printListPengguna(listPengguna);
-    // skema command line interface
-    while (true)
-    {
+
+    while (true) {
         printf("\n>> ");
         Word command = ReadWord();
-        if (wordStringCompare(command, "DAFTAR")) {
-            daftarPengguna(&listPengguna);
-            printListPengguna(listPengguna);
-        } else if (wordStringCompare(command, "MASUK")) {
-            masukPengguna(&currentLoginID, listPengguna);
-            displayNameFromID(currentLoginID, listPengguna);
+
+        if (currentLoginID == -1) {
+            if (wordStringCompare(command, "MASUK")) {
+                masukPengguna(&currentLoginID, listPengguna);
+                displayNameFromID(currentLoginID, listPengguna);
+            } else {
+                printf("Silakan masuk terlebih dahulu.\n");
+            }
+        } else {
+            if (wordStringCompare(command, "DAFTAR")) {
+                daftarPengguna(&listPengguna);
+            } else if (wordStringCompare(command, "UBAH_FOTO_PROFIL")) {
+                ubahFotoProfil(&listPengguna.contents[currentLoginID]);
+            } else if (wordStringCompare(command, "ATUR_JENIS_AKUN")) {
+                aturJenisAkun(&listPengguna.contents[currentLoginID]);
+            } else if (wordStringCompare(command, "GANTI_PROFIL")) {
+                gantiProfil(&listPengguna.contents[currentLoginID]);
+            } else if (wordStringCompare(command, "KELUAR")) {
+                currentLoginID = -1;
+                printf("Anda berhasil logout. Sampai jumpa di pertemuan berikutnya!\n");
+            } else if (wordStringCompare(command, "TUTUP_PROGRAM")) {
+                break;
+            }
         }
     }
 }

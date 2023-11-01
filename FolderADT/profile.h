@@ -24,13 +24,9 @@ void createFotoProfil(FotoProfil *F);
 /* Membentuk dua Matrix warnaProfil dan simbolProfil "kosong" berukuran 5 x 5 */
 
 /* *** KELOMPOK BACA/TULIS *** */
-void printFotoProfil(FotoProfil F);
+void displayFotoProfil(FotoProfil F);
 /* I.S. F terdefinisi */
 /* F.S. F ditampilkan di layar sesuai dengan warna dan simbolnya */
-
-void ubahFotoProfil(FotoProfil *F);
-/* I.S. F terdefinisi */
-/* F.S. Warna dan simbol pada F terubah sesuai dengan input pengguna */
 
 // typedef struct {
 //     char username[20];

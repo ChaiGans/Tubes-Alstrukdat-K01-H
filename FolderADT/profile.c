@@ -79,51 +79,13 @@ void displayFotoProfil(FotoProfil F)
     }
 }
 
-void ubahFotoProfil(FotoProfil *F)
-{
-    /* I.S. F terdefinisi */
-    /* F.S. Warna dan simbol pada F terubah sesuai dengan input pengguna */
-    int i, baris, kolom;
-    char warna, simbol;
-    printf("Masukkan Foto Profil yang baru: \n");
-    Word userInput = ReadWord();
-
-    baris = 0;
-    kolom = 0;
-    for (i = 0; i < 100; i++)
-    {
-        if (i % 4 == 0)
-        {
-            warna = userInput.TabWord[i];
-            ELMT(WARNAPROFIL(*F), baris, kolom) = warna;
-        }
-        else if (i % 4 == 2)
-        {
-            simbol = userInput.TabWord[i];
-            ELMT(SIMBOLPROFIL(*F), baris, kolom) = simbol;
-        }
-
-        if (i % 4 == 3)
-        {
-            kolom++;
-            if (kolom == 5)
-            {
-                kolom = 0;
-            }
-        }
-        if (i % 20 == 19)
-        {
-            baris++;
-        }
-    }
-}
 
 void createProfile(Profile *p)
 {
-    *p->bio = "";
-    (*p).nomorHP = NULL;
-    *p->weton = "";
-    *p->status = "PUBLIK";
+    transferStringToString("", p->bio);
+    (*p).nomorHP = -1;
+    transferStringToString("", p->weton);
+    transferStringToString("PUBLIK", p->status);
 
     FotoProfil foto;
     createFotoProfil(&foto);
@@ -132,7 +94,7 @@ void createProfile(Profile *p)
 
 void displayNomorHP(Profile p)
 {
-    if (p.nomorHP != NULL)
+    if (p.nomorHP != 0)
     {
         printf("0%d", p.nomorHP);
     }

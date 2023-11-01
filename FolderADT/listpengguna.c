@@ -217,8 +217,9 @@ boolean passwordChecker (int userID, ListPengguna l, Word passwordInput) {
 }
 
 void displayNameFromID (int userID, ListPengguna l) {
-    int i;
-    while (l.contents[userID].password[i] != '\0') {
-        printf("%c", l.contents[userID].password[i]);
+    int i = 0;
+    while (l.contents[userID].username[i] != '\0') {
+        printf("%c", l.contents[userID].username[i]);
+        i+=1;
     }
 }
