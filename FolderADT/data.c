@@ -166,19 +166,19 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna)
 }
 
 Profile cariPengguna(Word uname, ListPengguna listPengguna){
-    boolean found = false; int i = 0;
+    boolean found = false, sama; int i = 0, j;
 
     while((listPengguna.contents[i].index != MARK_STATIK)&&(found == false)){
 
-        int j = 0; boolean tidaksama = false;
+        j = 0; sama = true;
         
-        while((j < uname.Length)&&(tidaksama == false)){
-            if (uname.TabWord[j] != listPengguna.contents[i].username[j]) tidaksama = true;
+        while((j < uname.Length)&&(sama)){
+            if (uname.TabWord[j] != listPengguna.contents[i].username[j]) sama = false;
             else j++;
         } 
 
-        if (tidaksama) i++;
-        else found = true;
+        if ((sama)&&listPengguna.contents[i].username[j]=='\0') found = true;
+        else i++;
     } 
     
     return listPengguna.contents[i];
