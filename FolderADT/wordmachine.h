@@ -58,4 +58,7 @@ void CopyLine();
 
 Word ReadWord();
 boolean wordStringCompare (Word w, char command[]);
+int stringLength (char inputString[]);
+void transferWordToString (char inputString[], Word w) ;
+
 #endif

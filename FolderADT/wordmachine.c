@@ -165,3 +165,19 @@ boolean wordStringCompare (Word w, char command[]) {
     }
     return true;
 }
+
+int stringLength (char inputString[]) {
+    int lengthString = 0;
+    while (inputString[lengthString] != '\0') {
+        lengthString += 1;
+    }
+    return lengthString;
+}
+
+void transferWordToString (char inputString[], Word w) {
+    int i;
+    for (i = 0; i < w.Length; i++) {
+        inputString[i] = w.TabWord[i];
+    }
+    inputString[w.Length] = '\0';
+}
