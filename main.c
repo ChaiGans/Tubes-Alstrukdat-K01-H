@@ -1,6 +1,7 @@
 #include "FolderADT/charmachine.h"
 #include "FolderADT/wordmachine.h"
 #include "FolderADT/data.h"
+#include "features/user.h"
 #include <stdio.h>
 
 // static FILE *pita; // Declare pita as a global variable
@@ -26,7 +27,7 @@ int main()
     printf("Masukkan nama file config: ");
     ReadWord();
     Word fileName = currentWord;
-
+    int currentLoginID = -1;
     // inisiasi list yang akan digunakan
     ListPengguna listPengguna;
     CreateListPengguna(&listPengguna);
@@ -35,16 +36,18 @@ int main()
 
     // membaca file config
     initReadConfig(fileName, &listPengguna, &listKicau);
-
+    printListPengguna(listPengguna);
     // skema command line interface
     while (true)
     {
         printf("\n>> ");
         Word command = ReadWord();
-        printf("command : ");
-        for (int i = 1; i < command.Length; i++)
-        {
-            printf("%c", command.TabWord[i]);
+        if (wordStringCompare(command, "DAFTAR")) {
+            daftarPengguna(&listPengguna);
+            printListPengguna(listPengguna);
+        } else if (wordStringCompare(command, "MASUK")) {
+            masukPengguna(&currentLoginID, listPengguna);
+            displayNameFromID(currentLoginID, listPengguna);
         }
     }
 }
