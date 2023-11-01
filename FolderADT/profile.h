@@ -8,17 +8,20 @@
 #include "time.h"
 #include "listutas.h"
 #include "prioqueuechar.h"
+#include "listpengguna.h"
 
-typedef struct {
-    char username[20];
-    char password[20]; 
-    char bio[135]; // Bio max 135 karakter
-    int nomorHP; 
-    char weton[6]; // Pahing, Kliwon, Wage, Pon, dan Legi (case insensitive)
-    char status[6]; // PUBLIC, PRIVAT
-    Matrix fotoProfil[5][5]; // use pcolor.c
-    PrioQueueChar permintaanTeman; // harusnya priorqueuepermintaan (check by jumlah teman atau length of listTeman)
-} Profile;
+// typedef struct {
+//     char username[20];
+//     char password[20]; 
+//     char bio[135]; // Bio max 135 karakter
+//     int nomorHP; 
+//     char weton[6]; // Pahing, Kliwon, Wage, Pon, dan Legi (case insensitive)
+//     char status[6]; // PUBLIC, PRIVAT
+//     Matrix fotoProfil[5][5]; // use pcolor.c
+//     PrioQueueChar permintaanTeman; // harusnya priorqueuepermintaan (check by jumlah teman atau length of listTeman)
+// } Profile;
+
+void createProfile (Profile * p);
 
 // List Dinamis dari Kicauan
 // typedef struct {
