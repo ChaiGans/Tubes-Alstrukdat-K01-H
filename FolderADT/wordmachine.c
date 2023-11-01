@@ -181,3 +181,39 @@ void transferWordToString (char inputString[], Word w) {
     }
     inputString[w.Length] = '\0';
 }
+
+boolean stringStringCompare (char string1[], char string2[]) {
+    if (stringLength(string1) != stringLength(string2)) {
+        return false;
+    } else {
+        int i ;
+        for (i = 0; string1[i]!=0; i++) {
+            if (string1[i] != string2[i]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+void displayArrayOfChar (char string[]) {
+    int i;
+    for (i = 0; i < stringLength(string); i++) {
+        printf("%c", string[i]);
+    }
+}
+
+boolean isInteger (Word w, int* totalNumber) {
+    int i;
+    int number = NULL;
+    for (i = 0; i < w.Length; i++) {
+        if ((int)w.TabWord[i] < 48 || (int)w.TabWord[i] > 57) {
+            return false;
+        } else {
+            number *= 10;
+            number += w.TabWord[i] - '0';
+        }
+    }
+    *totalNumber = number;
+    return true;
+}

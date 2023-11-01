@@ -59,6 +59,8 @@ void CopyLine();
 Word ReadWord();
 boolean wordStringCompare (Word w, char command[]);
 int stringLength (char inputString[]);
-void transferWordToString (char inputString[], Word w) ;
-
+void transferWordToString (char inputString[], Word w);
+boolean stringStringCompare (char string1[], char string2[]);
+void displayArrayOfChar (char string[]);
+boolean isInteger (Word w, int* totalNumber);
 #endif

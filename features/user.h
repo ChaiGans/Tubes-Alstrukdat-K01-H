@@ -7,5 +7,6 @@
 
 void daftarPengguna (ListPengguna* l);
 void masukPengguna (int* currentUserID, ListPengguna l);
-
+void gantiProfil (Profile* userProfile);
+void aturJenisAkun (Profile* userProfile);
 #endif

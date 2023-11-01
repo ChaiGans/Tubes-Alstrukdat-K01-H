@@ -64,3 +64,46 @@ void masukPengguna (int* currentUserID, ListPengguna l) {
     printf(". Mari menjelajahi BurBir bersama Ande-Ande Lumut!\n");
 }
 
+void gantiProfil (Profile* userProfile) {
+    Word bio, nomorHP, weton;
+    int nomorHPinteger;
+    displayProfileInformation(*userProfile);
+    printf("Masukkan bio akun:\n");
+    bio = ReadWord();
+    putchar('\n');
+    do {
+        printf("Masukkan No HP:\n");
+        nomorHP = ReadWord();
+        putchar('\n');
+        if (!isInteger(nomorHP, &nomorHPinteger)) {
+            printf("No HP tidak valid. Masukkan lagi yuk!\n");
+        }
+    } while (!isInteger(nomorHP, &nomorHPinteger));
+    do {
+        printf("Masukkan Weton:\n");
+        weton = ReadWord();
+        putchar('\n');
+        if (!isWetonValid(weton)) {
+            printf("Weton anda tidak valid.\n");
+        }
+    } while (!isWetonValid(weton));
+    printf("Profil anda sudah berhasil diperbarui!");
+}
+
+void aturJenisAkun (Profile* userProfile) {
+    printf("Saat ini, akun Anda adalah akun ");
+    displayStatusAKun(*userProfile);
+    if (stringStringCompare(*userProfile->status, "PUBLIK")) {
+        printf(". Ingin mengubah ke akun PRIVAT? (YA/TIDAK)");
+        Word konfirmasi = ReadWord();
+        if (wordStringCompare(konfirmasi, "YA")) {
+            *userProfile->status = "PRIVAT";
+        }
+    } else {
+        printf(". Ingin mengubah ke akun PUBLIK? (YA/TIDAK)");
+        Word konfirmasi = ReadWord();
+        if (wordStringCompare(konfirmasi, "YA")) {
+            *userProfile->status = "PUBLIK";
+        }
+    }   
+}

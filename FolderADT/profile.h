@@ -2,13 +2,8 @@
 #define __TYPE_H__
 
 #include "boolean.h"
-#include "matrix.h"
-#include "listdin.h"
-#include "queue.h"
-#include "time.h"
-#include "listutas.h"
-#include "prioqueuechar.h"
 #include "listpengguna.h"
+#include "wordmachine.h"
 
 // typedef struct {
 //     char username[20];
@@ -22,7 +17,11 @@
 // } Profile;
 
 void createProfile (Profile * p);
-
+void displayStatusAKun (Profile p);
+void displayNomorHP (Profile p);
+void displayProfileInformation (Profile p);
+void toLowerCase(const char original[], char lowercaseCopy[]);
+boolean isWetonValid (Word w);
 // List Dinamis dari Kicauan
 // typedef struct {
 //     int id;
