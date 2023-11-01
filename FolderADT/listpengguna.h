@@ -158,4 +158,8 @@ void deleteLastListPengguna(ListPengguna *l, Profile *val);
 /*      Banyaknya elemen List berkurang satu */
 /*      List l mungkin menjadi kosong */
 
+boolean isUserAlreadyExist(ListPengguna l, Word username);
+void findUsernameID (Word usernameInput, ListPengguna l, int* userID, boolean* usernameExist);
+boolean passwordChecker (int userID, ListPengguna l, Word passwordInput);
+void displayNameFromID (int userID, ListPengguna l);
 #endif

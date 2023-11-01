@@ -189,3 +189,36 @@ void deleteLastListPengguna(ListPengguna *l, Profile *val) {
     *val = (*l).contents[getLastIdxListPengguna(*l)];
     (*l).contents[getLastIdxListPengguna(*l)].index = MARK_STATIK;
 }
+
+boolean isUserAlreadyExist(ListPengguna l, Word username) {
+    int i;
+    for (i = 0; i < ListPenggunaLength(l); i++) {
+        if (wordStringCompare(username, l.contents[i].username)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void findUsernameID (Word usernameInput, ListPengguna l, int* userID, boolean* usernameExist) {
+    int i;
+    *usernameExist = false;
+    *userID = IDX_UNDEF_STATIK;
+    for (i = 0; i < ListPenggunaLength(l); i++) {
+        if (wordStringCompare(usernameInput, l.contents[i].username)) {
+            *usernameExist = true;
+            *userID = i;
+        }
+    }
+}
+
+boolean passwordChecker (int userID, ListPengguna l, Word passwordInput) {
+    return (wordStringCompare(passwordInput, l.contents[userID].password));
+}
+
+void displayNameFromID (int userID, ListPengguna l) {
+    int i;
+    while (l.contents[userID].password[i] != '\0') {
+        printf("%c", l.contents[userID].password[i]);
+    }
+}
