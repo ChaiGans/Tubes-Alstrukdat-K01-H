@@ -8,8 +8,8 @@
 
 #include "boolean.h"
 #include "wordmachine.h"
-#include "fotoprofil.h"
 #include "prioqueuechar.h"
+#include "matrix.h"
 
 /*  Kamus Umum */
 #define CAPACITY_STATIK 20
@@ -22,6 +22,16 @@
 /* Nilai elemen tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
+typedef struct
+{
+   Matrix WarnaProfil;  // Matrix warna profil
+   Matrix SimbolProfil; // Matrix simbol profil
+} FotoProfil;
+
+/* *** Selektor *** */
+#define WARNAPROFIL(F) (F).WarnaProfil
+#define SIMBOLPROFIL(F) (F).SimbolProfil
+
 typedef struct
 {
    int index;
@@ -159,7 +169,7 @@ void deleteLastListPengguna(ListPengguna *l, Profile *val);
 /*      List l mungkin menjadi kosong */
 
 boolean isUserAlreadyExist(ListPengguna l, Word username);
-void findUsernameID (Word usernameInput, ListPengguna l, int* userID, boolean* usernameExist);
-boolean passwordChecker (int userID, ListPengguna l, Word passwordInput);
-void displayNameFromID (int userID, ListPengguna l);
+void findUsernameID(Word usernameInput, ListPengguna l, int *userID, boolean *usernameExist);
+boolean passwordChecker(int userID, ListPengguna l, Word passwordInput);
+void displayNameFromID(int userID, ListPengguna l);
 #endif
