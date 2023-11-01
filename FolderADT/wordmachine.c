@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include "wordmachine.h"
 #include "boolean.h"
 #include "charmachine.h"
@@ -128,12 +129,16 @@ void CopyLine()
 Word ReadWord()
 {
     START(stdin, false);
+    if (currentChar == '\n') { // to consume enter
+        ADV();
+    }
     currentWord.Length = 0;
     while (currentChar != MARK)
     {
         if (currentWord.Length < NMax)
         { // jika lebih akan terpotong
-            currentWord.TabWord[currentWord.Length++] = currentChar;
+            currentWord.TabWord[currentWord.Length] = currentChar;
+            currentWord.Length += 1;
             ADV();
         }
         else
@@ -141,4 +146,22 @@ Word ReadWord()
     }
     currentWord.TabWord[currentWord.Length] = '\0';
     return currentWord;
+}
+
+boolean wordStringCompare (Word w, char command[]) {
+    int i = 0;
+    int lengthCommand = 0;
+    while (command[lengthCommand] != '\0') {
+        lengthCommand += 1;
+    }
+    if (w.Length != lengthCommand) {
+        return false;
+    }
+    while (command[i] != '\0') {
+        if (w.TabWord[i] != command[i]) {
+            return false;
+        } 
+        i += 1;
+    }
+    return true;
 }

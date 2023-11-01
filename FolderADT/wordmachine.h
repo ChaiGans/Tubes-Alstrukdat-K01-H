@@ -57,4 +57,5 @@ void CopyLine();
           Jika panjang line melebihi NMax, maka sisa line "dipotong" */
 
 Word ReadWord();
+boolean wordStringCompare (Word w, char command[]);
 #endif
