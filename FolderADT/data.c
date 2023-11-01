@@ -162,7 +162,7 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna)
 
     ADVWORD(true); // read sampe pita ditutup
     if (EOF)
-        printf("Pengguna berhasil dibaca.\n");
+        printf("Config pengguna berhasil dibaca... \n");
 }
 
 Profile cariPengguna(Word uname, ListPengguna listPengguna){
@@ -193,7 +193,6 @@ void readKicauanConfig(char *filename, ListKicau *listKicau, ListPengguna listPe
         printf("File %s tidak ditemukan.\n", filename);
         return;
     }
-    printf("file kicau terbuka");
     STARTWORD(file, true);
 
     int banyakKicau = wordToInt(currentWord);
@@ -220,8 +219,7 @@ void readKicauanConfig(char *filename, ListKicau *listKicau, ListPengguna listPe
 
         insertLastListKicau(&*listKicau, tweet);
     }
-
-    printf("Kicauan berhasil dibaca");
+    printf("Config kicauan berhasil dibaca... \n");
 }
 
 void readBalasanConfig(char *filename, ListKicau *l)
@@ -264,6 +262,7 @@ void readBalasanConfig(char *filename, ListKicau *l)
         }
     }
     // lanjut
+    printf("Config balasan berhasil dibaca... \n");
 }
 
 void readDrafConfig(char *filename)
@@ -276,6 +275,7 @@ void readDrafConfig(char *filename)
     }
     STARTWORD(file, true);
     // lanjut
+    printf("Config draf berhasil dibaca... \n");
 }
 
 void readUtasConfig(char *filename, ListPengguna listPengguna, ListUtas *listUtas)
@@ -333,13 +333,14 @@ void readUtasConfig(char *filename, ListPengguna listPengguna, ListUtas *listUta
             insertLastListUtas(listUtas,temp);
         }
     }
+    printf("Config utas berhasil dibaca... \n");
 }
 
 void initReadConfig(Word fileName, ListPengguna *listPengguna, ListKicau *listKicau)
 {
-    readPenggunaConfig("../config/pengguna.txt", &*listPengguna);
-    readKicauanConfig("../config/kicauan.txt", &*listKicau, *listPengguna);
-    //  readBalasanConfig("config/balasan.txt");
-    //  readDrafConfig("config/draf.txt");
-    //  readUtasConfig("config/utas.txt");
+    readPenggunaConfig("config/pengguna.txt", listPengguna);
+    readKicauanConfig("config/kicauan.txt", listKicau, *listPengguna);
+    // readBalasanConfig("config/balasan.txt");
+    // readDrafConfig("config/draf.txt");
+    // readUtasConfig("config/utas.txt");
 }
