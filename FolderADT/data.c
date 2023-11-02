@@ -265,7 +265,7 @@ void readBalasanConfig(char *filename, ListKicau *l)
     printf("Config balasan berhasil dibaca... \n");
 }
 
-void readDrafConfig(char *filename)
+void readDrafConfig(char *filename, StackDraf* stackDraf, ListPengguna listpengguna)
 {
     FILE *file = fopen(filename, "r");
     if (file == NULL)
@@ -275,6 +275,26 @@ void readDrafConfig(char *filename)
     }
     STARTWORD(file, true);
     // lanjut
+    Draf p;
+    int banyakDraf = wordToInt(currentWord);
+    for (int i = 0 ; i<banyakDraf ; i++)
+    {
+        ADVWORD(true); // ID Draf
+        p.id = wordToInt(currentWord);
+
+        ADVWORD(true); // Text
+        int j; for (j = 0; j < currentWord.Length; j++){
+        p.text[j] = currentWord.TabWord[j];
+        }
+
+        ADVWORD(true); // Author
+        p.authorID = cariPengguna(currentWord,listpengguna).index;
+
+        ADVWORD(true); // Datetime
+        DATETIMEparser(currentWord.TabWord,&p.localtime);
+
+        PushStackDraf(&stackDraf,p);
+    }
     printf("Config draf berhasil dibaca... \n");
 }
 
@@ -311,24 +331,11 @@ void readUtasConfig(char *filename, ListPengguna listPengguna, ListUtas *listUta
             ADVWORD(true); // authorname
             // ubah authorname jadi authorid
             boolean found = false; j = 0;
-            while((listPengguna.contents[j].index != MARK_STATIK)&&(found == false))
-            {
-                int k = 0; boolean tidaksama = false;
-
-                while ((k < currentWord.Length) && (tidaksama == false)){
-                    if (currentWord.TabWord[k] != listPengguna.contents[j].username[k]) tidaksama = true;
-                    else k++;
-                }
-                
-                if (tidaksama) j++;
-                else found = true;
-
-                if (found) temp.idAuthor = listPengguna.contents[j].index;
-                else j++;
-            }
+            temp.idAuthor = cariPengguna(currentWord,listPengguna).index;
 
             ADVWORD(true);
             //datetime
+            DATETIMEparser(currentWord.TabWord,&temp.localtime);
 
             insertLastListUtas(listUtas,temp);
         }
