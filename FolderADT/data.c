@@ -222,7 +222,7 @@ void readKicauanConfig(char *filename, ListKicau *listKicau, ListPengguna listPe
     printf("Config kicauan berhasil dibaca... \n");
 }
 
-void readBalasanConfig(char *filename, ListKicau *l)
+void readBalasanConfig(char *filename, ListKicau *l, ListPengguna listpengguna)
 {
     FILE *file = fopen(filename, "r");
     if (file == NULL)
@@ -242,26 +242,27 @@ void readBalasanConfig(char *filename, ListKicau *l)
         ADVWORD(true);
         int j; 
         for (j = 0; j < banyakBalasan; j++) {
+            Balasan balasanBacaan;
             wordToIDParentParser(currentWord, &parentRoot, &idBalasan);
             ADVWORD(true);
-            int k;
+            transferWordToString(balasanBacaan.text, currentWord);
+            ADVWORD(true);
+            int userID;
+            boolean usernameExist;
+            findUsernameID(currentWord, listpengguna, &userID, &usernameExist);
+            balasanBacaan.authorID = userID;
+            ADVWORD(true);
+            DATETIMEparser(currentWord.TabWord, &balasanBacaan.time);
+            ADVWORD(true);
             if (parentRoot == -1) {
-                for (k = 0; k < currentWord.Length; k++) {
-                    (*l).buffer[currentIDKicauan].balasan->info.text[k] = currentWord.TabWord[k];
-                }
-                (*l).buffer[currentIDKicauan].balasan->info.id = idBalasan;
+                balasanBacaan.id = idBalasan;
+                (*l).buffer[currentIDKicauan].balasan = newTreeNode(balasanBacaan);
             } else {
-
+                balasanBacaan.id = idBalasan;
+                addChildrenAt(parentRoot, &(*l).buffer[currentIDKicauan].balasan, balasanBacaan);
             }
-            ADVWORD(true);
-            int authorID;
-            // Parse authorID
-            (*l).buffer[currentIDKicauan].balasan->info.authorID = authorID;
-            ADVWORD(true);
-            // Parse local time
         }
     }
-    // lanjut
     printf("Config balasan berhasil dibaca... \n");
 }
 
@@ -293,61 +294,61 @@ void readDrafConfig(char *filename, StackDraf* stackDraf, ListPengguna listpengg
         ADVWORD(true); // Datetime
         DATETIMEparser(currentWord.TabWord,&p.localtime);
 
-        PushStackDraf(&stackDraf,p);
+        PushStackDraf(stackDraf,p);
     }
     printf("Config draf berhasil dibaca... \n");
 }
 
-void readUtasConfig(char *filename, ListPengguna listPengguna, ListUtas *listUtas)
-{
-    FILE *file = fopen(filename, "r");
-    if (file == NULL)
-    {
-        printf("File %s tidak ditemukan.\n", filename);
-        return;
-    }
-    STARTWORD(file, true);
-    int banyakKicau = wordToInt(currentWord); // banyak kicau
-    for (int i = 0 ; i < banyakKicau ; i++)
-    {
-        Utas temp; int index;
+// void readUtasConfig(char *filename, ListPengguna listPengguna, ListUtas *listUtas)
+// {
+//     FILE *file = fopen(filename, "r");
+//     if (file == NULL)
+//     {
+//         printf("File %s tidak ditemukan.\n", filename);
+//         return;
+//     }
+//     STARTWORD(file, true);
+//     int banyakKicau = wordToInt(currentWord); // banyak kicau
+//     for (int i = 0 ; i < banyakKicau ; i++)
+//     {
+//         Utas temp; int index;
 
-        temp.IDUtas = i+1;
+//         temp.IDUtas = i+1;
 
-        ADVWORD(true);
-        temp.idKicau = wordToInt(currentWord); // ID kicau
+//         ADVWORD(true);
+//         temp.idKicau = wordToInt(currentWord); // ID kicau
 
-        ADVWORD(true);
-        int banyakUtas = wordToInt(currentWord); // jumlah utas (kicauam sambungan)
+//         ADVWORD(true);
+//         int banyakUtas = wordToInt(currentWord); // jumlah utas (kicauam sambungan)
         
-        for (int j = 0 ; j < banyakUtas ; j++)
-        {
-            ADVWORD(true); // text utas
-            for (j = 0; j < currentWord.Length; j++)
-            {
-                temp.text[j] = currentWord.TabWord[j];
-            }
+//         for (int j = 0 ; j < banyakUtas ; j++)
+//         {
+//             ADVWORD(true); // text utas
+//             for (j = 0; j < currentWord.Length; j++)
+//             {
+//                 temp.text[j] = currentWord.TabWord[j];
+//             }
 
-            ADVWORD(true); // authorname
-            // ubah authorname jadi authorid
-            boolean found = false; j = 0;
-            temp.idAuthor = cariPengguna(currentWord,listPengguna).index;
+//             ADVWORD(true); // authorname
+//             // ubah authorname jadi authorid
+//             boolean found = false; j = 0;
+//             temp.idAuthor = cariPengguna(currentWord,listPengguna).index;
 
-            ADVWORD(true);
-            //datetime
-            DATETIMEparser(currentWord.TabWord,&temp.localtime);
+//             ADVWORD(true);
+//             //datetime
+//             DATETIMEparser(currentWord.TabWord,&temp.localtime);
 
-            insertLastListUtas(listUtas,temp);
-        }
-    }
-    printf("Config utas berhasil dibaca... \n");
-}
+//             insertLastListUtas(listUtas,temp);
+//         }
+//     }
+//     printf("Config utas berhasil dibaca... \n");
+// }
 
 void initReadConfig(Word fileName, ListPengguna *listPengguna, ListKicau *listKicau)
 {
     readPenggunaConfig("config/pengguna.txt", listPengguna);
     readKicauanConfig("config/kicauan.txt", listKicau, *listPengguna);
-    // readBalasanConfig("config/balasan.txt");
+    readBalasanConfig("config/balasan.txt", listKicau, *listPengguna);
     // readDrafConfig("config/draf.txt");
     // readUtasConfig("config/utas.txt");
 }

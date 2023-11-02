@@ -11,8 +11,8 @@
 
 /* Selektor */
 #define ROOT(p) (p)->info
-#define LEFT(p) (p)->left
-#define RIGHT(p) (p)->right
+#define SIBLING(p) (p)->sibling
+#define CHILDREN(p) (p)->children
 
 typedef struct {
     int id;
@@ -22,9 +22,9 @@ typedef struct {
 } Balasan;
 typedef struct treeNode* Address;
 typedef struct treeNode { 
-     Balasan info;
-     Address left;
-     Address right;
+   Balasan info;
+   Address sibling;
+   Address children;
 } TreeNode;
 
 /* Definisi PohonBiner */
@@ -49,6 +49,14 @@ Address newTreeNode(Balasan val);
    Jika alokasi berhasil, maka address tidak NULL, dan misalnya 
    menghasilkan p, maka p↑.info=val, p↑.left=NULL, p↑.right=NULL 
    Jika alokasi gagal, mengirimkan NULL */
+
+void addSiblingToRoot(Balasan Val, BinTree* targetedRoot);
+
+void addChildrenToRoot(Balasan Val, BinTree* targetedRoot);
+
+void addChildrenAt(int id, BinTree* treeResult, Balasan val);
+
+int findHighestID(BinTree mainRoot);
 
 void deallocTreeNode (Address p);
 /* I.S. p terdefinisi 

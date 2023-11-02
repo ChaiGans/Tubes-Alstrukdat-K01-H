@@ -5,8 +5,8 @@
 /* *** Konstruktor/Kreator *** */
 void CreateEmptyStackDraf(StackDraf *S) {
     /* I.S. sembarang; */
-    /* F.S. Membuat sebuah StackDraf S yang kosong berkapasitas MaxEl */
-    /* jadi indeksnya antara 0.. MaxEl */
+    /* F.S. Membuat sebuah StackDraf S yang kosong berkapasitas MaxElStack */
+    /* jadi indeksnya antara 0.. MaxElStack */
     /* Ciri StackDraf kosong : TOP bernilai Nil */
     Top(*S) = Nil;
 }
@@ -17,7 +17,7 @@ boolean IsEmptyStackDraf(StackDraf S) {
 }
 boolean IsFullStackDraf(StackDraf S) {
     /* Mengirim true jika tabel penampung nilai elemen StackDraf penuh */
-    return Top(S) == MaxEl-1;
+    return Top(S) == MaxElStack-1;
 }
 
 /* ************ Menambahkan sebuah elemen ke StackDraf ************ */

@@ -70,7 +70,7 @@ void gantiProfil (Profile* userProfile) {
     displayProfileInformation(*userProfile);
     printf("Masukkan bio akun:\n");
     bio = ReadWord();
-    transferWordToString(*userProfile->bio, bio);
+    transferWordToString(userProfile->bio, bio);
     putchar('\n');
     do {
         printf("Masukkan No HP:\n");
@@ -89,7 +89,7 @@ void gantiProfil (Profile* userProfile) {
             printf("Weton anda tidak valid.\n");
         }
     } while (!isWetonValid(weton));
-    transferWordToString(*userProfile->weton, weton);
+    transferWordToString(userProfile->weton, weton);
     printf("Profil anda sudah berhasil diperbarui!");
 }
 

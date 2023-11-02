@@ -11,7 +11,7 @@
 #include "listkicau.h"
 
 #define Nil -1
-#define MaxEl 100
+#define MaxElStack 100
 /* Nil adalah StackDraf dengan elemen kosong . */
 
 // StackDraf dari draf kicauan
@@ -29,11 +29,11 @@ typedef int address;   /* indeks tabel */
 /* Contoh deklarasi variabel bertype StackDraf dengan ciri TOP : */
 /* Versi I : dengan menyimpan tabel dan alamat top secara eksplisit*/
 typedef struct { 
-  ElTypeDraf T[MaxEl]; /* tabel penyimpan elemen */
+  ElTypeDraf T[MaxElStack]; /* tabel penyimpan elemen */
   address TOP;  /* alamat TOP: elemen puncak */
 } StackDraf;
 /* Definisi StackDraf S kosong : S.TOP = Nil */
-/* Elemen yang dipakai menyimpan nilai StackDraf T[0]..T[MaxEl-1] */
+/* Elemen yang dipakai menyimpan nilai StackDraf T[0]..T[MaxElStack-1] */
 /* Jika S adalah StackDraf maka akses elemen : */
    /* S.T[(S.TOP)] untuk mengakses elemen TOP */
    /* S.TOP adalah alamat elemen TOP */
@@ -46,8 +46,8 @@ typedef struct {
 /* *** Konstruktor/Kreator *** */
 void CreateEmptyStackDraf(StackDraf *S);
 /* I.S. sembarang; */
-/* F.S. Membuat sebuah StackDraf S yang kosong berkapasitas MaxEl */
-/* jadi indeksnya antara 0.. MaxEl */
+/* F.S. Membuat sebuah StackDraf S yang kosong berkapasitas MaxElStack */
+/* jadi indeksnya antara 0.. MaxElStack */
 /* Ciri StackDraf kosong : TOP bernilai Nil */
 
 /* ************ Predikat Untuk test keadaan KOLEKSI ************ */
