@@ -37,3 +37,32 @@ void PopStackDraf(StackDraf * S, ElTypeDraf* X) {
     *X = InfoTop(*S);
     Top(*S) -= 1;
 }
+
+void createDraf (StackDraf currentDraf, ElTypeDraf* X, int currentUserID) {
+    (*X).authorID = currentUserID;
+    (*X).id = InfoTop(currentDraf).id + 1;
+    getLocalTime(&((*X).localtime));
+    transferStringToString("", X->text);
+}
+
+void drafKicauToKicauan (Draf drafKicau, Kicauan* kicauBaru) {
+    (*kicauBaru).authorID = drafKicau.authorID;
+    transferStringToString(drafKicau.text, kicauBaru->text);
+    (*kicauBaru).id = drafKicau.id;
+    (*kicauBaru).like = 0;
+    (*kicauBaru).localtime = drafKicau.localtime;
+    (*kicauBaru).balasan = NULL;
+}
+
+void searchLastDraf (StackDraf stackDraf, int currentUserID, Draf* lastDraf, boolean* found) {
+    ElTypeDraf currentDraf;
+    *found = false;
+    while (!IsEmptyStackDraf(stackDraf) && *found == false) {
+        PopStackDraf(&stackDraf, &currentDraf);
+        if (currentDraf.id == currentUserID) {
+            *lastDraf = currentDraf;
+            *found = true;
+        }
+    }
+    *found = false;
+}

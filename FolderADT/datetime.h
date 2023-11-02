@@ -92,7 +92,7 @@ long int DATETIMEDurasi(DATETIME DAw, DATETIME DAkh);
 /* Mengirim DAkh-DAw dlm Detik, dengan kalkulasi */
 /* Prekondisi: DAkh > DAw */
 
-void getLocalTIme (DATETIME* receiveTime);
+void getLocalTime (DATETIME* receiveTime);
 void displayDATETIME (DATETIME receiveTime);
 void DATETIMEparser (char datestring[19], DATETIME* returnedDateTime);
 

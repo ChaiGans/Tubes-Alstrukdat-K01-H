@@ -198,7 +198,7 @@ long int DATETIMEDurasi(DATETIME DAw, DATETIME DAkh) {
    return (durasiAkhir - durasiAwal);
 }
 
-void getLocalTIme (DATETIME* receiveTime){
+void getLocalTime (DATETIME* receiveTime){
     time_t rawtime;
     struct tm *local_timeinfo;
 

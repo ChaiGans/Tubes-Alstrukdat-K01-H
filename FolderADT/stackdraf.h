@@ -7,6 +7,8 @@
 
 #include "boolean.h"
 #include "datetime.h"
+#include "wordmachine.h"
+#include "listkicau.h"
 
 #define Nil -1
 #define MaxEl 100
@@ -66,4 +68,7 @@ void PopStackDraf(StackDraf * S, ElTypeDraf* X);
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 
+void createDraf (StackDraf currentDraf, ElTypeDraf* X, int currentUserID);
+void drafKicauToKicauan (Draf drafKicau, Kicauan* kicauBaru);
+void searchLastDraf (StackDraf stackDraf, int currentUserID, Draf* lastDraf, boolean* found);
 #endif
