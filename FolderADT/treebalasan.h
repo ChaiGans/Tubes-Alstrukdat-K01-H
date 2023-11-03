@@ -8,6 +8,7 @@
 
 #include "boolean.h"
 #include "datetime.h"
+#include "listpengguna.h"
 
 /* Selektor */
 #define ROOT(p) (p)->info
@@ -57,6 +58,10 @@ void addChildrenToRoot(Balasan Val, BinTree* targetedRoot);
 void addChildrenAt(int id, BinTree* treeResult, Balasan val);
 
 int findHighestID(BinTree mainRoot);
+
+boolean isIdBalasanDefined (int idBalasanSearch, BinTree balasan);
+void displayInformasiBalasan (BinTree balasan, ListPengguna listpengguna, int maxIndent);
+void displayTreeOfBalasan(BinTree p, int h, int l, ListPengguna listpengguna);
 
 void deallocTreeNode (Address p);
 /* I.S. p terdefinisi 
