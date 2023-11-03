@@ -77,6 +77,57 @@ int findHighestID(BinTree mainRoot) {
 void deallocTreeNode (Address p) {
     free(p);
 }
+
+boolean isIdBalasanDefined(int idBalasanSearch, BinTree balasan) {
+    if (balasan == NULL) {
+        return false; 
+    } else {
+        if (balasan->info.id == idBalasanSearch) {
+            return true; 
+        }
+        boolean foundInChildren = isIdBalasanDefined(idBalasanSearch, balasan->children);
+        boolean foundInSibling = isIdBalasanDefined(idBalasanSearch, balasan->sibling);
+
+        return foundInChildren || foundInSibling;
+    }
+}
+
+void displayInformasiBalasan (BinTree balasan, ListPengguna listpengguna, int maxIndent) {
+    int i;
+    for (i = 0; i < maxIndent; i++) {
+        printf(" ");
+    }
+    printf("| ID = %d\n", balasan->info.id);
+    for (i = 0; i < maxIndent; i++) {
+        printf(" ");
+    }
+    printf("| ");
+    displayNameFromID(balasan->info.authorID, listpengguna);
+    putchar('\n');
+    for (i = 0; i < maxIndent; i++) {
+        printf(" ");
+    }
+    printf("| ");
+    displayDATETIME(balasan->info.time);
+    putchar('\n');
+    for (i = 0; i < maxIndent; i++) {
+        printf(" ");
+    }
+    printf("| ");
+    displayArrayOfChar(balasan->info.text);
+    putchar("\n");
+}
+
+void displayTreeOfBalasan(BinTree p, int h, int l, ListPengguna listpengguna) {
+    if (p != NULL) { 
+        int maxIndent = h * l;
+        int i;
+        displayInformasiBalasan(p, listpengguna, maxIndent);
+        putchar('\n');
+        displayTreeOfBalasan(CHILDREN(p), h, l + 1, listpengguna); 
+        displayTreeOfBalasan(SIBLING(p), h, l, listpengguna);
+    }
+}
 /* I.S. p terdefinisi 
    F.S. p dikembalikan ke sistem 
    Melakukan dealokasi/pengembalian address p */
@@ -180,18 +231,6 @@ void deallocTreeNode (Address p) {
 //    (()()A) adalah pohon dengan 1 elemen dengan akar A
 //    ((()()B)(()()C)A) adalah pohon dengan akar A dan subpohon kiri (()()B) dan subpohon kanan (()()C) */
 
-// void printIndent(BinTree p, int h, int l) {
-//     if (!isTreeEmpty(p)) {
-//         int maxIndent = h * l;
-//         int i;
-//         for (i = 0; i < maxIndent; i++) {
-//             printf(" ");
-//         }
-//         printf("%d\n", ROOT(p));
-//         printIndent(LEFT(p), h, l + 1);
-//         printIndent(RIGHT(p), h, l + 1);
-//     }
-// }
 
 // void printTree(BinTree p, int h) {
 //     printIndent(p, h, 0);

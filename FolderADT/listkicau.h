@@ -149,5 +149,5 @@ void compressListKicau(ListKicau *l);
 /* Proses : Mengubah capacity sehingga capacity = nEff */
 /* I.S. List tidak kosong */
 /* F.S. Ukuran capacity = nEff */
-
+boolean isIdKicauDefined (int idSearch, ListKicau l);
 #endif

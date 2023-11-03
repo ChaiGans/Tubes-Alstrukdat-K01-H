@@ -177,3 +177,13 @@ void compressListKicau(ListKicau *l)
 /* Proses : Mengubah capacity sehingga capacity = nEff */
 /* I.S. List tidak kosong */
 /* F.S. Ukuran capacity = nEff */
+
+boolean isIdKicauDefined (int idSearch, ListKicau l) {
+    int i;
+    for (i = 0; i < listKicauLength(l); i++) {
+        if (l.buffer[i].id == idSearch) {
+            return true;
+        }
+    }
+    return false;
+}
