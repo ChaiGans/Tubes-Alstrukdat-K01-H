@@ -155,7 +155,7 @@ Word ReadCommands()
 
     STARTWORD(stdin, false);
 
-    return removeFirstChar(currentWord);
+    return removeFirstChar(currentWord); // membuang '\n' di awal
 }
 
 boolean wordStringCompare(Word w, char command[])
@@ -174,9 +174,6 @@ boolean wordStringCompare(Word w, char command[])
     {
         if (w.TabWord[i] != command[i])
         {
-            printf("ini di wordStringCompare\n");
-            printf("w.TabWord[%d] = %c\n", i, w.TabWord[i]);
-            printf("command[%d] = %c\n", i, command[i]);
             return false;
         }
         i += 1;
