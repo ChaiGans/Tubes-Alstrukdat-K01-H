@@ -119,7 +119,7 @@ void insertLastListUtas(AddressListUtas *l, int idKicauanBaru) {
             while (NEXT(last) != NULL) {
                 last = NEXT(last);
             }
-            AddressListUtas(last) = p;
+            NEXT(last) = p;
         }
     }
 }
@@ -129,7 +129,7 @@ void insertLastKicauanSambungan(AddressUtas *l, KicauanSambungan x) {
     /* F.S. Melakukan alokasi sebuah elemen dan */
     /* menambahkan elemen list di akhir: elemen terakhir yang baru */
     /* bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
-    if (isEmptyListUtas(*l)) {
+    if (isEmptyKicauanSambungan(*l)) {
         insertFirstKicauanSambungan(l, x);
     } else {
         AddressUtas p = newNodeKicauanSambungan(x);
@@ -138,7 +138,7 @@ void insertLastKicauanSambungan(AddressUtas *l, KicauanSambungan x) {
             while (NEXT(last) != NULL) {
                 last = NEXT(last);
             }
-            AddressUtas(last) = p;
+            NEXT(last) = p;
         }
     }
 }
@@ -228,7 +228,7 @@ void deleteAtKicauanSambungan(AddressUtas *l, int idx, KicauanSambungan* saveKic
     /* F.S. val diset dengan elemen l pada indeks ke-idx. */
     /*      Elemen l pada indeks ke-idx dihapus dari l */
     if (idx == 0){
-        deleteFirstListUtas(l, saveKicauanSambungan);
+        deleteFirstKicauanSambungan(l, saveKicauanSambungan);
     } else{
         int currentIdx = 0;
         AddressUtas p = FIRST(*l);

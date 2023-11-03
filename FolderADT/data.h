@@ -10,7 +10,7 @@
 #include "listkicau.h"
 #include "listutas.h"
 #include "stackdraf.h"
-
+#include "datetime.h"
 // Fungsi pada data.h digunakan untuk mendapatkan data dari file pengguna.txt, kicauan.txt, balasan.txt, draf.txt, dan utas.txt
 // Fungsi pada data.h juga digunakan untuk mengubah data pada file pengguna.txt, kicauan.txt, balasan.txt, draf.txt, dan utas.txt
 
@@ -23,6 +23,9 @@ int wordToInt(Word w);
 // keknya ini bakal dipindah ke tempat lain kek wordmachine.h
 // kalo ngga bikin file header baru yang full buat olah Word
 
+Profile cariPengguna(Word uname, ListPengguna listPengguna);
+// mengembalikan profile pengguna dengan nama uname.
+
 void readPenggunaConfig(char *filename, ListPengguna *listPengguna);
 // I.S. : Sembarang
 // F.S. : Membaca file pengguna.txt dan mendefinisikan profil pengguna.
@@ -31,15 +34,15 @@ void readKicauanConfig(char *filename, ListKicau *listKicau, ListPengguna listPe
 // I.S. : Sembarang
 // F.S. : Membaca file kicauan.txt dan mendefinisikan kicauan.
 
-void readBalasanConfig(char *filename, ListKicau *l);
+void readBalasanConfig(char *filename, ListKicau *l, ListPengguna listpengguna);
 // I.S. : Sembarang
 // F.S. : Membaca file balasan.txt dan mendefinisikan balasan.
 
-void readDrafConfig(char *filename);
+void readDrafConfig(char *filename, StackDraf* stackDraf, ListPengguna listpengguna);
 // I.S. : Sembarang
 // F.S. : Membaca file draf.txt dan mendefinisikan draf.
 
-void readUtasConfig(char *filename, ListPengguna listPengguna, ListUtas *listUtas);
+void readUtasConfig(char *filename, ListPengguna listPengguna, AddressListUtas *listUtas);
 // I.S. : Sembarang
 // F.S. : Membaca file utas.txt dan mendefinisikan utas.
 
