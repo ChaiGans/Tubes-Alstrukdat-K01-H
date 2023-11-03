@@ -2,6 +2,20 @@
 tes change read me
 
 ## CARA PAKE WORDMACHINE KALO MAU BACA DARI TERMINAL 
+### pake `ReadCommands()` untuk baca command  
+mungkin pake contoh pemakaian aja ye:  
+```
+Word command = ReadCommands(); // nerima input misalnya "LIHAT_PROFIL 2;"
+...  
+if (WordStringCompare(command, "LIHAT_PROFIL")) {
+    ADVWORD(false);  
+    int id = wordToInt(currentWord);
+    displayProfileInformation(listPengguna.contents[id]);
+}
+...
+```
+intinya untuk akses kata selanjutnya sebelum MARK, pake `ADVWORD(false)`
+
 ### pake `ReadWord()` yang udah dibikin chai
 cara pakenya 
 `kataYangLuMau = ReadWord()`
