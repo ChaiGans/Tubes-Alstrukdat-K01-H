@@ -57,11 +57,13 @@ void CopyLine();
           Jika panjang line melebihi NMax, maka sisa line "dipotong" */
 
 Word ReadWord();
-boolean wordStringCompare (Word w, char command[]);
-int stringLength (char inputString[]);
-void transferWordToString (char inputString[], Word w);
-boolean stringStringCompare (char string1[], char string2[]);
-void transferStringToString (char inputString[], char targetString[]);
-void displayArrayOfChar (char string[]);
-boolean isInteger (Word w, int* totalNumber);
+Word ReadCommands();
+boolean wordStringCompare(Word w, char command[]);
+int stringLength(char inputString[]);
+void transferWordToString(char inputString[], Word w);
+boolean stringStringCompare(char string1[], char string2[]);
+void transferStringToString(char inputString[], char targetString[]);
+void displayArrayOfChar(char string[]);
+boolean isInteger(Word w, int *totalNumber);
+Word removeFirstChar(Word w);
 #endif

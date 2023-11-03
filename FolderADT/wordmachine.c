@@ -45,7 +45,6 @@ void STARTWORD(FILE *input, boolean file)
               atau EndWord = false, currentWord adalah kata yang sudah diakuisisi,
               currentChar karakter pertama sesudah karakter terakhir kata */
     START(input, file);
-    IgnoreBlanks(file);
     if (isNewLine || EOP)
     {
         EndWord = true;
@@ -99,7 +98,8 @@ void CopyWord()
     {
         if (currentWord.Length < NMax)
         { // jika lebih akan terpotong
-            currentWord.TabWord[currentWord.Length++] = currentChar;
+            currentWord.TabWord[currentWord.Length] = currentChar;
+            currentWord.Length += 1;
             ADV();
         }
         else
@@ -129,7 +129,8 @@ void CopyLine()
 Word ReadWord()
 {
     START(stdin, false);
-    if (currentChar == '\n') { // to consume enter
+    if (currentChar == '\n')
+    { // to consume enter
         ADV();
     }
     currentWord.Length = 0;
@@ -148,55 +149,84 @@ Word ReadWord()
     return currentWord;
 }
 
-boolean wordStringCompare (Word w, char command[]) {
+Word ReadCommands()
+{
+    ADVWORD(false); // membuang word terakhir setelah membaca file
+
+    STARTWORD(stdin, false);
+
+    return removeFirstChar(currentWord);
+}
+
+boolean wordStringCompare(Word w, char command[])
+{
     int i = 0;
     int lengthCommand = 0;
-    while (command[lengthCommand] != '\0') {
+    while (command[lengthCommand] != '\0')
+    {
         lengthCommand += 1;
     }
-    if (w.Length != lengthCommand) {
+    if (w.Length != lengthCommand)
+    {
         return false;
     }
-    while (command[i] != '\0') {
-        if (w.TabWord[i] != command[i]) {
+    while (command[i] != '\0')
+    {
+        if (w.TabWord[i] != command[i])
+        {
+            printf("ini di wordStringCompare\n");
+            printf("w.TabWord[%d] = %c\n", i, w.TabWord[i]);
+            printf("command[%d] = %c\n", i, command[i]);
             return false;
-        } 
+        }
         i += 1;
     }
     return true;
 }
 
-int stringLength (char inputString[]) {
+int stringLength(char inputString[])
+{
     int lengthString = 0;
-    while (inputString[lengthString] != '\0') {
+    while (inputString[lengthString] != '\0')
+    {
         lengthString += 1;
     }
     return lengthString;
 }
 
-void transferWordToString (char inputString[], Word w) {
+void transferWordToString(char inputString[], Word w)
+{
     int i;
-    for (i = 0; i < w.Length; i++) {
+    for (i = 0; i < w.Length; i++)
+    {
         inputString[i] = w.TabWord[i];
     }
     inputString[w.Length] = '\0';
 }
 
-void transferStringToString (char inputString[], char targetString[]) {
+void transferStringToString(char inputString[], char targetString[])
+{
     int i;
-    for (i = 0; i<stringLength(inputString); i++) {
+    for (i = 0; i < stringLength(inputString); i++)
+    {
         targetString[i] = inputString[i];
     }
     targetString[stringLength(inputString)] = '\0';
 }
 
-boolean stringStringCompare (char string1[], char string2[]) {
-    if (stringLength(string1) != stringLength(string2)) {
+boolean stringStringCompare(char string1[], char string2[])
+{
+    if (stringLength(string1) != stringLength(string2))
+    {
         return false;
-    } else {
-        int i ;
-        for (i = 0; string1[i]!=0; i++) {
-            if (string1[i] != string2[i]) {
+    }
+    else
+    {
+        int i;
+        for (i = 0; string1[i] != 0; i++)
+        {
+            if (string1[i] != string2[i])
+            {
                 return false;
             }
         }
@@ -204,24 +234,42 @@ boolean stringStringCompare (char string1[], char string2[]) {
     return true;
 }
 
-void displayArrayOfChar (char string[]) {
+void displayArrayOfChar(char string[])
+{
     int i;
-    for (i = 0; i < stringLength(string); i++) {
+    for (i = 0; i < stringLength(string); i++)
+    {
         printf("%c", string[i]);
     }
 }
 
-boolean isInteger (Word w, int* totalNumber) {
+boolean isInteger(Word w, int *totalNumber)
+{
     int i;
     int number = 0;
-    for (i = 0; i < w.Length; i++) {
-        if ((int)w.TabWord[i] < 48 || (int)w.TabWord[i] > 57) {
+    for (i = 0; i < w.Length; i++)
+    {
+        if ((int)w.TabWord[i] < 48 || (int)w.TabWord[i] > 57)
+        {
             return false;
-        } else {
+        }
+        else
+        {
             number *= 10;
             number += w.TabWord[i] - '0';
         }
     }
-    *totalNumber = number;  
+    *totalNumber = number;
     return true;
+}
+
+Word removeFirstChar(Word w)
+{
+    int i;
+    for (i = 1; i < w.Length; i++)
+    {
+        w.TabWord[i - 1] = w.TabWord[i];
+    }
+    w.Length -= 1;
+    return w;
 }
