@@ -23,6 +23,9 @@ int wordToInt(Word w);
 // keknya ini bakal dipindah ke tempat lain kek wordmachine.h
 // kalo ngga bikin file header baru yang full buat olah Word
 
+Profile cariPengguna(Word uname, ListPengguna listPengguna);
+// mengembalikan profile pengguna dengan nama uname.
+
 void readPenggunaConfig(char *filename, ListPengguna *listPengguna);
 // I.S. : Sembarang
 // F.S. : Membaca file pengguna.txt dan mendefinisikan profil pengguna.
