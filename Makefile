@@ -18,7 +18,9 @@ SRC = main.c \
       ./FolderADT/stackdraf.c \
       ./FolderADT/time.c \
       ./FolderADT/datetime.c \
-      ./FolderADT/treebalasan.c
+      ./FolderADT/treebalasan.c \
+      ./features/balasan.c
+
 
 # Object files (automatically generated from source files)
 OBJ = $(SRC:.c=.o)
