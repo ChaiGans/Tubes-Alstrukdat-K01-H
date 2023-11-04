@@ -32,6 +32,7 @@ void daftarPengguna (ListPengguna* l) {
         } while (katasandi.Length > 20);
         newProfile.index = ListPenggunaLength(*l);
         insertLastListPengguna(l, newProfile);
+        CreateEmptyStackDraf(&(*l).contents[newProfile.index].stackdraf);
         printf("Pengguna telah berhasil terdaftar. Masuk untuk menikmati fitur-fitur BurBir.\n");
     } else {
         printf("Kapasitas pengguna sudah maksimal. Tidak bisa membuat pengguna baru lagi.\n");

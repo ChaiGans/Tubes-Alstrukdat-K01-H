@@ -33,6 +33,30 @@ int charToInt (char w) {
     return w - '0';
 }
 
+void drafAuthorParser (Word w, int* authorID, int* banyakDraf, ListPengguna l) {
+    char username[20];
+    int i = 0;
+    while (w.TabWord[i] && (w.TabWord[i] < '0' || w.TabWord[i] > '9')) {
+        username[i] = w.TabWord[i];
+        i += 1;
+    }
+    if (i > 0 && username[i-1] == ' ') {
+        i -= 1; 
+    }
+    username[i] = '\0';
+    while (w.TabWord[i] == ' ') {
+        i += 1;
+    }
+    int res = 0;
+    while (w.TabWord[i] >= '0' && w.TabWord[i] <= '9') {
+        res = res * 10 + (w.TabWord[i] - '0');
+        i += 1;
+    }
+    boolean usernameexist;
+    findUsernameIDbyString(username, l, authorID, &usernameexist);
+    *banyakDraf = res;
+}
+
 void wordToIDParentParser (Word w, int* parentRoot, int* idBalasan) {
     int i = 0;
     int save = 1;
@@ -88,6 +112,7 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna)
 
     for (int i = 0; i < banyakProfile; i++)
     {
+        CreateEmptyStackDraf(&((*listPengguna).contents[i].stackdraf));
         listPengguna->contents[i].index = i;
         ADVWORD(true); // currentWord = username
         cutWord(currentWord, listPengguna->contents[i].username);
@@ -266,7 +291,7 @@ void readBalasanConfig(char *filename, ListKicau *l, ListPengguna listpengguna)
     printf("Config balasan berhasil dibaca... \n");
 }
 
-void readDrafConfig(char *filename, StackDraf* stackDraf, ListPengguna listpengguna)
+void readDrafConfig(char *filename, ListPengguna* listpengguna)
 {
     FILE *file = fopen(filename, "r");
     if (file == NULL)
@@ -275,26 +300,22 @@ void readDrafConfig(char *filename, StackDraf* stackDraf, ListPengguna listpengg
         return;
     }
     STARTWORD(file, true);
-    // lanjut
-    Draf p;
-    int banyakDraf = wordToInt(currentWord);
-    for (int i = 0 ; i<banyakDraf ; i++)
-    {
-        ADVWORD(true); // ID Draf
-        p.id = wordToInt(currentWord);
-
-        ADVWORD(true); // Text
-        int j; for (j = 0; j < currentWord.Length; j++){
-        p.text[j] = currentWord.TabWord[j];
+    Draf drafBaru;
+    int banyakPengguna = wordToInt(currentWord);
+    ADVWORD(true);
+    int i, j, banyakDrafPengguna, authorID; 
+    for (i = 0 ; i <banyakPengguna; i++) {
+        drafAuthorParser(currentWord, &authorID, &banyakDrafPengguna, *listpengguna);
+        ADVWORD(true);
+        for (j = 0; j < banyakDrafPengguna; j++) {
+            transferWordToString(drafBaru.text, currentWord);
+            ADVWORD(true);
+            DATETIMEparser(currentWord.TabWord, &drafBaru.localtime);
+            ADVWORD(true);
+            drafBaru.authorID = authorID;
+            PushStackDraf(&(*listpengguna).contents[authorID].stackdraf, drafBaru);
+            ADVWORD(true);
         }
-
-        ADVWORD(true); // Author
-        p.authorID = cariPengguna(currentWord,listpengguna).index;
-
-        ADVWORD(true); // Datetime
-        DATETIMEparser(currentWord.TabWord,&p.localtime);
-
-        PushStackDraf(stackDraf,p);
     }
     printf("Config draf berhasil dibaca... \n");
 }

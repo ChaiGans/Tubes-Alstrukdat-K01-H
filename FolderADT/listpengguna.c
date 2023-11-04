@@ -212,6 +212,18 @@ void findUsernameID (Word usernameInput, ListPengguna l, int* userID, boolean* u
     }
 }
 
+void findUsernameIDbyString (char usernameInput[], ListPengguna l, int* userID, boolean* usernameExist) {
+    int i;
+    *usernameExist = false;
+    *userID = IDX_UNDEF_STATIK;
+    for (i = 0; i < ListPenggunaLength(l); i++) {
+        if (stringStringCompare(usernameInput, l.contents[i].username)) {
+            *usernameExist = true;
+            *userID = i;
+        }
+    }
+}
+
 boolean passwordChecker (int userID, ListPengguna l, Word passwordInput) {
     return (wordStringCompare(passwordInput, l.contents[userID].password));
 }

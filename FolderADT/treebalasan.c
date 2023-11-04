@@ -115,7 +115,7 @@ void displayInformasiBalasan (BinTree balasan, ListPengguna listpengguna, int ma
     }
     printf("| ");
     displayArrayOfChar(balasan->info.text);
-    putchar("\n");
+    putchar('\n');
 }
 
 void displayTreeOfBalasan(BinTree p, int h, int l, ListPengguna listpengguna) {

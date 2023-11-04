@@ -83,7 +83,7 @@ void displayFotoProfil(FotoProfil F)
 void createProfile(Profile *p)
 {
     transferStringToString("", p->bio);
-    (*p).nomorHP = -1;
+    (*p).nomorHP = 0;
     transferStringToString("", p->weton);
     transferStringToString("PUBLIK", p->status);
 

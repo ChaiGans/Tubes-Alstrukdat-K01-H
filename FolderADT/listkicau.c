@@ -177,6 +177,13 @@ void compressListKicau(ListKicau *l)
 /* Proses : Mengubah capacity sehingga capacity = nEff */
 /* I.S. List tidak kosong */
 /* F.S. Ukuran capacity = nEff */
+void drafKicauToKicauan (Draf drafKicau, Kicauan* kicauBaru) {
+    (*kicauBaru).authorID = drafKicau.authorID;
+    transferStringToString(drafKicau.text, kicauBaru->text);
+    (*kicauBaru).like = 0;
+    (*kicauBaru).localtime = drafKicau.localtime;
+    (*kicauBaru).balasan = NULL;
+}
 
 boolean isIdKicauDefined (int idSearch, ListKicau l) {
     int i;

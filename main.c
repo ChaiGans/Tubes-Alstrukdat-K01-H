@@ -2,6 +2,9 @@
 #include "FolderADT/wordmachine.h"
 #include "FolderADT/data.h"
 #include "features/user.h"
+#include "features/draf.h"
+#include "features/balasan.h"
+
 #include <stdio.h>
 
 Word userInput;
@@ -15,11 +18,12 @@ void printASCIIART() {
     printf("                                         \n");
 }
 
+
 int main() {
     printASCIIART();
-    printf("Selamat datang di tweeter.\n");
+    printf("Selamat datang di BurBir.\n");
+    printf("Aplikasi untuk studi kualitatif mengenai perilaku manusia dengan menggunakan metode (pengambilan data berupa) Focused Group Discussion kedua di zamannya.\n");
 
-    Word fileName;
     int currentLoginID = -1;
     ListPengguna listPengguna;
     CreateListPengguna(&listPengguna);
@@ -27,12 +31,11 @@ int main() {
     CreateListKicau(&listKicau, 10);
 
     printf("Masukkan nama file config: ");
-    ReadWord();
-    fileName = currentWord;
-
-    initReadConfig(fileName, &listPengguna, &listKicau);
+    Word filename = ReadWord();
+    initReadConfig(filename, &listPengguna, &listKicau);
 
     while (true) {
+        // printTree(listKicau.buffer[0].balasan, 2);
         printf("\n>> ");
         Word command = ReadWord();
 
@@ -40,18 +43,22 @@ int main() {
             if (wordStringCompare(command, "MASUK")) {
                 masukPengguna(&currentLoginID, listPengguna);
                 displayNameFromID(currentLoginID, listPengguna);
+            } else if (wordStringCompare(command, "DAFTAR")) {
+                daftarPengguna(&listPengguna); 
             } else {
                 printf("Silakan masuk terlebih dahulu.\n");
             }
         } else {
-            if (wordStringCompare(command, "DAFTAR")) {
-                daftarPengguna(&listPengguna);
-            } else if (wordStringCompare(command, "UBAH_FOTO_PROFIL")) {
+            if (wordStringCompare(command, "UBAH_FOTO_PROFIL")) {
                 ubahFotoProfil(&listPengguna.contents[currentLoginID]);
             } else if (wordStringCompare(command, "ATUR_JENIS_AKUN")) {
                 aturJenisAkun(&listPengguna.contents[currentLoginID]);
             } else if (wordStringCompare(command, "GANTI_PROFIL")) {
                 gantiProfil(&listPengguna.contents[currentLoginID]);
+            } else if (wordStringCompare(command, "BUAT_DRAF")) {
+                buatDraf(currentLoginID, &listKicau, &listPengguna);
+            } else if (wordStringCompare(command, "LIHAT_DRAF")) {
+                lihatDraf(currentLoginID, &listKicau, &listPengguna);
             } else if (wordStringCompare(command, "KELUAR")) {
                 currentLoginID = -1;
                 printf("Anda berhasil logout. Sampai jumpa di pertemuan berikutnya!\n");

@@ -29,7 +29,7 @@ void buatBalasan (int IDkicau, int IDbalasan, int currentLoginID, ListKicau* lis
             putchar('\n');
             printf("| ");
             displayArrayOfChar(balasanBaru.text);
-            putchar("\n");
+            putchar('\n');
         } else if (!isIdBalasanDefined(IDbalasan, listkicau->buffer[IDkicau].balasan)) {
             printf("Wah, tidak terdapat balasan yang ingin Anda balas!\n");
         } else {
@@ -39,7 +39,7 @@ void buatBalasan (int IDkicau, int IDbalasan, int currentLoginID, ListKicau* lis
             balasanBaru.id = findHighestID(listkicau->buffer[IDkicau].balasan) + 1;
             balasanBaru.authorID = currentLoginID;
             getLocalTime(&balasanBaru.time);
-            addChildrenAt(IDbalasan, listkicau->buffer[IDkicau].balasan, balasanBaru);
+            addChildrenAt(IDbalasan, &listkicau->buffer[IDkicau].balasan, balasanBaru);
             putchar('\n');
             printf("Selamat! balasan telah diterbitkan!\n");
             printf("Detil balasan:\n");
@@ -52,7 +52,7 @@ void buatBalasan (int IDkicau, int IDbalasan, int currentLoginID, ListKicau* lis
             putchar('\n');
             printf("| ");
             displayArrayOfChar(balasanBaru.text);
-            putchar("\n");
+            putchar('\n');
         }
     }
 }

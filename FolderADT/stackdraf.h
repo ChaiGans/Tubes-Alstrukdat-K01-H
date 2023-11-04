@@ -8,16 +8,14 @@
 #include "boolean.h"
 #include "datetime.h"
 #include "wordmachine.h"
-#include "listkicau.h"
 
 #define Nil -1
-#define MaxElStack 100
+#define MaxElStack 10
 /* Nil adalah StackDraf dengan elemen kosong . */
 
 // StackDraf dari draf kicauan
 typedef struct
 {
-    int id;
     char text[280];
     int authorID;
     DATETIME localtime;
@@ -69,6 +67,4 @@ void PopStackDraf(StackDraf * S, ElTypeDraf* X);
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 
 void createDraf (StackDraf currentDraf, ElTypeDraf* X, int currentUserID);
-void drafKicauToKicauan (Draf drafKicau, Kicauan* kicauBaru);
-void searchLastDraf (StackDraf stackDraf, int currentUserID, Draf* lastDraf, boolean* found);
 #endif

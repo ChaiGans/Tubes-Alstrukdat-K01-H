@@ -10,6 +10,7 @@
 #include "wordmachine.h"
 #include "prioqueuechar.h"
 #include "matrix.h"
+#include "stackdraf.h"
 
 /*  Kamus Umum */
 #define CAPACITY_STATIK 20
@@ -43,6 +44,7 @@ typedef struct
    char status[6];                // PUBLIC, PRIVAT
    FotoProfil fotoProfil;         // use pcolor.c
    PrioQueueChar permintaanTeman; // harusnya priorqueuepermintaan (check by jumlah teman atau length of listTeman)
+   StackDraf stackdraf;
 } Profile;
 
 typedef int IdxType;
@@ -170,6 +172,7 @@ void deleteLastListPengguna(ListPengguna *l, Profile *val);
 
 boolean isUserAlreadyExist(ListPengguna l, Word username);
 void findUsernameID(Word usernameInput, ListPengguna l, int *userID, boolean *usernameExist);
+void findUsernameIDbyString (char usernameInput[], ListPengguna l, int* userID, boolean* usernameExist) ;
 boolean passwordChecker(int userID, ListPengguna l, Word passwordInput);
 void displayNameFromID(int userID, ListPengguna l);
 #endif

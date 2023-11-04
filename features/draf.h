@@ -6,7 +6,7 @@
 #include "../FolderADT/listkicau.h"
 #include "../FolderADT/listpengguna.h"
 
-void buatDraf (StackDraf* stackDraf, int currentUserID, ListKicau* listkicau, ListPengguna listpengguna);
-void lihatDraf (StackDraf* stackDraf, int currentUserID, ListKicau* listkicau, ListPengguna listpengguna);
+void buatDraf (int currentUserID, ListKicau* listkicau, ListPengguna* listpengguna);
+void lihatDraf (int currentUserID, ListKicau* listkicau, ListPengguna* listpengguna);
 
 #endif

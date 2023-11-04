@@ -10,6 +10,7 @@
 #include "boolean.h"
 #include "datetime.h"
 #include "treebalasan.h"
+#include "stackdraf.h"
 /*  Kamus Umum */
 #define IDX_MIN_LISTDIN 0
 /* Indeks minimum list */
@@ -150,4 +151,5 @@ void compressListKicau(ListKicau *l);
 /* I.S. List tidak kosong */
 /* F.S. Ukuran capacity = nEff */
 boolean isIdKicauDefined (int idSearch, ListKicau l);
+void drafKicauToKicauan (Draf drafKicau, Kicauan* kicauBaru);
 #endif

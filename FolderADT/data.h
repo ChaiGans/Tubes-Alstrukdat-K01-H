@@ -38,7 +38,7 @@ void readBalasanConfig(char *filename, ListKicau *l, ListPengguna listpengguna);
 // I.S. : Sembarang
 // F.S. : Membaca file balasan.txt dan mendefinisikan balasan.
 
-void readDrafConfig(char *filename, StackDraf* stackDraf, ListPengguna listpengguna);
+void readDrafConfig(char *filename, ListPengguna* listpengguna);
 // I.S. : Sembarang
 // F.S. : Membaca file draf.txt dan mendefinisikan draf.
 
