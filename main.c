@@ -37,7 +37,8 @@ int main() {
     while (true) {
         // printTree(listKicau.buffer[0].balasan, 2);
         printf("\n>> ");
-        Word command = ReadWord();
+        ADVWORD(false); // false karena mau nerima input dari terminal
+        Word command = ReadCommands();
 
         if (currentLoginID == -1) {
             if (wordStringCompare(command, "MASUK")) {
@@ -62,6 +63,22 @@ int main() {
             } else if (wordStringCompare(command, "KELUAR")) {
                 currentLoginID = -1;
                 printf("Anda berhasil logout. Sampai jumpa di pertemuan berikutnya!\n");
+            } else if (wordStringCompare(command, "BALAS")) {
+                ADVWORD(false);
+                int idKicau = wordToInt(currentWord);
+                ADVWORD(false);
+                int idBalasan = wordToInt(currentWord);
+                buatBalasan(idKicau, idBalasan, currentLoginID, &listKicau, listPengguna);
+            } else if (wordStringCompare(command, "BALASAN")) {
+                ADVWORD(false);
+                int idKicau = wordToInt(currentWord);
+                lihatBalasan(idKicau, listKicau, listPengguna);
+            } else if (wordStringCompare(command, "HAPUS_BALASAN")) {
+                ADVWORD(false);
+                int idKicau = wordToInt(currentWord);
+                ADVWORD(false);
+                int idBalasan = wordToInt(currentWord);
+                hapusBalasan(currentLoginID, idKicau, idBalasan, &listKicau);
             } else if (wordStringCompare(command, "TUTUP_PROGRAM")) {
                 break;
             }
