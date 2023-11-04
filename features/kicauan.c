@@ -6,7 +6,9 @@ void printKicau(Kicauan tweet, ListPengguna ListPengguna){
     printf("| ID = %d\n", tweet.id);
     printf("| "); displayNameFromID(tweet.authorID, ListPengguna); endl;
     printf("| "); TulisDATETIME(tweet.localtime); endl;
-    printf("| %c\n", tweet.text);
+    printf("| "); int i = 0; while(tweet.text[i] != '\0'){
+        printf("%c", tweet.text[i]); i++;
+    } printf("\n");
     printf("| Disukai: %d\n", tweet.like);
 }
 
@@ -25,7 +27,7 @@ void upKicau(ListKicau *lk, ListPengguna lp, int currentUserID){
         printf("Kicauan tidak boleh hanya berisi spasi!\n"); return;
     } else {
         tweetUp.authorID = currentUserID;
-        tweetUp.id = getLastIdxListKicau(*lk)+1;
+        tweetUp.id = getLastIdxListKicau(*lk)+2;
         tweetUp.like = 0;
         getLocalTime(&tweetUp.localtime);
 
@@ -35,8 +37,6 @@ void upKicau(ListKicau *lk, ListPengguna lp, int currentUserID){
         printKicau(tweetUp, lp);
     }
 }
-
-
 
 void sukaKicauan(ListKicau *lk, ListPengguna lp, int IDtweet){
     if (isIdxEffListKicau(*lk, IDtweet)){
@@ -81,5 +81,3 @@ void editKicauan(int currentUserID, ListKicau *lk, ListPengguna lp, int IDtweet)
         } else printf("Kicauan dengan ID = %d bukan milikmu!", IDtweet);
     } else printf("Tidak ditemukan kicauan dengan ID = %d!", IDtweet);
 }
-
-
