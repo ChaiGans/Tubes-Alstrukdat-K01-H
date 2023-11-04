@@ -92,30 +92,38 @@ boolean isIdBalasanDefined(int idBalasanSearch, BinTree balasan) {
     }
 }
 
+void printIndented(int indent) {
+    for (int i = 0; i < indent; i++) {
+        printf(" ");
+    }
+}
+
+
 void displayInformasiBalasan (BinTree balasan, ListPengguna listpengguna, int maxIndent) {
     int i;
-    for (i = 0; i < maxIndent; i++) {
-        printf(" ");
-    }
+    printIndented(maxIndent);
     printf("| ID = %d\n", balasan->info.id);
-    for (i = 0; i < maxIndent; i++) {
-        printf(" ");
+    if (!isAuthorAccountPublic(balasan->info.authorID, listpengguna)) {
+        printIndented(maxIndent);
+        printf("| PRIVAT\n");
+        printIndented(maxIndent);
+        printf("| PRIVAT\n");
+        printIndented(maxIndent);
+        printf("| PRIVAT\n");
+    } else {
+        printIndented(maxIndent);
+        printf("| ");
+        displayNameFromID(balasan->info.authorID, listpengguna);
+        putchar('\n');
+        printIndented(maxIndent);
+        printf("| ");
+        displayDATETIME(balasan->info.time);
+        putchar('\n');
+        printIndented(maxIndent);
+        printf("| ");
+        displayArrayOfChar(balasan->info.text);
+        putchar('\n');
     }
-    printf("| ");
-    displayNameFromID(balasan->info.authorID, listpengguna);
-    putchar('\n');
-    for (i = 0; i < maxIndent; i++) {
-        printf(" ");
-    }
-    printf("| ");
-    displayDATETIME(balasan->info.time);
-    putchar('\n');
-    for (i = 0; i < maxIndent; i++) {
-        printf(" ");
-    }
-    printf("| ");
-    displayArrayOfChar(balasan->info.text);
-    putchar('\n');
 }
 
 void displayTreeOfBalasan(BinTree p, int h, int l, ListPengguna listpengguna) {
@@ -126,6 +134,33 @@ void displayTreeOfBalasan(BinTree p, int h, int l, ListPengguna listpengguna) {
         putchar('\n');
         displayTreeOfBalasan(CHILDREN(p), h, l + 1, listpengguna); 
         displayTreeOfBalasan(SIBLING(p), h, l, listpengguna);
+    }
+}
+
+void deleteSubtree(BinTree* subtree) {
+    if (subtree == NULL || *subtree == NULL) {
+        return;
+    }
+    
+    deleteSubtree(&(*subtree)->children); // Delete left subtree
+    deleteSubtree(&(*subtree)->sibling);  // Delete right subtree
+    
+    free(*subtree); // Free the current node
+    *subtree = NULL; // Set the pointer to NULL to avoid dangling pointer
+}
+
+void hapusCabangBalasan(BinTree* treeBalasan, int idTarget) {
+    if (treeBalasan == NULL || *treeBalasan == NULL) {
+        return;
+    }
+    
+    // If the target is the current node
+    if ((*treeBalasan)->info.id == idTarget) {
+        deleteSubtree(treeBalasan);
+    } else {
+        // Search in the children and siblings
+        hapusCabangBalasan(&(*treeBalasan)->children, idTarget);
+        hapusCabangBalasan(&(*treeBalasan)->sibling, idTarget);
     }
 }
 /* I.S. p terdefinisi 

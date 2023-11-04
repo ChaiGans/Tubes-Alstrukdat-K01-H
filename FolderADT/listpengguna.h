@@ -175,4 +175,5 @@ void findUsernameID(Word usernameInput, ListPengguna l, int *userID, boolean *us
 void findUsernameIDbyString (char usernameInput[], ListPengguna l, int* userID, boolean* usernameExist) ;
 boolean passwordChecker(int userID, ListPengguna l, Word passwordInput);
 void displayNameFromID(int userID, ListPengguna l);
+boolean isAuthorAccountPublic (int authorID, ListPengguna listpengguna);
 #endif

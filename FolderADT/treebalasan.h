@@ -17,7 +17,7 @@
 
 typedef struct {
     int id;
-    char text[10];
+    char text[280];
     int authorID;
     DATETIME time;
 } Balasan;
@@ -116,7 +116,7 @@ void printPostorder(BinTree p);
 /* Contoh: 
    (()()A) adalah pohon dengan 1 elemen dengan akar A
    ((()()B)(()()C)A) adalah pohon dengan akar A dan subpohon kiri (()()B) dan subpohon kanan (()()C) */
-
+void hapusCabangBalasan(BinTree* treeBalasan, int idTarget) ;
 void printTree(BinTree p, int h);
 /* I.S. p terdefinisi, h adalah jarak indentasi (spasi) */
 /* F.S. Semua simpul p sudah ditulis dengan indentasi (spasi) */

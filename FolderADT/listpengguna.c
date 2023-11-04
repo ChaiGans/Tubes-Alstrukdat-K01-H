@@ -235,3 +235,7 @@ void displayNameFromID (int userID, ListPengguna l) {
         i+=1;
     }
 }
+
+boolean isAuthorAccountPublic (int authorID, ListPengguna listpengguna) {
+    return stringStringCompare(listpengguna.contents[authorID].status, "PUBLIK");
+}

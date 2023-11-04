@@ -7,5 +7,6 @@
 
 void buatBalasan (int IDkicau, int IDbalasan, int currentLoginID, ListKicau* listkicau, ListPengguna listpengguna);
 void lihatBalasan (int idKicau, ListKicau listkicau, ListPengguna listpengguna);
+void hapusBalasan (int currentLoginID, int idKicau, int idBalasan, ListKicau* listkicau);
 
 #endif
