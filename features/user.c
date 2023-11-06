@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "user.h"
+#include <stdlib.h>
 
 void daftarPengguna (ListPengguna* l) {
     Profile newProfile;
@@ -67,7 +68,6 @@ void masukPengguna (int* currentUserID, ListPengguna l) {
 
 void gantiProfil (Profile* userProfile) {
     Word bio, nomorHP, weton;
-    int nomorHPinteger;
     displayProfileInformation(*userProfile);
     printf("Masukkan bio akun:\n");
     bio = ReadWord();
@@ -77,11 +77,22 @@ void gantiProfil (Profile* userProfile) {
         printf("Masukkan No HP:\n");
         nomorHP = ReadWord();
         putchar('\n');
-        if (!isInteger(nomorHP, &nomorHPinteger)) {
+        if (!isWordNomorHP(nomorHP)) {
             printf("No HP tidak valid. Masukkan lagi yuk!\n");
         }
-    } while (!isInteger(nomorHP, &nomorHPinteger));
-    (*userProfile).nomorHP = nomorHPinteger;
+    } while (!isWordNomorHP(nomorHP));
+    int k;
+    for (k = nomorHP.Length; k > 0; k--) {
+        nomorHP.TabWord[k+1] = nomorHP.TabWord[k];
+    }
+    nomorHP.TabWord[0] ='0';
+    nomorHP.Length += 1;
+    if (nomorHP.Length > 10) {
+        userProfile->nomorHP = (char *) realloc (userProfile->nomorHP, nomorHP.Length * (sizeof (char)) + 1);
+        (*userProfile).nomorHP[nomorHP.Length] = '\0';
+    }
+    transferWordToString(userProfile->nomorHP, nomorHP);
+
     do {
         printf("Masukkan Weton:\n");
         weton = ReadWord();
@@ -145,3 +156,21 @@ void ubahFotoProfil(Profile *userProfile) {
     printf("Foto profil anda sudah berhasil diganti!");
 }
 
+void lihatProfil (Word targetUser, int currentLoginID, ListPengguna listpengguna) {
+    int targetID;
+    boolean targetExisted;
+    findUsernameID(targetUser, listpengguna, &targetID, &targetExisted);
+    if (!targetExisted) {
+        printf("Wah, akun tersebut tidak ditemukan.\n");
+    } else {
+        if (!isAuthorAccountPublic(targetID, listpengguna)) {
+            printf("Wah, akun ");
+            displayNameFromID(targetID, listpengguna);
+            printf(" diprivat nih. Ikuti dulu yuk untuk bisa melihat profil ");
+            displayNameFromID(targetID, listpengguna);
+            printf("!\n");
+        } else {
+            displayProfileInformation(listpengguna.contents[targetID]);
+        }
+    }
+}

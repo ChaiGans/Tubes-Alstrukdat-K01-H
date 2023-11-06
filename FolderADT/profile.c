@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "profile.h"
+#include <stdlib.h>
 
 /* pcolor */
 void print_red(char c)
@@ -83,7 +84,7 @@ void displayFotoProfil(FotoProfil F)
 void createProfile(Profile *p)
 {
     transferStringToString("", p->bio);
-    (*p).nomorHP = 0;
+    p->nomorHP = calloc(11, sizeof(char));
     transferStringToString("", p->weton);
     transferStringToString("PUBLIK", p->status);
     p->status[6] = '\0';
@@ -102,7 +103,7 @@ void displayNomorHP(Profile p)
 {
     if (p.nomorHP != 0)
     {
-        printf("0%d", p.nomorHP);
+        printf("%s", p.nomorHP);
     }
     else
     {

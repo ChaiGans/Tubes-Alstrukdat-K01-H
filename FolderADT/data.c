@@ -1,5 +1,6 @@
 #include "data.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 Word blankLineCheck(Word w)
 {
@@ -118,6 +119,7 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna)
 
     for (int i = 0; i < banyakProfile; i++)
     {
+        createProfile(&((*listPengguna).contents[i]));
         CreateEmptyStackDraf(&((*listPengguna).contents[i].stackdraf));
         listPengguna->contents[i].index = i;
         ADVWORD(true); // currentWord = username
@@ -129,10 +131,11 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna)
         ADVWORD(true); // currentWord = bio
         cutWord(blankLineCheck(currentWord), listPengguna->contents[i].bio);
 
-        ADVWORD(true); // currentWord = nomor HP
-        listPengguna->contents[i].nomorHP = wordToInt(currentWord);
-        // 0 kalo di int jadi ilang
-
+        ADVWORD(true);
+        if (currentWord.Length > 10) { 
+            listPengguna->contents[i].nomorHP = realloc(listPengguna->contents[i].nomorHP, currentWord.Length * sizeof (char) + 1);
+        }
+        transferWordToString(listPengguna->contents[i].nomorHP, currentWord);
         ADVWORD(true); // currentWord = weton
         cutWord(blankLineCheck(currentWord), listPengguna->contents[i].weton);
 

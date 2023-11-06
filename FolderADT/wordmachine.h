@@ -64,6 +64,8 @@ void transferWordToString(char inputString[], Word w);
 boolean stringStringCompare(char string1[], char string2[]);
 void transferStringToString(char inputString[], char targetString[]);
 void displayArrayOfChar(char string[]);
-boolean isInteger(Word w, int *totalNumber);
+boolean isWordNomorHP(Word w);
 Word removeFirstChar(Word w);
+void CopyWord_FOR_LIHAT_PROFIL_ONLY();
+void ADVWORD_LIHAT_PROFIL_ONLY();
 #endif

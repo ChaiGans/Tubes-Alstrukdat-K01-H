@@ -57,6 +57,9 @@ int main() {
                 aturJenisAkun(&listPengguna.contents[currentLoginID]);
             } else if (wordStringCompare(command, "GANTI_PROFIL")) {
                 gantiProfil(&listPengguna.contents[currentLoginID]);
+            } else if (wordStringCompare(command, "LIHAT_PROFIL")) {
+                ADVWORD_LIHAT_PROFIL_ONLY();
+                lihatProfil(currentWord, currentLoginID, listPengguna);
             } else if (wordStringCompare(command, "BUAT_DRAF")) {
                 buatDraf(currentLoginID, &listKicau, &listPengguna);
             } else if (wordStringCompare(command, "LIHAT_DRAF")) {

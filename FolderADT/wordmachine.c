@@ -85,6 +85,12 @@ void ADVWORD(boolean file)
     }
 }
 
+void ADVWORD_LIHAT_PROFIL_ONLY() {
+    IgnoreBlanks(false);
+    EndWord = false;
+    CopyWord_FOR_LIHAT_PROFIL_ONLY();
+}
+
 void CopyWord()
 {
     /* Mengakuisisi kata, menyimpan dalam currentWord
@@ -95,6 +101,28 @@ void CopyWord()
               Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
     currentWord.Length = 0;
     while (currentChar != MARK && currentChar != EOF && currentChar != BLANK)
+    {
+        if (currentWord.Length < NMax)
+        { // jika lebih akan terpotong
+            currentWord.TabWord[currentWord.Length] = currentChar;
+            currentWord.Length += 1;
+            ADV();
+        }
+        else
+            break;
+    }
+}
+
+void CopyWord_FOR_LIHAT_PROFIL_ONLY()
+{
+    /* Mengakuisisi kata, menyimpan dalam currentWord
+       I.S. : currentChar adalah karakter pertama dari kata
+       F.S. : currentWord berisi kata yang sudah diakuisisi;
+              currentChar = BLANK atau currentChar = MARK;
+              currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
+              Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
+    currentWord.Length = 0;
+    while (currentChar != MARK && currentChar != EOF)
     {
         if (currentWord.Length < NMax)
         { // jika lebih akan terpotong
@@ -240,23 +268,19 @@ void displayArrayOfChar(char string[])
     }
 }
 
-boolean isInteger(Word w, int *totalNumber)
+boolean isWordNomorHP(Word w)
 {
     int i;
-    int number = 0;
+    if ((int)w.TabWord[0] < 49 || (int)w.TabWord[0] > 57) {
+        return false;
+    }
     for (i = 0; i < w.Length; i++)
     {
         if ((int)w.TabWord[i] < 48 || (int)w.TabWord[i] > 57)
         {
             return false;
         }
-        else
-        {
-            number *= 10;
-            number += w.TabWord[i] - '0';
-        }
     }
-    *totalNumber = number;
     return true;
 }
 

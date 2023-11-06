@@ -39,7 +39,7 @@ typedef struct
    char username[21];
    char password[21];
    char bio[136]; // Bio max 135 karakter
-   int nomorHP;
+   char* nomorHP;
    char weton[7];                 // Pahing, Kliwon, Wage, Pon, dan Legi (case insensitive)
    char status[7];                // PUBLIK, PRIVAT
    FotoProfil fotoProfil;         // use pcolor.c
