@@ -297,6 +297,16 @@ int KicauanSambunganLength(AddressUtas l) {
     }
 }
 
+boolean isIdUtasDefined (int idSearch, AddressListUtas *listUtas)
+{
+    AddressListUtas p = *listUtas;
+    while (p->idKicau != idSearch && NEXT(p) != NULL)
+    {
+        p = NEXT(p);
+    }
+    return (p == idSearch);
+}
+
 // /****************** PROSES TERHADAP LIST ******************/
 // ListUtas concatListUtas(ListUtas l1, ListUtas l2)  {
 //     /* I.S. l1 dan l2 sembarang */

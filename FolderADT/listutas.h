@@ -122,4 +122,21 @@ AddressUtas newNodeKicauanSambungan (KicauanSambungan x);
 // /* Konkatenasi dua buah list : l1 dan l2    */
 // /* menghasilkan l3 yang baru (dengan elemen list l1 dan l2 secara beurutan). */
 // /* Tidak ada alokasi/dealokasi pada prosedur ini */
+AddressListUtas newNodeListUtas(int idKicauBaru);
+AddressUtas newNodeKicauanSambungan (KicauanSambungan x);
+void CreateListUtas(AddressListUtas *l);
+boolean isEmptyListUtas(AddressListUtas l);
+boolean isEmptyKicauanSambungan(AddressUtas l);
+int indexOfListUtas(AddressListUtas l, int idKicauanUtama);
+void insertFirstListUtas(AddressListUtas *l, int idKicauanBaru);
+void insertFirstKicauanSambungan (AddressUtas *l, KicauanSambungan x);
+void insertLastListUtas(AddressListUtas *l, int idKicauanBaru);
+void insertLastKicauanSambungan(AddressUtas *l, KicauanSambungan x);
+void deleteFirstListUtas(AddressListUtas *l, int* idKicauanTarget);
+void deleteFirstKicauanSambungan(AddressUtas *l, KicauanSambungan* saveKicauan);
+void deleteAtListUtas(AddressListUtas *l, int idx, int* idKicauanTarget);
+void deleteAtKicauanSambungan(AddressUtas *l, int idx, KicauanSambungan* saveKicauanSambungan);
+int ListUtaslength(AddressListUtas l);
+int KicauanSambunganLength(AddressUtas l);
+boolean isIdUtasDefined (int idSearch, AddressListUtas *listUtas);
 #endif
