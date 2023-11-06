@@ -26,6 +26,9 @@ int wordToInt(Word w);
 Profile cariPengguna(Word uname, ListPengguna listPengguna);
 // mengembalikan profile pengguna dengan nama uname.
 
+Profile cariPenggunaID(int ID, ListPengguna lp);
+// mengembalikan profile pengguna dengan ID.
+
 void readPenggunaConfig(char *filename, ListPengguna *listPengguna);
 // I.S. : Sembarang
 // F.S. : Membaca file pengguna.txt dan mendefinisikan profil pengguna.
