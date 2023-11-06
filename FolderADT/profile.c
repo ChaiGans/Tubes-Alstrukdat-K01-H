@@ -86,6 +86,12 @@ void createProfile(Profile *p)
     (*p).nomorHP = 0;
     transferStringToString("", p->weton);
     transferStringToString("PUBLIK", p->status);
+    p->status[6] = '\0';
+    p->weton[6] = '\0';
+    p->bio[135] = '\0';
+    p->username[20] = '\0';
+    p->password[20] = '\0';
+
 
     FotoProfil foto;
     createFotoProfil(&foto);
