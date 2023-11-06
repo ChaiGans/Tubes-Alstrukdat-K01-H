@@ -209,6 +209,17 @@ Profile cariPengguna(Word uname, ListPengguna listPengguna){
     return listPengguna.contents[i];
 }
 
+Profile cariPenggunaID(int ID, ListPengguna lp){
+    boolean found = false; int i = 0;
+
+    while((lp.contents[i].index != MARK_STATIK)&&(found == false)){
+        if (lp.contents[i].index == ID) found = true;
+        else i++;
+    }   
+
+    return lp.contents[i];
+}
+
 
 void readKicauanConfig(char *filename, ListKicau *listKicau, ListPengguna listPengguna)
 {
