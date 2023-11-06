@@ -60,9 +60,9 @@ void addChildrenAt(int id, BinTree* treeResult, Balasan val);
 int findHighestID(BinTree mainRoot);
 
 boolean isIdBalasanDefined (int idBalasanSearch, BinTree balasan);
-void displayInformasiBalasan (BinTree balasan, ListPengguna listpengguna, int maxIndent);
-void displayTreeOfBalasan(BinTree p, int h, int l, ListPengguna listpengguna);
-
+void displayInformasiBalasan (BinTree balasan, int maxIndent, ListPengguna* listpengguna);
+void displayTreeOfBalasan(BinTree p, int h, int l, ListPengguna* listpengguna) ;
+boolean isBalasanKosong (BinTree balasan);
 void deallocTreeNode (Address p);
 /* I.S. p terdefinisi 
    F.S. p dikembalikan ke sistem 
@@ -78,6 +78,7 @@ boolean isUnerLeft (BinTree p);
 /* Mengirimkan true jika pohon biner tidak kosong, p adalah pohon unerleft: 
    hanya mempunyai subpohon kiri */
 
+void addSiblingAt (BinTree* treeResult, Balasan Val);
 boolean isUnerRight (BinTree p);
 /* Mengirimkan true jika pohon biner tidak kosong, p adalah pohon unerright: 
    hanya mempunyai subpohon kanan */

@@ -8,39 +8,50 @@ void buatBalasan (int IDkicau, int IDbalasan, int currentLoginID, ListKicau* lis
         Word masukanBalasan;
         int highestIDBalasan;
         Balasan balasanBaru;
-        highestIDBalasan = findHighestID(listkicau->buffer[IDkicau-1].balasan);
-        if (!isIdBalasanDefined(IDbalasan, listkicau->buffer[IDkicau-1].balasan)) {
-                printf("Wah, tidak terdapat balasan yang ingin Anda balas!\n");
-        } else {
-            if (!isAuthorAccountPublic(((*listkicau).buffer[IDkicau-1].authorID), listpengguna)) {
-                printf("Wah, akun tersebut merupakan akun privat dan anda belum berteman akun tersebut!\n");
+        if (IDbalasan == -1) {
+            printf("Masukkan balasan:\n");
+            masukanBalasan = ReadWord();
+            transferWordToString(balasanBaru.text, masukanBalasan);
+            balasanBaru.authorID = currentLoginID;
+            getLocalTime(&balasanBaru.time);
+            if (isBalasanKosong(listkicau->buffer[IDkicau-1].balasan)) {
+                balasanBaru.id = 1;
+                listkicau->buffer[IDkicau-1].balasan = newTreeNode(balasanBaru);
             } else {
-                if (IDbalasan == -1) {
-                    printf("Masukkan balasan:\n");
-                    masukanBalasan = ReadWord();
-                    transferWordToString(balasanBaru.text, masukanBalasan);
-                    balasanBaru.id = 1;
-                    balasanBaru.authorID = currentLoginID;
-                    getLocalTime(&balasanBaru.time);
-                    listkicau->buffer[IDkicau-1].balasan = newTreeNode(balasanBaru);
-                    putchar('\n');
-                    printf("Selamat! balasan telah diterbitkan!\n");
-                    printf("Detil balasan:\n");
-                    printf("| ID = %d\n", balasanBaru.id);
-                    printf("| ");
-                    displayNameFromID(currentLoginID, listpengguna);
-                    putchar('\n');
-                    printf("| ");
-                    displayDATETIME(balasanBaru.time);
-                    putchar('\n');
-                    printf("| ");
-                    displayArrayOfChar(balasanBaru.text);
-                    putchar('\n');
+                highestIDBalasan = findHighestID(listkicau->buffer[IDkicau-1].balasan);
+                balasanBaru.id = highestIDBalasan + 1;
+                addSiblingAt(&listkicau->buffer[IDkicau-1].balasan, balasanBaru);
+                // printf("%d\n", balasanBaru.id);
+                // printf("%d\n", listkicau->buffer[IDkicau-1].balasan->info.id);
+                // printf("%s\n", listkicau->buffer[IDkicau-1].balasan->info.text);
+                // displayDATETIME(listkicau->buffer[IDkicau-1].balasan->info.time);
+                // displayNameFromID(listkicau->buffer[IDkicau-1].balasan->info.authorID, listpengguna);
+            }
+            putchar('\n');
+            printf("Selamat! balasan telah diterbitkan!\n");
+            printf("Detil balasan:\n");
+            printf("| ID = %d\n", balasanBaru.id);
+            printf("| ");
+            displayNameFromID(currentLoginID, listpengguna);
+            putchar('\n');
+            printf("| ");
+            displayDATETIME(balasanBaru.time);
+            putchar('\n');
+            printf("| ");
+            displayArrayOfChar(balasanBaru.text);
+            putchar('\n');
+        } else {
+            if (!isIdBalasanDefined(IDbalasan, listkicau->buffer[IDkicau-1].balasan)) {
+                    printf("Wah, tidak terdapat balasan yang ingin Anda balas!\n");
+            } else {
+                if (!isAuthorAccountPublic(((*listkicau).buffer[IDkicau-1].authorID), listpengguna)) {
+                    printf("Wah, akun tersebut merupakan akun privat dan anda belum berteman akun tersebut!\n");
                 } else {
+                    highestIDBalasan = findHighestID(listkicau->buffer[IDkicau-1].balasan);
                     printf("Masukkan balasan:\n");
                     masukanBalasan = ReadWord();
                     transferWordToString(balasanBaru.text, masukanBalasan);
-                    balasanBaru.id = findHighestID(listkicau->buffer[IDkicau-1].balasan) + 1;
+                    balasanBaru.id = highestIDBalasan + 1;
                     balasanBaru.authorID = currentLoginID;
                     getLocalTime(&balasanBaru.time);
                     addChildrenAt(IDbalasan, &listkicau->buffer[IDkicau-1].balasan, balasanBaru);
@@ -72,7 +83,7 @@ void lihatBalasan (int idKicau, ListKicau listkicau, ListPengguna listpengguna) 
         if (!isAuthorAccountPublic(listkicau.buffer[idKicau-1].authorID, listpengguna)) {
             printf("Wah, kicauan tersebut dibuat oleh pengguna dengan akun privat!\n");
         } else {
-            displayTreeOfBalasan(listkicau.buffer[idKicau-1].balasan, 4, 0, listpengguna);
+            displayTreeOfBalasan(listkicau.buffer[idKicau-1].balasan, 4, 0, &listpengguna);
         }
     }
 }

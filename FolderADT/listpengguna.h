@@ -36,12 +36,12 @@ typedef struct
 typedef struct
 {
    int index;
-   char username[20];
-   char password[20];
-   char bio[135]; // Bio max 135 karakter
+   char username[21];
+   char password[21];
+   char bio[136]; // Bio max 135 karakter
    int nomorHP;
-   char weton[6];                 // Pahing, Kliwon, Wage, Pon, dan Legi (case insensitive)
-   char status[6];                // PUBLIC, PRIVAT
+   char weton[7];                 // Pahing, Kliwon, Wage, Pon, dan Legi (case insensitive)
+   char status[7];                // PUBLIK, PRIVAT
    FotoProfil fotoProfil;         // use pcolor.c
    PrioQueueChar permintaanTeman; // harusnya priorqueuepermintaan (check by jumlah teman atau length of listTeman)
    StackDraf stackdraf;

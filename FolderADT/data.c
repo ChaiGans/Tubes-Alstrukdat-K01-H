@@ -17,17 +17,23 @@ Word blankLineCheck(Word w)
     }
 }
 
-int wordToInt(Word w)
-{
+int wordToInt(Word w) {
     int res = 0;
     int i;
-    for (i = 0; i < w.Length; i++)
-    {
+    int sign = 1;
+    if (w.TabWord[0] == '-') {
+        sign = -1;
+        i = 1; 
+    } else {
+        i = 0; 
+    }
+    for (; i < w.Length; i++) {
         res *= 10;
         res += w.TabWord[i] - '0';
     }
-    return res;
+    return res * sign; 
 }
+
 
 int charToInt (char w) {
     return w - '0';

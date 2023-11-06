@@ -26,16 +26,17 @@ Address newTreeNode(Balasan val) {
    menghasilkan p, maka p↑.info=val, p↑.left=NULL, p↑.right=NULL 
    Jika alokasi gagal, mengirimkan NULL */
 
-void addSiblingToRoot(Balasan Val, BinTree* targetedRoot) {
-    Address newRoot = newTreeNode(Val);
-    (*targetedRoot)->sibling = newRoot;  
+void addSiblingAt(BinTree* treeResult, Balasan Val) {
+    if (*treeResult == NULL) {
+        return;
+    }
+    if (SIBLING(*treeResult) == NULL) {
+        Address newNode = newTreeNode(Val);
+        SIBLING(*treeResult) = newNode;
+    } else {
+        addSiblingAt(&((*treeResult)->sibling), Val);
+    }
 }
-
-void addChildrenToRoot(Balasan Val, BinTree* targetedRoot) {
-    Address newRoot = newTreeNode(Val);
-    (*targetedRoot)->children = newRoot;
-}
-
 void addChildrenAt(int id, BinTree* treeResult, Balasan val) {
     if (*treeResult == NULL) {
         return;
@@ -74,6 +75,14 @@ int findHighestID(BinTree mainRoot) {
     return max;
 }
 
+boolean isBalasanKosong (BinTree balasan) {
+    if (findHighestID(balasan) == INT_MIN) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 void deallocTreeNode (Address p) {
     free(p);
 }
@@ -98,12 +107,11 @@ void printIndented(int indent) {
     }
 }
 
-
-void displayInformasiBalasan (BinTree balasan, ListPengguna listpengguna, int maxIndent) {
+void displayInformasiBalasan (BinTree balasan, int maxIndent, ListPengguna* listpengguna) {
     int i;
     printIndented(maxIndent);
     printf("| ID = %d\n", balasan->info.id);
-    if (!isAuthorAccountPublic(balasan->info.authorID, listpengguna)) {
+    if (!isAuthorAccountPublic(balasan->info.authorID, *listpengguna)) {
         printIndented(maxIndent);
         printf("| PRIVAT\n");
         printIndented(maxIndent);
@@ -113,7 +121,7 @@ void displayInformasiBalasan (BinTree balasan, ListPengguna listpengguna, int ma
     } else {
         printIndented(maxIndent);
         printf("| ");
-        displayNameFromID(balasan->info.authorID, listpengguna);
+        displayNameFromID(balasan->info.authorID, *listpengguna);
         putchar('\n');
         printIndented(maxIndent);
         printf("| ");
@@ -126,11 +134,11 @@ void displayInformasiBalasan (BinTree balasan, ListPengguna listpengguna, int ma
     }
 }
 
-void displayTreeOfBalasan(BinTree p, int h, int l, ListPengguna listpengguna) {
+void displayTreeOfBalasan(BinTree p, int h, int l, ListPengguna* listpengguna) {
     if (p != NULL) { 
         int maxIndent = h * l;
         int i;
-        displayInformasiBalasan(p, listpengguna, maxIndent);
+        displayInformasiBalasan(p, maxIndent, listpengguna);
         putchar('\n');
         displayTreeOfBalasan(CHILDREN(p), h, l + 1, listpengguna); 
         displayTreeOfBalasan(SIBLING(p), h, l, listpengguna);

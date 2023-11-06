@@ -215,7 +215,7 @@ void getLocalTime (DATETIME* receiveTime){
 }
 
 void displayDATETIME (DATETIME receiveTime) {
-    printf("%d/%d/%d %d:%d:%d", Day(receiveTime), Month(receiveTime), Year(receiveTime), Hour(Time(receiveTime)), Minute(Time(receiveTime)), Second(Time(receiveTime))); 
+    printf("%02d/%02d/%02d %02d:%02d:%02d", Day(receiveTime), Month(receiveTime), Year(receiveTime), Hour(Time(receiveTime)), Minute(Time(receiveTime)), Second(Time(receiveTime))); 
 }
 
 void DATETIMEparser(char datestring[19], DATETIME* returnedDateTime) {

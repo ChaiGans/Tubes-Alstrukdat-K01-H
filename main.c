@@ -4,6 +4,7 @@
 #include "features/user.h"
 #include "features/draf.h"
 #include "features/balasan.h"
+#include "features/kicauan.h"
 
 #include <stdio.h>
 
@@ -79,6 +80,16 @@ int main() {
                 ADVWORD(false);
                 int idBalasan = wordToInt(currentWord);
                 hapusBalasan(currentLoginID, idKicau, idBalasan, &listKicau);
+            } else if (wordStringCompare(command, "KICAU")) {
+                upKicau(&listKicau, listPengguna, currentLoginID);
+            } else if (wordStringCompare(command, "SUKA_KICAUAN")) {
+                ADVWORD(false);
+                int idKicau = wordToInt(currentWord);
+                sukaKicauan(&listKicau, listPengguna, idKicau);
+            } else if (wordStringCompare(command, "UBAH_KICAUAN")) {
+                ADVWORD(false);
+                int idKicau = wordToInt(currentWord);
+                editKicauan(currentLoginID, &listKicau, listPengguna, idKicau);
             } else if (wordStringCompare(command, "TUTUP_PROGRAM")) {
                 break;
             }
