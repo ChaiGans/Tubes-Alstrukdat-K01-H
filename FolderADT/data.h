@@ -11,6 +11,7 @@
 #include "listutas.h"
 #include "stackdraf.h"
 #include "datetime.h"
+#include "grafpertemanan.h"
 // Fungsi pada data.h digunakan untuk mendapatkan data dari file pengguna.txt, kicauan.txt, balasan.txt, draf.txt, dan utas.txt
 // Fungsi pada data.h juga digunakan untuk mengubah data pada file pengguna.txt, kicauan.txt, balasan.txt, draf.txt, dan utas.txt
 
@@ -29,7 +30,7 @@ Profile cariPengguna(Word uname, ListPengguna listPengguna);
 Profile cariPenggunaID(int ID, ListPengguna lp);
 // mengembalikan profile pengguna dengan ID.
 
-void readPenggunaConfig(char *filename, ListPengguna *listPengguna);
+void readPenggunaConfig(char *filename, ListPengguna *listPengguna, GrafPertemanan *grafPertemanan);
 // I.S. : Sembarang
 // F.S. : Membaca file pengguna.txt dan mendefinisikan profil pengguna.
 
@@ -41,7 +42,7 @@ void readBalasanConfig(char *filename, ListKicau *l, ListPengguna listpengguna);
 // I.S. : Sembarang
 // F.S. : Membaca file balasan.txt dan mendefinisikan balasan.
 
-void readDrafConfig(char *filename, ListPengguna* listpengguna);
+void readDrafConfig(char *filename, ListPengguna *listpengguna);
 // I.S. : Sembarang
 // F.S. : Membaca file draf.txt dan mendefinisikan draf.
 
@@ -49,7 +50,7 @@ void readUtasConfig(char *filename, ListPengguna listPengguna, AddressListUtas *
 // I.S. : Sembarang
 // F.S. : Membaca file utas.txt dan mendefinisikan utas.
 
-void initReadConfig(Word fileName, ListPengguna *listPengguna, ListKicau *listKicau);
+void initReadConfig(Word fileName, ListPengguna *listPengguna, GrafPertemanan *grafPertemanan, ListKicau *listKicau);
 // I.S. : Sembarang
 // F.S. : Membaca semua file config dan inisiasi semua data.
 
