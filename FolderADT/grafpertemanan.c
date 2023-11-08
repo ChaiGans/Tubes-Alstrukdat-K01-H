@@ -14,12 +14,12 @@ void createGrafPertemanan(GrafPertemanan *G, int n)
     }
 }
 
-int getBanyakTeman(GrafPertemanan G, int i)
+int getBanyakTeman(GrafPertemanan G, int idProfil)
 {
     int count = 0;
     for (int j = 0; j < G.banyakOrang; j++)
     {
-        if (ElmtGrafPertemanan(G, i, j) == '1')
+        if (ElmtGrafPertemanan(G, idProfil, j) == '1' && idProfil != j)
         {
             count++;
         }
@@ -29,10 +29,10 @@ int getBanyakTeman(GrafPertemanan G, int i)
 
 boolean isTeman(GrafPertemanan G, int i, int j)
 {
-    return ElmtGrafPertemanan(G, i, j) == '1' && ElmtGrafPertemanan(G, j, i) == '1';
+    return ElmtGrafPertemanan(G, i, j) == '1' && ElmtGrafPertemanan(G, j, i) == '1' && i != j;
 }
 
-void hapusTeman(GrafPertemanan *G, int i, int j)
+void hapusHubunganTeman(GrafPertemanan *G, int i, int j)
 {
     ElmtGrafPertemanan(*G, i, j) = '0';
     ElmtGrafPertemanan(*G, j, i) = '0';
@@ -48,4 +48,22 @@ void displayGrafPertemanan(GrafPertemanan G)
         }
         printf("\n");
     }
+}
+
+boolean isMengirimPermintaan(GrafPertemanan G, int idPengirim, int idPenerima)
+{
+    return ElmtGrafPertemanan(G, idPengirim, idPenerima) == '1' && ElmtGrafPertemanan(G, idPenerima, idPengirim) == '0';
+}
+
+int getBanyakPermintaanTeman(GrafPertemanan G, int idPenerima)
+{
+    int count = 0;
+    for (int j = 0; j < G.banyakOrang; j++)
+    {
+        if (ElmtGrafPertemanan(G, idPenerima, j) == '1' && ElmtGrafPertemanan(G, j, idPenerima) == '0' && idPenerima != j)
+        {
+            count++;
+        }
+    }
+    return count;
 }
