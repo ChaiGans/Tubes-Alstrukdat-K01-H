@@ -213,12 +213,55 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna, GrafPerteman
         }
     }
 
+    for (int i = 0; i < banyakProfile; i++)
+    {
+        MakeEmptyQueue(&((*listPengguna).contents[i].permintaanTeman), 20);
+    }
+
     ADVWORD(true);
     int banyakPermintaanPertemenan = wordToInt(currentWord);
     for (int i = 0; i < banyakPermintaanPertemenan; i++)
     {
         ADVWORD(true); // currentWord = username pengirim
-        // proses permintaan pertemanan, tapi belum dikerjain karena gatau ADT graf hihi
+        int j = 0;
+        // mendapatkan id pengirim
+        int idPengirim = 0;
+        while (currentWord.TabWord[j] != BLANK)
+        {
+            idPengirim *= 10;
+            idPengirim += charToInt(currentWord.TabWord[j]);
+            j++;
+        } // idPengirim terdefinisi, j ada di ' '
+
+        // mendapatkan id penerima
+        int idPenerima = 0;
+        j++;
+        while (currentWord.TabWord[j] != BLANK)
+        {
+            idPenerima *= 10;
+            idPenerima += charToInt(currentWord.TabWord[j]);
+            j++;
+        } // idPenerima terdefinisi, j ada di ' '
+
+        // mendefinisikan bahwa idPengirim mengirimkan permintaan pertemanan ke idPenerima
+        ElmtGrafPertemanan(*pertemanan, idPengirim, idPenerima) = '1';
+
+        // mendapatkan popularitas
+        int popularitas = 0;
+        j++;
+        while (j < currentWord.Length)
+        {
+            popularitas *= 10;
+            popularitas += charToInt(currentWord.TabWord[j]);
+            j++;
+        } // popularitas terdefinisi
+
+        infotype adjInfo;
+        adjInfo.id = idPengirim;
+        adjInfo.popularity = popularitas;
+
+        // enqueue adjInfo
+        Enqueue(&((*listPengguna).contents[idPenerima].permintaanTeman), adjInfo);
     }
 
     ADVWORD(true); // read sampe pita ditutup
