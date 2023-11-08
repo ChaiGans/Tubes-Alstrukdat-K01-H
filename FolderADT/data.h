@@ -24,6 +24,10 @@ int wordToInt(Word w);
 // keknya ini bakal dipindah ke tempat lain kek wordmachine.h
 // kalo ngga bikin file header baru yang full buat olah Word
 
+void makeUpper(Word *w);
+// I.S. : w sembarang
+// F.S. : Mengubah semua karakter pada w menjadi huruf kapital.
+
 Profile cariPengguna(Word uname, ListPengguna listPengguna);
 // mengembalikan profile pengguna dengan nama uname.
 

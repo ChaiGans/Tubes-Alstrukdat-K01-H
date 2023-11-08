@@ -45,6 +45,19 @@ int charToInt(char w)
     return w - '0';
 }
 
+void makeUpperCase(Word *w)
+{
+    int i;
+    for (i = 0; i < w->Length; i++)
+    {
+        if (w->TabWord[i] >= 'a' && w->TabWord[i] <= 'z')
+        {
+            // Ubah karakter menjadi huruf kapital
+            w->TabWord[i] = w->TabWord[i] - 'a' + 'A';
+        }
+    }
+}
+
 void drafAuthorParser(Word w, int *authorID, int *banyakDraf, ListPengguna l)
 {
     char username[20];
@@ -156,6 +169,7 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna, GrafPerteman
         cutWord(blankLineCheck(currentWord), listPengguna->contents[i].weton);
 
         ADVWORD(true); // currentWord = status
+        makeUpperCase(&currentWord);
         cutWord(currentWord, listPengguna->contents[i].status);
 
         // baca profil
