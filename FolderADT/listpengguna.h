@@ -39,7 +39,7 @@ typedef struct
    char username[21];
    char password[21];
    char bio[136]; // Bio max 135 karakter
-   char* nomorHP;
+   char *nomorHP;
    char weton[7];                 // Pahing, Kliwon, Wage, Pon, dan Legi (case insensitive)
    char status[7];                // PUBLIK, PRIVAT
    FotoProfil fotoProfil;         // use pcolor.c
@@ -172,8 +172,10 @@ void deleteLastListPengguna(ListPengguna *l, Profile *val);
 
 boolean isUserAlreadyExist(ListPengguna l, Word username);
 void findUsernameID(Word usernameInput, ListPengguna l, int *userID, boolean *usernameExist);
-void findUsernameIDbyString (char usernameInput[], ListPengguna l, int* userID, boolean* usernameExist) ;
+void findUsernameIDbyString(char usernameInput[], ListPengguna l, int *userID, boolean *usernameExist);
 boolean passwordChecker(int userID, ListPengguna l, Word passwordInput);
 void displayNameFromID(int userID, ListPengguna l);
-boolean isAuthorAccountPublic (int authorID, ListPengguna listpengguna);
+boolean isAuthorAccountPublic(int authorID, ListPengguna listpengguna);
+int findIDFromUsername(ListPengguna l, Word username);
+
 #endif
