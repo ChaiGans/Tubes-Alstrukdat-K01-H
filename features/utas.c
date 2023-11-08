@@ -21,16 +21,24 @@ void buatUtas (int idKicau, int currentUserID, AddressListUtas *listUtas, ListPe
                 }
                 printf("Utas berhasil dibuat!\n");
                 printf("Masukkan kicauan:\n");
-                char isi[280];
-                scanf("%s",&isi);
+                char isi[280]; Word masukanIsi;
+                masukanIsi = ReadWord();
+                transferWordToString(isi,masukanIsi);
                 if (stringStringCompare(isi,(*listKicau).buffer[idKicau].text)) // melihat apakah tulisan manual sama dengan kicauan, tidak handle kalau beda
                 {
+                    KicauanSambungan temp;
+                    temp.idAuthor = currentUserID; // kicauan utama
+                    transferWordToString(temp.text,masukanIsi);
+                    temp.indexKicauanSambungan = 0;
+                    getLocalTime(&temp.localtime);
+                    insertLastKicauanSambungan(&p,temp);
                     printf("Apakah Anda ingin melanjutkan utas ini? (YA/TIDAK)\n");
-                    char konfirmasi[5];
-                    scanf("%s",&konfirmasi);
-                    while (konfirmasi != "TIDAK")
+                    char konfirmasi[5]; Word masukanKonfirmasi;
+                    masukanKonfirmasi = ReadWord();
+                    transferWordToString(konfirmasi,masukanKonfirmasi);
+                    while (konfirmasi != "TIDAK") // kicauan sambungan
                     {
-                        KicauanSambungan temp; Word masukanKicauanSambungan; Word masukanKonfirmasi;
+                        Word masukanKicauanSambungan;
                         printf("Masukkan kicauan:\n");
                         masukanKicauanSambungan = ReadWord();
                         transferWordToString(temp.text,masukanKicauanSambungan);
