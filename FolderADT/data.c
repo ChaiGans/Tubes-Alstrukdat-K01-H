@@ -450,19 +450,20 @@ void readUtasConfig(char *filename, ListPengguna listPengguna, ListKicau *listKi
 
         ADVWORD(true); // idKicau
         int idKicau = wordToInt(currentWord);
-        insertLastListUtas(&listUtas, idKicau);
+        insertLastListUtas(listUtas, idKicau);
 
-        AddressListUtas p = *listUtas; // Address utas
-        while (p->idKicau != idKicau)
+        AddressListUtas s = *listUtas; // Address utas
+        while (s->idKicau != idKicau)
         {
-            p = NEXT(p);
+            s = NEXT(s);
         }
+        AddressUtas p = s->utas;
 
         temp.idAuthor = ((*listKicau).buffer[idKicau].authorID);
         temp.indexKicauanSambungan = 0;
         getLocalTime(&temp.localtime);
-        transferStringToString((*listKicau).buffer[idKicau].text,temp.text);
-        insertLastKicauanSambungan(&p,temp);
+        transferStringToString((*listKicau).buffer[idKicau].text, temp.text);
+        insertLastKicauanSambungan(&p, temp);
 
         ADVWORD(true); // jumlah kicauan sambungan
         int banyakKicauanSambungan = wordToInt(currentWord);
@@ -485,17 +486,17 @@ void readUtasConfig(char *filename, ListPengguna listPengguna, ListKicau *listKi
 
             temp.indexKicauanSambungan = KicauanSambunganLength(p);
 
-            insertLastKicauanSambungan(&p,temp);
+            insertLastKicauanSambungan(&p, temp);
         }
     }
     printf("Config utas berhasil dibaca... \n");
 }
 
-void initReadConfig(Word fileName, ListPengguna *listPengguna, GrafPertemanan *pertemanan, ListKicau *listKicau)
+void initReadConfig(Word fileName, ListPengguna *listPengguna, GrafPertemanan *pertemanan, ListKicau *listKicau, AddressListUtas *listUtas)
 {
-    readPenggunaConfig("config/pengguna.txt", listPengguna, pertemanan);
+    // readPenggunaConfig("config/pengguna.txt", listPengguna, pertemanan);
     readKicauanConfig("config/kicauan.txt", listKicau, *listPengguna);
     readBalasanConfig("config/balasan.txt", listKicau, *listPengguna);
     // readDrafConfig("config/draf.txt");
-    // readUtasConfig("config/utas.txt");
+    // readUtasConfig("config/utas.txt", *listPengguna, listKicau, listUtas);
 }

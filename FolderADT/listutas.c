@@ -2,17 +2,21 @@
 #include <stdlib.h>
 #include "listutas.h"
 
-AddressListUtas newNodeListUtas(int idKicauBaru) {
-    AddressListUtas p = (AddressListUtas) malloc (sizeof (Node));
-    if (p != NULL) {
+AddressListUtas newNodeListUtas(int idKicauBaru)
+{
+    AddressListUtas p = (AddressListUtas)malloc(sizeof(Node));
+    if (p != NULL)
+    {
         p->idKicau = idKicauBaru;
         p->next = NULL;
         p->utas = NULL;
     }
 }
-AddressUtas newNodeKicauanSambungan (KicauanSambungan x) {
-    AddressUtas p = (AddressUtas) malloc (sizeof(Utas));
-    if (p != NULL) {
+AddressUtas newNodeKicauanSambungan(KicauanSambungan x)
+{
+    AddressUtas p = (AddressUtas)malloc(sizeof(Utas));
+    if (p != NULL)
+    {
         p->info = x;
         p->next = NULL;
     }
@@ -24,19 +28,21 @@ AddressUtas newNodeKicauanSambungan (KicauanSambungan x) {
 
 /* PROTOTYPE */
 /****************** PEMBUATAN LIST KOSONG ******************/
-void CreateListUtas(AddressListUtas *l) {
+void CreateListUtas(AddressListUtas *l)
+{
     /* I.S. sembarang             */
     /* F.S. Terbentuk list kosong */
     FIRST(*l) = NULL;
 }
 
 // /****************** TEST LIST KOSONG ******************/
-boolean isEmptyListUtas(AddressListUtas l) {
+boolean isEmptyListUtas(AddressListUtas l)
+{
     /* Mengirim true jika list kosong */
     return (FIRST(l) == NULL);
-
 }
-boolean isEmptyKicauanSambungan(AddressUtas l) {
+boolean isEmptyKicauanSambungan(AddressUtas l)
+{
     /* Mengirim true jika list kosong */
     return (FIRST(l) == NULL);
 }
@@ -61,62 +67,77 @@ boolean isEmptyKicauanSambungan(AddressUtas l) {
 //     Alamat p = FIRST(*l);
 //     while (currentIdx < idx) {
 //         currentIdx += 1;
-//         p = NEXT(p); 
+//         p = NEXT(p);
 //     }
 //     UTAS(p) = val;
 // }
 
-int indexOfListUtas(AddressListUtas l, int idKicauanUtama) {
+int indexOfListUtas(AddressListUtas l, int idKicauanUtama)
+{
     /* I.S. l, val terdefinisi */
     /* F.S. Mencari apakah ada elemen list l yang bernilai val */
     /* Jika ada, mengembalikan indeks elemen pertama l yang bernilai val */
     /* Mengembalikan IDX_UNDEF_UTAS jika tidak ditemukan */
     int currentIdx = 0;
     AddressListUtas p = FIRST(l);
-    while (p != NULL && p->idKicau != idKicauanUtama) {
+    while (p != NULL && p->idKicau != idKicauanUtama)
+    {
         currentIdx += 1;
         p = NEXT(p);
     }
-    if (p == NULL) {
+    if (p == NULL)
+    {
         return IDX_UNDEF_UTAS;
-    } else {
+    }
+    else
+    {
         return currentIdx;
     }
 }
 
 // /****************** PRIMITIF BERDASARKAN NILAI ******************/
 // /*** PENAMBAHAN ELEMEN ***/
-void insertFirstListUtas(AddressListUtas *l, int idKicauanBaru) {
+void insertFirstListUtas(AddressListUtas *l, int idKicauanBaru)
+{
     /* I.S. l mungkin kosong */
     /* F.S. Melakukan alokasi sebuah elemen dan */
     /* menambahkan elemen pertama dengan nilai val jika alokasi berhasil. */
     /* Jika alokasi gagal: I.S.= F.S. */
     AddressListUtas p = newNodeListUtas(idKicauanBaru);
-    if (p != NULL){
+    if (p != NULL)
+    {
         p->next = FIRST(*l);
         FIRST(*l) = p;
     }
 }
-void insertFirstKicauanSambungan (AddressUtas *l, KicauanSambungan x) {
+void insertFirstKicauanSambungan(AddressUtas *l, KicauanSambungan x)
+{
     AddressUtas p = newNodeKicauanSambungan(x);
-    if (p != NULL) {
+    if (p != NULL)
+    {
         p->next = FIRST(*l);
         FIRST(*l) = p;
     }
 }
 
-void insertLastListUtas(AddressListUtas *l, int idKicauanBaru) {
+void insertLastListUtas(AddressListUtas *l, int idKicauanBaru)
+{
     /* I.S. l mungkin kosong */
     /* F.S. Melakukan alokasi sebuah elemen dan */
     /* menambahkan elemen list di akhir: elemen terakhir yang baru */
     /* bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
-    if (isEmptyListUtas(*l)) {
+    if (isEmptyListUtas(*l))
+    {
         insertFirstListUtas(l, idKicauanBaru);
-    } else {
+    }
+    else
+    {
         AddressListUtas p = newNodeListUtas(idKicauanBaru);
-        if (p != NULL) {
+        if (p != NULL)
+        {
             AddressListUtas last = FIRST(*l);
-            while (NEXT(last) != NULL) {
+            while (NEXT(last) != NULL)
+            {
                 last = NEXT(last);
             }
             NEXT(last) = p;
@@ -124,18 +145,24 @@ void insertLastListUtas(AddressListUtas *l, int idKicauanBaru) {
     }
 }
 
-void insertLastKicauanSambungan(AddressUtas *l, KicauanSambungan x) {
+void insertLastKicauanSambungan(AddressUtas *l, KicauanSambungan x)
+{
     /* I.S. l mungkin kosong */
     /* F.S. Melakukan alokasi sebuah elemen dan */
     /* menambahkan elemen list di akhir: elemen terakhir yang baru */
     /* bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
-    if (isEmptyKicauanSambungan(*l)) {
+    if (isEmptyKicauanSambungan(*l))
+    {
         insertFirstKicauanSambungan(l, x);
-    } else {
+    }
+    else
+    {
         AddressUtas p = newNodeKicauanSambungan(x);
-        if (p != NULL) {
+        if (p != NULL)
+        {
             AddressUtas last = FIRST(*l);
-            while (NEXT(last) != NULL) {
+            while (NEXT(last) != NULL)
+            {
                 last = NEXT(last);
             }
             NEXT(last) = p;
@@ -166,7 +193,8 @@ void insertLastKicauanSambungan(AddressUtas *l, KicauanSambungan x) {
 // }
 
 // /*** PENGHAPUSAN ELEMEN ***/
-void deleteFirstListUtas(AddressListUtas *l, int* idKicauanTarget) {
+void deleteFirstListUtas(AddressListUtas *l, int *idKicauanTarget)
+{
     /* I.S. List l tidak kosong  */
     /* F.S. Elemen pertama list dihapus: nilai UTAS disimpan pada x */
     /*      dan alamat elemen pertama di-dealokasi */
@@ -176,7 +204,8 @@ void deleteFirstListUtas(AddressListUtas *l, int* idKicauanTarget) {
     free(p);
 }
 
-void deleteFirstKicauanSambungan(AddressUtas *l, KicauanSambungan* saveKicauan) {
+void deleteFirstKicauanSambungan(AddressUtas *l, KicauanSambungan *saveKicauan)
+{
     AddressUtas p = FIRST(*l);
     *saveKicauan = p->info;
     FIRST(*l) = NEXT(p);
@@ -202,17 +231,22 @@ void deleteFirstKicauanSambungan(AddressUtas *l, KicauanSambungan* saveKicauan) 
 //     free(p);
 // }
 
-void deleteAtListUtas(AddressListUtas *l, int idx, int* idKicauanTarget) {
+void deleteAtListUtas(AddressListUtas *l, int idx, int *idKicauanTarget)
+{
     /* I.S. list tidak kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
     /* F.S. val diset dengan elemen l pada indeks ke-idx. */
     /*      Elemen l pada indeks ke-idx dihapus dari l */
-    if (idx == 0){
+    if (idx == 0)
+    {
         deleteFirstListUtas(l, idKicauanTarget);
-    } else{
+    }
+    else
+    {
         int currentIdx = 0;
         AddressListUtas p = FIRST(*l);
         AddressListUtas prev;
-        while (currentIdx < idx) { 
+        while (currentIdx < idx)
+        {
             currentIdx += 1;
             prev = p;
             p = NEXT(p);
@@ -223,17 +257,22 @@ void deleteAtListUtas(AddressListUtas *l, int idx, int* idKicauanTarget) {
     }
 }
 
-void deleteAtKicauanSambungan(AddressUtas *l, int idx, KicauanSambungan* saveKicauanSambungan) {
+void deleteAtKicauanSambungan(AddressUtas *l, int idx, KicauanSambungan *saveKicauanSambungan)
+{
     /* I.S. list tidak kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
     /* F.S. val diset dengan elemen l pada indeks ke-idx. */
     /*      Elemen l pada indeks ke-idx dihapus dari l */
-    if (idx == 0){
+    if (idx == 0)
+    {
         deleteFirstKicauanSambungan(l, saveKicauanSambungan);
-    } else{
+    }
+    else
+    {
         int currentIdx = 0;
         AddressUtas p = FIRST(*l);
         AddressUtas prev;
-        while (currentIdx < idx) { 
+        while (currentIdx < idx)
+        {
             currentIdx += 1;
             prev = p;
             p = NEXT(p);
@@ -252,7 +291,7 @@ void deleteAtKicauanSambungan(AddressUtas *l, int idx, KicauanSambungan* saveKic
 //     /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
 //     /* Jika list kosong : menulis [] */
 //     /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
-//     if (isEmptyListUtas(l)) { 
+//     if (isEmptyListUtas(l)) {
 //         printf("[]");
 //     } else {
 //         Alamat p = FIRST(l);
@@ -267,14 +306,19 @@ void deleteAtKicauanSambungan(AddressUtas *l, int idx, KicauanSambungan* saveKic
 //     }
 // }
 
-int ListUtaslength(AddressListUtas l) {
+int ListUtaslength(AddressListUtas l)
+{
     /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
-    if (isEmptyListUtas(l)) {
+    if (isEmptyListUtas(l))
+    {
         return 0;
-    } else {
+    }
+    else
+    {
         int currentIdx = 0;
         AddressListUtas p = FIRST(l);
-        while (p != NULL) {
+        while (p != NULL)
+        {
             currentIdx += 1;
             p = NEXT(p);
         }
@@ -282,14 +326,19 @@ int ListUtaslength(AddressListUtas l) {
     }
 }
 
-int KicauanSambunganLength(AddressUtas l) {
+int KicauanSambunganLength(AddressUtas l)
+{
     /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
-    if (isEmptyKicauanSambungan(l)) {
+    if (isEmptyKicauanSambungan(l))
+    {
         return 0;
-    } else {
+    }
+    else
+    {
         int currentIdx = 0;
         AddressUtas p = FIRST(l);
-        while (p != NULL) {
+        while (p != NULL)
+        {
             currentIdx += 1;
             p = NEXT(p);
         }
@@ -297,14 +346,14 @@ int KicauanSambunganLength(AddressUtas l) {
     }
 }
 
-boolean isIdUtasDefined (int idSearch, AddressListUtas *listUtas)
+boolean isIdUtasDefined(int idSearch, AddressListUtas *listUtas)
 {
     AddressListUtas p = *listUtas;
     while (p->idKicau != idSearch && NEXT(p) != NULL)
     {
         p = NEXT(p);
     }
-    return (p == idSearch);
+    return (p->idKicau == idSearch);
 }
 
 // /****************** PROSES TERHADAP LIST ******************/
