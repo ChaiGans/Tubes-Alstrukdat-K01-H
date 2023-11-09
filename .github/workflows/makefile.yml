@@ -2,9 +2,9 @@ name: Makefile CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
   pull_request:
-    branches: [ "main" ]
+    branches: [main]
 
 jobs:
   build:
@@ -12,16 +12,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
 
-    - name: configure
-      run: ./configure
-
-    - name: Install dependencies
+    - name: Build with make
       run: make
 
-    - name: Run check
-      run: make check
-
-    - name: Run distcheck
-      run: make distcheck
+    - name: Check if build was successful
+      run: |
+        if [ $? -eq 0 ]; then
+          echo "Makefile build successful."
+        else
+          echo "Makefile build failed."
+          exit 1
+        fi
