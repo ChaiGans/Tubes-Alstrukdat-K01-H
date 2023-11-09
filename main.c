@@ -28,6 +28,7 @@ int main() {
 
     int currentLoginID = -1;
     ListPengguna listPengguna;
+    GrafPertemanan grafPertemanan;
     CreateListPengguna(&listPengguna);
     ListKicau listKicau;
     CreateListKicau(&listKicau, 10);
@@ -36,7 +37,7 @@ int main() {
 
     printf("Masukkan nama file config: ");
     Word filename = ReadWord();
-    initReadConfig(filename, &listPengguna, &listKicau);
+    initReadConfig(filename, &listPengguna, &grafPertemanan, &listKicau);
 
     while (true) {
         // printTree(listKicau.buffer[0].balasan, 2);
