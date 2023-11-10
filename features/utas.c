@@ -9,7 +9,7 @@ void buatUtas(int idKicau, int currentUserID, AddressListUtas *listUtas, ListPen
     }
     else
     {
-        if (!isIdUtasDefined(idKicau, listUtas)) // belum dibuat utas tapi tidak handle jika kicau sudah jadi kicauan utama
+        if (!isIdUtasDefined(idKicau, listUtas)) // belum dibuat utas
         {
             if ((*listKicau).buffer[idKicau].authorID == currentUserID) // kicaunya milik currentUser
             {
@@ -26,7 +26,7 @@ void buatUtas(int idKicau, int currentUserID, AddressListUtas *listUtas, ListPen
                 Word masukanIsi;
                 masukanIsi = ReadWord();
                 transferWordToString(isi, masukanIsi);
-                if (stringStringCompare(isi, (*listKicau).buffer[idKicau].text)) // melihat apakah tulisan manual sama dengan kicauan, tidak handle kalau beda
+                if (stringStringCompare(isi, (*listKicau).buffer[idKicau].text)) // melihat apakah tulisan manual sama dengan kicauan
                 {
                     KicauanSambungan temp;
                     temp.idAuthor = currentUserID; // kicauan utama
@@ -55,11 +55,19 @@ void buatUtas(int idKicau, int currentUserID, AddressListUtas *listUtas, ListPen
                     }
                     printf("Utas selesai!\n");
                 }
+                else
+                {
+                    printf("Masukan berbeda dengan kicauan\n");
+                }
             }
             else
             {
                 printf("Utas ini bukan milik anda!\n");
             }
+        }
+        else
+        {
+            printf("Kicauan sudah menjadi utas!\n");
         }
     }
 }
@@ -72,9 +80,9 @@ void sambungUtas(int idUtas, int index, int currentUserID, AddressListUtas *list
     }
     else
     {
-        int i = 0;
+        int i = 1; // idUtas dimulai dari idUtas 1
         AddressListUtas s = *listUtas;
-        while (i != idUtas) // cari utas dengan idKicau
+        while (i != idUtas) // cari utas dengan idUtas
         {
             s = NEXT(s); // address listutas
             i += 1;
@@ -111,23 +119,23 @@ void hapusUtas(int idUtas, int index, int currentUserID, AddressListUtas *listUt
     }
     else
     {
-        int i = 0;
+        int i = 1; // idUtas mulai dari 1
         AddressListUtas s = *listUtas;
-        while (i != idUtas) // cari utas dengan idKicau
+        while (i != idUtas) // cari utas dengan idUtas
         {
             s = NEXT(s); // address listutas
             i += 1;
         }
-        AddressUtas p = s->utas;               // address utas
-        if (p->info.idAuthor != currentUserID) // kicaunya bukan milik currentUser
-        {
-            // cek utas milik dia atau tidak
-            printf("Anda tidak bisa menghapus kicauan dalam utas ini!\n");
-        }
-        else if (index >= KicauanSambunganLength(p)) // indeks lebih besar dari seharusnya
+        AddressUtas p = s->utas;                // address utas
+        if (index >= KicauanSambunganLength(p)) // indeks lebih besar dari seharusnya
         {
             // cek indeks kicauan sambungan ada atau tidak
             printf("Kicauan sambungan dengan index %d tidak ditemukan pada utas!\n", index);
+        }
+        else if (p->info.idAuthor != currentUserID) // kicaunya bukan milik currentUser
+        {
+            // cek utas milik dia atau tidak
+            printf("Anda tidak bisa menghapus kicauan dalam utas ini!\n");
         }
         else if (index == 0)
         {
@@ -138,6 +146,7 @@ void hapusUtas(int idUtas, int index, int currentUserID, AddressListUtas *listUt
         {
             KicauanSambungan temp;
             deleteAtKicauanSambungan(&p, index, &temp);
+            printf("Kicauan sambungan berhasil dihapus!\n");
         }
     }
 }
@@ -150,9 +159,9 @@ void cetakUtas(int idUtas, int currentUserID, AddressListUtas *listUtas, ListPen
     }
     else
     {
-        int i = 0;
+        int i = 1; // idUtas mulai dari 1
         AddressListUtas s = *listUtas;
-        while (i != idUtas) // cari utas dengan idKicau
+        while (i != idUtas) // cari utas dengan idUtas
         {
             s = NEXT(s); // address listutas
             i += 1;
@@ -176,7 +185,7 @@ void cetakUtas(int idUtas, int currentUserID, AddressListUtas *listUtas, ListPen
             printf("\n");
             for (int i = 1; i < KicauanSambunganLength(p) + 1; i++)
             {
-                p = NEXT(p);
+                p = NEXT(p); // dari kicauan index 1 (bukan kicauan utama)
                 printf("    |   INDEX = %d\n", i);
                 printf("    |   ");
                 displayNameFromID(p->info.idAuthor, listPengguna);

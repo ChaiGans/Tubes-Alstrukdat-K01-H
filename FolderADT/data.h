@@ -54,7 +54,7 @@ void readUtasConfig(char *filename, ListPengguna listPengguna, ListKicau *listKi
 // I.S. : Sembarang
 // F.S. : Membaca file utas.txt dan mendefinisikan utas.
 
-void initReadConfig(Word fileName, ListPengguna *listPengguna, GrafPertemanan *grafPertemanan, ListKicau *listKicau);
+void initReadConfig(Word fileName, ListPengguna *listPengguna, GrafPertemanan *grafPertemanan, ListKicau *listKicau, AddressListUtas *listUtas);
 // I.S. : Sembarang
 // F.S. : Membaca semua file config dan inisiasi semua data.
 
