@@ -96,24 +96,18 @@ void displayDaftarPermintaanTeman(int currentUserID, GrafPertemanan grafPerteman
     {
         printf("Terdapat %d permintaan pertemanan untuk anda.\n", NBElmtQueue(Q));
         int i;
-        for (i = 0; i < NBElmtQueue(Q); i++)
+        while (!IsEmptyQueue(Q))
         {
-            printf("%d\n", NBElmtQueue(Q));
-            int idPengirim = Q.T[Q.HEAD].id;
-            int popularitas = Q.T[Q.HEAD].popularity;
+            // printf("%d\n", NBElmtQueue(Q));
+            infotype pertmintaan;
+            Dequeue(&Q, &pertmintaan);
+            int idPengirim = pertmintaan.id;
+            int popularitas = pertmintaan.popularity;
             printf("| ");
             displayNameFromID(idPengirim, listPengguna);
             printf("\n");
             printf("| Jumlah teman: %d\n", popularitas);
             printf("\n");
-            if (Q.HEAD == NBElmtQueue(Q))
-            {
-                Q.HEAD = 1;
-            }
-            else
-            {
-                Q.HEAD++;
-            }
         }
     }
     else

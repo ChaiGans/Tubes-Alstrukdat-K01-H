@@ -243,9 +243,6 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna, GrafPerteman
             j++;
         } // idPenerima terdefinisi, j ada di ' '
 
-        // mendefinisikan bahwa idPengirim mengirimkan permintaan pertemanan ke idPenerima
-        ElmtGrafPertemanan(*pertemanan, idPengirim, idPenerima) = '1';
-
         // mendapatkan popularitas
         int popularitas = 0;
         j++;

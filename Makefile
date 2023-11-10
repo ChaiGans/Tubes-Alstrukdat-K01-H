@@ -19,7 +19,13 @@ SRC = main.c \
       ./FolderADT/time.c \
       ./FolderADT/datetime.c \
       ./FolderADT/treebalasan.c \
-      ./features/balasan.c
+      ./features/balasan.c \
+      ./features/utas.c \
+      ./FolderADT/listutas.c \
+      ./features/kicauan.c \
+      ./FolderADT/grafpertemanan.c \
+      ./FolderADT/prioqueuechar.c \
+      ./features/teman.c 
 
 
 # Object files (automatically generated from source files)
