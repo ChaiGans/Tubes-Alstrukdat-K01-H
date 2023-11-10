@@ -7,7 +7,7 @@
 
 void printKicau(Kicauan tweet, ListPengguna ListPengguna);
 void upKicau(ListKicau *lk, ListPengguna lp, int currentUserID);
-void kicauanTeman(int currentUserID);
+void kicauanTeman(int currentUserID, ListPengguna lp, ListKicau lk,  GrafPertemanan gp);
 void sukaKicauan(ListKicau *lk, ListPengguna lp, int IDtweet);
 void editKicauan(int currentUserID, ListKicau *lk, ListPengguna lp, int IDtweet);
 

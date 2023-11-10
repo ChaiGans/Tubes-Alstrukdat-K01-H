@@ -344,7 +344,11 @@ void readKicauanConfig(char *filename, ListKicau *listKicau, ListPengguna listPe
         tweet.authorID = cariPengguna(currentWord, listPengguna).index;
 
         ADVWORD(true);
-        // tweet.datetime =
+        char placeholder[19];
+        transferWordToString(placeholder, currentWord);
+        DATETIMEparser(placeholder, &(tweet.localtime));
+
+        tweet.balasan = NULL;
 
         insertLastListKicau(&*listKicau, tweet);
     }

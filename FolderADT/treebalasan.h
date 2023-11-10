@@ -60,6 +60,7 @@ void addChildrenAt(int id, BinTree* treeResult, Balasan val);
 int findHighestID(BinTree mainRoot);
 
 boolean isIdBalasanDefined (int idBalasanSearch, BinTree balasan);
+BinTree BalasanFromID(int idBalasanSearch, BinTree balasan);
 void displayInformasiBalasan (BinTree balasan, int maxIndent, ListPengguna* listpengguna);
 void displayTreeOfBalasan(BinTree p, int h, int l, ListPengguna* listpengguna) ;
 boolean isBalasanKosong (BinTree balasan);

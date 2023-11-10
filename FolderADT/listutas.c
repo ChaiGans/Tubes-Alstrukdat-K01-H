@@ -356,6 +356,12 @@ boolean isIdUtasDefined(int idSearch, AddressListUtas *listUtas)
     return (p->idKicau == idSearch);
 }
 
+int utaslength(AddressUtas au){
+    int i = 0; AddressUtas p = au; while(p != NULL){
+        p = p->next; i++;
+    } return i;
+}
+
 // /****************** PROSES TERHADAP LIST ******************/
 // ListUtas concatListUtas(ListUtas l1, ListUtas l2)  {
 //     /* I.S. l1 dan l2 sembarang */

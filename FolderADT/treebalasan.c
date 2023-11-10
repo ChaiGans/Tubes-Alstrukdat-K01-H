@@ -101,6 +101,20 @@ boolean isIdBalasanDefined(int idBalasanSearch, BinTree balasan) {
     }
 }
 
+BinTree BalasanFromID(int idBalasanSearch, BinTree balasan) {
+    if (balasan != NULL) {
+
+        if (balasan->info.id == idBalasanSearch) return balasan;
+
+        BinTree balasanInChildren = BalasanFromID(idBalasanSearch, balasan->children);
+        BinTree balasanInSibling = BalasanFromID(idBalasanSearch, balasan->sibling);
+
+        if (balasanInChildren == NULL) return balasanInSibling;
+        else return balasanInChildren;
+
+    } else return NULL;
+}
+
 void printIndented(int indent) {
     for (int i = 0; i < indent; i++) {
         printf(" ");

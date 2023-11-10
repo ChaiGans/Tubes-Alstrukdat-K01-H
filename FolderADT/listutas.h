@@ -139,4 +139,5 @@ void deleteAtKicauanSambungan(AddressUtas *l, int idx, KicauanSambungan* saveKic
 int ListUtaslength(AddressListUtas l);
 int KicauanSambunganLength(AddressUtas l);
 boolean isIdUtasDefined (int idSearch, AddressListUtas *listUtas);
+int utaslength(AddressUtas au);
 #endif

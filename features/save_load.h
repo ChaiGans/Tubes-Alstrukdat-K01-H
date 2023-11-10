@@ -10,5 +10,5 @@ void saveDraft(char* fileName, ListPengguna lp);
 void saveUtas();
 char* concatDir(char* dir1, char* dir2);
 boolean isExist(char* dirName);
-void saveAll(ListKicau lk, ListPengguna lp);
-void loadAll(ListKicau *lk, ListPengguna *lp);
+void saveAll(ListKicau lk, ListPengguna lp, AddressListUtas lu);
+void loadAll(ListPengguna *listPengguna, GrafPertemanan *pertemanan, ListKicau *listKicau, AddressListUtas *listUtas);

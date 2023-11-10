@@ -16,6 +16,7 @@ void upKicau(ListKicau *lk, ListPengguna lp, int currentUserID){
     Kicauan tweetUp; 
 
     // reading untuk char < 280;
+    printf("Masukkan kicauan:\n");
     int curLen = 0; START(stdin, false); IgnoreBlanks(false); 
     while(currentChar != MARK){
         if (curLen < 280){
@@ -30,7 +31,7 @@ void upKicau(ListKicau *lk, ListPengguna lp, int currentUserID){
         tweetUp.id = getLastIdxListKicau(*lk)+2;
         tweetUp.like = 0;
         getLocalTime(&tweetUp.localtime);
-
+        tweetUp.balasan = NULL;
         insertLastListKicau(&*lk, tweetUp);
         
         printf("\nSelamat! kicauan telah diterbitkan!\nDetail kicauan:\n");
@@ -38,23 +39,32 @@ void upKicau(ListKicau *lk, ListPengguna lp, int currentUserID){
     }
 }
 
+void kicauanTeman(int currentUserID, ListPengguna lp, ListKicau lk, GrafPertemanan gp){
+    int i; for(i = lk.nEff-1; i>=0; i--){
+        if (isTeman(gp, currentUserID, lk.buffer[i].authorID)){
+            printf("\n"); printKicau(lk.buffer[i],lp);
+        }
+    }
+}
+
 void sukaKicauan(ListKicau *lk, ListPengguna lp, int IDtweet){
-    if (isIdxEffListKicau(*lk, IDtweet)){
+    if (isIdxEffListKicau(*lk, IDtweet-1)){
         boolean found = true; int i = 0; boolean private = false;
         while ((lp.contents[i].index != MARK_STATIK)&&(found)){
             if (lp.contents[i].index == (*lk).buffer[IDtweet-1].authorID) found = false;
             else i++;
-        } if (lp.contents[i].status == "PUBLIC"){
+        } if (lp.contents[i].status == "PUBLIK"){
+            (*lk).buffer[IDtweet-1].like++;
             printf("Selamat! Kicauan telah disukai!\nDetail kicauan:\n");
             printKicau((*lk).buffer[IDtweet-1], lp);
         } else {
             printf("Wah, kicauan tersebut dibuat oleh akun privat! Ikuti akun itu dulu ya");
         }
-    }else printf("Tidak ditemukan kicauan dengan ID = %d;", IDtweet);
+    } else printf("Tidak ditemukan kicauan dengan ID = %d;", IDtweet);
 }
 
 void editKicauan(int currentUserID, ListKicau *lk, ListPengguna lp, int IDtweet){
-    if (isIdxEffListKicau(*lk, IDtweet)){
+    if (isIdxEffListKicau(*lk, IDtweet-1)){
         if ((*lk).buffer[IDtweet-1].authorID == currentUserID){
             
             printf("Masukkan kicauan baru: ");
@@ -75,7 +85,7 @@ void editKicauan(int currentUserID, ListKicau *lk, ListPengguna lp, int IDtweet)
 
             (*lk).buffer[IDtweet-1] = newTweet;
 
-            printf("Selamat! kicauan telah diterbitkan!\nDetil kicauan:");
+            printf("Selamat! kicauan telah diterbitkan!\nDetil kicauan:\n");
             printKicau(newTweet, lp);
 
         } else printf("Kicauan dengan ID = %d bukan milikmu!", IDtweet);
