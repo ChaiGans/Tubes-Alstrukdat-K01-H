@@ -115,3 +115,48 @@ void displayDaftarPermintaanTeman(int currentUserID, GrafPertemanan grafPerteman
         printf("Tidak ada permintaan pertemanan untuk anda.\n");
     }
 }
+
+void terimaPermintaanTeman(int currentUserID, GrafPertemanan *grafPertemanan, ListPengguna *listPengguna)
+{
+    // cari nama pengguna dari currentUserID
+    PrioQueueChar *Q = &listPengguna->contents[currentUserID].permintaanTeman;
+    // jika tidak ada permintaan pertemanan
+    if (NBElmtQueue(*Q) == 0)
+    {
+        printf("Tidak ada permintaan pertemanan untuk anda.\n");
+        return;
+    }
+    // jika ada permintaan, tampilkan permintaan dari yang paling populer
+    infotype permintaan;
+    Dequeue(Q, &permintaan);
+    int idPengirim = permintaan.id;
+    int popularitas = permintaan.popularity;
+
+    printf("Permintaan pertemanan teratas dari ");
+    displayNameFromID(idPengirim, *listPengguna);
+    printf("\n\n| ");
+    displayNameFromID(idPengirim, *listPengguna);
+    printf("\n");
+    printf("| Jumlah teman: %d\n", popularitas);
+    printf("\n");
+
+    printf("Apakah Anda ingin menyetujui permintaan pertemanan ini? (YA/TIDAK) ");
+    Word pilihan = ReadWord();
+    if (wordStringCompare(pilihan, "TIDAK"))
+    {
+        Enqueue(Q, permintaan);
+        printf("Permintaan pertemanan dari ");
+        displayNameFromID(idPengirim, *listPengguna);
+        printf(" telah ditolak.\n ");
+        return;
+    }
+    else if (wordStringCompare(pilihan, "YA"))
+    {
+        addTeman(grafPertemanan, currentUserID, idPengirim);
+        printf("Permintaan pertemanan dari ");
+        displayNameFromID(idPengirim, *listPengguna);
+        printf(" telah disetujui. Selamat! Anda telah berteman dengan ");
+        displayNameFromID(idPengirim, *listPengguna);
+        printf(".\n");
+    }
+}

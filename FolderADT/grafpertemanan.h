@@ -39,3 +39,7 @@ boolean isMengirimPermintaan(GrafPertemanan G, int idPengirim, int idPenerima);
 int getBanyakPermintaanTeman(GrafPertemanan G, int idPenerima);
 /* Mengembalikan banyaknya permintaan pertemanan yang diterima oleh idPenerima */
 #endif
+
+void addTeman(GrafPertemanan *G, int idPengirim, int idPenerima);
+/* I.S. G terdefinisi, idPengirim dan idPenerima terdefinisi */
+/* F.S. Orang pada index ke idPengirim dan idPenerima menjadi berteman */

@@ -67,3 +67,9 @@ int getBanyakPermintaanTeman(GrafPertemanan G, int idPenerima)
     }
     return count;
 }
+
+void addTeman(GrafPertemanan *G, int idPengirim, int idPenerima)
+{
+    ElmtGrafPertemanan(*G, idPengirim, idPenerima) = '1';
+    ElmtGrafPertemanan(*G, idPenerima, idPengirim) = '1';
+}
