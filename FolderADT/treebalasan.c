@@ -175,16 +175,19 @@ void hapusCabangBalasan(BinTree* treeBalasan, int idTarget) {
     if (treeBalasan == NULL || *treeBalasan == NULL) {
         return;
     }
-    
-    // If the target is the current node
+
     if ((*treeBalasan)->info.id == idTarget) {
-        deleteSubtree(treeBalasan);
+        BinTree temp = *treeBalasan; 
+        *treeBalasan = (*treeBalasan)->sibling; 
+
+        deleteSubtree(&temp->children);
+        free(temp);
     } else {
-        // Search in the children and siblings
         hapusCabangBalasan(&(*treeBalasan)->children, idTarget);
         hapusCabangBalasan(&(*treeBalasan)->sibling, idTarget);
     }
 }
+
 /* I.S. p terdefinisi 
    F.S. p dikembalikan ke sistem 
    Melakukan dealokasi/pengembalian address p */
