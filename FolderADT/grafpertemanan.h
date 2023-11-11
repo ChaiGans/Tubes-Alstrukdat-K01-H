@@ -36,7 +36,7 @@ void displayGrafPertemanan(GrafPertemanan G);
 boolean isMengirimPermintaan(GrafPertemanan G, int idPengirim, int idPenerima);
 /* Mengembalikan true jika idPengirim mengirim permintaan pertemanan ke idPenerima */
 
-int getBanyakPermintaanTeman(GrafPertemanan G, int idPenerima);
+// int getBanyakPermintaanTeman(GrafPertemanan G, int idPenerima);
 /* Mengembalikan banyaknya permintaan pertemanan yang diterima oleh idPenerima */
 #endif
 

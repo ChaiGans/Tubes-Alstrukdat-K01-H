@@ -55,18 +55,18 @@ boolean isMengirimPermintaan(GrafPertemanan G, int idPengirim, int idPenerima)
     return ElmtGrafPertemanan(G, idPengirim, idPenerima) == '1' && ElmtGrafPertemanan(G, idPenerima, idPengirim) == '0';
 }
 
-int getBanyakPermintaanTeman(GrafPertemanan G, int idPenerima)
-{
-    int count = 0;
-    for (int j = 0; j < G.banyakOrang; j++)
-    {
-        if (ElmtGrafPertemanan(G, idPenerima, j) == '1' && ElmtGrafPertemanan(G, j, idPenerima) == '0' && idPenerima != j)
-        {
-            count++;
-        }
-    }
-    return count;
-}
+// int getBanyakPermintaanTeman(GrafPertemanan G, int idPenerima)
+// {
+//     int count = 0;
+//     for (int j = 0; j < G.banyakOrang; j++)
+//     {
+//         if (ElmtGrafPertemanan(G, idPenerima, j) == '1' && ElmtGrafPertemanan(G, j, idPenerima) == '0' && idPenerima != j)
+//         {
+//             count++;
+//         }
+//     }
+//     return count;
+// }
 
 void addTeman(GrafPertemanan *G, int idPengirim, int idPenerima)
 {
