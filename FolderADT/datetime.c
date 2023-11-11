@@ -84,7 +84,7 @@ void TulisDATETIME(DATETIME D) {
     /* F.S. : Nilai D ditulis dg format DD/MM/YYYY HH:MM:SS */
     /* Proses : menulis nilai setiap komponen D ke layar dalam format DD/MM/YYYY HH:MM:SS
     tanpa karakter apa pun di depan atau belakangnya, termasuk spasi, enter, dll.*/
-    printf("%d/%d/%d %d:%d:%d", Day(D), Month(D), Year(D), Hour(Time(D)), Minute(Time(D)), Second(Time(D)));
+    printf("%02d/%02d/%04d %02d:%02d:%02d", Day(D), Month(D), Year(D), Hour(Time(D)), Minute(Time(D)), Second(Time(D)));
 }
 
 /* ***************************************************************** */

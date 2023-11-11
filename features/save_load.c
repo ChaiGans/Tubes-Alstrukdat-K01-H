@@ -40,7 +40,7 @@ void saveBalasan(char* fileName, ListKicau lk, ListPengguna lp){
             fprintf(file, "\n%d", banyakIDBalasan);
             int k = 0; for(k = 1; k < banyakIDBalasan+1; k++){
                 BinTree writeBalasan = BalasanFromID(k, lk.buffer[j].balasan);
-                fprintf(file, "\n-1 %d", k); // di sini masih bug, bingung cara cari id parent root
+                fprintf(file, "%d %d", getParentID(NULL, lk.buffer[j].balasan, k) , k); // di sini masih bug, bingung cara cari id parent root
                 fprintf(file, "\n%s", writeBalasan->info.text);
                 fprintf(file, "\n%s", cariPenggunaID(writeBalasan->info.authorID, lp).username);
                 fprintf(file, "\n%d/%d/%d %d:%d:%d", writeBalasan->info.time.DD, writeBalasan->info.time.MM, writeBalasan->info.time.YYYY, writeBalasan->info.time.T.HH, writeBalasan->info.time.T.MM, writeBalasan->info.time.T.SS);
@@ -68,7 +68,7 @@ void saveKicauan(char* fileName, ListKicau lk, ListPengguna lp){
     } fclose(file);
 }
 
-void savePengguna(char* fileName, ListPengguna lp){
+void savePengguna(char* fileName, ListPengguna lp, GrafPertemanan gp){
     FILE *file = fopen(fileName, "w");
     int i = 0; fprintf(file, "%d", ListPenggunaLength(lp));
     while(i < ListPenggunaLength(lp)){
@@ -85,7 +85,17 @@ void savePengguna(char* fileName, ListPengguna lp){
                 if (k != lp.contents[i].fotoProfil.SimbolProfil.colEff - 1) fputs(" ", file);
             } if (j != lp.contents[i].fotoProfil.SimbolProfil.rowEff - 1) fputs("\n", file);
         }
-    } fclose(file);
+    } int j;
+    for (i = 0; i < gp.banyakOrang; i++){
+        for(j = 0; j < gp.banyakOrang; j++){
+            if (j == 0) fprintf(file, "\n%c", gp.matrixPertemanan.mem[i][j]);
+            else fprintf(file, " %c", gp.matrixPertemanan.mem[i][j]);
+        } 
+    }
+
+    
+    
+    fclose(file);
 }
 
 void saveDraft(char* fileName, ListPengguna lp){
@@ -126,7 +136,7 @@ void saveUtas(char* fileName, ListPengguna listPengguna, ListKicau listKicau, Ad
     } fclose(file);
 }
 
-void saveAll(ListKicau lk, ListPengguna lp, AddressListUtas lu){
+void saveAll(ListKicau lk, ListPengguna lp, AddressListUtas lu, GrafPertemanan gp){
     char* dirName = (char*)malloc(sizeof(char)*(100));
     printf("Masukkan nama folder penyimpanan\n");
     int curLen = 0; START(stdin, false); IgnoreBlanks(false);
@@ -147,7 +157,7 @@ void saveAll(ListKicau lk, ListPengguna lp, AddressListUtas lu){
     saveDraft(concatDir(dirName, "/draf.txt"), lp);
     saveKicauan(concatDir(dirName, "/kicauan.txt"), lk, lp);
     printf("2...\n");
-    savePengguna(concatDir(dirName, "/pengguna.txt"), lp);
+    savePengguna(concatDir(dirName, "/pengguna.txt"), lp, gp);
     saveUtas(concatDir(dirName, "/utas.txt"), lp, lk, lu);
     printf("3...\n");
     printf("\nPenyimpanan telah berhasil dilakukan!\n");

@@ -40,10 +40,14 @@ void upKicau(ListKicau *lk, ListPengguna lp, int currentUserID){
 }
 
 void kicauanTeman(int currentUserID, ListPengguna lp, ListKicau lk, GrafPertemanan gp){
-    int i; for(i = lk.nEff-1; i>=0; i--){
-        if (isTeman(gp, currentUserID, lk.buffer[i].authorID) || isAuthorAccountPublic(lk.buffer[i].authorID, lp)) {
+    boolean adaTeman = false;
+    int i; for(i = 0; i<lk.nEff; i++){
+        if (isTeman(gp, currentUserID, lk.buffer[i].authorID)){
             printf("\n"); printKicau(lk.buffer[i],lp);
+            adaTeman = true;
         }
+    } if (!adaTeman){
+        printf("\nAnda belum memiliki teman, coba untuk menjalin hubungan teman terlebih dahulu!\n");
     }
 }
 

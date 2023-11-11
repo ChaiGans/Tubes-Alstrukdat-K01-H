@@ -143,6 +143,10 @@ int main()
             {
                 upKicau(&listKicau, listPengguna, currentLoginID);
             }
+            else if (wordStringCompare(command, "KICAUAN"))
+            {
+                kicauanTeman(currentLoginID, listPengguna, listKicau, grafPertemanan);
+            }
             else if (wordStringCompare(command, "SUKA_KICAUAN"))
             {
                 ADVWORD(false);

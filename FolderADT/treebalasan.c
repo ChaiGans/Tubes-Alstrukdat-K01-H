@@ -115,6 +115,22 @@ BinTree BalasanFromID(int idBalasanSearch, BinTree balasan) {
     } else return NULL;
 }
 
+int getParentID(BinTree parent, BinTree children, int childrenID){
+    if (children != NULL){
+        if (children->info.id == childrenID){
+            if (parent == NULL) return -1;
+            else return parent->info.id;
+        }
+
+        int ParentIDFromSibling = getParentID(parent, children->sibling, childrenID);
+        int ParentIDFromChildren = getParentID(children, children->children, childrenID);
+
+        if (ParentIDFromChildren == NULL) return ParentIDFromSibling;
+        else return ParentIDFromChildren;
+    } else return NULL;
+
+}
+
 void printIndented(int indent) {
     for (int i = 0; i < indent; i++) {
         printf(" ");
