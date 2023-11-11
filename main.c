@@ -1,6 +1,7 @@
 #include "FolderADT/charmachine.h"
 #include "FolderADT/wordmachine.h"
 #include "FolderADT/data.h"
+#include "features/save_load.h"
 #include "features/user.h"
 #include "features/draf.h"
 #include "features/balasan.h"
@@ -59,6 +60,14 @@ int main()
             else if (wordStringCompare(command, "DAFTAR"))
             {
                 daftarPengguna(&listPengguna);
+            }
+            else if (wordStringCompare(command, "MUAT"))
+            {
+                loadAll(&listPengguna, &grafPertemanan, &listKicau, &listUtas);
+            } 
+            else if(wordStringCompare(command, "SIMPAN"))
+            {
+                saveAll(listKicau, listPengguna, listUtas, grafPertemanan);
             }
             else
             {
@@ -190,6 +199,10 @@ int main()
                 ADVWORD(false);
                 int idUtas = wordToInt(currentWord);
                 cetakUtas(idUtas, currentLoginID, &listUtas, listPengguna, listKicau, grafPertemanan);
+            }
+            else if(wordStringCompare(command, "SIMPAN"))
+            {
+                saveAll(listKicau, listPengguna, listUtas, grafPertemanan);
             }
             else if (wordStringCompare(command, "TUTUP_PROGRAM"))
             {

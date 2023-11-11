@@ -43,7 +43,7 @@ void saveBalasan(char* fileName, ListKicau lk, ListPengguna lp){
                 fprintf(file, "%d %d", getParentID(NULL, lk.buffer[j].balasan, k) , k); // di sini masih bug, bingung cara cari id parent root
                 fprintf(file, "\n%s", writeBalasan->info.text);
                 fprintf(file, "\n%s", cariPenggunaID(writeBalasan->info.authorID, lp).username);
-                fprintf(file, "\n%d/%d/%d %d:%d:%d", writeBalasan->info.time.DD, writeBalasan->info.time.MM, writeBalasan->info.time.YYYY, writeBalasan->info.time.T.HH, writeBalasan->info.time.T.MM, writeBalasan->info.time.T.SS);
+                fprintf(file, "\n%02d/%02d/%04d %02d:%02d:%02d", writeBalasan->info.time.DD, writeBalasan->info.time.MM, writeBalasan->info.time.YYYY, writeBalasan->info.time.T.HH, writeBalasan->info.time.T.MM, writeBalasan->info.time.T.SS);
             }
             i++;
         } j++;
@@ -63,8 +63,8 @@ void saveKicauan(char* fileName, ListKicau lk, ListPengguna lp){
             fprintf(file, "\n%s", lk.buffer[i].text);
             fprintf(file, "\n%d", lk.buffer[i].like);
             fprintf(file, "\n%s", cariPenggunaID(lk.buffer[i].authorID, lp).username);
-            fprintf(file, "\n%d/%d/%d %d:%d:%d", lk.buffer[i].localtime.DD, lk.buffer[i].localtime.MM, lk.buffer[i].localtime.YYYY, lk.buffer[i].localtime.T.HH, lk.buffer[i].localtime.T.MM, lk.buffer[i].localtime.T.SS);
-        }
+            fprintf(file, "\n%02d/%02d/%04d %02d:%02d:%02d", lk.buffer[i].localtime.DD, lk.buffer[i].localtime.MM, lk.buffer[i].localtime.YYYY, lk.buffer[i].localtime.T.HH, lk.buffer[i].localtime.T.MM, lk.buffer[i].localtime.T.SS);
+        } i++;
     } fclose(file);
 }
 
@@ -81,20 +81,33 @@ void savePengguna(char* fileName, ListPengguna lp, GrafPertemanan gp){
         for (int j = 0; j < lp.contents[i].fotoProfil.SimbolProfil.rowEff; j++){
             for (int k = 0; k < lp.contents[i].fotoProfil.SimbolProfil.colEff; k++){
                 fprintf(file, "%c ", lp.contents[i].fotoProfil.WarnaProfil.mem[i][j]);
-                fprintf(file, "%c", lp.contents[i].fotoProfil.WarnaProfil.mem[i][j]);
+                fprintf(file, "%c", lp.contents[i].fotoProfil.SimbolProfil.mem[i][j]);
                 if (k != lp.contents[i].fotoProfil.SimbolProfil.colEff - 1) fputs(" ", file);
             } if (j != lp.contents[i].fotoProfil.SimbolProfil.rowEff - 1) fputs("\n", file);
-        }
-    } int j;
+        } i++;
+    } int j, lenPermintaan = 0;
     for (i = 0; i < gp.banyakOrang; i++){
         for(j = 0; j < gp.banyakOrang; j++){
             if (j == 0) fprintf(file, "\n%c", gp.matrixPertemanan.mem[i][j]);
             else fprintf(file, " %c", gp.matrixPertemanan.mem[i][j]);
         } 
+    } i = 0; infotype tumbal; PrioQueueChar pqctumbal;
+    while(lp.contents[i].index != MARK_STATIK){
+        if (!IsEmptyQueue(lp.contents[i].permintaanTeman)) lenPermintaan+=NBElmtQueue(lp.contents[i].permintaanTeman);
+        i++;
+    } fprintf(file, "\n%d", lenPermintaan);
+    j = 0, i = 0; 
+    while(j < lenPermintaan){
+        if (!IsEmptyQueue(lp.contents[i].permintaanTeman)){
+            // 0 1 0 == id 0 meminta pertemanan ke id 1, dengan 0 popularitas
+            pqctumbal = lp.contents[i].permintaanTeman;
+            while(!IsEmptyQueue(pqctumbal)){
+                Dequeue(&pqctumbal, &tumbal);
+                fprintf(file, "\n%d %d %d", tumbal.id, i, tumbal.popularity);
+                j++;
+            }   
+        } i++;
     }
-
-    
-    
     fclose(file);
 }
 
@@ -102,17 +115,22 @@ void saveDraft(char* fileName, ListPengguna lp){
     FILE *file = fopen(fileName, "w");
     int i = 0, len = 0;
     while(lp.contents[i].index != MARK_STATIK){
-        if (lp.contents[i].stackdraf.T != NULL) len++;
+        if (!IsEmptyStackDraf(lp.contents[i].stackdraf)) len++;
         i++;
     } fprintf(file, "%d", len); i = 0;
     while(lp.contents[i].index != MARK_STATIK){
-        if (lp.contents[i].stackdraf.T != NULL){
-            fprintf(file, "\ns", lp.contents[i].username);
-            StackDraf temp = lp.contents[i].stackdraf; ElTypeDraf tempdraf;
-            while (!IsEmptyStackDraf(temp)){
+        if (!IsEmptyStackDraf(lp.contents[i].stackdraf)){
+            fprintf(file, "\n%s", lp.contents[i].username);
+            StackDraf temp = lp.contents[i].stackdraf; 
+            StackDraf temp2; CreateEmptyStackDraf(&temp2);
+            ElTypeDraf tempdraf;
+            while(!IsEmptyStackDraf(temp)){
                 PopStackDraf(&temp, &tempdraf);
+                PushStackDraf(&temp2, tempdraf);
+            } while (!IsEmptyStackDraf(temp2)){
+                PopStackDraf(&temp2, &tempdraf);
                 fprintf(file, "\n%s", tempdraf.text);
-                fprintf(file, "\n%d/%d/%d %d:%d:%d", tempdraf.localtime.DD, tempdraf.localtime.MM, tempdraf.localtime.YYYY, tempdraf.localtime.T.HH, tempdraf.localtime.T.MM, tempdraf.localtime.T.SS);
+                fprintf(file, "\n%02d/%02d/%04d %02d:%02d:%02d", tempdraf.localtime.DD, tempdraf.localtime.MM, tempdraf.localtime.YYYY, tempdraf.localtime.T.HH, tempdraf.localtime.T.MM, tempdraf.localtime.T.SS);
             }
         } i++;
     } fclose(file);
@@ -125,12 +143,12 @@ void saveUtas(char* fileName, ListPengguna listPengguna, ListKicau listKicau, Ad
     AddressListUtas curr = listUtas;
     int i = 0; for(i = 0; i < len; i++){
         fprintf(file, "\n%d", curr->idKicau);
-        fprintf(file, "\n%d", utaslength(curr->utas));
+        fprintf(file, "\n%d", utasLength(curr->utas));
         AddressUtas currU = curr->utas;
         while(currU != NULL){
             fprintf(file, "\n%s", currU->info.text);
             fprintf(file, "\n%s", cariPenggunaID((currU->info.idAuthor), listPengguna).username);
-            fprintf(file, "\n%d/%d/%d %d:%d:%d", currU->info.localtime.DD, currU->info.localtime.MM, currU->info.localtime.YYYY, currU->info.localtime.T.HH, currU->info.localtime.T.MM, currU->info.localtime.T.SS);
+            fprintf(file, "\n%02d/%02d/%04d %02d:%02d:%02d", currU->info.localtime.DD, currU->info.localtime.MM, currU->info.localtime.YYYY, currU->info.localtime.T.HH, currU->info.localtime.T.MM, currU->info.localtime.T.SS);
             currU = currU->next;
         } curr = curr->next;
     } fclose(file);
@@ -184,7 +202,7 @@ void loadAll(ListPengguna *listPengguna, GrafPertemanan *pertemanan, ListKicau *
         // readDrafConfig(concatDir(dirName, "/draf.txt"));
         readUtasConfig(concatDir(dirName, "/utas.txt"), *listPengguna, listKicau, listUtas);
         printf("3...\n");
-        printf("\nPenyimpanan telah berhasil dilakukan!\n");
+        printf("\nPemuatan selesai!\n");
     } 
 
 }

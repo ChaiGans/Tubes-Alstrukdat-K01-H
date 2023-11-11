@@ -25,7 +25,8 @@ SRC = main.c \
       ./features/kicauan.c \
       ./FolderADT/grafpertemanan.c \
       ./FolderADT/prioqueuechar.c \
-      ./features/teman.c 
+      ./features/teman.c \
+      ./features/save_load.c
 
 
 # Object files (automatically generated from source files)

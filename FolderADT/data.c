@@ -249,7 +249,7 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna, GrafPerteman
             popularitas += charToInt(currentWord.TabWord[j]);
             j++;
         } // popularitas terdefinisi
-
+        
         infotype adjInfo;
         adjInfo.id = idPengirim;
         adjInfo.popularity = popularitas;
