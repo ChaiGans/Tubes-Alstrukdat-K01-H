@@ -446,12 +446,12 @@ void readUtasConfig(char *filename, ListPengguna listPengguna, ListKicau *listKi
     }
     STARTWORD(file, true); // banyak kicauan yang jadi utas
     int banyakUtas = wordToInt(currentWord);
+    KicauanSambungan temp;
     for (int i = 0; i < banyakUtas; i++)
     {
-        KicauanSambungan temp;
-
         ADVWORD(true); // idKicau
         int idKicau = wordToInt(currentWord);
+
         insertLastListUtas(listUtas, idKicau);
 
         AddressListUtas s = *listUtas; // Address utas
@@ -461,47 +461,32 @@ void readUtasConfig(char *filename, ListPengguna listPengguna, ListKicau *listKi
         }
         AddressUtas p = s->utas;
 
-        int i = 0;
-        while ((*listKicau).buffer[i].id != idKicau && i != listKicauLength(*listKicau))
+        temp.idAuthor = (*listKicau).buffer[idKicau - 1].authorID;
+        temp.indexKicauanSambungan = 0;
+        DATETIMEparser(currentWord.TabWord, &temp.localtime);
+        transferStringToString((*listKicau).buffer[idKicau - 1].text, temp.text);
+        insertLastKicauanSambungan(&p, temp);
+        s->utas = p;
+
+        ADVWORD(true); // jumlah kicauan sambungan
+        int banyakKicauanSambungan = wordToInt(currentWord);
+
+        for (int j = 1; j < banyakKicauanSambungan + 1; j++)
         {
-            i += 1;
-        }
-        if (i == listKicauLength(*listKicau)) // belum ada kicaunya
-        {
-            printf("Belum ada kicauan dengan ID ini!\n"); // handle kalau kicauan belum ada
-        }
-        else
-        {
-            temp.idAuthor = (*listKicau).buffer[i].authorID;
-            temp.indexKicauanSambungan = 0;
+            ADVWORD(true); // text
+            transferWordToString(temp.text, currentWord);
+
+            ADVWORD(true); // authorname
+            // ubah authorname jadi authorid
+            temp.idAuthor = cariPengguna(currentWord, listPengguna).index;
+
+            ADVWORD(true);
+            // datetime
             DATETIMEparser(currentWord.TabWord, &temp.localtime);
-            transferStringToString((*listKicau).buffer[idKicau].text, temp.text);
+
+            temp.indexKicauanSambungan = utasLength(p);
+
             insertLastKicauanSambungan(&p, temp);
-
-            ADVWORD(true); // jumlah kicauan sambungan
-            int banyakKicauanSambungan = wordToInt(currentWord);
-
-            for (int j = 1; j < banyakKicauanSambungan + 1; j++)
-            {
-                ADVWORD(true); // text
-                for (j = 0; j < currentWord.Length; j++)
-                {
-                    temp.text[j] = currentWord.TabWord[j];
-                }
-
-                ADVWORD(true); // authorname
-                // ubah authorname jadi authorid
-                temp.idAuthor = cariPengguna(currentWord, listPengguna).index;
-
-                ADVWORD(true);
-                // datetime
-                DATETIMEparser(currentWord.TabWord, &temp.localtime);
-
-                temp.indexKicauanSambungan = KicauanSambunganLength(p);
-                printf("%d\n", temp.idAuthor);
-
-                insertLastKicauanSambungan(&p, temp);
-            }
         }
     }
     printf("Config utas berhasil dibaca... \n");
