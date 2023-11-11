@@ -172,7 +172,6 @@ void deleteLastListPengguna(ListPengguna *l, Profile *val);
 
 boolean isUserAlreadyExist(ListPengguna l, Word username);
 void findUsernameID(Word usernameInput, ListPengguna l, int *userID, boolean *usernameExist);
-void findUsernameIDbyString(char usernameInput[], ListPengguna l, int *userID, boolean *usernameExist);
 boolean passwordChecker(int userID, ListPengguna l, Word passwordInput);
 void displayNameFromID(int userID, ListPengguna l);
 boolean isAuthorAccountPublic(int authorID, ListPengguna listpengguna);
