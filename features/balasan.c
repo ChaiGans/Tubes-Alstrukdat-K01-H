@@ -74,16 +74,18 @@ void buatBalasan (int IDkicau, int IDbalasan, int currentLoginID, ListKicau* lis
     }
 }
 
-void lihatBalasan (int currentLoginID, int idKicau, ListKicau listkicau, ListPengguna listpengguna, GrafPertemanan G) {
+void lihatBalasan (int currentLoginID, int idKicau, ListKicau listkicau, ListPengguna listpengguna, GrafPertemanan* G) {
     if (!isIdKicauDefined(idKicau, listkicau)) {
         printf("Tidak terdapat kicauan dengan id tersebut!\n");
     } else if (listkicau.buffer[idKicau-1].balasan == NULL) {
         printf("Belum terdapat balasan apapun pada kicauan tersebut. Yuk balas kicauan tersebut!\n");
     } else {
-        if (!isAuthorAccountPublic(listkicau.buffer[idKicau-1].authorID, listpengguna) && !isTeman(G, currentLoginID, (listkicau).buffer[idKicau-1].authorID)) {
+        printf("%d %d\n",currentLoginID, (listkicau).buffer[idKicau-1].authorID);
+        printf("%d", isTeman(*G, currentLoginID, (listkicau).buffer[idKicau-1].authorID));
+        if (!isAuthorAccountPublic(listkicau.buffer[idKicau-1].authorID, listpengguna) && !isTeman(*G, currentLoginID, (listkicau).buffer[idKicau-1].authorID)) {
             printf("Wah, kicauan tersebut dibuat oleh pengguna dengan akun privat!\n");
         } else {
-            displayTreeOfBalasan(listkicau.buffer[idKicau-1].balasan, 4, 0, &listpengguna);
+            displayTreeOfBalasan(currentLoginID ,listkicau.buffer[idKicau-1].balasan, 4, 0, &listpengguna, G);
         }
     }
 }

@@ -121,11 +121,11 @@ void printIndented(int indent) {
     }
 }
 
-void displayInformasiBalasan (BinTree balasan, int maxIndent, ListPengguna* listpengguna) {
+void displayInformasiBalasan (int currentLoginID, BinTree balasan, int maxIndent, ListPengguna* listpengguna, GrafPertemanan *G) {
     int i;
     printIndented(maxIndent);
     printf("| ID = %d\n", balasan->info.id);
-    if (!isAuthorAccountPublic(balasan->info.authorID, *listpengguna)) {
+    if (!isAuthorAccountPublic(balasan->info.authorID, *listpengguna) && !isTeman(*G, balasan->info.authorID, currentLoginID)) {
         printIndented(maxIndent);
         printf("| PRIVAT\n");
         printIndented(maxIndent);
@@ -148,14 +148,14 @@ void displayInformasiBalasan (BinTree balasan, int maxIndent, ListPengguna* list
     }
 }
 
-void displayTreeOfBalasan(BinTree p, int h, int l, ListPengguna* listpengguna) {
+void displayTreeOfBalasan(int currentLoginID, BinTree p, int h, int l, ListPengguna* listpengguna, GrafPertemanan *G) {
     if (p != NULL) { 
         int maxIndent = h * l;
         int i;
-        displayInformasiBalasan(p, maxIndent, listpengguna);
+        displayInformasiBalasan(currentLoginID, p , maxIndent, listpengguna, G);
         putchar('\n');
-        displayTreeOfBalasan(CHILDREN(p), h, l + 1, listpengguna); 
-        displayTreeOfBalasan(SIBLING(p), h, l, listpengguna);
+        displayTreeOfBalasan(currentLoginID ,CHILDREN(p), h, l + 1, listpengguna, G); 
+        displayTreeOfBalasan(currentLoginID ,SIBLING(p), h, l, listpengguna, G);
     }
 }
 

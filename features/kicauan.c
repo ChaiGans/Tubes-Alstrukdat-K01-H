@@ -41,7 +41,7 @@ void upKicau(ListKicau *lk, ListPengguna lp, int currentUserID){
 
 void kicauanTeman(int currentUserID, ListPengguna lp, ListKicau lk, GrafPertemanan gp){
     int i; for(i = lk.nEff-1; i>=0; i--){
-        if (isTeman(gp, currentUserID, lk.buffer[i].authorID)){
+        if (isTeman(gp, currentUserID, lk.buffer[i].authorID) || isAuthorAccountPublic(lk.buffer[i].authorID, lp)) {
             printf("\n"); printKicau(lk.buffer[i],lp);
         }
     }
