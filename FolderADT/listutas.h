@@ -10,33 +10,35 @@
 #include "datetime.h"
 
 /* Definisi Node : */
-typedef struct KicauanSambungan {
+typedef struct KicauanSambungan
+{
     int idAuthor;
     int indexKicauanSambungan;
     char text[280];
     DATETIME localtime;
 } KicauanSambungan;
 
-typedef struct Utas* AddressUtas;
-typedef struct Utas {
+typedef struct Utas *AddressUtas;
+typedef struct Utas
+{
     KicauanSambungan info;
     AddressUtas next;
 } Utas;
 
-typedef struct Node* AddressListUtas;
-typedef struct Node {
+typedef struct Node *AddressListUtas;
+typedef struct Node
+{
     int idKicau;
     AddressUtas utas;
     AddressListUtas next;
 } Node;
 
 AddressListUtas newNodeListUtas(int idKicau);
-AddressUtas newNodeKicauanSambungan (KicauanSambungan x);
+AddressUtas newNodeKicauanSambungan(KicauanSambungan x);
 /* Definisi ListUtas : */
 /* ListUtas kosong : FIRST(l) = NULL */
 /* Setiap elemen dengan Alamat p dapat diacu INFO(p), NEXT(p) */
 /* Elemen terakhir list: jika Alamatnya Last, maka NEXT(Last)=NULL */
-
 
 #define IDX_UNDEF_UTAS (-1)
 #define FIRST(l) (l)
@@ -102,7 +104,6 @@ AddressUtas newNodeKicauanSambungan (KicauanSambungan x);
 // /* F.S. val diset dengan elemen l pada indeks ke-idx. */
 // /*      Elemen l pada indeks ke-idx dihapus dari l */
 
-
 // /****************** PROSES SEMUA ELEMEN LIST ******************/
 // void displayListUtas(ListUtas l);
 // // void printInfo(ListUtas l);
@@ -123,21 +124,20 @@ AddressUtas newNodeKicauanSambungan (KicauanSambungan x);
 // /* menghasilkan l3 yang baru (dengan elemen list l1 dan l2 secara beurutan). */
 // /* Tidak ada alokasi/dealokasi pada prosedur ini */
 AddressListUtas newNodeListUtas(int idKicauBaru);
-AddressUtas newNodeKicauanSambungan (KicauanSambungan x);
+AddressUtas newNodeKicauanSambungan(KicauanSambungan x);
 void CreateListUtas(AddressListUtas *l);
 boolean isEmptyListUtas(AddressListUtas l);
 boolean isEmptyKicauanSambungan(AddressUtas l);
 int indexOfListUtas(AddressListUtas l, int idKicauanUtama);
 void insertFirstListUtas(AddressListUtas *l, int idKicauanBaru);
-void insertFirstKicauanSambungan (AddressUtas *l, KicauanSambungan x);
+void insertFirstKicauanSambungan(AddressUtas *l, KicauanSambungan x);
 void insertLastListUtas(AddressListUtas *l, int idKicauanBaru);
 void insertLastKicauanSambungan(AddressUtas *l, KicauanSambungan x);
-void deleteFirstListUtas(AddressListUtas *l, int* idKicauanTarget);
-void deleteFirstKicauanSambungan(AddressUtas *l, KicauanSambungan* saveKicauan);
-void deleteAtListUtas(AddressListUtas *l, int idx, int* idKicauanTarget);
-void deleteAtKicauanSambungan(AddressUtas *l, int idx, KicauanSambungan* saveKicauanSambungan);
+void deleteFirstListUtas(AddressListUtas *l, int *idKicauanTarget);
+void deleteFirstKicauanSambungan(AddressUtas *l, KicauanSambungan *saveKicauan);
+void deleteAtListUtas(AddressListUtas *l, int idx, int *idKicauanTarget);
+void deleteAtKicauanSambungan(AddressUtas *l, int idx, KicauanSambungan *saveKicauanSambungan);
 int ListUtaslength(AddressListUtas l);
-int KicauanSambunganLength(AddressUtas l);
-boolean isIdUtasDefined (int idSearch, AddressListUtas *listUtas);
-int utaslength(AddressUtas au);
+boolean isIdUtasDefined(int idSearch, AddressListUtas *listUtas);
+int utasLength(AddressUtas au);
 #endif

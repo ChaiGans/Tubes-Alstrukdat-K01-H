@@ -326,42 +326,34 @@ int ListUtaslength(AddressListUtas l)
     }
 }
 
-int KicauanSambunganLength(AddressUtas l)
+boolean isIdUtasDefined(int idSearch, AddressListUtas *listUtas)
 {
-    /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
-    if (isEmptyKicauanSambungan(l))
+    if (isEmptyListUtas(*listUtas))
     {
-        return 0;
+        return false;
     }
     else
     {
-        int currentIdx = 0;
-        AddressUtas p = FIRST(l);
-        while (p != NULL)
+        AddressListUtas p = *listUtas;
+        while (p->idKicau != idSearch && NEXT(p) != NULL)
         {
-            currentIdx += 1;
             p = NEXT(p);
         }
-        return (currentIdx);
+        return (p->idKicau == idSearch);
     }
 }
 
-boolean isIdUtasDefined(int idSearch, AddressListUtas *listUtas)
+int utasLength(AddressUtas au)
 {
-    AddressListUtas p = *listUtas;
-    while (p->idKicau != idSearch && NEXT(p) != NULL)
+    int i = 0;
+    AddressUtas p = au;
+    while (p != NULL)
     {
-        p = NEXT(p);
+        p = p->next;
+        i++;
     }
-    return (p->idKicau == idSearch);
+    return i;
 }
-
-int utaslength(AddressUtas au){
-    int i = 0; AddressUtas p = au; while(p != NULL){
-        p = p->next; i++;
-    } return i;
-}
-
 // /****************** PROSES TERHADAP LIST ******************/
 // ListUtas concatListUtas(ListUtas l1, ListUtas l2)  {
 //     /* I.S. l1 dan l2 sembarang */

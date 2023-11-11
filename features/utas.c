@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include "utas.h"
 
-void buatUtas(int idKicau, int currentUserID, AddressListUtas *listUtas, ListPengguna listPengguna, ListKicau *listKicau)
+void buatUtas(int idKicau, int currentUserID, AddressListUtas *listUtas, ListKicau listKicau)
 {
-    if (!isIdKicauDefined(idKicau, *listKicau)) // kicau tidak ada
+    if (!isIdKicauDefined(idKicau, listKicau)) // kicau tidak ada
     {
-        printf("Kicauan tidak ditemukan\n");
+        printf("Kicauan tidak ditemukan!\n");
     }
     else
     {
-        if (!isIdUtasDefined(idKicau, listUtas)) // belum dibuat utas
+        if ((listKicau).buffer[idKicau - 1].authorID == currentUserID) // kicaunya milik currentUser
         {
-            if ((*listKicau).buffer[idKicau].authorID == currentUserID) // kicaunya milik currentUser
+            if (!isIdUtasDefined(idKicau, listUtas)) // belum dibuat utas
             {
                 insertLastListUtas(listUtas, idKicau);
                 AddressListUtas s = *listUtas;
@@ -21,60 +21,48 @@ void buatUtas(int idKicau, int currentUserID, AddressListUtas *listUtas, ListPen
                 }
                 AddressUtas p = s->utas; // address utas
                 printf("Utas berhasil dibuat!\n");
-                printf("Masukkan kicauan:\n");
-                char isi[280];
                 Word masukanIsi;
-                masukanIsi = ReadWord();
-                transferWordToString(isi, masukanIsi);
-                if (stringStringCompare(isi, (*listKicau).buffer[idKicau].text)) // melihat apakah tulisan manual sama dengan kicauan
+                KicauanSambungan temp;
+                temp.idAuthor = currentUserID; // kicauan utama
+                temp.indexKicauanSambungan = 0;
+                transferStringToString((listKicau).buffer[idKicau - 1].text, temp.text);
+                getLocalTime(&temp.localtime);
+                insertFirstKicauanSambungan(&p, temp);
+                s->utas = p;
+
+                Word masukanKicauanSambungan;
+                Word masukanKonfirmasi;
+                char konfirmasi[6];
+                do // kicauan sambungan minimal sekali
                 {
-                    KicauanSambungan temp;
-                    temp.idAuthor = currentUserID; // kicauan utama
-                    transferWordToString(temp.text, masukanIsi);
-                    temp.indexKicauanSambungan = 0;
+                    printf("Masukkan kicauan:\n");
+                    masukanKicauanSambungan = ReadWord();
+                    transferWordToString(temp.text, masukanKicauanSambungan);
+                    temp.idAuthor = currentUserID;
+                    temp.indexKicauanSambungan = utasLength(p);
                     getLocalTime(&temp.localtime);
                     insertLastKicauanSambungan(&p, temp);
                     printf("Apakah Anda ingin melanjutkan utas ini? (YA/TIDAK)\n");
-                    char konfirmasi[5];
-                    Word masukanKonfirmasi;
                     masukanKonfirmasi = ReadWord();
                     transferWordToString(konfirmasi, masukanKonfirmasi);
-                    while (konfirmasi != "TIDAK") // kicauan sambungan
-                    {
-                        Word masukanKicauanSambungan;
-                        printf("Masukkan kicauan:\n");
-                        masukanKicauanSambungan = ReadWord();
-                        transferWordToString(temp.text, masukanKicauanSambungan);
-                        temp.idAuthor = currentUserID;
-                        temp.indexKicauanSambungan = KicauanSambunganLength(p);
-                        getLocalTime(&temp.localtime);
-                        insertLastKicauanSambungan(&p, temp);
-                        printf("Apakah Anda ingin melanjutkan utas ini? (YA/TIDAK)\n");
-                        masukanKonfirmasi = ReadWord();
-                        transferWordToString(konfirmasi, masukanKonfirmasi);
-                    }
-                    printf("Utas selesai!\n");
-                }
-                else
-                {
-                    printf("Masukan berbeda dengan kicauan\n");
-                }
+                } while (!stringStringCompare(konfirmasi, "TIDAK"));
+                printf("Utas selesai!\n");
             }
             else
             {
-                printf("Utas ini bukan milik anda!\n");
+                printf("Kicauan sudah menjadi utas!\n");
             }
         }
         else
         {
-            printf("Kicauan sudah menjadi utas!\n");
+            printf("Utas ini bukan milik anda!\n");
         }
     }
 }
 
-void sambungUtas(int idUtas, int index, int currentUserID, AddressListUtas *listUtas, ListPengguna listPengguna, ListKicau *listKicau)
+void sambungUtas(int idUtas, int index, int currentUserID, AddressListUtas *listUtas, ListKicau listKicau)
 {
-    if (idUtas >= ListUtaslength(*listUtas)) // belum dibuat utas
+    if (idUtas > ListUtaslength(*listUtas)) // belum dibuat utas
     {
         printf("Utas tidak ditemukan!\n");
     }
@@ -87,33 +75,34 @@ void sambungUtas(int idUtas, int index, int currentUserID, AddressListUtas *list
             s = NEXT(s); // address listutas
             i += 1;
         }
-        AddressUtas p = s->utas;               // address utas
-        if (p->info.idAuthor != currentUserID) // kicaunya bukan milik currentUser
+        AddressUtas p = s->utas;
+        s->utas = p;
+        KicauanSambungan temp;
+        Word masukanKicauanSambungan;
+        if ((listKicau).buffer[s->idKicau - 1].authorID != currentUserID) // kicaunya bukan milik currentUser
         {
             printf("Anda tidak bisa menyambung utas ini!\n");
         }
-        else if (index > KicauanSambunganLength(p)) // indeks terlalu tinggi
+        else if (index > utasLength(p)) // indeks terlalu tinggi
         {
             printf("Index terlalu tinggi!\n");
         }
         else // memenuhi semua kondisi
         {
-            KicauanSambungan temp;
-            Word masukanKicauanSambungan;
             printf("Masukkan kicauan:\n");
             masukanKicauanSambungan = ReadWord();
             transferWordToString(temp.text, masukanKicauanSambungan);
+            temp.indexKicauanSambungan = utasLength(p);
             temp.idAuthor = currentUserID;
-            temp.indexKicauanSambungan = KicauanSambunganLength(p);
             getLocalTime(&temp.localtime);
             insertLastKicauanSambungan(&p, temp);
         }
     }
 }
 
-void hapusUtas(int idUtas, int index, int currentUserID, AddressListUtas *listUtas, ListPengguna listPengguna, ListKicau *listKicau)
+void hapusUtas(int idUtas, int index, int currentUserID, AddressListUtas *listUtas, ListKicau listKicau)
 {
-    if (idUtas >= ListUtaslength(*listUtas)) // utas tidak ada
+    if (idUtas > ListUtaslength(*listUtas)) // utas tidak ada
     {
         printf("Utas tidak ditemukan!\n");
     }
@@ -126,13 +115,8 @@ void hapusUtas(int idUtas, int index, int currentUserID, AddressListUtas *listUt
             s = NEXT(s); // address listutas
             i += 1;
         }
-        AddressUtas p = s->utas;                // address utas
-        if (index >= KicauanSambunganLength(p)) // indeks lebih besar dari seharusnya
-        {
-            // cek indeks kicauan sambungan ada atau tidak
-            printf("Kicauan sambungan dengan index %d tidak ditemukan pada utas!\n", index);
-        }
-        else if (p->info.idAuthor != currentUserID) // kicaunya bukan milik currentUser
+        AddressUtas p = s->utas;                                          // address utas
+        if ((listKicau).buffer[s->idKicau - 1].authorID != currentUserID) // kicaunya bukan milik currentUser
         {
             // cek utas milik dia atau tidak
             printf("Anda tidak bisa menghapus kicauan dalam utas ini!\n");
@@ -141,6 +125,11 @@ void hapusUtas(int idUtas, int index, int currentUserID, AddressListUtas *listUt
         {
             // cek indeks kicauan utama atau tidak
             printf("Anda tidak bisa menghapus kicauan utama!\n");
+        }
+        else if (index >= utasLength(p)) // indeks lebih besar dari seharusnya
+        {
+            // cek indeks kicauan sambungan ada atau tidak
+            printf("Kicauan sambungan dengan index %d tidak ditemukan pada utas!\n", index);
         }
         else // memenuhi semua kondisi
         {
@@ -151,9 +140,9 @@ void hapusUtas(int idUtas, int index, int currentUserID, AddressListUtas *listUt
     }
 }
 
-void cetakUtas(int idUtas, int currentUserID, AddressListUtas *listUtas, ListPengguna listPengguna)
+void cetakUtas(int idUtas, int currentUserID, AddressListUtas *listUtas, ListPengguna listPengguna, ListKicau listKicau, GrafPertemanan grafPertemanan)
 {
-    if (idUtas >= ListUtaslength(*listUtas))
+    if (idUtas > ListUtaslength(*listUtas))
     {
         printf("Utas tidak ditemukan!\n");
     }
@@ -167,7 +156,8 @@ void cetakUtas(int idUtas, int currentUserID, AddressListUtas *listUtas, ListPen
             i += 1;
         }
         AddressUtas p = s->utas; // address utas
-        if (!isAuthorAccountPublic(p->info.idAuthor, listPengguna))
+        s->utas = p;
+        if (!isAuthorAccountPublic((listKicau).buffer[s->idKicau - 1].authorID, listPengguna) && !isTeman(grafPertemanan, (listKicau).buffer[s->idKicau - 1].authorID, currentUserID))
         {
             // cek privat atau tidak dan berteman atau tidak
             printf("Akun yang membuat utas ini adalah akun privat! Ikuti dahulu akun ini untuk melihat utasnya!\n");
@@ -181,9 +171,11 @@ void cetakUtas(int idUtas, int currentUserID, AddressListUtas *listUtas, ListPen
             printf("|   ");
             displayDATETIME(p->info.localtime);
             printf("\n");
+            printf("|   ");
             displayArrayOfChar(p->info.text);
             printf("\n");
-            for (int i = 1; i < KicauanSambunganLength(p) + 1; i++)
+            printf("\n");
+            for (int i = 1; i < utasLength(p) + 1; i++)
             {
                 p = NEXT(p); // dari kicauan index 1 (bukan kicauan utama)
                 printf("    |   INDEX = %d\n", i);
@@ -195,6 +187,7 @@ void cetakUtas(int idUtas, int currentUserID, AddressListUtas *listUtas, ListPen
                 printf("\n");
                 printf("    |   ");
                 displayArrayOfChar(p->info.text);
+                printf("\n");
                 printf("\n");
             }
         }

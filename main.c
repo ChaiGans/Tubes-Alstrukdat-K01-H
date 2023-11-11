@@ -142,7 +142,7 @@ int main()
             {
                 ADVWORD(false);
                 int idKicauUtas = wordToInt(currentWord);
-                buatUtas(idKicauUtas, currentLoginID, &listUtas, listPengguna, &listKicau);
+                buatUtas(idKicauUtas, currentLoginID, &listUtas, listKicau);
             }
             else if (wordStringCompare(command, "SAMBUNG_UTAS"))
             {
@@ -150,7 +150,7 @@ int main()
                 int idUtas = wordToInt(currentWord);
                 ADVWORD(false);
                 int index = wordToInt(currentWord);
-                sambungUtas(idUtas, index, currentLoginID, &listUtas, listPengguna, &listKicau);
+                sambungUtas(idUtas, index, currentLoginID, &listUtas, listKicau);
             }
             else if (wordStringCompare(command, "HAPUS_UTAS"))
             {
@@ -158,13 +158,13 @@ int main()
                 int idUtas = wordToInt(currentWord);
                 ADVWORD(false);
                 int index = wordToInt(currentWord);
-                hapusUtas(idUtas, index, currentLoginID, &listUtas, listPengguna, &listKicau);
+                hapusUtas(idUtas, index, currentLoginID, &listUtas, listKicau);
             }
             else if (wordStringCompare(command, "CETAK_UTAS"))
             {
                 ADVWORD(false);
                 int idUtas = wordToInt(currentWord);
-                cetakUtas(idUtas, currentLoginID, &listUtas, listPengguna);
+                cetakUtas(idUtas, currentLoginID, &listUtas, listPengguna, listKicau);
             }
             else if (wordStringCompare(command, "TUTUP_PROGRAM"))
             {
