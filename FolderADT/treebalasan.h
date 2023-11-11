@@ -62,7 +62,7 @@ int findHighestID(BinTree mainRoot);
 
 boolean isIdBalasanDefined (int idBalasanSearch, BinTree balasan);
 BinTree BalasanFromID(int idBalasanSearch, BinTree balasan);
-int getParentID(BinTree parent, BinTree children, int childrenID);
+BinTree getParent(BinTree parent, BinTree children, int childrenID);
 void displayInformasiBalasan (int currentLoginID, BinTree balasan, int maxIndent, ListPengguna* listpengguna, GrafPertemanan *G);
 void displayTreeOfBalasan(int currentLoginID, BinTree p, int h, int l, ListPengguna* listpengguna, GrafPertemanan *G);
 boolean isBalasanKosong (BinTree balasan);
