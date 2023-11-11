@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "balasan.h"
 
-void buatBalasan (int IDkicau, int IDbalasan, int currentLoginID, ListKicau* listkicau, ListPengguna listpengguna) {
+void buatBalasan (int IDkicau, int IDbalasan, int currentLoginID, ListKicau* listkicau, ListPengguna listpengguna, GrafPertemanan G) {
     if (!isIdKicauDefined(IDkicau, *listkicau)) {
         printf("Wah, tidak terdapat kicauan yang ingin Anda balas!\n");
     } else {
@@ -44,7 +44,7 @@ void buatBalasan (int IDkicau, int IDbalasan, int currentLoginID, ListKicau* lis
             if (!isIdBalasanDefined(IDbalasan, listkicau->buffer[IDkicau-1].balasan)) {
                     printf("Wah, tidak terdapat balasan yang ingin Anda balas!\n");
             } else {
-                if (!isAuthorAccountPublic(((*listkicau).buffer[IDkicau-1].authorID), listpengguna)) {
+                if (!isAuthorAccountPublic(((*listkicau).buffer[IDkicau-1].authorID), listpengguna) && !isTeman(G, currentLoginID, (*listkicau).buffer[IDkicau-1].authorID)) {
                     printf("Wah, akun tersebut merupakan akun privat dan anda belum berteman akun tersebut!\n");
                 } else {
                     highestIDBalasan = findHighestID(listkicau->buffer[IDkicau-1].balasan);
@@ -74,13 +74,13 @@ void buatBalasan (int IDkicau, int IDbalasan, int currentLoginID, ListKicau* lis
     }
 }
 
-void lihatBalasan (int idKicau, ListKicau listkicau, ListPengguna listpengguna) {
+void lihatBalasan (int currentLoginID, int idKicau, ListKicau listkicau, ListPengguna listpengguna, GrafPertemanan G) {
     if (!isIdKicauDefined(idKicau, listkicau)) {
         printf("Tidak terdapat kicauan dengan id tersebut!\n");
     } else if (listkicau.buffer[idKicau-1].balasan == NULL) {
         printf("Belum terdapat balasan apapun pada kicauan tersebut. Yuk balas kicauan tersebut!\n");
     } else {
-        if (!isAuthorAccountPublic(listkicau.buffer[idKicau-1].authorID, listpengguna)) {
+        if (!isAuthorAccountPublic(listkicau.buffer[idKicau-1].authorID, listpengguna) && !isTeman(G, currentLoginID, (listkicau).buffer[idKicau-1].authorID)) {
             printf("Wah, kicauan tersebut dibuat oleh pengguna dengan akun privat!\n");
         } else {
             displayTreeOfBalasan(listkicau.buffer[idKicau-1].balasan, 4, 0, &listpengguna);
