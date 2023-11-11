@@ -35,6 +35,11 @@ void hapusTeman(int currentUserID, GrafPertemanan *grafPertemanan, ListPengguna 
     printf("Masukkan nama pengguna yang ingin dihapus: ");
     Word namaPenggunaYangDihapus = ReadWord();
     int idPenggunaYangDihapus = findIDFromUsername(listPengguna, namaPenggunaYangDihapus);
+    if (idPenggunaYangDihapus == IDX_UNDEF_STATIK)
+    {
+        printf("Pengguna bernama %s tidak ditemukan.\n", namaPenggunaYangDihapus);
+        return;
+    }
     if (!isTeman(*grafPertemanan, currentUserID, idPenggunaYangDihapus))
     {
         printf("%s bukan teman Anda.\n", namaPenggunaYangDihapus);
@@ -59,6 +64,13 @@ void hapusTeman(int currentUserID, GrafPertemanan *grafPertemanan, ListPengguna 
 
 void kirimPermintaanTeman(int currentUserID, GrafPertemanan *grafPertemanan, ListPengguna listPengguna)
 {
+    // periksa apakah currentUserID memiliki permintaan pertemanan yang belum disetujui
+    if (getBanyakPermintaanTeman(listPengguna.contents[currentUserID].permintaanTeman) != 0)
+    {
+        printf("Terdapat permintaan pertemanan yang belum Anda setujui. Silakan kosongkan daftar permintaan pertemanan untuk Anda terlebih dahulu.\n");
+        return;
+    }
+
     // cari nama pengguna yang akan ditambahkan
     printf("Masukkan nama pengguna yang ingin ditambahkan sebagai teman: ");
     Word namaPenggunaYangDitambahkan = ReadWord();
@@ -76,11 +88,6 @@ void kirimPermintaanTeman(int currentUserID, GrafPertemanan *grafPertemanan, Lis
     if (isMengirimPermintaan(*grafPertemanan, currentUserID, idPenerima))
     {
         printf("Anda sudah mengirim permintaan pertemanan kepada %s.\nSilahkan tunggu hingga permintaan anda disetujui.\n", namaPenggunaYangDitambahkan);
-        return;
-    }
-    if (getBanyakPermintaanTeman(*grafPertemanan, currentUserID))
-    {
-        printf("Terdapat permintaan pertemanan yang belum Anda setujui. Silakan kosongkan daftar permintaan pertemanan untuk Anda terlebih dahulu.\n");
         return;
     }
     ElmtGrafPertemanan(*grafPertemanan, currentUserID, idPenerima) = '1';
@@ -144,7 +151,6 @@ void terimaPermintaanTeman(int currentUserID, GrafPertemanan *grafPertemanan, Li
     Word pilihan = ReadWord();
     if (wordStringCompare(pilihan, "TIDAK"))
     {
-        Enqueue(Q, permintaan);
         printf("Permintaan pertemanan dari ");
         displayNameFromID(idPengirim, *listPengguna);
         printf(" telah ditolak.\n ");
