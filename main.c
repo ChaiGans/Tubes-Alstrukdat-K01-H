@@ -29,8 +29,9 @@ int main()
 
     int currentLoginID = -1;
     ListPengguna listPengguna;
-    GrafPertemanan grafPertemanan;
     CreateListPengguna(&listPengguna);
+    GrafPertemanan grafPertemanan;
+    createGrafPertemanan(&grafPertemanan, 0);
     ListKicau listKicau;
     CreateListKicau(&listKicau, 10);
     AddressListUtas listUtas;
@@ -39,7 +40,7 @@ int main()
     printf("Masukkan nama file config: ");
     Word filename = ReadWord();
     initReadConfig(filename, &listPengguna, &grafPertemanan, &listKicau, &listUtas);
-
+    displayGrafPertemanan(grafPertemanan);
     while (true)
     {
         // printTree(listKicau.buffer[0].balasan, 2);
@@ -80,7 +81,7 @@ int main()
             else if (wordStringCompare(command, "LIHAT_PROFIL"))
             {
                 ADVWORD_LIHAT_PROFIL_ONLY();
-                lihatProfil(currentWord, currentLoginID, listPengguna);
+                lihatProfil(currentWord, currentLoginID, listPengguna, grafPertemanan);
             }
             else if (wordStringCompare(command, "BUAT_DRAF"))
             {
@@ -101,13 +102,13 @@ int main()
                 int idKicau = wordToInt(currentWord);
                 ADVWORD(false);
                 int idBalasan = wordToInt(currentWord);
-                buatBalasan(idKicau, idBalasan, currentLoginID, &listKicau, listPengguna);
+                buatBalasan(idKicau, idBalasan, currentLoginID, &listKicau, listPengguna, grafPertemanan);
             }
             else if (wordStringCompare(command, "BALASAN"))
             {
                 ADVWORD(false);
                 int idKicau = wordToInt(currentWord);
-                lihatBalasan(idKicau, listKicau, listPengguna);
+                lihatBalasan(currentLoginID, idKicau, listKicau, listPengguna, grafPertemanan);
             }
             else if (wordStringCompare(command, "HAPUS_BALASAN"))
             {
@@ -126,6 +127,10 @@ int main()
                 ADVWORD(false);
                 int idKicau = wordToInt(currentWord);
                 sukaKicauan(&listKicau, listPengguna, idKicau);
+            } 
+            else if (wordStringCompare(command, "KICAUAN")) 
+            {
+                kicauanTeman(currentLoginID, listPengguna, listKicau, grafPertemanan);
             }
             else if (wordStringCompare(command, "UBAH_KICAUAN"))
             {
