@@ -78,7 +78,6 @@ void addNewUserGrafPertemanan(GrafPertemanan *G)
 {
     GrafPertemanan newG;
     createGrafPertemanan(&newG, G->banyakOrang + 1);
-    displayGrafPertemanan(newG);
     int n = G->banyakOrang;
     for (int i = 0; i < n; i++)
     {
@@ -87,7 +86,6 @@ void addNewUserGrafPertemanan(GrafPertemanan *G)
             ElmtGrafPertemanan(newG, i, j) = ElmtGrafPertemanan(*G, i, j);
         }
     }
-    printf("halo\n");
     ElmtGrafPertemanan(newG, n, n) = '1';
     G->matrixPertemanan = newG.matrixPertemanan;
     G->banyakOrang++;
