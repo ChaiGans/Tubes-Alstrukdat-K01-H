@@ -58,32 +58,29 @@ void makeUpperCase(Word *w)
     }
 }
 
-void drafAuthorParser(Word w, int *authorID, int *banyakDraf, ListPengguna l)
+void drafAuthorParser(Word w, int *authorID, int *banyakDraf, ListPengguna* l)
 {
     char username[20];
     int i = 0;
-    while (w.TabWord[i] && (w.TabWord[i] < '0' || w.TabWord[i] > '9'))
+    while (w.TabWord[i] < '0' || w.TabWord[i] > '9')
     {
         username[i] = w.TabWord[i];
         i += 1;
     }
-    if (i > 0 && username[i - 1] == ' ')
-    {
-        i -= 1;
-    }
-    username[i] = '\0';
-    while (w.TabWord[i] == ' ')
-    {
-        i += 1;
-    }
+    username[i-1] = '\0';
     int res = 0;
     while (w.TabWord[i] >= '0' && w.TabWord[i] <= '9')
     {
         res = res * 10 + (w.TabWord[i] - '0');
         i += 1;
     }
-    boolean usernameexist;
-    findUsernameIDbyString(username, l, authorID, &usernameexist);
+    int j;
+  
+    for (j = 0; j < ListPenggunaLength(*l); j++) {
+        if (stringStringCompare(username, (*l).contents[j].username)) {
+            *authorID = j;
+        }
+    }
     *banyakDraf = res;
 }
 
@@ -414,22 +411,26 @@ void readDrafConfig(char *filename, ListPengguna *listpengguna)
     }
     STARTWORD(file, true);
     Draf drafBaru;
+    StackDraf dummyStack;
     int banyakPengguna = wordToInt(currentWord);
     ADVWORD(true);
     int i, j, banyakDrafPengguna, authorID;
     for (i = 0; i < banyakPengguna; i++)
     {
-        drafAuthorParser(currentWord, &authorID, &banyakDrafPengguna, *listpengguna);
+        drafAuthorParser(currentWord, &authorID, &banyakDrafPengguna, listpengguna); 
         ADVWORD(true);
         for (j = 0; j < banyakDrafPengguna; j++)
         {
             transferWordToString(drafBaru.text, currentWord);
             ADVWORD(true);
             DATETIMEparser(currentWord.TabWord, &drafBaru.localtime);
-            ADVWORD(true);
             drafBaru.authorID = authorID;
-            PushStackDraf(&(*listpengguna).contents[authorID].stackdraf, drafBaru);
             ADVWORD(true);
+            PushStackDraf(&dummyStack, drafBaru);
+        }
+        while (!IsEmptyStackDraf(dummyStack)) {
+            PopStackDraf(&dummyStack, &drafBaru);
+            PushStackDraf(&(*listpengguna).contents[authorID].stackdraf, drafBaru);
         }
     }
     printf("Config draf berhasil dibaca... \n");
@@ -511,6 +512,6 @@ void initReadConfig(Word fileName, ListPengguna *listPengguna, GrafPertemanan *p
     readPenggunaConfig("config/pengguna.txt", listPengguna, pertemanan);
     readKicauanConfig("config/kicauan.txt", listKicau, *listPengguna);
     readBalasanConfig("config/balasan.txt", listKicau, *listPengguna);
-    // readDrafConfig("config/draf.txt");
+    readDrafConfig("config/draf.txt", listPengguna);
     readUtasConfig("config/utas.txt", *listPengguna, listKicau, listUtas);
 }
