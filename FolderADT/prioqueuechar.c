@@ -127,3 +127,8 @@ void PrintPrioQueueChar(PrioQueueChar Q)
 
 	printf("#\n");
 }
+
+int getBanyakPermintaanTeman(PrioQueueChar Q)
+{
+	return NBElmtQueue(Q);
+}
