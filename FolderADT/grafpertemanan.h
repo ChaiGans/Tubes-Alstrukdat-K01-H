@@ -43,3 +43,5 @@ boolean isMengirimPermintaan(GrafPertemanan G, int idPengirim, int idPenerima);
 void addTeman(GrafPertemanan *G, int idPengirim, int idPenerima);
 /* I.S. G terdefinisi, idPengirim dan idPenerima terdefinisi */
 /* F.S. Orang pada index ke idPengirim dan idPenerima menjadi berteman */
+
+void addNewUserGrafPertemanan(GrafPertemanan *G);
