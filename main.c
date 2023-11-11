@@ -127,8 +127,8 @@ int main()
                 ADVWORD(false);
                 int idKicau = wordToInt(currentWord);
                 sukaKicauan(&listKicau, listPengguna, idKicau);
-            } 
-            else if (wordStringCompare(command, "KICAUAN")) 
+            }
+            else if (wordStringCompare(command, "KICAUAN"))
             {
                 kicauanTeman(currentLoginID, listPengguna, listKicau, grafPertemanan);
             }
@@ -164,7 +164,7 @@ int main()
             {
                 ADVWORD(false);
                 int idUtas = wordToInt(currentWord);
-                cetakUtas(idUtas, currentLoginID, &listUtas, listPengguna, listKicau);
+                cetakUtas(idUtas, currentLoginID, &listUtas, listPengguna, listKicau, grafPertemanan);
             }
             else if (wordStringCompare(command, "TUTUP_PROGRAM"))
             {
