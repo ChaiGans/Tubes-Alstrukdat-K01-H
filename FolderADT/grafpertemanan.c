@@ -29,7 +29,7 @@ int getBanyakTeman(GrafPertemanan G, int idProfil)
 
 boolean isTeman(GrafPertemanan G, int i, int j)
 {
-    return ElmtGrafPertemanan(G, i, j) == '1' && ElmtGrafPertemanan(G, j, i) == '1' && i != j;
+    return ElmtGrafPertemanan(G, i, j) == '1' && ElmtGrafPertemanan(G, j, i) == '1';
 }
 
 void hapusHubunganTeman(GrafPertemanan *G, int i, int j)
