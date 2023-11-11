@@ -38,6 +38,7 @@ void daftarPengguna (ListPengguna* l) {
     } else {
         printf("Kapasitas pengguna sudah maksimal. Tidak bisa membuat pengguna baru lagi.\n");
     }   
+    
 }
 
 void masukPengguna (int* currentUserID, ListPengguna l) {
@@ -156,14 +157,14 @@ void ubahFotoProfil(Profile *userProfile) {
     printf("Foto profil anda sudah berhasil diganti!");
 }
 
-void lihatProfil (Word targetUser, int currentLoginID, ListPengguna listpengguna) {
+void lihatProfil (Word targetUser, int currentLoginID, ListPengguna listpengguna, GrafPertemanan G) {
     int targetID;
     boolean targetExisted;
     findUsernameID(targetUser, listpengguna, &targetID, &targetExisted);
     if (!targetExisted) {
         printf("Wah, akun tersebut tidak ditemukan.\n");
     } else {
-        if (!isAuthorAccountPublic(targetID, listpengguna)) {
+        if (!isAuthorAccountPublic(targetID, listpengguna) && !isTeman(G, currentLoginID, targetID)) {
             printf("Wah, akun ");
             displayNameFromID(targetID, listpengguna);
             printf(" diprivat nih. Ikuti dulu yuk untuk bisa melihat profil ");
