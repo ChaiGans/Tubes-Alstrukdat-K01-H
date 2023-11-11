@@ -6,6 +6,7 @@
 #include "features/balasan.h"
 #include "features/kicauan.h"
 #include "features/utas.h"
+#include "features/teman.h"
 
 #include <stdio.h>
 
@@ -83,6 +84,26 @@ int main()
                 ADVWORD_LIHAT_PROFIL_ONLY();
                 lihatProfil(currentWord, currentLoginID, listPengguna, grafPertemanan);
             }
+            else if (wordStringCompare(command, "DAFTAR_TEMAN"))
+            {
+                displayDaftarTeman(currentLoginID, grafPertemanan, listPengguna);
+            }
+            else if (wordStringCompare(command, "HAPUS_TEMAN"))
+            {
+                hapusTeman(currentLoginID, &grafPertemanan, listPengguna);
+            }
+            else if (wordStringCompare(command, "TAMBAH_TEMAN"))
+            {
+                kirimPermintaanTeman(currentLoginID, &grafPertemanan, listPengguna);
+            }
+            else if (wordStringCompare(command, "DAFTAR_PERMINTAAN_PERTEMANAN"))
+            {
+                displayDaftarPermintaanTeman(currentLoginID, grafPertemanan, listPengguna);
+            }
+            else if (wordStringCompare(command, "SETUJUI_PERTEMANAN"))
+            {
+                terimaPermintaanTeman(currentLoginID, &grafPertemanan, &listPengguna);
+            }
             else if (wordStringCompare(command, "BUAT_DRAF"))
             {
                 buatDraf(currentLoginID, &listKicau, &listPengguna);
@@ -108,7 +129,7 @@ int main()
             {
                 ADVWORD(false);
                 int idKicau = wordToInt(currentWord);
-                lihatBalasan(currentLoginID, idKicau, listKicau, listPengguna, grafPertemanan);
+                lihatBalasan(currentLoginID, idKicau, listKicau, listPengguna, &grafPertemanan);
             }
             else if (wordStringCompare(command, "HAPUS_BALASAN"))
             {
