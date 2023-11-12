@@ -9,9 +9,7 @@ void displayDaftarTeman(int currentUserID, GrafPertemanan grafPertemanan, ListPe
     if (getBanyakTeman(grafPertemanan, currentUserID))
     {
         printf(" memiliki %d teman.\n", getBanyakTeman(grafPertemanan, currentUserID));
-        printf("Daftar teman ");
-        displayArrayOfChar(currentUserProfile.username);
-        printf(":\n");
+        printf("Daftar teman %s:\n", currentUserProfile.username);
         int i;
         for (i = 0; i < grafPertemanan.banyakOrang; i++)
         {
@@ -105,7 +103,9 @@ void kirimPermintaanTeman(int currentUserID, GrafPertemanan *grafPertemanan, Lis
         return;
     }
     ElmtGrafPertemanan(*grafPertemanan, currentUserID, idPenerima) = '1';
-    printf("Permintaan pertemanan telah dikirimkan kepada %s.\n", namaPenggunaYangDitambahkan);
+    printf("Permintaan pertemanan telah dikirimkan kepada ");
+    displayArrayOfChar(namaPenggunaYangDitambahkan.TabWord);
+    printf(".\n");
 }
 
 void displayDaftarPermintaanTeman(int currentUserID, GrafPertemanan grafPertemanan, ListPengguna listPengguna)
