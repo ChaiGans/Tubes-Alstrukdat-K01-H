@@ -107,7 +107,7 @@ void displayNomorHP(Profile p)
     }
     else
     {
-        printf("");
+        printf(" "); 
     }
 }
 

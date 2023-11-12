@@ -9,7 +9,9 @@ void displayDaftarTeman(int currentUserID, GrafPertemanan grafPertemanan, ListPe
     if (getBanyakTeman(grafPertemanan, currentUserID))
     {
         printf(" memiliki %d teman.\n", getBanyakTeman(grafPertemanan, currentUserID));
-        printf("Daftar teman %s:\n", currentUserProfile.username);
+        printf("Daftar teman ");
+        displayArrayOfChar(currentUserProfile.username);
+        printf(":\n");
         int i;
         for (i = 0; i < grafPertemanan.banyakOrang; i++)
         {
