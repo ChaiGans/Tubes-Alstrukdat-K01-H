@@ -57,7 +57,7 @@ void addChildrenAt(int id, BinTree* treeResult, Balasan val) {
 
 int findHighestID(BinTree mainRoot) {
     if (mainRoot == NULL) {
-        return INT_MIN; 
+        return -999; 
     }
 
     int max = (mainRoot)->info.id;
@@ -76,7 +76,7 @@ int findHighestID(BinTree mainRoot) {
 }
 
 boolean isBalasanKosong (BinTree balasan) {
-    if (findHighestID(balasan) == INT_MIN) {
+    if (findHighestID(balasan) == -999) {
         return true;
     } else {
         return false;
