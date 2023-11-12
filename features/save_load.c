@@ -75,7 +75,7 @@ void savePengguna(char* fileName, ListPengguna lp, GrafPertemanan gp){
         fprintf(file, "\n%s\n", lp.contents[i].username);
         fprintf(file, "%s\n", lp.contents[i].password);
         fprintf(file, "%s\n", lp.contents[i].bio);
-        fprintf(file, "%d\n", lp.contents[i].nomorHP);
+        fprintf(file, "%s\n", lp.contents[i].nomorHP);
         fprintf(file, "%s\n", lp.contents[i].weton);
         fprintf(file, "%s\n", lp.contents[i].status);
         for (int j = 0; j < lp.contents[i].fotoProfil.SimbolProfil.rowEff; j++){
@@ -184,10 +184,9 @@ void saveAll(ListKicau lk, ListPengguna lp, AddressListUtas lu, GrafPertemanan g
 void loadAll(ListPengguna *listPengguna, GrafPertemanan *pertemanan, ListKicau *listKicau, AddressListUtas *listUtas){
     char* dirName = (char*)malloc(sizeof(char)*(100));
     printf("Masukkan nama folder yang hendak dimuat\n");
-    int curLen = 0; START(stdin, false); IgnoreBlanks(false);
-    while(currentChar != MARK){
-        dirName[curLen] = currentChar; curLen++;
-        ADV();
+    int curLen = 0; Word dirWord = ReadWord();
+    while(curLen < dirWord.Length){
+        dirName[curLen] = dirWord.TabWord[curLen]; curLen++;
     } dirName[curLen] = '\0';
     if (!isExist(dirName)){
         printf("\nTidak ada folder yang dimaksud!\n"); return;
