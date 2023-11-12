@@ -37,17 +37,22 @@ void hapusTeman(int currentUserID, GrafPertemanan *grafPertemanan, ListPengguna 
     int idPenggunaYangDihapus = findIDFromUsername(listPengguna, namaPenggunaYangDihapus);
     if (idPenggunaYangDihapus == IDX_UNDEF_STATIK)
     {
-        printf("Pengguna bernama %s tidak ditemukan.\n", namaPenggunaYangDihapus);
+        printf("Pengguna bernama ");
+        displayArrayOfChar(namaPenggunaYangDihapus.TabWord);
+        printf(" tidak ditemukan.\n");
         return;
     }
     if (!isTeman(*grafPertemanan, currentUserID, idPenggunaYangDihapus))
     {
-        printf("%s bukan teman Anda.\n", namaPenggunaYangDihapus);
+        displayArrayOfChar(namaPenggunaYangDihapus.TabWord);
+        printf(" bukan teman Anda.\n");
         return;
     }
     else
     {
-        printf("Apakah anda yakin ingin menghapus %s dari daftar teman anda? (YA/TIDAK) ", namaPenggunaYangDihapus);
+        printf("Apakah anda yakin ingin menghapus ");
+        displayArrayOfChar(namaPenggunaYangDihapus.TabWord);
+        printf(" dari daftar teman anda? (YA/TIDAK) \n");
         Word pilihan = ReadWord();
         if (wordStringCompare(pilihan, "TIDAK"))
         {
@@ -57,7 +62,9 @@ void hapusTeman(int currentUserID, GrafPertemanan *grafPertemanan, ListPengguna 
         else if (wordStringCompare(pilihan, "YA"))
         {
             hapusHubunganTeman(grafPertemanan, currentUserID, idPenggunaYangDihapus);
-            printf("Pengguna %s telah dihapus dari daftar teman.\n", namaPenggunaYangDihapus);
+            printf("Pengguna ");
+            displayArrayOfChar(namaPenggunaYangDihapus.TabWord);
+            printf(" telah dihapus dari daftar teman.\n");
         }
     }
 }
@@ -77,17 +84,22 @@ void kirimPermintaanTeman(int currentUserID, GrafPertemanan *grafPertemanan, Lis
     int idPenerima = findIDFromUsername(listPengguna, namaPenggunaYangDitambahkan);
     if (idPenerima == IDX_UNDEF_STATIK)
     {
-        printf("Pengguna bernama %s tidak ditemukan.\n", namaPenggunaYangDitambahkan);
+        printf("Pengguna bernama ");
+        displayArrayOfChar(namaPenggunaYangDitambahkan.TabWord);
+        printf(" tidak ditemukan.\n");
         return;
     }
     if (isTeman(*grafPertemanan, currentUserID, idPenerima))
     {
-        printf("%s sudah menjadi teman Anda.\n", namaPenggunaYangDitambahkan);
+        displayArrayOfChar(namaPenggunaYangDitambahkan.TabWord);
+        printf(" sudah menjadi teman Anda.\n");
         return;
     }
     if (isMengirimPermintaan(*grafPertemanan, currentUserID, idPenerima))
     {
-        printf("Anda sudah mengirim permintaan pertemanan kepada %s.\nSilahkan tunggu hingga permintaan anda disetujui.\n", namaPenggunaYangDitambahkan);
+        printf("Anda sudah mengirim permintaan pertemanan kepada ");
+        displayArrayOfChar(namaPenggunaYangDitambahkan.TabWord);
+        printf(".\nSilahkan tunggu hingga permintaan anda disetujui.\n");
         return;
     }
     ElmtGrafPertemanan(*grafPertemanan, currentUserID, idPenerima) = '1';
