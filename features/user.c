@@ -2,7 +2,7 @@
 #include "user.h"
 #include <stdlib.h>
 
-void daftarPengguna (ListPengguna* l) {
+void daftarPengguna (ListPengguna* l, GrafPertemanan* G) {
     Profile newProfile;
     Word username, katasandi;
     createProfile(&newProfile);
@@ -35,6 +35,7 @@ void daftarPengguna (ListPengguna* l) {
         insertLastListPengguna(l, newProfile);
         CreateEmptyStackDraf(&(*l).contents[newProfile.index].stackdraf);
         printf("Pengguna telah berhasil terdaftar. Masuk untuk menikmati fitur-fitur BurBir.\n");
+        addNewUserGrafPertemanan(G);
     } else {
         printf("Kapasitas pengguna sudah maksimal. Tidak bisa membuat pengguna baru lagi.\n");
     }   

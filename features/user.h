@@ -6,7 +6,7 @@
 #include "../FolderADT/profile.h"
 #include "../FolderADT/grafpertemanan.h"
 
-void daftarPengguna (ListPengguna* l);
+void daftarPengguna (ListPengguna* l, GrafPertemanan* G) ;
 void masukPengguna (int* currentUserID, ListPengguna l);
 void gantiProfil (Profile* userProfile);
 void aturJenisAkun (Profile* userProfile);

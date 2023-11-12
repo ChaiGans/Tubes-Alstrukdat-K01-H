@@ -59,7 +59,7 @@ int main()
             }
             else if (wordStringCompare(command, "DAFTAR"))
             {
-                daftarPengguna(&listPengguna);
+                daftarPengguna(&listPengguna, &grafPertemanan);
             }
             else if (wordStringCompare(command, "MUAT"))
             {
