@@ -95,7 +95,7 @@ void sambungUtas(int idUtas, int index, int currentUserID, AddressListUtas *list
             temp.indexKicauanSambungan = utasLength(p);
             temp.idAuthor = currentUserID;
             getLocalTime(&temp.localtime);
-            insertLastKicauanSambungan(&p, temp);
+            insertAtKicauanSambungan(&p, index, temp);
         }
     }
 }
@@ -156,7 +156,7 @@ void cetakUtas(int idUtas, int currentUserID, AddressListUtas *listUtas, ListPen
             i += 1;
         }
         AddressUtas p = s->utas; // address utas
-        s->utas = p;
+        AddressUtas copy = p;    // duplicate address utas untuk traversing
         if (!isAuthorAccountPublic((listKicau).buffer[s->idKicau - 1].authorID, listPengguna) && !isTeman(grafPertemanan, (listKicau).buffer[s->idKicau - 1].authorID, currentUserID))
         {
             // cek privat atau tidak dan berteman atau tidak
@@ -166,27 +166,27 @@ void cetakUtas(int idUtas, int currentUserID, AddressListUtas *listUtas, ListPen
         {
             printf("|   ID = %d\n", s->idKicau);
             printf("|   ");
-            displayNameFromID(p->info.idAuthor, listPengguna);
+            displayNameFromID(copy->info.idAuthor, listPengguna);
             printf("\n");
             printf("|   ");
-            displayDATETIME(p->info.localtime);
+            displayDATETIME(copy->info.localtime);
             printf("\n");
             printf("|   ");
-            displayArrayOfChar(p->info.text);
+            displayArrayOfChar(copy->info.text);
             printf("\n");
             printf("\n");
-            for (int i = 1; i < utasLength(p) + 1; i++)
+            for (int i = 1; i < utasLength(p); i++)
             {
-                p = NEXT(p); // dari kicauan index 1 (bukan kicauan utama)
+                copy = copy->next; // dimulai dari kicauan sambungan pertama bukan kicauan utama
                 printf("    |   INDEX = %d\n", i);
                 printf("    |   ");
-                displayNameFromID(p->info.idAuthor, listPengguna);
+                displayNameFromID(copy->info.idAuthor, listPengguna);
                 printf("\n");
                 printf("    |   ");
-                displayDATETIME(p->info.localtime);
+                displayDATETIME(copy->info.localtime);
                 printf("\n");
                 printf("    |   ");
-                displayArrayOfChar(p->info.text);
+                displayArrayOfChar(copy->info.text);
                 printf("\n");
                 printf("\n");
             }

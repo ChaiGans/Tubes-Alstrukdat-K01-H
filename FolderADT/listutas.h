@@ -137,6 +137,7 @@ void deleteFirstListUtas(AddressListUtas *l, int *idKicauanTarget);
 void deleteFirstKicauanSambungan(AddressUtas *l, KicauanSambungan *saveKicauan);
 void deleteAtListUtas(AddressListUtas *l, int idx, int *idKicauanTarget);
 void deleteAtKicauanSambungan(AddressUtas *l, int idx, KicauanSambungan *saveKicauanSambungan);
+void insertAtKicauanSambungan(AddressUtas *l, int idx, KicauanSambungan kicauanSambungan);
 int ListUtaslength(AddressListUtas l);
 boolean isIdUtasDefined(int idSearch, AddressListUtas *listUtas);
 int utasLength(AddressUtas au);

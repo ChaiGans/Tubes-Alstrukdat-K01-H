@@ -257,6 +257,39 @@ void deleteAtListUtas(AddressListUtas *l, int idx, int *idKicauanTarget)
     }
 }
 
+void insertAtKicauanSambungan(AddressUtas *l, int idx, KicauanSambungan kicauanSambungan)
+{
+    if (idx != 0) // tidak boleh masuk dalam kicauan utama
+    {
+        if (idx == utasLength(*l))
+        {
+            insertLastKicauanSambungan(l, kicauanSambungan);
+        }
+        else
+        {
+            AddressUtas temp = newNodeKicauanSambungan(kicauanSambungan);
+            if (temp != NULL)
+            {
+                int currentIdx = 0;
+                AddressUtas p = *l;
+                AddressUtas prev;
+                while (currentIdx < idx)
+                {
+                    currentIdx += 1;
+                    prev = p;
+                    p = NEXT(p);
+                }
+                NEXT(temp) = p;
+                NEXT(prev) = temp;
+            }
+        }
+    }
+    else
+    {
+        printf("Anda tidak boleh mengganti kicauan utama\n");
+    }
+}
+
 void deleteAtKicauanSambungan(AddressUtas *l, int idx, KicauanSambungan *saveKicauanSambungan)
 {
     /* I.S. list tidak kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
