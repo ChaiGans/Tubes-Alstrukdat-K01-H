@@ -57,15 +57,43 @@ void CopyLine();
           Jika panjang line melebihi NMax, maka sisa line "dipotong" */
 
 Word ReadWord();
+/* Mengembalikan Word yang diberikan pengguna melalui terminal */
+
 Word ReadCommands();
+/* Mengembalikan command yang diberikan pengguna melalui terminal*/
+
 boolean wordStringCompare(Word w, char command[]);
+/* Mengembalikan true jika w sama dengan command */
+
 int stringLength(char inputString[]);
+/* Mengembalikan panjang string */
+
 void transferWordToString(char inputString[], Word w);
+/* I.S. inputString sembarang */
+/* F.S. inputString berisi string yang sama dengan w */
+
 boolean stringStringCompare(char string1[], char string2[]);
+/* Mengembalikan true ketika kedua string memiliki isi yang sama */
+/* false jika tidak */
+
 void transferStringToString(char inputString[], char targetString[]);
+/* I.S. inputString sembarang */
+/* F.S. inputString berisi string yang sama dengan targetString */
+
 void displayArrayOfChar(char string[]);
+/* I.S. string sembarang */
+/* F.S. string ditampilkan di layar */
+
 boolean isWordNomorHP(Word w);
+/* Mengembalikan true jika word hanya memuat angka */
+
 Word removeFirstChar(Word w);
+/* Menghilangkan huruf pertama pada w */
+
 void CopyWord_FOR_LIHAT_PROFIL_ONLY();
+/* Copyword khusus untuk Lihat Profil */
+
 void ADVWORD_LIHAT_PROFIL_ONLY();
+/* ADVWORD khusus untuk Lihat Profil*/
+
 #endif

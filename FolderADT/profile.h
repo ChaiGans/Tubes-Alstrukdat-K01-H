@@ -40,11 +40,28 @@ void displayFotoProfil(FotoProfil F);
 // } Profile;
 
 void createProfile(Profile *p);
+/* I.S. p sembarang */
+/* F.S. p terdefinisi dengan nilai defaultnya */
+
 void displayStatusAKun(Profile p);
+/* I.S. p terdefinisi */
+/* F.S. Status dari akun (PUBLIK atau PRIVAT) ditampilkan di layar */
+
 void displayNomorHP(Profile p);
+/* I.S. p terdefinisi */
+/* F.S. nomorHP dari akun ditampilkan di layar */
+
 void displayProfileInformation(Profile p);
+/* I.S. p terdefinisi */
+/* F.S. Informasi dari akun ditampilkan di layar */
+
 void toLowerCase(const char original[], char lowercaseCopy[]);
+/* I.S. original terdefinisi */
+/* F.S. lowercaseCopy terdefinisi dengan lowercase dari original */
+
 boolean isWetonValid(Word w);
+/* Mengembalikan true jika weton valid, false jika tidak*/
+
 // List Dinamis dari Kicauan
 // typedef struct {
 //     int id;

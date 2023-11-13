@@ -45,3 +45,5 @@ void addTeman(GrafPertemanan *G, int idPengirim, int idPenerima);
 /* F.S. Orang pada index ke idPengirim dan idPenerima menjadi berteman */
 
 void addNewUserGrafPertemanan(GrafPertemanan *G);
+/* I.S. G terdefinisi */
+/* F.S. Orang baru ditambahkan pada graf pertemanan */

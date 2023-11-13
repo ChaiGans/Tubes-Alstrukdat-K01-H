@@ -87,9 +87,13 @@ void PrintPrioQueueChar(PrioQueueChar Q);
 #
 */
 void masuk(PrioQueueChar *Q, infotype X);
+/* I.S. Q terdefinisi, mungkin kosong */
+/* F.S. X dimasukkan ke dalam Q sesuai dengan prioritasnya */
 
 int compare(const void *a, const void *b);
+/* Mengembalikan hasil perbandingan popularity dari a dan b */
 
 int getBanyakPermintaanTeman(PrioQueueChar Q);
+/* Mengembalikan banyaknya permintaan teman yang dimiliki dalam Q */
 
 #endif
