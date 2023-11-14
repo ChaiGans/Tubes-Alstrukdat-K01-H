@@ -49,7 +49,7 @@ void masukPengguna (int* currentUserID, ListPengguna l) {
     do {
         printf("Masukkan nama:\n");
         usernameMasukan = ReadWord();
-        findUsernameID(usernameMasukan, l, &currentID, &usernameFound);
+        findUsernameID(usernameMasukan, &l, &currentID, &usernameFound);
         putchar('\n');
         if (!usernameFound) {
             printf("Wah, nama yang Anda cari tidak ada. Masukkan nama lain!\n");
@@ -161,7 +161,7 @@ void ubahFotoProfil(Profile *userProfile) {
 void lihatProfil (Word targetUser, int currentLoginID, ListPengguna listpengguna, GrafPertemanan G) {
     int targetID;
     boolean targetExisted;
-    findUsernameID(targetUser, listpengguna, &targetID, &targetExisted);
+    findUsernameID(targetUser, &listpengguna, &targetID, &targetExisted);
     if (!targetExisted) {
         printf("Wah, akun tersebut tidak ditemukan.\n");
     } else {

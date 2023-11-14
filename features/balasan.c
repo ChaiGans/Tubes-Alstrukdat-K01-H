@@ -80,8 +80,6 @@ void lihatBalasan (int currentLoginID, int idKicau, ListKicau listkicau, ListPen
     } else if (listkicau.buffer[idKicau-1].balasan == NULL) {
         printf("Belum terdapat balasan apapun pada kicauan tersebut. Yuk balas kicauan tersebut!\n");
     } else {
-        printf("%d %d\n",currentLoginID, (listkicau).buffer[idKicau-1].authorID);
-        printf("%d", isTeman(*G, currentLoginID, (listkicau).buffer[idKicau-1].authorID));
         if (!isAuthorAccountPublic(listkicau.buffer[idKicau-1].authorID, listpengguna) && !isTeman(*G, currentLoginID, (listkicau).buffer[idKicau-1].authorID)) {
             printf("Wah, kicauan tersebut dibuat oleh pengguna dengan akun privat!\n");
         } else {

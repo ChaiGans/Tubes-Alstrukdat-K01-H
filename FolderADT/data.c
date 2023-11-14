@@ -345,17 +345,18 @@ void readKicauanConfig(char *filename, ListKicau *listKicau, ListPengguna listPe
         char placeholder[19];
         transferWordToString(placeholder, currentWord);
         DATETIMEparser(placeholder, &(tweet.localtime));
-
         tweet.balasan = NULL;
 
         insertLastListKicau(&*listKicau, tweet);
     }
+    ADVWORD(true);
     printf("Config kicauan berhasil dibaca... \n");
     fclose(file);
 }
 
 void readBalasanConfig(char *filename, ListKicau *l, ListPengguna listpengguna)
 {
+    Balasan balasanBacaan;
     FILE *file = fopen(filename, "r");
     if (file == NULL)
     {
@@ -376,27 +377,30 @@ void readBalasanConfig(char *filename, ListKicau *l, ListPengguna listpengguna)
         int j;
         for (j = 0; j < banyakBalasan; j++)
         {
-            Balasan balasanBacaan;
             wordToIDParentParser(currentWord, &parentRoot, &idBalasan);
+            // displayArrayOfChar(currentWord.TabWord);
+            // putchar('\n');
             ADVWORD(true);
             transferWordToString(balasanBacaan.text, currentWord);
             ADVWORD(true);
             int userID;
             boolean usernameExist;
-            findUsernameID(currentWord, listpengguna, &userID, &usernameExist);
+            findUsernameID(currentWord, &listpengguna, &userID, &usernameExist);
             balasanBacaan.authorID = userID;
             ADVWORD(true);
-            DATETIMEparser(currentWord.TabWord, &balasanBacaan.time);
+            char save[19];
+            transferWordToString(save, currentWord);
+            DATETIMEparser(save, &balasanBacaan.time);
             ADVWORD(true);
             if (parentRoot == -1)
             {
                 balasanBacaan.id = idBalasan;
-                (*l).buffer[currentIDKicauan].balasan = newTreeNode(balasanBacaan);
+                (*l).buffer[currentIDKicauan-1].balasan = newTreeNode(balasanBacaan);
             }
             else
             {
                 balasanBacaan.id = idBalasan;
-                addChildrenAt(parentRoot, &(*l).buffer[currentIDKicauan].balasan, balasanBacaan);
+                addChildrenAt(parentRoot, &(*l).buffer[currentIDKicauan-1].balasan, balasanBacaan);
             }
         }
     }
@@ -415,6 +419,7 @@ void readDrafConfig(char *filename, ListPengguna *listpengguna)
     STARTWORD(file, true);
     Draf drafBaru;
     StackDraf dummyStack;
+    CreateEmptyStackDraf(&dummyStack);
     int banyakPengguna = wordToInt(currentWord);
     int i, j, banyakDrafPengguna, authorID;
     for (i = 0; i < banyakPengguna; i++)
@@ -498,11 +503,11 @@ void readUtasConfig(char *filename, ListPengguna listPengguna, ListKicau *listKi
 
 void initReadConfig(Word fileName, ListPengguna *listPengguna, GrafPertemanan *pertemanan, ListKicau *listKicau, AddressListUtas *listUtas)
 {
-    readPenggunaConfig("setuptest/pengguna.txt", listPengguna, pertemanan);
-    readKicauanConfig("setuptest/kicauan.txt", listKicau, *listPengguna);
-    readBalasanConfig("setuptest/balasan.txt", listKicau, *listPengguna);
-    readDrafConfig("setuptest/draf.txt", listPengguna);
-    readUtasConfig("setuptest/utas.txt", *listPengguna, listKicau, listUtas);
+    readPenggunaConfig("config/pengguna.txt", listPengguna, pertemanan);
+    readKicauanConfig("config/kicauan.txt", listKicau, *listPengguna);
+    readBalasanConfig("config/balasan.txt", listKicau, *listPengguna);
+    readDrafConfig("config/draf.txt", listPengguna);
+    readUtasConfig("config/utas.txt", *listPengguna, listKicau, listUtas);
     printf("Jumlah pengguna = %d\n", ListPenggunaLength(*listPengguna));
     printf("Jumlah tweet = %d\n", listKicauLength(*listKicau));
 }
