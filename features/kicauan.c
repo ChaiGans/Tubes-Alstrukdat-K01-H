@@ -41,7 +41,7 @@ void upKicau(ListKicau *lk, ListPengguna lp, int currentUserID){
 
 void kicauanTeman(int currentUserID, ListPengguna lp, ListKicau lk, GrafPertemanan gp){
     boolean adaTeman = false;
-    int i; for(i = lk.nEff-1; i>=-1; i--){
+    int i; for(i = lk.nEff-1; i>=0; i--){
         if (isTeman(gp, currentUserID, lk.buffer[i].authorID)){
             printf("\n"); printKicau(lk.buffer[i],lp);
             adaTeman = true;

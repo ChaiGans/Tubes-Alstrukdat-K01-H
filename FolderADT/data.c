@@ -416,19 +416,18 @@ void readDrafConfig(char *filename, ListPengguna *listpengguna)
     Draf drafBaru;
     StackDraf dummyStack;
     int banyakPengguna = wordToInt(currentWord);
-    ADVWORD(true);
     int i, j, banyakDrafPengguna, authorID;
     for (i = 0; i < banyakPengguna; i++)
     {
-        drafAuthorParser(currentWord, &authorID, &banyakDrafPengguna, listpengguna); 
         ADVWORD(true);
+        drafAuthorParser(currentWord, &authorID, &banyakDrafPengguna, listpengguna); 
         for (j = 0; j < banyakDrafPengguna; j++)
         {
+            ADVWORD(true);
             transferWordToString(drafBaru.text, currentWord);
             ADVWORD(true);
             DATETIMEparser(currentWord.TabWord, &drafBaru.localtime);
             drafBaru.authorID = authorID;
-            ADVWORD(true);
             PushStackDraf(&dummyStack, drafBaru);
         }
         while (!IsEmptyStackDraf(dummyStack)) {
@@ -499,9 +498,11 @@ void readUtasConfig(char *filename, ListPengguna listPengguna, ListKicau *listKi
 
 void initReadConfig(Word fileName, ListPengguna *listPengguna, GrafPertemanan *pertemanan, ListKicau *listKicau, AddressListUtas *listUtas)
 {
-    readPenggunaConfig("config/pengguna.txt", listPengguna, pertemanan);
-    readKicauanConfig("config/kicauan.txt", listKicau, *listPengguna);
-    readBalasanConfig("config/balasan.txt", listKicau, *listPengguna);
-    readDrafConfig("config/draf.txt", listPengguna);
-    readUtasConfig("config/utas.txt", *listPengguna, listKicau, listUtas);
+    readPenggunaConfig("setuptest/pengguna.txt", listPengguna, pertemanan);
+    readKicauanConfig("setuptest/kicauan.txt", listKicau, *listPengguna);
+    readBalasanConfig("setuptest/balasan.txt", listKicau, *listPengguna);
+    readDrafConfig("setuptest/draf.txt", listPengguna);
+    readUtasConfig("setuptest/utas.txt", *listPengguna, listKicau, listUtas);
+    printf("Jumlah pengguna = %d\n", ListPenggunaLength(*listPengguna));
+    printf("Jumlah tweet = %d\n", listKicauLength(*listKicau));
 }

@@ -17,10 +17,12 @@ void saveBalasan(char* fileName, ListKicau lk, ListPengguna lp){
     while(i < banyakBalasan){
         if (lk.buffer[j].balasan != NULL){
             int banyakIDBalasan = findHighestID(lk.buffer[j].balasan); 
+            fprintf(file, "\n%d", j+1);
             fprintf(file, "\n%d", banyakIDBalasan);
             int k = 0; for(k = 1; k < banyakIDBalasan+1; k++){
                 BinTree writeBalasan = BalasanFromID(k, lk.buffer[j].balasan);
-                fprintf(file, "%d %d", getParent(NULL, lk.buffer[j].balasan, k)->info.id, k); // di sini masih bug, bingung cara cari id parent root
+                BinTree parent = getParent(NULL, lk.buffer[j].balasan, k);
+                fprintf(file, "\n%d %d", (parent==NULL)? -1 : parent->info.id, k); // di sini masih bug, bingung cara cari id parent root
                 fprintf(file, "\n%s", writeBalasan->info.text);
                 fprintf(file, "\n%s", cariPenggunaID(writeBalasan->info.authorID, lp).username);
                 fprintf(file, "\n%02d/%02d/%04d %02d:%02d:%02d", writeBalasan->info.time.DD, writeBalasan->info.time.MM, writeBalasan->info.time.YYYY, writeBalasan->info.time.T.HH, writeBalasan->info.time.T.MM, writeBalasan->info.time.T.SS);
