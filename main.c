@@ -103,7 +103,7 @@ int main()
             }
             else if (wordStringCompare(command, "TAMBAH_TEMAN"))
             {
-                kirimPermintaanTeman(currentLoginID, &grafPertemanan, listPengguna);
+                kirimPermintaanTeman(currentLoginID, &grafPertemanan, &listPengguna);
             }
             else if (wordStringCompare(command, "DAFTAR_PERMINTAAN_PERTEMANAN"))
             {
@@ -160,7 +160,7 @@ int main()
             {
                 ADVWORD(false);
                 int idKicau = wordToInt(currentWord);
-                sukaKicauan(&listKicau, listPengguna, idKicau);
+                sukaKicauan(&listKicau, listPengguna, idKicau, grafPertemanan, currentLoginID);
             }
             else if (wordStringCompare(command, "KICAUAN"))
             {
