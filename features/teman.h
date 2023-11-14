@@ -11,7 +11,7 @@ void hapusTeman(int currentUserID, GrafPertemanan *grafPertemanan, ListPengguna 
 // I.S. : currentUserID, grafPertemanan, dan listPengguna terdefinisi
 // F.S. : Menghapus teman dari currentUserID
 
-void kirimPermintaanTeman(int currentUserID, GrafPertemanan *grafPertemanan, ListPengguna listPengguna);
+void kirimPermintaanTeman(int currentUserID, GrafPertemanan *grafPertemanan, ListPengguna *listPengguna);
 // I.S. : currentUserID, grafPertemanan, dan listPengguna terdefinisi
 // F.S. : currentUserID memberikan permintaan teman ke seorang nama pengguna
 

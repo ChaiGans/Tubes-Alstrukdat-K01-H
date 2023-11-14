@@ -69,10 +69,10 @@ void hapusTeman(int currentUserID, GrafPertemanan *grafPertemanan, ListPengguna 
     }
 }
 
-void kirimPermintaanTeman(int currentUserID, GrafPertemanan *grafPertemanan, ListPengguna listPengguna)
+void kirimPermintaanTeman(int currentUserID, GrafPertemanan *grafPertemanan, ListPengguna *listPengguna)
 {
     // periksa apakah currentUserID memiliki permintaan pertemanan yang belum disetujui
-    if (getBanyakPermintaanTeman(listPengguna.contents[currentUserID].permintaanTeman) != 0)
+    if (getBanyakPermintaanTeman((*listPengguna).contents[currentUserID].permintaanTeman) != 0)
     {
         printf("Terdapat permintaan pertemanan yang belum Anda setujui. Silakan kosongkan daftar permintaan pertemanan untuk Anda terlebih dahulu.\n");
         return;
@@ -81,7 +81,8 @@ void kirimPermintaanTeman(int currentUserID, GrafPertemanan *grafPertemanan, Lis
     // cari nama pengguna yang akan ditambahkan
     printf("Masukkan nama pengguna yang ingin ditambahkan sebagai teman: ");
     Word namaPenggunaYangDitambahkan = ReadWord();
-    int idPenerima = findIDFromUsername(listPengguna, namaPenggunaYangDitambahkan);
+    int idPenerima = findIDFromUsername(*listPengguna, namaPenggunaYangDitambahkan);
+    PrioQueueChar *Q = &(*listPengguna).contents[idPenerima].permintaanTeman;
     if (idPenerima == IDX_UNDEF_STATIK)
     {
         printf("Pengguna bernama ");
@@ -102,10 +103,14 @@ void kirimPermintaanTeman(int currentUserID, GrafPertemanan *grafPertemanan, Lis
         printf(".\nSilahkan tunggu hingga permintaan anda disetujui.\n");
         return;
     }
-    ElmtGrafPertemanan(*grafPertemanan, currentUserID, idPenerima) = '1';
+    // melakukan enqueue pada permintaan teman dari penerima
+    infotype permintaan = {getBanyakTeman(*grafPertemanan, currentUserID), currentUserID};
+    Enqueue(Q, permintaan);
+
+    // menampilkan pesan berhasil
     printf("Permintaan pertemanan telah dikirimkan kepada ");
     displayArrayOfChar(namaPenggunaYangDitambahkan.TabWord);
-    printf(".\n");
+    printf(" Tunggu beberapa saat hingga permintaan Anda disetujui.\n");
 }
 
 void displayDaftarPermintaanTeman(int currentUserID, GrafPertemanan grafPertemanan, ListPengguna listPengguna)
