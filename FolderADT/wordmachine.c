@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include "wordmachine.h"
 #include "boolean.h"
 #include "charmachine.h"
@@ -293,4 +294,26 @@ Word removeFirstChar(Word w)
     }
     w.Length -= 1;
     return w;
+}
+
+char* concatCharPtr(char* dir1, char* dir2){
+
+    int i = 0, len = 0;
+    while(dir1[i] != '\0'){
+        i++; len++;
+    } i = 0; while(dir2[i] != '\0'){
+        i++; len++;
+    } 
+    
+    char* string3 = (char*)malloc(sizeof(char)*(len+1)); 
+    int j = 0; i = 0;
+
+    while(dir1[i] != '\0'){
+        string3[i] = dir1[i]; i++;
+    } while(dir2[j] != '\0'){
+        string3[i] = dir2[j];
+        i++; j++;
+    } string3[len] = '\0';
+    
+    return string3;
 }

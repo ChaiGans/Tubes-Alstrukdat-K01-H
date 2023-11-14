@@ -96,4 +96,5 @@ void CopyWord_FOR_LIHAT_PROFIL_ONLY();
 void ADVWORD_LIHAT_PROFIL_ONLY();
 /* ADVWORD khusus untuk Lihat Profil*/
 
+char* concatCharPtr(char* dir1, char* dir2);
 #endif

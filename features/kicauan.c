@@ -41,7 +41,7 @@ void upKicau(ListKicau *lk, ListPengguna lp, int currentUserID){
 
 void kicauanTeman(int currentUserID, ListPengguna lp, ListKicau lk, GrafPertemanan gp){
     boolean adaTeman = false;
-    int i; for(i = 0; i<lk.nEff; i++){
+    int i; for(i = lk.nEff-1; i>=-1; i--){
         if (isTeman(gp, currentUserID, lk.buffer[i].authorID)){
             printf("\n"); printKicau(lk.buffer[i],lp);
             adaTeman = true;
@@ -51,13 +51,22 @@ void kicauanTeman(int currentUserID, ListPengguna lp, ListKicau lk, GrafPerteman
     }
 }
 
-void sukaKicauan(ListKicau *lk, ListPengguna lp, int IDtweet){
+void debugKicau(ListKicau lk, ListPengguna lp, int debugID){
+    Kicauan kc = lk.buffer[debugID-1];
+    printf("AUID = %d\n", kc.authorID);
+    printf("ID = %d\n", kc.id);
+    printf("LIKE = %d\n", kc.like);
+    TulisDATETIME(kc.localtime); endl;
+    printf("ISI = %s\n", kc.text);
+}
+
+void sukaKicauan(ListKicau *lk, ListPengguna lp, int IDtweet, GrafPertemanan gp, int currentUserID){
     if (isIdxEffListKicau(*lk, IDtweet-1)){
         boolean found = true; int i = 0; boolean private = false;
         while ((lp.contents[i].index != MARK_STATIK)&&(found)){
             if (lp.contents[i].index == (*lk).buffer[IDtweet-1].authorID) found = false;
             else i++;
-        } if (lp.contents[i].status == "PUBLIK"){
+        } if (stringStringCompare(lp.contents[i].status, "PUBLIK")||(isTeman(gp, lp.contents[i].index, currentUserID))){
             (*lk).buffer[IDtweet-1].like++;
             printf("Selamat! Kicauan telah disukai!\nDetail kicauan:\n");
             printKicau((*lk).buffer[IDtweet-1], lp);

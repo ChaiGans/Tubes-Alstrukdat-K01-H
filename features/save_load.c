@@ -1,25 +1,5 @@
 #include "save_load.h"
 
-char* concatDir(char* dir1, char* dir2){
-    int i = 0, len = 0;
-    while(dir1[i] != '\0'){
-        i++; len++;
-    } i = 0; while(dir2[i] != '\0'){
-        i++; len++;
-    } 
-    
-    char* string3 = (char*)malloc(sizeof(char)*(len+1)); 
-    int j = 0; i = 0;
-
-    while(dir1[i] != '\0'){
-        string3[i] = dir1[i]; i++;
-    } while(dir2[j] != '\0'){
-        string3[i] = dir2[j];
-        i++; j++;
-    } 
-    
-    return string3;
-}
 
 boolean isExist(char* dirName){
     struct stat sb;
@@ -120,14 +100,15 @@ void saveDraft(char* fileName, ListPengguna lp){
     } fprintf(file, "%d", len); i = 0;
     while(lp.contents[i].index != MARK_STATIK){
         if (!IsEmptyStackDraf(lp.contents[i].stackdraf)){
-            fprintf(file, "\n%s", lp.contents[i].username);
             StackDraf temp = lp.contents[i].stackdraf; 
             StackDraf temp2; CreateEmptyStackDraf(&temp2);
-            ElTypeDraf tempdraf;
+            ElTypeDraf tempdraf; int length = 0;
             while(!IsEmptyStackDraf(temp)){
                 PopStackDraf(&temp, &tempdraf);
                 PushStackDraf(&temp2, tempdraf);
-            } while (!IsEmptyStackDraf(temp2)){
+                length++;
+            } fprintf(file, "\n%s %d", lp.contents[i].username, length);
+            while (!IsEmptyStackDraf(temp2)){
                 PopStackDraf(&temp2, &tempdraf);
                 fprintf(file, "\n%s", tempdraf.text);
                 fprintf(file, "\n%02d/%02d/%04d %02d:%02d:%02d", tempdraf.localtime.DD, tempdraf.localtime.MM, tempdraf.localtime.YYYY, tempdraf.localtime.T.HH, tempdraf.localtime.T.MM, tempdraf.localtime.T.SS);
@@ -143,8 +124,9 @@ void saveUtas(char* fileName, ListPengguna listPengguna, ListKicau listKicau, Ad
     AddressListUtas curr = listUtas;
     int i = 0; for(i = 0; i < len; i++){
         fprintf(file, "\n%d", curr->idKicau);
-        fprintf(file, "\n%d", utasLength(curr->utas));
+        fprintf(file, "\n%d", utasLength(curr->utas->next));
         AddressUtas currU = curr->utas;
+        currU = currU->next;
         while(currU != NULL){
             fprintf(file, "\n%s", currU->info.text);
             fprintf(file, "\n%s", cariPenggunaID((currU->info.idAuthor), listPengguna).username);
@@ -157,10 +139,9 @@ void saveUtas(char* fileName, ListPengguna listPengguna, ListKicau listKicau, Ad
 void saveAll(ListKicau lk, ListPengguna lp, AddressListUtas lu, GrafPertemanan gp){
     char* dirName = (char*)malloc(sizeof(char)*(100));
     printf("Masukkan nama folder penyimpanan\n");
-    int curLen = 0; START(stdin, false); IgnoreBlanks(false);
-    while(currentChar != MARK){
-        dirName[curLen] = currentChar; curLen++;
-        ADV();
+    int curLen = 0; Word dirWord = ReadWord();
+    while(curLen < dirWord.Length){
+        dirName[curLen] = dirWord.TabWord[curLen]; curLen++;
     } dirName[curLen] = '\0';
     if (!isExist(dirName)){
         printf("belum terdapat %s. Akan dilakukan pembuatan %s terlebih dahulu.\n", dirName, dirName);
@@ -170,13 +151,13 @@ void saveAll(ListKicau lk, ListPengguna lp, AddressListUtas lu, GrafPertemanan g
     } 
     printf("\nAnda akan melakukan penyimpanan di %s.\n", dirName);
     printf("\n Mohon tunggu...\n");
-    saveBalasan(concatDir(dirName, "/balasan.txt"), lk, lp);
+    saveBalasan(concatCharPtr(dirName, "/balasan.txt"), lk, lp);
     printf("1...\n");
-    saveDraft(concatDir(dirName, "/draf.txt"), lp);
-    saveKicauan(concatDir(dirName, "/kicauan.txt"), lk, lp);
+    saveDraft(concatCharPtr(dirName, "/draf.txt"), lp);
+    saveKicauan(concatCharPtr(dirName, "/kicauan.txt"), lk, lp);
     printf("2...\n");
-    savePengguna(concatDir(dirName, "/pengguna.txt"), lp, gp);
-    saveUtas(concatDir(dirName, "/utas.txt"), lp, lk, lu);
+    savePengguna(concatCharPtr(dirName, "/pengguna.txt"), lp, gp);
+    saveUtas(concatCharPtr(dirName, "/utas.txt"), lp, lk, lu);
     printf("3...\n");
     printf("\nPenyimpanan telah berhasil dilakukan!\n");
 }
@@ -191,17 +172,19 @@ void loadAll(ListPengguna *listPengguna, GrafPertemanan *pertemanan, ListKicau *
     if (!isExist(dirName)){
         printf("\nTidak ada folder yang dimaksud!\n"); return;
     } else{
+        CreateListPengguna(listPengguna); createGrafPertemanan(pertemanan, 0); CreateListKicau(listKicau, 100); CreateListUtas(listUtas);
         printf("\nAnda akan melakukan pemuatan dari %s.\n", dirName);
         printf("\n Mohon tunggu...\n");
-        readPenggunaConfig(concatDir(dirName, "/pengguna.txt"), listPengguna, pertemanan);
+        readPenggunaConfig(concatCharPtr(dirName, "/pengguna.txt"), listPengguna, pertemanan);
         printf("1...\n");
-        readKicauanConfig(concatDir(dirName, "/kicauan.txt"), listKicau, *listPengguna);
-        readBalasanConfig(concatDir(dirName, "/balasan.txt"), listKicau, *listPengguna);
+        readKicauanConfig(concatCharPtr(dirName, "/kicauan.txt"), listKicau, *listPengguna);
+        readBalasanConfig(concatCharPtr(dirName, "/balasan.txt"), listKicau, *listPengguna);
         printf("2...\n");
-        // readDrafConfig(concatDir(dirName, "/draf.txt"));
-        readUtasConfig(concatDir(dirName, "/utas.txt"), *listPengguna, listKicau, listUtas);
+        //readDrafConfig(concatCharPtr(dirName, "/draf.txt"), listPengguna);
+        readUtasConfig(concatCharPtr(dirName, "/utas.txt"), *listPengguna, listKicau, listUtas);
         printf("3...\n");
         printf("\nPemuatan selesai!\n");
+        printf("STATISTIK\nTOTAL PENGGUNA = %d\nTOTAL KICAU = %d\n", ListPenggunaLength(*listPengguna), listKicauLength(*listKicau));
     } 
 
 }
