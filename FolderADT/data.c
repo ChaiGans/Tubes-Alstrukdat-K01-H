@@ -443,6 +443,7 @@ void readDrafConfig(char *filename, ListPengguna *listpengguna)
             PushStackDraf(&(*listpengguna).contents[authorID].stackdraf, drafBaru);
         }
     }
+    ADVWORD(true);
     printf("Config draf berhasil dibaca... \n");
     fclose(file);
 }
@@ -474,7 +475,7 @@ void readUtasConfig(char *filename, ListPengguna listPengguna, ListKicau *listKi
 
         temp.idAuthor = (*listKicau).buffer[idKicau - 1].authorID;
         temp.indexKicauanSambungan = 0;
-        DATETIMEparser(currentWord.TabWord, &temp.localtime);
+        temp.localtime = (*listKicau).buffer[idKicau-1].localtime;
         transferStringToString((*listKicau).buffer[idKicau - 1].text, temp.text);
         insertLastKicauanSambungan(&p, temp);
         s->utas = p;
@@ -492,8 +493,10 @@ void readUtasConfig(char *filename, ListPengguna listPengguna, ListKicau *listKi
             temp.idAuthor = cariPengguna(currentWord, listPengguna).index;
 
             ADVWORD(true);
+            char saveDate[19];
+            transferWordToString(saveDate, currentWord);
             // datetime
-            DATETIMEparser(currentWord.TabWord, &temp.localtime);
+            DATETIMEparser(saveDate, &temp.localtime);
 
             temp.indexKicauanSambungan = utasLength(p);
 
