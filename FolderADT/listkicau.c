@@ -130,6 +130,7 @@ void copyListKicau(ListKicau lIn, ListKicau *lOut)
 /* *** Menambahkan elemen terakhir *** */
 void insertLastListKicau(ListKicau *l, ElTypeKicau val)
 {
+    val.id = listKicauLength(*l)+1;
     (*l).buffer[(*l).nEff] = val;
     (*l).nEff++;
     if (isFullListKicau(*l))
