@@ -13,7 +13,7 @@ void displayDaftarTeman(int currentUserID, GrafPertemanan grafPertemanan, ListPe
         int i;
         for (i = 0; i < grafPertemanan.banyakOrang; i++)
         {
-            if (isTeman(grafPertemanan, currentUserID, i))
+            if (isTeman(grafPertemanan, currentUserID, i) && currentUserID!=i)
             {
                 printf("| ");
                 displayNameFromID(i, listPengguna);
@@ -82,7 +82,6 @@ void kirimPermintaanTeman(int currentUserID, GrafPertemanan *grafPertemanan, Lis
     printf("Masukkan nama pengguna yang ingin ditambahkan sebagai teman: ");
     Word namaPenggunaYangDitambahkan = ReadWord();
     int idPenerima = findIDFromUsername(*listPengguna, namaPenggunaYangDitambahkan);
-    PrioQueueChar *Q = &(*listPengguna).contents[idPenerima].permintaanTeman;
     if (idPenerima == IDX_UNDEF_STATIK)
     {
         printf("Pengguna bernama ");
@@ -105,7 +104,7 @@ void kirimPermintaanTeman(int currentUserID, GrafPertemanan *grafPertemanan, Lis
     }
     // melakukan enqueue pada permintaan teman dari penerima
     infotype permintaan = {getBanyakTeman(*grafPertemanan, currentUserID), currentUserID};
-    Enqueue(Q, permintaan);
+    Enqueue(&(*listPengguna).contents[idPenerima].permintaanTeman, permintaan);
 
     // menampilkan pesan berhasil
     printf("Permintaan pertemanan telah dikirimkan kepada ");

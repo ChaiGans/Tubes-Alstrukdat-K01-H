@@ -34,6 +34,8 @@ void daftarPengguna (ListPengguna* l, GrafPertemanan* G) {
         newProfile.index = ListPenggunaLength(*l);
         insertLastListPengguna(l, newProfile);
         CreateEmptyStackDraf(&(*l).contents[newProfile.index].stackdraf);
+        MakeEmptyQueue(&(*l).contents[newProfile.index].permintaanTeman, 20);
+        
         printf("Pengguna telah berhasil terdaftar. Masuk untuk menikmati fitur-fitur BurBir.\n");
         addNewUserGrafPertemanan(G);
     } else {

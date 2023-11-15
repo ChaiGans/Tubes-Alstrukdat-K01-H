@@ -12,6 +12,7 @@
 #include "stackdraf.h"
 #include "datetime.h"
 #include "grafpertemanan.h"
+#include "prioqueuechar.h"
 // Fungsi pada data.h digunakan untuk mendapatkan data dari file pengguna.txt, kicauan.txt, balasan.txt, draf.txt, dan utas.txt
 // Fungsi pada data.h juga digunakan untuk mengubah data pada file pengguna.txt, kicauan.txt, balasan.txt, draf.txt, dan utas.txt
 

@@ -5,6 +5,7 @@
 #include "../FolderADT/wordmachine.h"
 #include "../FolderADT/profile.h"
 #include "../FolderADT/grafpertemanan.h"
+#include "../FolderADT/prioqueuechar.h"
 
 void daftarPengguna (ListPengguna* l, GrafPertemanan* G) ;
 void masukPengguna (int* currentUserID, ListPengguna l);

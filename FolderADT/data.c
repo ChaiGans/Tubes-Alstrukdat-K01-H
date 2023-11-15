@@ -146,6 +146,7 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna, GrafPerteman
     {
         createProfile(&((*listPengguna).contents[i]));
         CreateEmptyStackDraf(&((*listPengguna).contents[i].stackdraf));
+        MakeEmptyQueue(&((*listPengguna).contents[i].permintaanTeman), 20);
         listPengguna->contents[i].index = i;
         ADVWORD(true); // currentWord = username
         cutWord(currentWord, listPengguna->contents[i].username);
