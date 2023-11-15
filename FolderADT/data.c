@@ -431,7 +431,9 @@ void readDrafConfig(char *filename, ListPengguna *listpengguna)
             ADVWORD(true);
             transferWordToString(drafBaru.text, currentWord);
             ADVWORD(true);
-            DATETIMEparser(currentWord.TabWord, &drafBaru.localtime);
+            char save[19];
+            transferWordToString(save, currentWord);
+            DATETIMEparser(save, &drafBaru.localtime);
             drafBaru.authorID = authorID;
             PushStackDraf(&dummyStack, drafBaru);
         }
