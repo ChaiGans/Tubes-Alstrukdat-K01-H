@@ -58,7 +58,7 @@ void makeUpperCase(Word *w)
     }
 }
 
-void drafAuthorParser(Word w, int *authorID, int *banyakDraf, ListPengguna* l)
+void drafAuthorParser(Word w, int *authorID, int *banyakDraf, ListPengguna *l)
 {
     char username[20];
     int i = 0;
@@ -67,7 +67,7 @@ void drafAuthorParser(Word w, int *authorID, int *banyakDraf, ListPengguna* l)
         username[i] = w.TabWord[i];
         i += 1;
     }
-    username[i-1] = '\0';
+    username[i - 1] = '\0';
     int res = 0;
     while (w.TabWord[i] >= '0' && w.TabWord[i] <= '9')
     {
@@ -75,9 +75,11 @@ void drafAuthorParser(Word w, int *authorID, int *banyakDraf, ListPengguna* l)
         i += 1;
     }
     int j;
-  
-    for (j = 0; j < ListPenggunaLength(*l); j++) {
-        if (stringStringCompare(username, (*l).contents[j].username)) {
+
+    for (j = 0; j < ListPenggunaLength(*l); j++)
+    {
+        if (stringStringCompare(username, (*l).contents[j].username))
+        {
             *authorID = j;
         }
     }
@@ -175,30 +177,31 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna, GrafPerteman
         createFotoProfil(&foto);
 
         // looping untuk baca foto profil
-        int i, baris, kolom;
+        int j, baris, kolom;
         char warna, simbol;
         for (baris = 0; baris < 5; baris++)
         {
             kolom = 0;
             ADVWORD(true);
-            for (i = 0; i < 18; i++)
+            for (j = 0; j < 18; j++)
             {
-                if (i % 4 == 0)
+                if (j % 4 == 0)
                 {
-                    warna = currentWord.TabWord[i];
+                    warna = currentWord.TabWord[j];
                     ELMT(WARNAPROFIL(foto), baris, kolom) = warna;
                 }
-                else if (i % 4 == 2)
+                else if (j % 4 == 2)
                 {
-                    simbol = currentWord.TabWord[i];
+                    simbol = currentWord.TabWord[j];
                     ELMT(SIMBOLPROFIL(foto), baris, kolom) = simbol;
                 }
-                if (i % 4 == 3)
+                if (j % 4 == 3)
                     kolom++;
             }
         }
 
-        listPengguna->contents[i].fotoProfil = foto;
+        (*listPengguna).contents[i].fotoProfil = foto;
+        displayFotoProfil((*listPengguna).contents[i].fotoProfil);
     }
 
     createGrafPertemanan(pertemanan, banyakProfile);
@@ -250,7 +253,7 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna, GrafPerteman
             popularitas += charToInt(currentWord.TabWord[j]);
             j++;
         } // popularitas terdefinisi
-        
+
         infotype adjInfo;
         adjInfo.id = idPengirim;
         adjInfo.popularity = popularitas;
@@ -396,12 +399,12 @@ void readBalasanConfig(char *filename, ListKicau *l, ListPengguna listpengguna)
             if (parentRoot == -1)
             {
                 balasanBacaan.id = idBalasan;
-                (*l).buffer[currentIDKicauan-1].balasan = newTreeNode(balasanBacaan);
+                (*l).buffer[currentIDKicauan - 1].balasan = newTreeNode(balasanBacaan);
             }
             else
             {
                 balasanBacaan.id = idBalasan;
-                addChildrenAt(parentRoot, &(*l).buffer[currentIDKicauan-1].balasan, balasanBacaan);
+                addChildrenAt(parentRoot, &(*l).buffer[currentIDKicauan - 1].balasan, balasanBacaan);
             }
         }
     }
@@ -426,7 +429,7 @@ void readDrafConfig(char *filename, ListPengguna *listpengguna)
     for (i = 0; i < banyakPengguna; i++)
     {
         ADVWORD(true);
-        drafAuthorParser(currentWord, &authorID, &banyakDrafPengguna, listpengguna); 
+        drafAuthorParser(currentWord, &authorID, &banyakDrafPengguna, listpengguna);
         for (j = 0; j < banyakDrafPengguna; j++)
         {
             ADVWORD(true);
@@ -438,7 +441,8 @@ void readDrafConfig(char *filename, ListPengguna *listpengguna)
             drafBaru.authorID = authorID;
             PushStackDraf(&dummyStack, drafBaru);
         }
-        while (!IsEmptyStackDraf(dummyStack)) {
+        while (!IsEmptyStackDraf(dummyStack))
+        {
             PopStackDraf(&dummyStack, &drafBaru);
             PushStackDraf(&(*listpengguna).contents[authorID].stackdraf, drafBaru);
         }
@@ -475,7 +479,7 @@ void readUtasConfig(char *filename, ListPengguna listPengguna, ListKicau *listKi
 
         temp.idAuthor = (*listKicau).buffer[idKicau - 1].authorID;
         temp.indexKicauanSambungan = 0;
-        temp.localtime = (*listKicau).buffer[idKicau-1].localtime;
+        temp.localtime = (*listKicau).buffer[idKicau - 1].localtime;
         transferStringToString((*listKicau).buffer[idKicau - 1].text, temp.text);
         insertLastKicauanSambungan(&p, temp);
         s->utas = p;
