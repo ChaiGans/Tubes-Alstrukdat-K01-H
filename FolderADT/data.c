@@ -201,7 +201,6 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna, GrafPerteman
         }
 
         (*listPengguna).contents[i].fotoProfil = foto;
-        displayFotoProfil((*listPengguna).contents[i].fotoProfil);
     }
 
     createGrafPertemanan(pertemanan, banyakProfile);
