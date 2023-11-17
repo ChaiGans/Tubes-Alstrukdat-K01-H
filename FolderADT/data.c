@@ -332,11 +332,7 @@ void readKicauanConfig(char *filename, ListKicau *listKicau, ListPengguna listPe
         tweet.id = wordToInt(currentWord);
 
         ADVWORD(true); // current word = text
-        int j;
-        for (j = 0; j < currentWord.Length; j++)
-        {
-            tweet.text[j] = currentWord.TabWord[j];
-        }
+        transferWordToString(tweet.text, currentWord);
 
         ADVWORD(true); // current word = like
         tweet.like = wordToInt(currentWord);

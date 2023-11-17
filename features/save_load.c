@@ -182,11 +182,10 @@ void loadAll(ListPengguna *listPengguna, GrafPertemanan *pertemanan, ListKicau *
         readKicauanConfig(concatCharPtr(dirName, "/kicauan.txt"), listKicau, *listPengguna);
         readBalasanConfig(concatCharPtr(dirName, "/balasan.txt"), listKicau, *listPengguna);
         printf("2...\n");
-        //readDrafConfig(concatCharPtr(dirName, "/draf.txt"), listPengguna);
+        readDrafConfig(concatCharPtr(dirName, "/draf.txt"), listPengguna);
         readUtasConfig(concatCharPtr(dirName, "/utas.txt"), *listPengguna, listKicau, listUtas);
         printf("3...\n");
         printf("\nPemuatan selesai!\n");
-        printf("STATISTIK\nTOTAL PENGGUNA = %d\nTOTAL KICAU = %d\n", ListPenggunaLength(*listPengguna), listKicauLength(*listKicau));
     } 
 
 }

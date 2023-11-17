@@ -38,11 +38,7 @@ int main()
     CreateListKicau(&listKicau, 10);
     AddressListUtas listUtas;
     CreateListUtas(&listUtas);
-
-    printf("Masukkan nama file config: ");
-    Word filename = ReadWord();
-    initReadConfig(filename, &listPengguna, &grafPertemanan, &listKicau, &listUtas);
-    displayGrafPertemanan(grafPertemanan);
+    loadAll(&listPengguna, &grafPertemanan, &listKicau, &listUtas);
     while (true)
     {
         // printTree(listKicau.buffer[0].balasan, 2);
@@ -55,7 +51,6 @@ int main()
             if (wordStringCompare(command, "MASUK"))
             {
                 masukPengguna(&currentLoginID, listPengguna);
-                displayNameFromID(currentLoginID, listPengguna);
             }
             else if (wordStringCompare(command, "DAFTAR"))
             {
