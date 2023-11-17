@@ -166,7 +166,7 @@ void saveAll(ListKicau lk, ListPengguna lp, AddressListUtas lu, GrafPertemanan g
 
 void loadAll(ListPengguna *listPengguna, GrafPertemanan *pertemanan, ListKicau *listKicau, AddressListUtas *listUtas){
     char* dirName = (char*)malloc(sizeof(char)*(100));
-    printf("Masukkan nama folder yang hendak dimuat\n");
+    printf("Masukkan nama folder yang hendak dimuat: ");
     int curLen = 0; Word dirWord = ReadWord();
     while(curLen < dirWord.Length){
         dirName[curLen] = dirWord.TabWord[curLen]; curLen++;
@@ -176,15 +176,15 @@ void loadAll(ListPengguna *listPengguna, GrafPertemanan *pertemanan, ListKicau *
     } else{
         CreateListPengguna(listPengguna); createGrafPertemanan(pertemanan, 0); CreateListKicau(listKicau, 100); CreateListUtas(listUtas);
         printf("\nAnda akan melakukan pemuatan dari %s.\n", dirName);
-        printf("\n Mohon tunggu...\n");
-        readPenggunaConfig(concatCharPtr(dirName, "/pengguna.txt"), listPengguna, pertemanan);
+        printf("\nMohon tunggu...\n");
         printf("1...\n");
+        printf("2...\n");
+        printf("3...\n");
+        readPenggunaConfig(concatCharPtr(dirName, "/pengguna.txt"), listPengguna, pertemanan);
         readKicauanConfig(concatCharPtr(dirName, "/kicauan.txt"), listKicau, *listPengguna);
         readBalasanConfig(concatCharPtr(dirName, "/balasan.txt"), listKicau, *listPengguna);
-        printf("2...\n");
         readDrafConfig(concatCharPtr(dirName, "/draf.txt"), listPengguna);
         readUtasConfig(concatCharPtr(dirName, "/utas.txt"), *listPengguna, listKicau, listUtas);
-        printf("3...\n");
         printf("\nPemuatan selesai!\n");
     } 
 
