@@ -96,4 +96,7 @@ int compare(const void *a, const void *b);
 int getBanyakPermintaanTeman(PrioQueueChar Q);
 /* Mengembalikan banyaknya permintaan teman yang dimiliki dalam Q */
 
+boolean isMengirimPermintaan(PrioQueueChar Q, int idPengirim);
+/* Mengembalikan true jika idPengirim mengirimkan permintaan pertemanan kepada currentUserID */
+
 #endif

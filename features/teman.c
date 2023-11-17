@@ -13,7 +13,7 @@ void displayDaftarTeman(int currentUserID, GrafPertemanan grafPertemanan, ListPe
         int i;
         for (i = 0; i < grafPertemanan.banyakOrang; i++)
         {
-            if (isTeman(grafPertemanan, currentUserID, i) && currentUserID!=i)
+            if (isTeman(grafPertemanan, currentUserID, i) && currentUserID != i)
             {
                 printf("| ");
                 displayNameFromID(i, listPengguna);
@@ -95,7 +95,7 @@ void kirimPermintaanTeman(int currentUserID, GrafPertemanan *grafPertemanan, Lis
         printf(" sudah menjadi teman Anda.\n");
         return;
     }
-    if (isMengirimPermintaan(*grafPertemanan, currentUserID, idPenerima))
+    if (isMengirimPermintaan((*listPengguna).contents[idPenerima].permintaanTeman, currentUserID))
     {
         printf("Anda sudah mengirim permintaan pertemanan kepada ");
         displayArrayOfChar(namaPenggunaYangDitambahkan.TabWord);

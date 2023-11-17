@@ -50,10 +50,10 @@ void displayGrafPertemanan(GrafPertemanan G)
     }
 }
 
-boolean isMengirimPermintaan(GrafPertemanan G, int idPengirim, int idPenerima)
-{
-    return ElmtGrafPertemanan(G, idPengirim, idPenerima) == '1' && ElmtGrafPertemanan(G, idPenerima, idPengirim) == '0';
-}
+// boolean isMengirimPermintaan(GrafPertemanan G, int idPengirim, int idPenerima)
+// {
+//     return ElmtGrafPertemanan(G, idPengirim, idPenerima) == '1' && ElmtGrafPertemanan(G, idPenerima, idPengirim) == '0';
+// }
 
 // int getBanyakPermintaanTeman(GrafPertemanan G, int idPenerima)
 // {

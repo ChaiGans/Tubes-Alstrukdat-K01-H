@@ -132,3 +132,17 @@ int getBanyakPermintaanTeman(PrioQueueChar Q)
 {
 	return NBElmtQueue(Q);
 }
+
+boolean isMengirimPermintaan(PrioQueueChar Q, int idPengirim)
+{
+	infotype temp;
+	while (!IsEmptyQueue(Q))
+	{
+		Dequeue(&Q, &temp);
+		if (temp.id == idPengirim)
+		{
+			return true;
+		}
+	}
+	return false;
+}
