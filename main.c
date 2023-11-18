@@ -64,10 +64,14 @@ int main()
             {
                 saveAll(listKicau, listPengguna, listUtas, grafPertemanan);
             }
+            else if (wordStringCompare(command, "TUTUP_PROGRAM"))
+            {
+                break;
+            }
             else
             {
                 printf("Silakan masuk terlebih dahulu.\n");
-            }
+            } 
         }
         else
         {
