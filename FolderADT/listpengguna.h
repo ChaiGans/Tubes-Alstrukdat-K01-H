@@ -35,23 +35,24 @@ typedef struct
 
 typedef struct
 {
-   int index;
-   char username[21];
-   char password[21];
-   char bio[136]; // Bio max 135 karakter
-   char *nomorHP;
-   char weton[7];                 // Pahing, Kliwon, Wage, Pon, dan Legi (case insensitive)
-   char status[7];                // PUBLIK, PRIVAT
-   FotoProfil fotoProfil;         // use pcolor.c
-   PrioQueueChar permintaanTeman; // harusnya priorqueuepermintaan (check by jumlah teman atau length of listTeman)
-   StackDraf stackdraf;
+   int index; // Index user dalam list statik pengguna
+   char username[21]; // Username pengguna
+   char password[21]; // Kata sandi pengguna
+   char bio[136]; // Bio pengguna
+   char *nomorHP; // Nomor HP pengguna
+   char weton[7]; // Weton pengguna 
+   char status[7]; // Tipe akun pengguna (PUBLIK, PRIVAT)
+   FotoProfil fotoProfil; // Foto profil pengguna
+   PrioQueueChar permintaanTeman; // Permintaan pertemanan pengguna
+   StackDraf stackdraf; // Draf Kicauan Pengguna
 } Profile;
 
 typedef int IdxType;
 typedef struct
 {
-   Profile contents[CAPACITY_STATIK]; /* memori tempat penyimpan elemen (container) */
+   Profile contents[CAPACITY_STATIK]; // List statik pengguna bertipe Profile
 } ListPengguna;
+
 /* Indeks yang digunakan [0..CAPACITY-1] */
 /* Jika l adalah ListPengguna, cara deklarasi dan akses: */
 /* Deklarasi : l : ListPengguna */
