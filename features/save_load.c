@@ -153,13 +153,13 @@ void saveAll(ListKicau lk, ListPengguna lp, AddressListUtas lu, GrafPertemanan g
     } 
     printf("\nAnda akan melakukan penyimpanan di %s.\n", dirName);
     printf("\n Mohon tunggu...\n");
-    saveBalasan(concatCharPtr(dirName, "/balasan.txt"), lk, lp);
+    saveBalasan(concatCharPtr(dirName, "/balasan.config"), lk, lp);
     printf("1...\n");
-    saveDraft(concatCharPtr(dirName, "/draf.txt"), lp);
-    saveKicauan(concatCharPtr(dirName, "/kicauan.txt"), lk, lp);
+    saveDraft(concatCharPtr(dirName, "/draf.config"), lp);
+    saveKicauan(concatCharPtr(dirName, "/kicauan.config"), lk, lp);
     printf("2...\n");
-    savePengguna(concatCharPtr(dirName, "/pengguna.txt"), lp, gp);
-    saveUtas(concatCharPtr(dirName, "/utas.txt"), lp, lk, lu);
+    savePengguna(concatCharPtr(dirName, "/pengguna.config"), lp, gp);
+    saveUtas(concatCharPtr(dirName, "/utas.config"), lp, lk, lu);
     printf("3...\n");
     printf("\nPenyimpanan telah berhasil dilakukan!\n");
 }
@@ -180,11 +180,11 @@ void loadAll(ListPengguna *listPengguna, GrafPertemanan *pertemanan, ListKicau *
         printf("1...\n");
         printf("2...\n");
         printf("3...\n");
-        readPenggunaConfig(concatCharPtr(dirName, "/pengguna.txt"), listPengguna, pertemanan);
-        readKicauanConfig(concatCharPtr(dirName, "/kicauan.txt"), listKicau, *listPengguna);
-        readBalasanConfig(concatCharPtr(dirName, "/balasan.txt"), listKicau, *listPengguna);
-        readDrafConfig(concatCharPtr(dirName, "/draf.txt"), listPengguna);
-        readUtasConfig(concatCharPtr(dirName, "/utas.txt"), *listPengguna, listKicau, listUtas);
+        readPenggunaConfig(concatCharPtr(dirName, "/pengguna.config"), listPengguna, pertemanan);
+        readKicauanConfig(concatCharPtr(dirName, "/kicauan.config"), listKicau, *listPengguna);
+        readBalasanConfig(concatCharPtr(dirName, "/balasan.config"), listKicau, *listPengguna);
+        readDrafConfig(concatCharPtr(dirName, "/draf.config"), listPengguna);
+        readUtasConfig(concatCharPtr(dirName, "/utas.config"), *listPengguna, listKicau, listUtas);
         printf("\nPemuatan selesai!\n");
     } 
 
