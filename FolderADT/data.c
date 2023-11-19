@@ -264,7 +264,7 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna, GrafPerteman
     ADVWORD(true); // read sampe pita ditutup
     if (EOF)
         printf("Config pengguna berhasil dibaca... \n");
-    fclose(file);
+    // fclose(file);
 }
 
 Profile cariPengguna(Word uname, ListPengguna listPengguna)
@@ -350,7 +350,7 @@ void readKicauanConfig(char *filename, ListKicau *listKicau, ListPengguna listPe
     }
     ADVWORD(true);
     printf("Config kicauan berhasil dibaca... \n");
-    fclose(file);
+    // fclose(file);
 }
 
 void readBalasanConfig(char *filename, ListKicau *l, ListPengguna listpengguna)
@@ -404,7 +404,7 @@ void readBalasanConfig(char *filename, ListKicau *l, ListPengguna listpengguna)
         }
     }
     printf("Config balasan berhasil dibaca... \n");
-    fclose(file);
+    // fclose(file);
 }
 
 void readDrafConfig(char *filename, ListPengguna *listpengguna)
@@ -444,7 +444,7 @@ void readDrafConfig(char *filename, ListPengguna *listpengguna)
     }
     ADVWORD(true);
     printf("Config draf berhasil dibaca... \n");
-    fclose(file);
+    // fclose(file);
 }
 
 void readUtasConfig(char *filename, ListPengguna listPengguna, ListKicau *listKicau, AddressListUtas *listUtas)
@@ -503,7 +503,7 @@ void readUtasConfig(char *filename, ListPengguna listPengguna, ListKicau *listKi
         }
     }
     printf("Config utas berhasil dibaca... \n");
-    fclose(file);
+    // fclose(file);
 }
 
 void initReadConfig(Word fileName, ListPengguna *listPengguna, GrafPertemanan *pertemanan, ListKicau *listKicau, AddressListUtas *listUtas)
