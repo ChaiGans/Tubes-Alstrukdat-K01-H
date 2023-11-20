@@ -148,7 +148,7 @@ void saveAll(ListKicau lk, ListPengguna lp, AddressListUtas lu, GrafPertemanan g
     if (!isExist(dirName)){
         printf("belum terdapat %s. Akan dilakukan pembuatan %s terlebih dahulu.\n", dirName, dirName);
         printf("\n Mohon tunggu...");
-        mkdir(dirName);
+        mkdir(dirName, 0777);
         printf("1...\n2...\n3...\n\n%s sudah berhasil dibuat.", dirName);
     } 
     printf("\nAnda akan melakukan penyimpanan di %s.\n", dirName);
