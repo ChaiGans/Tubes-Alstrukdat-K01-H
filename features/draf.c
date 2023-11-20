@@ -8,9 +8,10 @@ void buatDraf (int currentUserID, ListKicau* listkicau, ListPengguna* listpenggu
     Word isiDraf = ReadWord();
     getLocalTime(&drafBaru.localtime);
     transferWordToString(drafBaru.text, isiDraf);
+    drafBaru.authorID = currentUserID;
     putchar('\n');
     do {
-        printf("Apakah anda ingin menghapus, menyimpan, atau menerbitkan draf ini?");
+        printf("Apakah anda ingin menghapus, menyimpan, atau menerbitkan draf ini? ");
         konfirmasiAksi = ReadWord();
         if (wordStringCompare(konfirmasiAksi, "HAPUS")) {
             printf("Draf telah berhasil dihapus!\n");
