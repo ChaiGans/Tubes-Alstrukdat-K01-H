@@ -87,6 +87,10 @@ void sambungUtas(int idUtas, int index, int currentUserID, AddressListUtas *list
         {
             printf("Index terlalu tinggi!\n");
         }
+        else if (index == 0) // mau memasukkan di indeks 0 (kicauan utama)
+        {
+            printf("Anda tidak bisa menyambung utas di indeks 0!\n");
+        }
         else // memenuhi semua kondisi
         {
             printf("Masukkan kicauan:\n");
