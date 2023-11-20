@@ -62,8 +62,8 @@ void savePengguna(char* fileName, ListPengguna lp, GrafPertemanan gp){
         fprintf(file, "%s\n", lp.contents[i].status);
         for (int j = 0; j < lp.contents[i].fotoProfil.SimbolProfil.rowEff; j++){
             for (int k = 0; k < lp.contents[i].fotoProfil.SimbolProfil.colEff; k++){
-                fprintf(file, "%c ", lp.contents[i].fotoProfil.WarnaProfil.mem[i][j]);
-                fprintf(file, "%c", lp.contents[i].fotoProfil.SimbolProfil.mem[i][j]);
+                fprintf(file, "%c ", lp.contents[i].fotoProfil.WarnaProfil.mem[j][k]);
+                fprintf(file, "%c", lp.contents[i].fotoProfil.SimbolProfil.mem[j][k]);
                 if (k != lp.contents[i].fotoProfil.SimbolProfil.colEff - 1) fputs(" ", file);
             } if (j != lp.contents[i].fotoProfil.SimbolProfil.rowEff - 1) fputs("\n", file);
         } i++;
@@ -148,7 +148,7 @@ void saveAll(ListKicau lk, ListPengguna lp, AddressListUtas lu, GrafPertemanan g
     if (!isExist(dirName)){
         printf("belum terdapat %s. Akan dilakukan pembuatan %s terlebih dahulu.\n", dirName, dirName);
         printf("\n Mohon tunggu...");
-        mkdir(dirName, 0777);
+        mkdir(dirName);
         printf("1...\n2...\n3...\n\n%s sudah berhasil dibuat.", dirName);
     } 
     printf("\nAnda akan melakukan penyimpanan di %s.\n", dirName);
