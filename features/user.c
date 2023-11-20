@@ -113,13 +113,13 @@ void aturJenisAkun (Profile* userProfile) {
     printf("Saat ini, akun Anda adalah akun ");
     displayStatusAKun(*userProfile);
     if (stringStringCompare((*userProfile).status, "PUBLIK")) {
-        printf(". Ingin mengubah ke akun PRIVAT? (YA/TIDAK)");
+        printf(". Ingin mengubah ke akun PRIVAT? (YA/TIDAK) ");
         Word konfirmasi = ReadWord();
         if (wordStringCompare(konfirmasi, "YA")) {
             transferStringToString("PRIVAT", userProfile->status);
         }
     } else {
-        printf(". Ingin mengubah ke akun PUBLIK? (YA/TIDAK)");
+        printf(". Ingin mengubah ke akun PUBLIK? (YA/TIDAK) ");
         Word konfirmasi = ReadWord();
         if (wordStringCompare(konfirmasi, "YA")) {
             transferStringToString("PUBLIK", userProfile->status);
