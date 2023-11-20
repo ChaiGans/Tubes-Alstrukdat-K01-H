@@ -50,7 +50,11 @@ int main()
         {
             if (wordStringCompare(command, "MASUK"))
             {
-                masukPengguna(&currentLoginID, listPengguna);
+                if (isEmptyListPengguna(listPengguna)) {
+                    printf("Tidak ada pengguna yang terdaftar. Harap melakukan DAFTAR terlebih dahulu.\n");
+                } else {
+                    masukPengguna(&currentLoginID, listPengguna);
+                }
             }
             else if (wordStringCompare(command, "DAFTAR"))
             {
@@ -206,6 +210,9 @@ int main()
             else if (wordStringCompare(command, "TUTUP_PROGRAM"))
             {
                 break;
+            }
+            else {
+                printf("Perintah yang kamu berikan tidak valid.\n");
             }
         }
     }
