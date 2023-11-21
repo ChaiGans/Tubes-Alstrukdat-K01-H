@@ -53,6 +53,8 @@ boolean IsEmptyStackDraf(StackDraf S);
 /* Mengirim true jika StackDraf kosong: lihat definisi di atas */
 boolean IsFullStackDraf(StackDraf S);
 /* Mengirim true jika tabel penampung nilai elemen StackDraf penuh */
+int LengthStackDraf(StackDraf S);
+/* Mengirim banyak stack yang ada*/
 
 /* ************ Menambahkan sebuah elemen ke StackDraf ************ */
 void PushStackDraf(StackDraf * S, ElTypeDraf X);

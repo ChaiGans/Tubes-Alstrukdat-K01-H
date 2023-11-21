@@ -10,6 +10,7 @@
 #define NMax 100
 #define BLANK ' '
 #define NEWLINE '\n'
+#define CARRIAGE '\r'
 
 typedef struct
 {

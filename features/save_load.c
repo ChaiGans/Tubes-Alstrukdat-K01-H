@@ -89,8 +89,7 @@ void savePengguna(char* fileName, ListPengguna lp, GrafPertemanan gp){
                 j++;
             }   
         } i++;
-    }
-    fclose(file);
+    } fclose(file);
 }
 
 void saveDraft(char* fileName, ListPengguna lp){
@@ -103,15 +102,10 @@ void saveDraft(char* fileName, ListPengguna lp){
     while(lp.contents[i].index != MARK_STATIK){
         if (!IsEmptyStackDraf(lp.contents[i].stackdraf)){
             StackDraf temp = lp.contents[i].stackdraf; 
-            StackDraf temp2; CreateEmptyStackDraf(&temp2);
             ElTypeDraf tempdraf; int length = 0;
-            while(!IsEmptyStackDraf(temp)){
+            fprintf(file, "\n%s %d", lp.contents[i].username, LengthStackDraf(temp));
+            while (!IsEmptyStackDraf(temp)){
                 PopStackDraf(&temp, &tempdraf);
-                PushStackDraf(&temp2, tempdraf);
-                length++;
-            } fprintf(file, "\n%s %d", lp.contents[i].username, length);
-            while (!IsEmptyStackDraf(temp2)){
-                PopStackDraf(&temp2, &tempdraf);
                 fprintf(file, "\n%s", tempdraf.text);
                 fprintf(file, "\n%02d/%02d/%04d %02d:%02d:%02d", tempdraf.localtime.DD, tempdraf.localtime.MM, tempdraf.localtime.YYYY, tempdraf.localtime.T.HH, tempdraf.localtime.T.MM, tempdraf.localtime.T.SS);
             }

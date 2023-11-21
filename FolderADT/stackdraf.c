@@ -20,6 +20,14 @@ boolean IsFullStackDraf(StackDraf S) {
     return Top(S) == MaxElStack-1;
 }
 
+int LengthStackDraf(StackDraf S){
+    int i = 0; ElTypeDraf tumbal;
+    while (!IsEmptyStackDraf(S)){
+        PopStackDraf(&S, &tumbal);
+        i++;
+    } return i;
+}
+
 /* ************ Menambahkan sebuah elemen ke StackDraf ************ */
 void PushStackDraf(StackDraf * S, ElTypeDraf X) {
     /* Menambahkan X sebagai elemen StackDraf S. */
