@@ -85,27 +85,6 @@ boolean isEmptyListKicau(ListKicau l);
 boolean isFullListKicau(ListKicau l);
 /* Mengirimkan true jika list l penuh, mengirimkan false jika tidak */
 
-/* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
-/* *** Mendefinisikan isi list dari pembacaan *** */
-void readListKicau(ListKicau *l);
-/* I.S. l sembarang dan sudah dialokasikan sebelumnya */
-/* F.S. List l terdefinisi */
-/* Proses : membaca banyaknya elemen l dan mengisi nilainya */
-/* 1. Baca banyaknya elemen diakhiri enter, misalnya N */
-/*    Pembacaan diulangi sampai didapat N yang benar yaitu 0 <= N <= CAPACITY(l) */
-/*    Jika N tidak valid, tidak diberikan pesan kesalahan */
-/* 2. Jika 0 < N <= CAPACITY(l); Lakukan N kali: Baca elemen mulai dari indeks
-      0 satu per satu diakhiri enter */
-/*    Jika N = 0; hanya terbentuk l kosong */
-void printListKicau(ListKicau l);
-/* Proses : Menuliskan isi list dengan traversal, list ditulis di antara kurung siku;
-   antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan karakter di depan,
-   di tengah, atau di belakang, termasuk spasi dan enter */
-/* I.S. l boleh kosong */
-/* F.S. Jika l tidak kosong: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika list kosong : menulis [] */
-
 /* ********** SEARCHING ********** */
 /* ***  Perhatian : list boleh kosong!! *** */
 IdxType indexOfListKicau(ListKicau l, ElTypeKicau val);
