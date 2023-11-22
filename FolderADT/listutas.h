@@ -141,4 +141,5 @@ void insertAtKicauanSambungan(AddressUtas *l, int idx, KicauanSambungan kicauanS
 int ListUtaslength(AddressListUtas l);
 boolean isIdUtasDefined(int idSearch, AddressListUtas *listUtas);
 int utasLength(AddressUtas au);
+void displayUtas(int idUtas, int currentUserID, AddressListUtas *listUtas, ListPengguna listPengguna);
 #endif
