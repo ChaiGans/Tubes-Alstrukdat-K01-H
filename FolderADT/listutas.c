@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "listutas.h"
+#include "listpengguna.h"
 
 AddressListUtas newNodeListUtas(int idKicauBaru)
 {
@@ -259,34 +260,27 @@ void deleteAtListUtas(AddressListUtas *l, int idx, int *idKicauanTarget)
 
 void insertAtKicauanSambungan(AddressUtas *l, int idx, KicauanSambungan kicauanSambungan)
 {
-    if (idx != 0) // tidak boleh masuk dalam kicauan utama
+    if (idx == 0)
     {
-        if (idx == utasLength(*l))
-        {
-            insertLastKicauanSambungan(l, kicauanSambungan);
-        }
-        else
-        {
-            AddressUtas temp = newNodeKicauanSambungan(kicauanSambungan);
-            if (temp != NULL)
-            {
-                int currentIdx = 0;
-                AddressUtas p = *l;
-                AddressUtas prev;
-                while (currentIdx < idx)
-                {
-                    currentIdx += 1;
-                    prev = p;
-                    p = NEXT(p);
-                }
-                NEXT(temp) = p;
-                NEXT(prev) = temp;
-            }
-        }
+        insertFirstKicauanSambungan(&l, kicauanSambungan);
     }
     else
     {
-        printf("Anda tidak boleh mengganti kicauan utama\n");
+        AddressUtas temp = newNodeKicauanSambungan(kicauanSambungan);
+        if (temp != NULL)
+        {
+            int currentIdx = 0;
+            AddressUtas p = *l;
+            AddressUtas prev;
+            while (currentIdx < idx)
+            {
+                currentIdx += 1;
+                prev = p;
+                p = NEXT(p);
+            }
+            NEXT(temp) = p;
+            NEXT(prev) = temp;
+        }
     }
 }
 
@@ -387,6 +381,53 @@ int utasLength(AddressUtas au)
     }
     return i;
 }
+
+void displayUtas(int idUtas, int currentUserID, AddressListUtas *listUtas, ListPengguna listPengguna)
+{
+    if (idUtas > ListUtaslength(*listUtas))
+    {
+        printf("Utas tidak ditemukan!\n");
+    }
+    else
+    {
+        int i = 1; // idUtas mulai dari 1
+        AddressListUtas s = *listUtas;
+        while (i != idUtas) // cari utas dengan idUtas
+        {
+            s = NEXT(s); // address listutas
+            i += 1;
+        }
+        AddressUtas p = s->utas; // address utas
+        AddressUtas copy = p;    // duplicate address utas untuk traversing
+        printf("|   ID = %d\n", s->idKicau);
+        printf("|   ");
+        displayNameFromID(copy->info.idAuthor, listPengguna);
+        printf("\n");
+        printf("|   ");
+        displayDATETIME(copy->info.localtime);
+        printf("\n");
+        printf("|   ");
+        displayArrayOfChar(copy->info.text);
+        printf("\n");
+        printf("\n");
+        for (int i = 1; i < utasLength(p); i++)
+        {
+            copy = copy->next; // dimulai dari kicauan sambungan pertama bukan kicauan utama
+            printf("    |   INDEX = %d\n", i);
+            printf("    |   ");
+            displayNameFromID(copy->info.idAuthor, listPengguna);
+            printf("\n");
+            printf("    |   ");
+            displayDATETIME(copy->info.localtime);
+            printf("\n");
+            printf("    |   ");
+            displayArrayOfChar(copy->info.text);
+            printf("\n");
+            printf("\n");
+        }
+    }
+}
+
 // /****************** PROSES TERHADAP LIST ******************/
 // ListUtas concatListUtas(ListUtas l1, ListUtas l2)  {
 //     /* I.S. l1 dan l2 sembarang */
