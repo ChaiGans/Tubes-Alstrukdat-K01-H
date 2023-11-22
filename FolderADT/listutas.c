@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "listutas.h"
-#include "listpengguna.h"
 
 AddressListUtas newNodeListUtas(int idKicauBaru)
 {
@@ -262,7 +261,7 @@ void insertAtKicauanSambungan(AddressUtas *l, int idx, KicauanSambungan kicauanS
 {
     if (idx == 0)
     {
-        insertFirstKicauanSambungan(&l, kicauanSambungan);
+        insertFirstKicauanSambungan(l, kicauanSambungan);
     }
     else
     {
@@ -380,52 +379,6 @@ int utasLength(AddressUtas au)
         i++;
     }
     return i;
-}
-
-void displayUtas(int idUtas, int currentUserID, AddressListUtas *listUtas, ListPengguna listPengguna)
-{
-    if (idUtas > ListUtaslength(*listUtas))
-    {
-        printf("Utas tidak ditemukan!\n");
-    }
-    else
-    {
-        int i = 1; // idUtas mulai dari 1
-        AddressListUtas s = *listUtas;
-        while (i != idUtas) // cari utas dengan idUtas
-        {
-            s = NEXT(s); // address listutas
-            i += 1;
-        }
-        AddressUtas p = s->utas; // address utas
-        AddressUtas copy = p;    // duplicate address utas untuk traversing
-        printf("|   ID = %d\n", s->idKicau);
-        printf("|   ");
-        displayNameFromID(copy->info.idAuthor, listPengguna);
-        printf("\n");
-        printf("|   ");
-        displayDATETIME(copy->info.localtime);
-        printf("\n");
-        printf("|   ");
-        displayArrayOfChar(copy->info.text);
-        printf("\n");
-        printf("\n");
-        for (int i = 1; i < utasLength(p); i++)
-        {
-            copy = copy->next; // dimulai dari kicauan sambungan pertama bukan kicauan utama
-            printf("    |   INDEX = %d\n", i);
-            printf("    |   ");
-            displayNameFromID(copy->info.idAuthor, listPengguna);
-            printf("\n");
-            printf("    |   ");
-            displayDATETIME(copy->info.localtime);
-            printf("\n");
-            printf("    |   ");
-            displayArrayOfChar(copy->info.text);
-            printf("\n");
-            printf("\n");
-        }
-    }
 }
 
 // /****************** PROSES TERHADAP LIST ******************/
