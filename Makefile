@@ -35,7 +35,9 @@ DRIVERS = ./FolderADT/grafpertemanandriver.c \
           ./FolderADT/listpenggunadriver.c \
           ./FolderADT/prioqueuechardriver.c \
           ./FolderADT/stackdrafdriver.c \
-          ./FolderADT/treebalasandriver.c
+          ./FolderADT/treebalasandriver.c \
+          ./FolderADT/listutasdriver.c \
+          
 
 # Object files (automatically generated from source files)
 OBJ = $(SRC:.c=.o)
