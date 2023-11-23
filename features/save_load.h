@@ -1,4 +1,4 @@
-#include "../FolderADT/data.h"
+#include "../FolderADT/primitive_data/data.h"
 #include <stdio.h>
 #include <sys/stat.h>
 #include <stdlib.h>

@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "wordmachine.h"
-#include "boolean.h"
+#include "../boolean.h"
 #include "charmachine.h"
 
 boolean EndWord;

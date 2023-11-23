@@ -1,7 +1,7 @@
 #ifndef TEMAN_H
 #define TEMAN_H
 
-#include "../FolderADT/data.h"
+#include "../FolderADT/primitive_data/data.h"
 
 void displayDaftarTeman(int currentUserID, GrafPertemanan grafPertemanan, ListPengguna listPengguna);
 // I.S. : currentUserID, grafPertemanan, dan listPengguna terdefinisi

@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "listkicau.h"
+#include "../kicauan/listkicau.h"
 #include "listutas.h"
-#include "listpengguna.h"
+#include "../pengguna/listpengguna.h"
 
 int main()
 {

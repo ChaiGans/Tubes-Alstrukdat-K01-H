@@ -1,9 +1,9 @@
 #ifndef __TYPE_H__
 #define __TYPE_H__
 
-#include "boolean.h"
+#include "../boolean.h"
 #include "listpengguna.h"
-#include "wordmachine.h"
+#include "../wordmachine/wordmachine.h"
 
 /* pcolor */
 #define NORMAL "\x1B[0m"

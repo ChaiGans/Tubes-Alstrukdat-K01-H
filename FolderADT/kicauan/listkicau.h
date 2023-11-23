@@ -7,10 +7,10 @@
 #ifndef LISTKICAU_H
 #define LISTKICAU_H
 
-#include "boolean.h"
-#include "datetime.h"
-#include "treebalasan.h"
-#include "stackdraf.h"
+#include "../boolean.h"
+#include "../datetime/datetime.h"
+#include "../balasan/treebalasan.h"
+#include "../draf/stackdraf.h"
 /*  Kamus Umum */
 #define IDX_MIN_LISTDIN 0
 /* Indeks minimum list */

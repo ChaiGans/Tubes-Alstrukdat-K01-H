@@ -1,9 +1,9 @@
 #ifndef KICAUAN_H
 #define KICAUAN_H
 
-#include "../FolderADT/wordmachine.h"
-#include "../FolderADT/listkicau.h"
-#include "../FolderADT/data.h"
+#include "../FolderADT/wordmachine/wordmachine.h"
+#include "../FolderADT/kicauan/listkicau.h"
+#include "../FolderADT/primitive_data/data.h"
 
 void printKicau(Kicauan tweet, ListPengguna ListPengguna, char* tag);
 void upKicau(ListKicau *lk, ListPengguna lp, int currentUserID, DatabaseTagar *databaseTagar);

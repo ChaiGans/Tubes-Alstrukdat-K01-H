@@ -5,9 +5,9 @@
 #ifndef StackDraft_H
 #define StackDraft_H
 
-#include "boolean.h"
-#include "datetime.h"
-#include "wordmachine.h"
+#include "../boolean.h"
+#include "../datetime/datetime.h"
+#include "../wordmachine/wordmachine.h"
 
 #define Nil -1
 #define MaxElStack 10

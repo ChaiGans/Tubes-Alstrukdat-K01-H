@@ -12,7 +12,7 @@ int main(){
     if (isEmptyListKicau(lk)) printf("\nlist kicau kosong\n");
     else printf("\nlist kicau tidak kosong\n");
 
-    Kicauan tweet; 
+    Kicauan tweet;  
     tweet.authorID = 1; 
     tweet.balasan = NULL; 
     tweet.id = 2; 

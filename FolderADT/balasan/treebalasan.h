@@ -6,10 +6,10 @@
 #ifndef POHONBINER_H
 #define POHONBINER_H
 
-#include "boolean.h"
-#include "datetime.h"
-#include "listpengguna.h"
-#include "grafpertemanan.h"
+#include "../boolean.h"
+#include "../datetime/datetime.h"
+#include "../pengguna/listpengguna.h"
+#include "../pertemanan/grafpertemanan.h"
 
 /* Selektor */
 #define ROOT(p) (p)->info

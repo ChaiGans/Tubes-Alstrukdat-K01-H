@@ -1,8 +1,8 @@
 #ifndef GRAFPERTEMANAN_H
 #define GRAFPERTEMANAN_H
 
-#include "matrix.h"
-#include "boolean.h"
+#include "../matrix/matrix.h"
+#include "../boolean.h"
 
 typedef struct Grafpertemanan
 {

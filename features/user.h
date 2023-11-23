@@ -1,11 +1,11 @@
 #ifndef _USER_h
 #define _USER_h
 
-#include "../FolderADT/listpengguna.h"
-#include "../FolderADT/wordmachine.h"
-#include "../FolderADT/profile.h"
-#include "../FolderADT/grafpertemanan.h"
-#include "../FolderADT/prioqueuechar.h"
+#include "../FolderADT/pengguna/listpengguna.h"
+#include "../FolderADT/wordmachine/wordmachine.h"
+#include "../FolderADT/pengguna/profile.h"
+#include "../FolderADT/pertemanan/grafpertemanan.h"
+#include "../FolderADT/queue/prioqueuechar.h"
 
 void daftarPengguna (ListPengguna* l, GrafPertemanan* G) ;
 void masukPengguna (int* currentUserID, ListPengguna l);

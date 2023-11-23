@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "treebalasan.h"
-#include "listpengguna.h"
-#include "grafpertemanan.h"
 
 int main() {
     ListPengguna listpengguna;

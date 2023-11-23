@@ -2,7 +2,7 @@
 /* Implementasi Mesin Karakter */
 
 #include "charmachine.h"
-#include "boolean.h"
+#include "../boolean.h"
 #include <stdio.h>
 
 char currentChar;

@@ -3,16 +3,18 @@
 #ifndef DATA_H
 #define DATA_H
 
-#include "wordmachine.h"
-#include "boolean.h"
-#include "profile.h"
-#include "listpengguna.h"
-#include "listkicau.h"
-#include "listutas.h"
-#include "stackdraf.h"
-#include "datetime.h"
-#include "grafpertemanan.h"
-#include "prioqueuechar.h"
+#include "../wordmachine/wordmachine.h"
+#include "../boolean.h"
+#include "../pengguna/profile.h"
+#include "../pengguna/listpengguna.h"
+#include "../kicauan/listkicau.h"
+#include "../utas/listutas.h"
+#include "../draf/stackdraf.h"
+#include "../datetime/datetime.h"
+#include "../pertemanan/grafpertemanan.h"
+#include "../queue/prioqueuechar.h"
+
+
 // Fungsi pada data.h digunakan untuk mendapatkan data dari file pengguna.txt, kicauan.txt, balasan.txt, draf.txt, dan utas.txt
 // Fungsi pada data.h juga digunakan untuk mengubah data pada file pengguna.txt, kicauan.txt, balasan.txt, draf.txt, dan utas.txt
 

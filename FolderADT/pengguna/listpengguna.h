@@ -6,11 +6,11 @@
 #ifndef ListPengguna_H
 #define ListPengguna_H
 
-#include "boolean.h"
-#include "wordmachine.h"
-#include "prioqueuechar.h"
-#include "matrix.h"
-#include "stackdraf.h"
+#include "../boolean.h"
+#include "../wordmachine/wordmachine.h"
+#include "../queue/prioqueuechar.h"
+#include "../matrix/matrix.h"
+#include "../draf/stackdraf.h"
 
 /*  Kamus Umum */
 #define CAPACITY_STATIK 20
