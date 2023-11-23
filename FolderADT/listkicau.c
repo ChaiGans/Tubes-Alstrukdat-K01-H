@@ -223,7 +223,7 @@ void insertTagar(DatabaseTagar *databaseTagar, char tagar[], Kicauan *kicauan){
         (*databaseTagar).length++;
     } else{
         int i = hash;
-        while(((*databaseTagar).keyAndValue[i] != NULL) && (!stringStringCompare((*databaseTagar).keyAndValue[i]->Tagar, tagarlowercase))) i++;
+        while(((*databaseTagar).keyAndValue[i] != NULL) && (!stringStringCompare((*databaseTagar).keyAndValue[i]->Tagar, tagarlowercase))) i = (i + 1)%200;
         if ((*databaseTagar).keyAndValue[i] == NULL){
             PointerMapTagar tagarbaru = (PointerMapTagar) malloc(30*sizeof(char) + sizeof(PointerAddressKicau));  
             int j = 0; while ((j < 30)&&(tagarlowercase[j] != '\0')){
