@@ -219,7 +219,6 @@ void insertTagar(DatabaseTagar *databaseTagar, char tagar[], Kicauan *kicauan){
         } tagarbaru->Tagar[i] = '\0';
         tagarbaru->listKicauTagar = newPointerKicauNode(kicauan);
         (*databaseTagar).keyAndValue[hash] = tagarbaru;
-        printf("\n\ndata tag belum ada\n\n");
         (*databaseTagar).length++;
     } else{
         int i = hash;
@@ -231,10 +230,8 @@ void insertTagar(DatabaseTagar *databaseTagar, char tagar[], Kicauan *kicauan){
             } tagarbaru->Tagar[j] = '\0';
             tagarbaru->listKicauTagar = newPointerKicauNode(kicauan);
             (*databaseTagar).keyAndValue[hash] = tagarbaru;
-            printf("\n\ndata tag geser hash\n\n");
             (*databaseTagar).length++;
         } else{
-            printf("\n\ndata tag udah ada");
             PointerAddressKicau p = (*databaseTagar).keyAndValue[i]->listKicauTagar;
             
             while(p->nextKicau != NULL){
