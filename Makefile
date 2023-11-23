@@ -37,7 +37,8 @@ DRIVERS = ./FolderADT/pertemanan/grafpertemanandriver.c \
           ./FolderADT/draf/stackdrafdriver.c \
           ./FolderADT/balasan/treebalasandriver.c \
           ./FolderADT/utas/listutasdriver.c \
-          
+          ./FolderADT/matrix/matrixdriver.c \
+          ./FolderADT/pengguna/profiledriver.c \
 
 # Object files (automatically generated from source files)
 OBJ = $(SRC:.c=.o)
@@ -79,7 +80,17 @@ $(DRIVERS:.c=.o): %.o : %.c
 # Clean up object files and the executable
 clean:
 	@rm -f *.o $(EXECUTABLE) $(DRIVER_EXES)
-	@rm -f FolderADT/*.o
+	@rm -f FolderADT/balasan/*.o
+	@rm -f FolderADT/datetime/*.o
+	@rm -f FolderADT/draf/*.o
+	@rm -f FolderADT/kicauan/*.o
+	@rm -f FolderADT/matrix/*.o
+	@rm -f FolderADT/pengguna/*.o
+	@rm -f FolderADT/pertemanan/*.o
+	@rm -f FolderADT/primitive_data/*.o
+	@rm -f FolderADT/queue/*.o
+	@rm -f FolderADT/wordmachine/*.o
+	@rm -f FolderADT/utas/*.o
 	@rm -f features/*.o
 	@echo "Cleanup completed."
 
