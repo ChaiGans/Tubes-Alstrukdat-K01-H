@@ -74,9 +74,6 @@ boolean isFullListKicau(ListKicau l)
 }
 /* Mengirimkan true jika list l penuh, mengirimkan false jika tidak */
 
-/* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
-/* *** Mendefinisikan isi list dari pembacaan *** */
-
 /* ********** SEARCHING ********** */
 /* ***  Perhatian : list boleh kosong!! *** */
 IdxType indexOfListKicau(ListKicau l, ElTypeKicau val)
@@ -176,4 +173,75 @@ boolean isIdKicauDefined (int idSearch, ListKicau l) {
         }
     }
     return false;
+}
+
+char makeLowerCase(char A){
+    int ascii = (int) A;
+    if ((ascii >= 65)&&(ascii <= 90)) ascii+=32;
+    return (char)ascii;
+}
+
+int hashTagar(char karakter[]){
+    int total = 0, i = 0;
+    while (karakter[i] != '\0'){
+        total += ((int) makeLowerCase(karakter[i])); i++;
+    } return (total % 200);
+}
+
+boolean isTagarValid(int nilaiHashtagar, DatabaseTagar databaseTagar){
+    return (databaseTagar.keyAndValue[nilaiHashtagar] != NULL);
+}
+
+void createDatabaseTagar(DatabaseTagar *databaseTagar){
+    int i; for(i = 0; i < 200; i++){
+        (*databaseTagar).keyAndValue[i] = NULL;
+    } (*databaseTagar).length = 0;
+}
+
+PointerAddressKicau newPointerKicauNode(Kicauan *kicauan){
+    PointerAddressKicau new = (PointerAddressKicau) malloc(sizeof(PointerAddressKicau)+sizeof(PointerKicauan)); 
+    (new)->nextKicau = NULL; 
+    (new)->currKicau = kicauan;
+    return (new);
+}
+
+void insertTagar(DatabaseTagar *databaseTagar, char tagar[], Kicauan *kicauan){
+    int hash = hashTagar(tagar); 
+    char tagarlowercase[30];
+    int curLen = 0;
+    while((curLen < 29)&&(tagar[curLen] != '\0')){
+        tagarlowercase[curLen] = makeLowerCase(tagar[curLen]); curLen++;
+    } tagarlowercase[curLen] = '\0';
+    if (!isTagarValid(hash, *databaseTagar)){
+        PointerMapTagar tagarbaru = (PointerMapTagar) malloc(30*sizeof(char));  
+        int i = 0; while ((i < 30)&&(tagarlowercase[i] != '\0')){
+            tagarbaru->Tagar[i] = tagarlowercase[i]; i++;
+        } tagarbaru->Tagar[i] = '\0';
+        tagarbaru->listKicauTagar = newPointerKicauNode(kicauan);
+        (*databaseTagar).keyAndValue[hash] = tagarbaru;
+        printf("\n\ndata tag belum ada\n\n");
+        (*databaseTagar).length++;
+    } else{
+        int i = hash;
+        while(((*databaseTagar).keyAndValue[i] != NULL) && (!stringStringCompare((*databaseTagar).keyAndValue[i]->Tagar, tagarlowercase))) i++;
+        if ((*databaseTagar).keyAndValue[i] == NULL){
+            PointerMapTagar tagarbaru = (PointerMapTagar) malloc(30*sizeof(char) + sizeof(PointerAddressKicau));  
+            int j = 0; while ((j < 30)&&(tagarlowercase[j] != '\0')){
+                tagarbaru->Tagar[j] = tagarlowercase[j]; j++;
+            } tagarbaru->Tagar[j] = '\0';
+            tagarbaru->listKicauTagar = newPointerKicauNode(kicauan);
+            (*databaseTagar).keyAndValue[hash] = tagarbaru;
+            printf("\n\ndata tag geser hash\n\n");
+            (*databaseTagar).length++;
+        } else{
+            printf("\n\ndata tag udah ada");
+            PointerAddressKicau p = (*databaseTagar).keyAndValue[i]->listKicauTagar;
+            
+            while(p->nextKicau != NULL){
+                p = p->nextKicau;
+            }
+            PointerAddressKicau baru = newPointerKicauNode(kicauan);
+            p->nextKicau = baru;
+        }
+    }
 }

@@ -38,7 +38,9 @@ int main()
     CreateListKicau(&listKicau, 10);
     AddressListUtas listUtas;
     CreateListUtas(&listUtas);
-    loadAll(&listPengguna, &grafPertemanan, &listKicau, &listUtas);
+    DatabaseTagar databaseTagar; 
+    loadAll(&listPengguna, &grafPertemanan, &listKicau, &listUtas, &databaseTagar);
+    createDatabaseTagar(&databaseTagar);
     while (true)
     {
         // printTree(listKicau.buffer[0].balasan, 2);
@@ -62,7 +64,7 @@ int main()
             }
             else if (wordStringCompare(command, "MUAT"))
             {
-                loadAll(&listPengguna, &grafPertemanan, &listKicau, &listUtas);
+                loadAll(&listPengguna, &grafPertemanan, &listKicau, &listUtas, &databaseTagar);
             } 
             else if(wordStringCompare(command, "SIMPAN"))
             {
@@ -153,7 +155,13 @@ int main()
             }
             else if (wordStringCompare(command, "KICAU"))
             {
-                upKicau(&listKicau, listPengguna, currentLoginID);
+                upKicau(&listKicau, listPengguna, currentLoginID, &databaseTagar);
+            }
+            else if (wordStringCompare(command, "CARI_KICAUAN"))
+            {
+                ADVWORD(false);
+                char tagar[30]; transferWordToString(tagar, currentWord);
+                cariKicauTagar(tagar, listKicau, listPengguna, databaseTagar);
             }
             else if (wordStringCompare(command, "KICAUAN"))
             {

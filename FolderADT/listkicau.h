@@ -32,11 +32,31 @@ typedef struct
 typedef Kicauan ElTypeKicau; /* type elemen list */
 typedef int IdxType;
 typedef struct
-{
+{   
     ElTypeKicau *buffer; /* memori tempat penyimpan elemen (container) */
     int nEff;            /* >=0, banyaknya elemen efektif */
     int capacity;        /* ukuran elemen */
 } ListKicau;
+
+// hash untuk tagar
+typedef Kicauan* PointerKicauan;
+typedef struct addressKicau* PointerAddressKicau;
+typedef struct addressKicau
+{
+    Kicauan* currKicau;
+    PointerAddressKicau nextKicau;
+} AddressKicau;
+typedef struct mapTagar* PointerMapTagar;
+typedef struct mapTagar
+{
+    char Tagar[30];
+    PointerAddressKicau listKicauTagar;
+} MapTagar;
+typedef struct 
+{
+    PointerMapTagar keyAndValue[200];
+    int length;
+} DatabaseTagar;
 
 /* ********** SELEKTOR ********** */
 #define NEFF(l) (l).nEff
@@ -130,5 +150,20 @@ void compressListKicau(ListKicau *l);
 /* I.S. List tidak kosong */
 /* F.S. Ukuran capacity = nEff */
 boolean isIdKicauDefined (int idSearch, ListKicau l);
+// mereturn true jika id kicau terdefinisi, false jika tidak
 void drafKicauToKicauan (Draf drafKicau, Kicauan* kicauBaru);
+// membuat drafkicau menjadi sebuah kicauan
+char makeLowerCase(char karakter);
+// membuat sebuah karakter menjadi lowercasenya
+int hashTagar(char karakter[]);
+// fungsi hash, mengubah string menjadi nilai integer
+void createDatabaseTagar(DatabaseTagar *databaseTagar);
+// fungsi untuk inisialisasi databasetagar
+boolean isTagarValid(int nilaiHashtagar, DatabaseTagar databaseTagar);
+// fungsi yang mereturn apakah tagar valid atau tidak
+void insertTagar(DatabaseTagar *databaseTagar, char tagar[], Kicauan *kicauan);
+// fungsi untuk memasukkan tagar ke dalam database
+
+PointerAddressKicau newPointerKicauNode(Kicauan *kicauan);
+// fungsi yang mereturn pointeraddresskicau yang berisi kicauan
 #endif

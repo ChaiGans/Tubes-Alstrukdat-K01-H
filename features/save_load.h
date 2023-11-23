@@ -11,4 +11,4 @@ void saveDraft(char* fileName, ListPengguna lp);
 void saveUtas(char* fileName, ListPengguna listPengguna, ListKicau listKicau, AddressListUtas listUtas);
 boolean isExist(char* dirName);
 void saveAll(ListKicau lk, ListPengguna lp, AddressListUtas lu, GrafPertemanan gp);
-void loadAll(ListPengguna *listPengguna, GrafPertemanan *pertemanan, ListKicau *listKicau, AddressListUtas *listUtas);
+void loadAll(ListPengguna *listPengguna, GrafPertemanan *pertemanan, ListKicau *listKicau, AddressListUtas *listUtas, DatabaseTagar *databaseTagar);

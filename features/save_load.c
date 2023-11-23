@@ -158,7 +158,7 @@ void saveAll(ListKicau lk, ListPengguna lp, AddressListUtas lu, GrafPertemanan g
     printf("\nPenyimpanan telah berhasil dilakukan!\n");
 }
 
-void loadAll(ListPengguna *listPengguna, GrafPertemanan *pertemanan, ListKicau *listKicau, AddressListUtas *listUtas){
+void loadAll(ListPengguna *listPengguna, GrafPertemanan *pertemanan, ListKicau *listKicau, AddressListUtas *listUtas, DatabaseTagar *databaseTagar){
     char* dirName = (char*)malloc(sizeof(char)*(100));
     printf("Masukkan nama folder yang hendak dimuat: ");
     int curLen = 0; Word dirWord = ReadWord();
@@ -180,6 +180,7 @@ void loadAll(ListPengguna *listPengguna, GrafPertemanan *pertemanan, ListKicau *
         readDrafConfig(concatCharPtr(dirName, "/draf.config"), listPengguna);
         readUtasConfig(concatCharPtr(dirName, "/utas.config"), *listPengguna, listKicau, listUtas);
         printf("\nPemuatan selesai!\n");
+        createDatabaseTagar(databaseTagar);
     } 
 
 }
