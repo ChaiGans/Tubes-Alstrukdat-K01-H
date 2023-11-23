@@ -6,37 +6,37 @@ CFLAGS = -g
 
 # Source files
 SRC = main.c \
-      ./FolderADT/data.c \
-      ./FolderADT/wordmachine.c \
-      ./FolderADT/charmachine.c \
-      ./FolderADT/matrix.c \
-      ./FolderADT/listpengguna.c \
-      ./FolderADT/profile.c \
-      ./FolderADT/listkicau.c \
+      ./FolderADT/primitive_data/data.c \
+      ./FolderADT/wordmachine/wordmachine.c \
+      ./FolderADT/wordmachine/charmachine.c \
+      ./FolderADT/matrix/matrix.c \
+      ./FolderADT/pengguna/listpengguna.c \
+      ./FolderADT/pengguna/profile.c \
+      ./FolderADT/kicauan/listkicau.c \
       ./features/user.c \
       ./features/draf.c \
-      ./FolderADT/stackdraf.c \
-      ./FolderADT/time.c \
-      ./FolderADT/datetime.c \
-      ./FolderADT/treebalasan.c \
+      ./FolderADT/draf/stackdraf.c \
+      ./FolderADT/datetime/time.c \
+      ./FolderADT/datetime/datetime.c \
+      ./FolderADT/balasan/treebalasan.c \
       ./features/balasan.c \
       ./features/utas.c \
-      ./FolderADT/listutas.c \
+      ./FolderADT/utas/listutas.c \
       ./features/kicauan.c \
-      ./FolderADT/grafpertemanan.c \
-      ./FolderADT/prioqueuechar.c \
+      ./FolderADT/pertemanan/grafpertemanan.c \
+      ./FolderADT/queue/prioqueuechar.c \
       ./features/teman.c \
       ./features/save_load.c
 
 # Drivers source files
-DRIVERS = ./FolderADT/grafpertemanandriver.c \
-          ./FolderADT/listkicaudriver.c \
-          ./FolderADT/datetimedriver.c \
-          ./FolderADT/listpenggunadriver.c \
-          ./FolderADT/prioqueuechardriver.c \
-          ./FolderADT/stackdrafdriver.c \
-          ./FolderADT/treebalasandriver.c \
-          ./FolderADT/listutasdriver.c \
+DRIVERS = ./FolderADT/pertemanan/grafpertemanandriver.c \
+          ./FolderADT/kicauan/listkicaudriver.c \
+          ./FolderADT/datetime/datetimedriver.c \
+          ./FolderADT/pengguna/listpenggunadriver.c \
+          ./FolderADT/queue/prioqueuechardriver.c \
+          ./FolderADT/draf/stackdrafdriver.c \
+          ./FolderADT/balasan/treebalasandriver.c \
+          ./FolderADT/utas/listutasdriver.c \
           
 
 # Object files (automatically generated from source files)
