@@ -47,7 +47,7 @@ void kicauanTeman(int currentUserID, ListPengguna lp, ListKicau lk, GrafPerteman
             adaTeman = true;
         }
     } if (!adaTeman){
-        printf("\nAnda belum memiliki teman, coba untuk menjalin hubungan teman terlebih dahulu!\n");
+        printf("\nAnda belum memiliki teman atau teman anda belum memiliki kicauan, coba untuk menjalin hubungan teman terlebih dahulu atau coba untuk memakai fitur KICAU!\n");
     }
 }
 

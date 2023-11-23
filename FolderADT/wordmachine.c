@@ -143,15 +143,13 @@ void CopyLine()
 
     while (currentChar != NEWLINE && currentChar != EOF)
     {
-        if (currentWord.Length < NMax)
+        if (i < NMax)
         {
             if (currentChar != CARRIAGE){
                 currentWord.TabWord[i] = currentChar;
                 i++;
-            } ADV();
-        }
-        else
-            break;
+            } 
+        } ADV();
     }
     currentWord.Length = i;
 }
