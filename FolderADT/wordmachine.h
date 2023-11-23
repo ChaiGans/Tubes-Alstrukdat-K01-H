@@ -7,7 +7,7 @@
 #include "boolean.h"
 #include "charmachine.h"
 
-#define NMax 100
+#define NMax 300
 #define BLANK ' '
 #define NEWLINE '\n'
 #define CARRIAGE '\r'
