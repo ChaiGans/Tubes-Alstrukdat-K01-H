@@ -67,23 +67,32 @@ int main()
     }
     s.text[i] = '\0';
 
-    AddressListUtas u;
-    CreateListUtas(&u);
+    AddressListUtas m;
+    CreateListUtas(&m);
+
+    // Sebelum dimasukkan
+    printf("Sebelum ada masukan!\n");
+    // Test isEmptyUtas
+    printf("Apakah listUtas kosong? %d\n", isEmptyListUtas(m));
+    // Test jumlah utas
+    printf("Jumlah utas? %d\n", ListUtaslength(m));
+    printf("\n");
 
     // Test masukan
-    insertLastListUtas(&u, 1);
-    insertLastKicauanSambungan(&(u->utas), kicauanUtama);
-    insertLastKicauanSambungan(&(u->utas), s);
+    insertLastListUtas(&m, 1);
+    AddressListUtas u = m; // salin
+    insertLastKicauanSambungan(&(m->utas), kicauanUtama);
 
+    printf("Setelah memasukkan kicauan utama!\n");
     // Test isEmptyUtas
-    printf("Apakah listUtas kosong? %d\n", isEmptyListUtas(u));
+    printf("Apakah listUtas kosong? %d\n", isEmptyListUtas(m));
     // Test isEmptyKicauanSambungan
-    printf("Apakah kicauan sambungan kosong (tidak ada kicau selain kicauan utama)? %d\n", isEmptyKicauanSambungan(u->utas));
+    printf("Apakah kicauan sambungan kosong? %d\n", isEmptyKicauanSambungan(m->utas));
 
     // Test jumlah utas
-    printf("Jumlah utas? %d\n", ListUtaslength(u));
+    printf("Jumlah utas? %d\n", ListUtaslength(m));
     // Test jumlah kicauan sambungan
-    printf("Jumlah kicauan sambungan termasuk kicauan utama? %d\n", utasLength(u->utas));
+    printf("Jumlah kicauan sambungan termasuk kicauan utama? %d\n", utasLength(m->utas));
 
     // Test menampilkan
     i = 1;
@@ -131,10 +140,130 @@ int main()
         }
         printf("\n");
     }
+    printf("\n");
+
+    printf("Setelah memasukkan kicauan sambungan pertama!\n");
+    insertLastKicauanSambungan(&(m->utas), s);
+    u = m;
+    // Test isEmptyUtas
+    printf("Apakah listUtas kosong? %d\n", isEmptyListUtas(m));
+    // Test isEmptyKicauanSambungan
+    printf("Apakah kicauan sambungan kosong? %d\n", isEmptyKicauanSambungan(m->utas));
+
+    // Test jumlah utas
+    printf("Jumlah utas? %d\n", ListUtaslength(m));
+    // Test jumlah kicauan sambungan
+    printf("Jumlah kicauan sambungan termasuk kicauan utama? %d\n", utasLength(m->utas));
+
+    // Test menampilkan
+    i = 1;
+    idUtas = s.indexKicauanSambungan;
+    while (i != idUtas) // cari utas dengan idUtas
+    {
+        u = NEXT(u); // address listutas
+        i += 1;
+    }
+    temp = u->utas; // address utas
+    copy = temp;    // duplicate address utas untuk traversing
+    printf("|   ID = %d\n", u->idKicau);
+    printf("|   ");
+    i = 0;
+    while (p.contents[i].index != k1.authorID)
+    {
+        i += 1;
+    }
+    indeks = i;
+    printf("%s\n", p.contents[i].username);
+    printf("|   ");
+    printf("%2d/%2d/%4d %2d/%2d/%2d\n", copy->info.localtime.DD, copy->info.localtime.MM, copy->info.localtime.YYYY, copy->info.localtime.T.HH, copy->info.localtime.T.MM, copy->info.localtime.T.SS);
+    printf("|   ");
+    j = 0;
+    while (copy->info.text[j] != '\0')
+    {
+        printf("%c", copy->info.text[j]);
+        j++;
+    }
+    printf("\n");
+    for (int i = 1; i < utasLength(temp); i++)
+    {
+        copy = copy->next; // dimulai dari kicauan sambungan pertama bukan kicauan utama
+        printf("    |   INDEX = %d\n", i);
+        printf("    |   ");
+        printf("%s\n", p.contents[indeks].username);
+        printf("    |   ");
+        printf("%2d/%2d/%4d %2d/%2d/%2d\n", copy->info.localtime.DD, copy->info.localtime.MM, copy->info.localtime.YYYY, copy->info.localtime.T.HH, copy->info.localtime.T.MM, copy->info.localtime.T.SS);
+        printf("    |   ");
+        int j = 0;
+        while (copy->info.text[j] != '\0')
+        {
+            printf("%c", copy->info.text[j]);
+            j++;
+        }
+        printf("\n");
+    }
+    printf("\n");
 
     // Test delete
+    printf("Setelah delete!\n");
     KicauanSambungan asal;
     deleteAtKicauanSambungan(&temp, 1, &asal);
+    u = m;
+    // Test isEmptyUtas
+    printf("Apakah listUtas kosong? %d\n", isEmptyListUtas(m));
+    // Test isEmptyKicauanSambungan
+    printf("Apakah kicauan sambungan kosong? %d\n", isEmptyKicauanSambungan(m->utas));
+
+    // Test jumlah utas
+    printf("Jumlah utas? %d\n", ListUtaslength(m));
+    // Test jumlah kicauan sambungan
+    printf("Jumlah kicauan sambungan termasuk kicauan utama? %d\n", utasLength(m->utas));
+
+    i = 1;
+    idUtas = s.indexKicauanSambungan;
+    while (i != idUtas) // cari utas dengan idUtas
+    {
+        u = NEXT(u); // address listutas
+        i += 1;
+    }
+    temp = u->utas; // address utas
+    copy = temp;    // duplicate address utas untuk traversing
+    printf("|   ID = %d\n", u->idKicau);
+    printf("|   ");
+    i = 0;
+    while (p.contents[i].index != k1.authorID)
+    {
+        i += 1;
+    }
+    indeks = i;
+    printf("%s\n", p.contents[i].username);
+    printf("|   ");
+    printf("%2d/%2d/%4d %2d/%2d/%2d\n", copy->info.localtime.DD, copy->info.localtime.MM, copy->info.localtime.YYYY, copy->info.localtime.T.HH, copy->info.localtime.T.MM, copy->info.localtime.T.SS);
+    printf("|   ");
+    j = 0;
+    while (copy->info.text[j] != '\0')
+    {
+        printf("%c", copy->info.text[j]);
+        j++;
+    }
+    printf("\n");
+    for (int i = 1; i < utasLength(temp); i++)
+    {
+        copy = copy->next; // dimulai dari kicauan sambungan pertama bukan kicauan utama
+        printf("    |   INDEX = %d\n", i);
+        printf("    |   ");
+        printf("%s\n", p.contents[indeks].username);
+        printf("    |   ");
+        printf("%2d/%2d/%4d %2d/%2d/%2d\n", copy->info.localtime.DD, copy->info.localtime.MM, copy->info.localtime.YYYY, copy->info.localtime.T.HH, copy->info.localtime.T.MM, copy->info.localtime.T.SS);
+        printf("    |   ");
+        int j = 0;
+        while (copy->info.text[j] != '\0')
+        {
+            printf("%c", copy->info.text[j]);
+            j++;
+        }
+        printf("\n");
+    }
+    printf("\n");
 
     return 0;
 }
