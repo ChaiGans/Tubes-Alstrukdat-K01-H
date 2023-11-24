@@ -39,6 +39,7 @@ DRIVERS = ./FolderADT/pertemanan/grafpertemanandriver.c \
           ./FolderADT/utas/listutasdriver.c \
           ./FolderADT/matrix/matrixdriver.c \
           ./FolderADT/pengguna/profiledriver.c \
+          ./FolderADT/wordmachine/wordmachinedriver.c \
 
 # Object files (automatically generated from source files)
 OBJ = $(SRC:.c=.o)
