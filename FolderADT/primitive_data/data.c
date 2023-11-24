@@ -260,8 +260,7 @@ void readPenggunaConfig(char *filename, ListPengguna *listPengguna, GrafPerteman
         // enqueue adjInfo
         Enqueue(&((*listPengguna).contents[idPenerima].permintaanTeman), adjInfo);
     }
-
-    ADVWORD(true); // read sampe pita ditutup
+    ADVWORD(true); ADVWORD(true); // read sampe pita ditutup
     if (EOF)
         printf("Config pengguna berhasil dibaca... \n");
     // fclose(file);
@@ -348,7 +347,7 @@ void readKicauanConfig(char *filename, ListKicau *listKicau, ListPengguna listPe
 
         insertLastListKicau(&*listKicau, tweet);
     }
-    ADVWORD(true);
+    ADVWORD(true); ADVWORD(true);
     printf("Config kicauan berhasil dibaca... \n");
     // fclose(file);
 }
@@ -402,7 +401,7 @@ void readBalasanConfig(char *filename, ListKicau *l, ListPengguna listpengguna)
                 addChildrenAt(parentRoot, &(*l).buffer[currentIDKicauan - 1].balasan, balasanBacaan);
             }
         }
-    }
+    } ADVWORD(true);
     printf("Config balasan berhasil dibaca... \n");
     // fclose(file);
 }
@@ -442,7 +441,7 @@ void readDrafConfig(char *filename, ListPengguna *listpengguna)
             PushStackDraf(&(*listpengguna).contents[authorID].stackdraf, drafBaru);
         }
     }
-    ADVWORD(true);
+    ADVWORD(true); ADVWORD(true);
     printf("Config draf berhasil dibaca... \n");
     // fclose(file);
 }
@@ -501,7 +500,7 @@ void readUtasConfig(char *filename, ListPengguna listPengguna, ListKicau *listKi
 
             insertLastKicauanSambungan(&p, temp);
         }
-    }
+    } ADVWORD(true);
     printf("Config utas berhasil dibaca... \n");
     // fclose(file);
 }
