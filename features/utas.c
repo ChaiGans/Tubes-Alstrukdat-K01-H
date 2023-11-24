@@ -55,7 +55,7 @@ void buatUtas(int idKicau, int currentUserID, AddressListUtas *listUtas, ListKic
         }
         else
         {
-            printf("Utas ini bukan milik anda!\n");
+            printf("Kicauan ini bukan milik anda!\n");
         }
     }
 }
