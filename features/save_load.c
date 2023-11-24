@@ -29,7 +29,8 @@ void saveBalasan(char* fileName, ListKicau lk, ListPengguna lp){
             }
             i++;
         } j++;
-    } fclose(file);
+    } fputs("\n", file); 
+    fclose(file);
 }
 
 void saveKicauan(char* fileName, ListKicau lk, ListPengguna lp){
@@ -47,7 +48,8 @@ void saveKicauan(char* fileName, ListKicau lk, ListPengguna lp){
             fprintf(file, "\n%s", cariPenggunaID(lk.buffer[i].authorID, lp).username);
             fprintf(file, "\n%02d/%02d/%04d %02d:%02d:%02d", lk.buffer[i].localtime.DD, lk.buffer[i].localtime.MM, lk.buffer[i].localtime.YYYY, lk.buffer[i].localtime.T.HH, lk.buffer[i].localtime.T.MM, lk.buffer[i].localtime.T.SS);
         } i++;
-    } fclose(file);
+    } fputs("\n", file); 
+    fclose(file);
 }
 
 void savePengguna(char* fileName, ListPengguna lp, GrafPertemanan gp){
@@ -89,7 +91,8 @@ void savePengguna(char* fileName, ListPengguna lp, GrafPertemanan gp){
                 j++;
             }   
         } i++;
-    } fclose(file);
+    } fputs("\n", file);
+    fclose(file);
 }
 
 void saveDraft(char* fileName, ListPengguna lp){
@@ -110,7 +113,8 @@ void saveDraft(char* fileName, ListPengguna lp){
                 fprintf(file, "\n%02d/%02d/%04d %02d:%02d:%02d", tempdraf.localtime.DD, tempdraf.localtime.MM, tempdraf.localtime.YYYY, tempdraf.localtime.T.HH, tempdraf.localtime.T.MM, tempdraf.localtime.T.SS);
             }
         } i++;
-    } fclose(file);
+    } fputs("\n", file);
+    fclose(file);
 }
 
 void saveUtas(char* fileName, ListPengguna listPengguna, ListKicau listKicau, AddressListUtas listUtas){
@@ -129,7 +133,8 @@ void saveUtas(char* fileName, ListPengguna listPengguna, ListKicau listKicau, Ad
             fprintf(file, "\n%02d/%02d/%04d %02d:%02d:%02d", currU->info.localtime.DD, currU->info.localtime.MM, currU->info.localtime.YYYY, currU->info.localtime.T.HH, currU->info.localtime.T.MM, currU->info.localtime.T.SS);
             currU = currU->next;
         } curr = curr->next;
-    } fclose(file);
+    } fputs("\n", file);
+    fclose(file);
 }
 
 void saveAll(ListKicau lk, ListPengguna lp, AddressListUtas lu, GrafPertemanan gp){
