@@ -271,7 +271,7 @@ void displayArrayOfChar(char string[])
 boolean isWordNomorHP(Word w)
 {
     int i;
-    if ((int)w.TabWord[0] < 49 || (int)w.TabWord[0] > 57) {
+    if ((int)w.TabWord[0] < 48 || (int)w.TabWord[0] > 57) {
         return false;
     }
     for (i = 0; i < w.Length; i++)

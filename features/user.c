@@ -85,12 +85,6 @@ void gantiProfil (Profile* userProfile) {
             printf("No HP tidak valid. Masukkan lagi yuk!\n");
         }
     } while (!isWordNomorHP(nomorHP));
-    int k;
-    for (k = nomorHP.Length; k > 0; k--) {
-        nomorHP.TabWord[k+1] = nomorHP.TabWord[k];
-    }
-    nomorHP.TabWord[0] ='0';
-    nomorHP.Length += 1;
     if (nomorHP.Length > 10) {
         userProfile->nomorHP = (char *) realloc (userProfile->nomorHP, nomorHP.Length * (sizeof (char)) + 1);
         (*userProfile).nomorHP[nomorHP.Length] = '\0';
