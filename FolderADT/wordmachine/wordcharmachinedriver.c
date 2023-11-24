@@ -4,12 +4,13 @@
 
 int main()
 {
+    Word kata;
     printf("Masukkan sebuah kata: ");
-    Word kata = ReadWord();
+    kata = ReadWord();
     printf("Kata yang dimasukkan: %s\n", kata.TabWord);
 
     printf("Masukkan kata 'in Harmonia Progressio': ");
-    Word kata = ReadWord();
+    kata = ReadWord();
     if (wordStringCompare(kata, "in Harmonia Progressio"))
     {
         printf("Kata yang dimasukkan: %s\n", kata.TabWord);
